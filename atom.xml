@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fantaixi.github.io</id>
     <title>饭太稀</title>
-    <updated>2020-04-29T10:15:59.391Z</updated>
+    <updated>2020-04-29T18:37:01.711Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fantaixi.github.io"/>
     <link rel="self" href="https://fantaixi.github.io/atom.xml"/>
@@ -10,6 +10,54 @@
     <logo>https://fantaixi.github.io/images/avatar.png</logo>
     <icon>https://fantaixi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 饭太稀</rights>
+    <entry>
+        <title type="html"><![CDATA[第一个Java程序，Hello World]]></title>
+        <id>https://fantaixi.github.io/post/di-yi-ge-java-cheng-xu-hello-world/</id>
+        <link href="https://fantaixi.github.io/post/di-yi-ge-java-cheng-xu-hello-world/">
+        </link>
+        <updated>2020-04-29T18:09:46.000Z</updated>
+        <content type="html"><![CDATA[<p>public class Test {<br>
+public static void main(String[] args) {<br>
+System.out.println(&quot;Hello World&quot;);<br>
+}<br>
+}<br>
+运行结果如下：<br>
+<img src="https://fantaixi.github.io/post-images/1588184119057.png" alt="" loading="lazy"></p>
+<p>适当分析：<br>
+1）第一个public  类Test的修饰符，作用范围：同一工程下，同类，同包，子类，不同包可见<br>
+2）class 声明Test为一个类<br>
+3）第二个public 同 1），区别在于是方法的修饰符，对于当前方法对其他类是否可见取决于所在类的修饰符<br>
+4）static，表示当前方法为静态方法<br>
+5）void，表示当前方法没有返回值<br>
+6）String[] args，参数，为String类型的数组，名字args<br>
+7）System.out.println，表示在控制台换行输出</p>
+<p>小结：一个Java程序必有一个主程序入口，默认的入口如上。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java初识]]></title>
+        <id>https://fantaixi.github.io/post/java-chu-shi/</id>
+        <link href="https://fantaixi.github.io/post/java-chu-shi/">
+        </link>
+        <updated>2020-04-29T17:50:08.000Z</updated>
+        <content type="html"><![CDATA[<p>1.Java凭什么这么强大？<br>
+主要由JVM实现平台无关性，真正实现一处编译，随处运行。</p>
+<p>2.JVM、JRE及JDK的区别？<br>
+JVM：Java虚拟机<br>
+JRE：JVM + Java SE标准类库<br>
+JDK：JRE + 开发工具（例如Javac编译工具等）<br>
+<img src="https://fantaixi.github.io/post-images/1588182860675.png" alt="" loading="lazy"></p>
+<p>3.Java分类<br>
+Java SE（标准版）<br>
+Java EE（企业版）<br>
+Java ME（手机版）</p>
+<p>4.一个Java程序的开发流程（粗略）<br>
+1）编写源代码  .java<br>
+2） javac.exe编译源代码 ，生成字节码文件<br>
+3） java.exe运行字节码<br>
+<img src="https://fantaixi.github.io/post-images/1588183729386.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java安装]]></title>
         <id>https://fantaixi.github.io/post/java/</id>
@@ -20,18 +68,21 @@
 Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。Java语言作为静态面向对象编程语言的代表，极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程 。<br>
 Java具有简单性、面向对象、分布式、健壮性、安全性、平台独立与可移植性、多线程、动态性等特点   。Java可以编写桌面应用程序、Web应用程序、分布式系统和嵌入式系统应用程序等 。<br>
 ---&lt;百度百科&gt;<br>
-小结：很大，很持久</p>
-<p>2.安装<br>
+2.安装<br>
 2.1 下载jdk<br>
 https://www.java.com/zh_CN/download/help/download_options.xml</p>
 <p>2.2系统环境变量配置<br>
 win7：<br>
 <img src="https://fantaixi.github.io/post-images/1588154373181.png" alt="" loading="lazy"><br>
 win10：<br>
-<img src="https://fantaixi.github.io/post-images/1588154530632.png" alt="" loading="lazy"></p>
-<p>2.3检查jdk是否安装成功<br>
+<img src="https://fantaixi.github.io/post-images/1588154530632.png" alt="" loading="lazy"><br>
+2.3 为什么配置path环境变量？<br>
+path环境变量：windows操作系统执行命令时所要搜寻的路径<br>
+为什么要配置path:希望java的开发工具（javac.exe,java.exe)在任何的文件路径下都可以执行成功。</p>
+<p>2.4检查jdk是否安装成功<br>
 cmd：java -version<br>
 <img src="https://fantaixi.github.io/post-images/1588154715970.png" alt="" loading="lazy"></p>
+<p>小结：很大，很持久（通过jvm实现平台无关性）</p>
 ]]></content>
     </entry>
     <entry>
