@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fantaixi.github.io</id>
     <title>饭太稀</title>
-    <updated>2020-04-29T18:38:20.775Z</updated>
+    <updated>2020-04-29T18:44:01.625Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fantaixi.github.io"/>
     <link rel="self" href="https://fantaixi.github.io/atom.xml"/>
@@ -60,8 +60,8 @@ Java ME（手机版）</p>
     </entry>
     <entry>
         <title type="html"><![CDATA[Java安装]]></title>
-        <id>https://fantaixi.github.io/post/java/</id>
-        <link href="https://fantaixi.github.io/post/java/">
+        <id>https://fantaixi.github.io/post/java-an-zhuang/</id>
+        <link href="https://fantaixi.github.io/post/java-an-zhuang/">
         </link>
         <updated>2020-04-29T09:15:30.000Z</updated>
         <content type="html"><![CDATA[<p>1.简介<br>
