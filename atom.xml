@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fantaixi.github.io</id>
     <title>饭太稀</title>
-    <updated>2020-04-29T19:02:30.945Z</updated>
+    <updated>2020-04-30T07:53:41.515Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fantaixi.github.io"/>
     <link rel="self" href="https://fantaixi.github.io/atom.xml"/>
@@ -11,7 +11,87 @@
     <icon>https://fantaixi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 饭太稀</rights>
     <entry>
-        <title type="html"><![CDATA[第一个Java程序，Hello World]]></title>
+        <title type="html"><![CDATA[04 Java基本语法]]></title>
+        <id>https://fantaixi.github.io/post/04-java-ji-ben-yu-fa/</id>
+        <link href="https://fantaixi.github.io/post/04-java-ji-ben-yu-fa/">
+        </link>
+        <updated>2020-04-30T06:52:38.000Z</updated>
+        <content type="html"><![CDATA[<p>一、Java关键字与标识符</p>
+<p>1.1 Java关键字的使用<br>
+定义：被Java语言赋予了特殊含义，用做专门用途的字符串（单词）<br>
+特点：关键字中所有字母都为小写<br>
+具体有哪些关键字：<br>
+<img src="https://fantaixi.github.io/post-images/1588229972083.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588229980768.png" alt="" loading="lazy"></p>
+<p>1.2 保留字<br>
+现Java版本尚未使用，但以后版本可能会作为关键字使用。<br>
+具体哪些保留字：goto 、const</p>
+<p>二、标识符<br>
+定义：凡是自己可以起名字的地方都叫标识符。<br>
+涉及到的结构：<br>
+包名、类名、接口名、变量名、方法名、常量名<br>
+规则：(必须要遵守。否则，编译不通过)<br>
+<img src="https://fantaixi.github.io/post-images/1588230188167.png" alt="" loading="lazy"></p>
+<p>小结：在起名字时，为了提高阅读性，要尽量意义，“见名知意”。</p>
+<p>三、变量的使用 ***<br>
+3.1 变量的分类<br>
+1）按数据类型分类<br>
+<img src="https://fantaixi.github.io/post-images/1588231616061.png" alt="" loading="lazy"><br>
+详细说明：</p>
+<ol>
+<li>整型：byte(1字节=8bit) \ short(2字节) \ int(4字节) \ long(8字节)<br>
+① byte范围：-128 ~ 127<br>
+② 声明long型变量，必须以&quot;l&quot;或&quot;L&quot;结尾<br>
+③ 通常，定义整型变量时，使用int型。<br>
+④整型的常量，默认类型是：int型</li>
+<li>浮点型：float(4字节) \ double(8字节)<br>
+① 浮点型，表示带小数点的数值<br>
+② float表示数值的范围比long还大<br>
+③ 定义float类型变量时，变量要以&quot;f&quot;或&quot;F&quot;结尾<br>
+④ 通常，定义浮点型变量时，使用double型。<br>
+⑤ 浮点型的常量，默认类型为：double</li>
+<li>字符型：char (1字符=2字节)<br>
+① 定义char型变量，通常使用一对'',内部只能写一个字符<br>
+② 表示方式：1.声明一个字符 2.转义字符 3.直接使用 Unicode 值来表示字符型常量</li>
+<li>布尔型：boolean<br>
+① 只能取两个值之一：true 、 false<br>
+② 常常在条件判断、循环结构中使用</li>
+</ol>
+<p>2）按声明的位置分类<br>
+<img src="https://fantaixi.github.io/post-images/1588231919694.png" alt="" loading="lazy"></p>
+<p>3.2 变量的定义格式<br>
+数据类型  变量名 = 变量值;<br>
+或<br>
+数据类型  变量名;<br>
+变量名 = 变量值;</p>
+<p>变量使用的注意点：<br>
+① 变量必须先声明，后使用<br>
+② 变量都定义在其作用域内。在作用域内，它是有效的。换句话说，出了作用域，就失效了<br>
+③ 同一个作用域内，不可以声明两个同名的变量</p>
+<p>四、基本数据类型变量间运算规则<br>
+4.1 涉及到的基本数据类型：除了boolean之外的其他7种</p>
+<p>4.2 自动类型转换(只涉及7种基本数据类型）</p>
+<p>小结：当容量小的数据类型的变量与容量大的数据类型的变量做运算时，结果自动提升为容量大的数据类型。（自动类型转换）<br>
+byte 、char 、short --&gt; int --&gt; long --&gt; float --&gt; double<br>
+特别的：当byte、char、short三种类型的变量做运算时，结果为int型（此时的容量大小指的是，表示数的范围的大和小。比如：float容量要大于long的容量）</p>
+<p>4.3 强制类型转换(只涉及7种基本数据类型）：自动类型提升运算的逆运算。<br>
+1.需要使用强转符：( )<br>
+2.注意点：强制类型转换，可能导致精度损失。</p>
+<p>4.4 String与8种基本数据类型间的运算</p>
+<ol>
+<li>String属于引用数据类型,翻译为：字符串</li>
+<li>声明String类型变量时，使用一对&quot;&quot;</li>
+<li>String可以和8种基本数据类型变量做运算，且运算只能是连接运算：+</li>
+<li>运算的结果仍然是String类型<br>
+避免：<br>
+String s = 123;//编译错误<br>
+String s1 = &quot;123&quot;;<br>
+int i = (int)s1;//编译错误</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[03 第一个Java程序，Hello World ]]></title>
         <id>https://fantaixi.github.io/post/di-yi-ge-java-cheng-xu-hello-world/</id>
         <link href="https://fantaixi.github.io/post/di-yi-ge-java-cheng-xu-hello-world/">
         </link>
@@ -35,7 +115,7 @@ System.out.println(&quot;Hello World&quot;);<br>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Java初识]]></title>
+        <title type="html"><![CDATA[02 Java初识]]></title>
         <id>https://fantaixi.github.io/post/java-chu-shi/</id>
         <link href="https://fantaixi.github.io/post/java-chu-shi/">
         </link>
@@ -59,7 +139,7 @@ Java ME（手机版）</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Java安装]]></title>
+        <title type="html"><![CDATA[01 Java安装]]></title>
         <id>https://fantaixi.github.io/post/java-an-zhuang/</id>
         <link href="https://fantaixi.github.io/post/java-an-zhuang/">
         </link>

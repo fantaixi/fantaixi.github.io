@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>04 Java基本语法 | 饭太稀</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://fantaixi.github.io/favicon.ico?v=1588233200718">
+<link rel="stylesheet" href="https://fantaixi.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、Java关键字与标识符
+1.1 Java关键字的使用
+定义：被Java语言赋予了特殊含义，用做专门用途的字符串（单词）
+特点：关键字中所有字母都为小写
+具体有哪些关键字：
+
+
+1.2 保留字
+现Java版本尚未使用，但以后版本可能会作为..." />
+    <meta name="keywords" content="Java" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://fantaixi.github.io">
+        <img src="https://fantaixi.github.io/images/avatar.png?v=1588233200718" class="site-logo">
+        <h1 class="site-title">饭太稀</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://fantaixi.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">04 Java基本语法</h2>
+            <div class="post-date">2020-04-30</div>
+            
+            <div class="post-content" v-pre>
+              <p>一、Java关键字与标识符</p>
+<p>1.1 Java关键字的使用<br>
+定义：被Java语言赋予了特殊含义，用做专门用途的字符串（单词）<br>
+特点：关键字中所有字母都为小写<br>
+具体有哪些关键字：<br>
+<img src="https://fantaixi.github.io/post-images/1588229972083.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588229980768.png" alt="" loading="lazy"></p>
+<p>1.2 保留字<br>
+现Java版本尚未使用，但以后版本可能会作为关键字使用。<br>
+具体哪些保留字：goto 、const</p>
+<p>二、标识符<br>
+定义：凡是自己可以起名字的地方都叫标识符。<br>
+涉及到的结构：<br>
+包名、类名、接口名、变量名、方法名、常量名<br>
+规则：(必须要遵守。否则，编译不通过)<br>
+<img src="https://fantaixi.github.io/post-images/1588230188167.png" alt="" loading="lazy"></p>
+<p>小结：在起名字时，为了提高阅读性，要尽量意义，“见名知意”。</p>
+<p>三、变量的使用 ***<br>
+3.1 变量的分类<br>
+1）按数据类型分类<br>
+<img src="https://fantaixi.github.io/post-images/1588231616061.png" alt="" loading="lazy"><br>
+详细说明：</p>
+<ol>
+<li>整型：byte(1字节=8bit) \ short(2字节) \ int(4字节) \ long(8字节)<br>
+① byte范围：-128 ~ 127<br>
+② 声明long型变量，必须以&quot;l&quot;或&quot;L&quot;结尾<br>
+③ 通常，定义整型变量时，使用int型。<br>
+④整型的常量，默认类型是：int型</li>
+<li>浮点型：float(4字节) \ double(8字节)<br>
+① 浮点型，表示带小数点的数值<br>
+② float表示数值的范围比long还大<br>
+③ 定义float类型变量时，变量要以&quot;f&quot;或&quot;F&quot;结尾<br>
+④ 通常，定义浮点型变量时，使用double型。<br>
+⑤ 浮点型的常量，默认类型为：double</li>
+<li>字符型：char (1字符=2字节)<br>
+① 定义char型变量，通常使用一对'',内部只能写一个字符<br>
+② 表示方式：1.声明一个字符 2.转义字符 3.直接使用 Unicode 值来表示字符型常量</li>
+<li>布尔型：boolean<br>
+① 只能取两个值之一：true 、 false<br>
+② 常常在条件判断、循环结构中使用</li>
+</ol>
+<p>2）按声明的位置分类<br>
+<img src="https://fantaixi.github.io/post-images/1588231919694.png" alt="" loading="lazy"></p>
+<p>3.2 变量的定义格式<br>
+数据类型  变量名 = 变量值;<br>
+或<br>
+数据类型  变量名;<br>
+变量名 = 变量值;</p>
+<p>变量使用的注意点：<br>
+① 变量必须先声明，后使用<br>
+② 变量都定义在其作用域内。在作用域内，它是有效的。换句话说，出了作用域，就失效了<br>
+③ 同一个作用域内，不可以声明两个同名的变量</p>
+<p>四、基本数据类型变量间运算规则<br>
+4.1 涉及到的基本数据类型：除了boolean之外的其他7种</p>
+<p>4.2 自动类型转换(只涉及7种基本数据类型）</p>
+<p>小结：当容量小的数据类型的变量与容量大的数据类型的变量做运算时，结果自动提升为容量大的数据类型。（自动类型转换）<br>
+byte 、char 、short --&gt; int --&gt; long --&gt; float --&gt; double<br>
+特别的：当byte、char、short三种类型的变量做运算时，结果为int型（此时的容量大小指的是，表示数的范围的大和小。比如：float容量要大于long的容量）</p>
+<p>4.3 强制类型转换(只涉及7种基本数据类型）：自动类型提升运算的逆运算。<br>
+1.需要使用强转符：( )<br>
+2.注意点：强制类型转换，可能导致精度损失。</p>
+<p>4.4 String与8种基本数据类型间的运算</p>
+<ol>
+<li>String属于引用数据类型,翻译为：字符串</li>
+<li>声明String类型变量时，使用一对&quot;&quot;</li>
+<li>String可以和8种基本数据类型变量做运算，且运算只能是连接运算：+</li>
+<li>运算的结果仍然是String类型<br>
+避免：<br>
+String s = 123;//编译错误<br>
+String s1 = &quot;123&quot;;<br>
+int i = (int)s1;//编译错误</li>
+</ol>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://fantaixi.github.io/tag/UDPQ9NSLF/" class="tag">
+                    Java
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://fantaixi.github.io/post/di-yi-ge-java-cheng-xu-hello-world/">
+                  <h3 class="post-title">
+                    03 第一个Java程序，Hello World 
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
