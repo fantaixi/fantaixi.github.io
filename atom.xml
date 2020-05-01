@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fantaixi.github.io</id>
     <title>饭太稀</title>
-    <updated>2020-04-30T07:53:41.515Z</updated>
+    <updated>2020-05-01T12:28:37.795Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fantaixi.github.io"/>
     <link rel="self" href="https://fantaixi.github.io/atom.xml"/>
@@ -10,6 +10,238 @@
     <logo>https://fantaixi.github.io/images/avatar.png</logo>
     <icon>https://fantaixi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 饭太稀</rights>
+    <entry>
+        <title type="html"><![CDATA[05 Java运算符]]></title>
+        <id>https://fantaixi.github.io/post/05-java-yun-suan-fu/</id>
+        <link href="https://fantaixi.github.io/post/05-java-yun-suan-fu/">
+        </link>
+        <updated>2020-05-01T08:26:47.000Z</updated>
+        <content type="html"><![CDATA[<p>一、算术运算符： + -  * / % (前)++ (后)++ (前)-- (后)--<br>
+【典型代码】<br>
+//除号：/<br>
+int num1 = 12;<br>
+int num2 = 5;<br>
+int result1 = num1 / num2;<br>
+System.out.println(result1);//2<br>
+// %:取余运算<br>
+//结果的符号与被模数的符号相同<br>
+//开发中，经常使用%来判断能否被除尽的情况。<br>
+int m1 = 12;<br>
+int n1 = 5;<br>
+System.out.println(&quot;m1 % n1 = &quot; + m1 % n1);</p>
+<pre><code>	int m2 = -12;
+	int n2 = 5;
+	System.out.println(&quot;m2 % n2 = &quot; + m2 % n2);
+
+	int m3 = 12;
+	int n3 = -5;
+	System.out.println(&quot;m3 % n3 = &quot; + m3 % n3);
+
+	int m4 = -12;
+	int n4 = -5;
+	System.out.println(&quot;m4 % n4 = &quot; + m4 % n4);
+	//(前)++ :先自增1，后运算
+	//(后)++ :先运算，后自增1
+	int a1 = 10;
+	int b1 = ++a1;
+	System.out.println(&quot;a1 = &quot; + a1 + &quot;,b1 = &quot; + b1);
+	
+	int a2 = 10;
+	int b2 = a2++;
+	System.out.println(&quot;a2 = &quot; + a2 + &quot;,b2 = &quot; + b2);
+	
+	int a3 = 10;
+	++a3;//a3++;
+	int b3 = a3;
+	//(前)-- :先自减1，后运算
+	//(后)-- :先运算，后自减1
+	
+	int a4 = 10;
+	int b4 = a4--;//int b4 = --a4;
+	System.out.println(&quot;a4 = &quot; + a4 + &quot;,b4 = &quot; + b4);
+</code></pre>
+<p>【特别说明的】<br>
+1.//(前)++ :先自增1，后运算<br>
+//(后)++ :先运算，后自增1<br>
+2.//(前)-- :先自减1，后运算<br>
+//(后)-- :先运算，后自减1<br>
+3.连接符：+：只能使用在String与其他数据类型变量之间使用。</p>
+<p>二、赋值运算符：=  +=  -=  <em>=  /=  %=<br>
+【典型代码】<br>
+int i2,j2;<br>
+//连续赋值<br>
+i2 = j2 = 10;<br>
+//</em>**************<br>
+int i3 = 10,j3 = 20;<br>
+int num1 = 10;<br>
+num1 += 2;//num1 = num1 + 2;<br>
+System.out.println(num1);//12</p>
+<pre><code>	int num2 = 12;
+	num2 %= 5;//num2 = num2 % 5;
+	System.out.println(num2);
+
+	short s1 = 10;
+	//s1 = s1 + 2;//编译失败
+	s1 += 2;//结论：不会改变变量本身的数据类型
+	System.out.println(s1);
+</code></pre>
+<p>【特别说明】<br>
+1.运算的结果不会改变变量本身的数据类型<br>
+2.<br>
+//开发中，如果希望变量实现+2的操作，有几种方法？(前提：int num = 10;)<br>
+//方式一：num = num + 2;<br>
+//方式二：num += 2; (推荐)</p>
+<pre><code>	//开发中，如果希望变量实现+1的操作，有几种方法？(前提：int num = 10;)
+	//方式一：num = num + 1;
+	//方式二：num += 1; 
+	//方式三：num++; (推荐)
+</code></pre>
+<p>三、比较运算符（关系运算符）: == != &gt;  &lt;  &gt;=  &lt;=  instanceof<br>
+【典型代码】<br>
+int i = 10;<br>
+int j = 20;</p>
+<pre><code>	System.out.println(i == j);//false
+	System.out.println(i = j);//20
+
+	boolean b1 = true;
+	boolean b2 = false;
+	System.out.println(b2 == b1);//false
+	System.out.println(b2 = b1);//true
+</code></pre>
+<p>【特别说明】<br>
+1.比较运算符的结果是boolean类型<br>
+2.&gt;  &lt;  &gt;=  &lt;= :只能使用在数值类型的数据之间。<br>
+3. == 和 !=: 不仅可以使用在数值类型数据之间，还可以使用在其他引用类型变量之间。<br>
+Account acct1 = new Account(1000);<br>
+Account acct2 = new Account(1000);<br>
+boolean b1 = (acct1 == acct2);//比较两个Account是否是同一个账户。<br>
+boolean b2 = (acct1 != acct2);//</p>
+<p>四、逻辑运算符：&amp; &amp;&amp;  |  || !  ^<br>
+【典型代码】<br>
+//区分&amp; 与 &amp;&amp;<br>
+//相同点1：&amp; 与  &amp;&amp; 的运算结果相同<br>
+//相同点2：当符号左边是true时，二者都会执行符号右边的运算<br>
+//不同点：当符号左边是false时，&amp;继续执行符号右边的运算。&amp;&amp;不再执行符号右边的运算。<br>
+//开发中，推荐使用&amp;&amp;<br>
+boolean b1 = true;<br>
+b1 = false;<br>
+int num1 = 10;<br>
+if(b1 &amp; (num1++ &gt; 0)){<br>
+System.out.println(&quot;我现在在北京&quot;);<br>
+}else{<br>
+System.out.println(&quot;我现在在南京&quot;);<br>
+}</p>
+<pre><code>	System.out.println(&quot;num1 = &quot; + num1);
+	
+	boolean b2 = true;
+	b2 = false;
+	int num2 = 10;
+	if(b2 &amp;&amp; (num2++ &gt; 0)){
+		System.out.println(&quot;我现在在北京&quot;);
+	}else{
+		System.out.println(&quot;我现在在南京&quot;);
+	}
+
+	System.out.println(&quot;num2 = &quot; + num2);
+
+	// 区分：| 与 || 
+	//相同点1：| 与  || 的运算结果相同
+	//相同点2：当符号左边是false时，二者都会执行符号右边的运算
+	//不同点3：当符号左边是true时，|继续执行符号右边的运算，而||不再执行符号右边的运算
+	//开发中，推荐使用||
+	boolean b3 = false;
+	b3 = true;
+	int num3 = 10;
+	if(b3 | (num3++ &gt; 0)){
+		System.out.println(&quot;我现在在北京&quot;);
+	}else{
+		System.out.println(&quot;我现在在南京&quot;);
+	}
+	System.out.println(&quot;num3 = &quot; + num3);
+
+
+	boolean b4 = false;
+	b4 = true;
+	int num4 = 10;
+	if(b4 || (num4++ &gt; 0)){
+		System.out.println(&quot;我现在在北京&quot;);
+	}else{
+		System.out.println(&quot;我现在在南京&quot;);
+	}
+	System.out.println(&quot;num4 = &quot; + num4);
+</code></pre>
+<p>【特别说明】<br>
+逻辑运算符操作的都是boolean类型的变量。而且结果也是boolean类型</p>
+<p>五、位运算符：&lt;&lt;  &gt;&gt; &gt;&gt;&gt; &amp;  |  ^  ~<br>
+【典型代码】<br>
+int i = 21;<br>
+i = -21;<br>
+System.out.println(&quot;i &lt;&lt; 2 :&quot; + (i &lt;&lt; 2));   // i &lt;&lt; 2 :-84<br>
+System.out.println(&quot;i &lt;&lt; 3 :&quot; + (i &lt;&lt; 3));   // i &lt;&lt; 3 :-168<br>
+System.out.println(&quot;i &lt;&lt; 27 :&quot; + (i &lt;&lt; 27));   //  i &lt;&lt; 27 :1476395008</p>
+<pre><code>	int m = 12;
+	int n = 5;
+	System.out.println(&quot;m &amp; n :&quot; + (m &amp; n));   //  m &amp; n :4
+	System.out.println(&quot;m | n :&quot; + (m | n));    //  m | n :13
+	System.out.println(&quot;m ^ n :&quot; + (m ^ n));   //  m ^ n :9
+</code></pre>
+<p>【面试题】 你能否写出最高效的2 * 8的实现方式？<br>
+答案：2 &lt;&lt; 3  或  8 &lt;&lt; 1<br>
+【特别说明的】</p>
+<ol>
+<li>位运算符操作的都是整型的数据</li>
+<li>&lt;&lt; ：在一定范围内，每向左移1位，相当于 * 2
+<blockquote>
+<blockquote>
+<p>:在一定范围内，每向右移1位，相当于 / 2</p>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<p>典型题目：<br>
+1.交换两个变量的值。（int a=1,b=2）<br>
+a =  a ^ b;<br>
+b =  a ^ b;//此时的a已经不是原来的a了，此时右边的表达式就等价于：( a ^ b ) ^ b ，结果是a，并把它赋予变量b；<br>
+a =  a ^ b;//此时的a与b都不是原来的a与b了，此时右边的表达式就等价于：a ^ ( a ^ b ) ，结果是b，并把它赋予变量a；</p>
+<p>2.实现60的二进制到十六进制的转换<br>
+public static void BitCalc() {<br>
+//获取60的二进制<br>
+System.out.println(Integer.toBinaryString(60));<br>
+int num =60;<br>
+int n1 = num &amp; 15;<br>
+int temp = 60 &gt;&gt; 4;<br>
+int n2 = temp &amp; 15;<br>
+System.out.print(n2);	<br>
+System.out.println((char)(n1-10+'A'));<br>
+//三元运算<br>
+int x =1,y;<br>
+y =(x&gt;1)?'a':200;<br>
+System.out.println(&quot;y=&quot;+y);		<br>
+}</p>
+<p>结果：<br>
+111100<br>
+3C<br>
+y=200</p>
+<p>六、三元运算符：(条件表达式)? 表达式1 : 表达式2<br>
+【典型代码】<br>
+1.获取两个整数的较大值<br>
+2.获取三个数的最大值<br>
+【特别说明的】</p>
+<ol>
+<li>说明<br>
+① 条件表达式的结果为boolean类型<br>
+② 根据条件表达式真或假，决定执行表达式1，还是表达式2.<br>
+如果表达式为true，则执行表达式1。<br>
+如果表达式为false，则执行表达式2。<br>
+③ 表达式1 和表达式2要求是一致的。<br>
+④ 三元运算符可以嵌套使用</li>
+<li></li>
+</ol>
+<p>凡是可以使用三元运算符的地方，都可以改写为if-else<br>
+反之，不成立。<br>
+3. 如果程序既可以使用三元运算符，又可以使用if-else结构，那么优先选择三元运算符。原因：简洁、执行效率高。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[04 Java基本语法]]></title>
         <id>https://fantaixi.github.io/post/04-java-ji-ben-yu-fa/</id>
