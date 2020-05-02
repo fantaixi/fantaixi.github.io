@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>06 Java流程控制 | 饭太稀</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://fantaixi.github.io/favicon.ico?v=1588411832002">
+<link rel="stylesheet" href="https://fantaixi.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、顺序结构：程序从上到下执行。
+分支结构：
+if-else if - else
+switch-case
+1.if-else条件判断结构
+1.1.
+结构一：
+if(条件表达式){
+执行表达式
+}
+结构二：二选一
+if(条件表达式){
+执行表..." />
+    <meta name="keywords" content="Java" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://fantaixi.github.io">
+        <img src="https://fantaixi.github.io/images/avatar.png?v=1588411832002" class="site-logo">
+        <h1 class="site-title">饭太稀</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://fantaixi.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">06 Java流程控制</h2>
+            <div class="post-date">2020-05-02</div>
+            
+            <div class="post-content" v-pre>
+              <p>一、顺序结构：程序从上到下执行。<br>
+分支结构：<br>
+if-else if - else<br>
+switch-case</p>
+<p>1.if-else条件判断结构<br>
+1.1.<br>
+结构一：<br>
+if(条件表达式){<br>
+执行表达式<br>
+}</p>
+<p>结构二：二选一<br>
+if(条件表达式){<br>
+执行表达式1<br>
+}else{<br>
+执行表达式2<br>
+}</p>
+<p>结构三：n选一<br>
+if(条件表达式){<br>
+执行表达式1<br>
+}else if(条件表达式){<br>
+执行表达式2<br>
+}else if(条件表达式){<br>
+执行表达式3<br>
+}<br>
+...<br>
+else{<br>
+执行表达式n<br>
+}</p>
+<p>1.2.说明：</p>
+<ol>
+<li>else 结构是可选的。</li>
+<li>针对于条件表达式：
+<blockquote>
+<p>如果多个条件表达式之间是“互斥”关系(或没有交集的关系),哪个判断和执行语句声明在上面还是下面，无所谓。<br>
+如果多个条件表达式之间有交集的关系，需要根据实际情况，考虑清楚应该将哪个结构声明在上面。<br>
+如果多个条件表达式之间有包含的关系，通常情况下，需要将范围小的声明在范围大的上面。否则，范围小的就没机会执行了。（比如异常处理）</p>
+</blockquote>
+</li>
+<li>if-else结构是可以相互嵌套的。</li>
+<li>如果if-else结构中的执行语句只有一行时，对应的一对{}可以省略的。但是，不建议大家省略。</li>
+</ol>
+<p>2.switch-case选择结构<br>
+switch(表达式){<br>
+case 常量1:<br>
+执行语句1;<br>
+//break;<br>
+case 常量2:<br>
+执行语句2;<br>
+//break;<br>
+...<br>
+default:<br>
+执行语句n;<br>
+//break;<br>
+}<br>
+2.说明：<br>
+① 根据switch表达式中的值，依次匹配各个case中的常量。一旦匹配成功，则进入相应case结构中，调用其执行语句。<br>
+当调用完执行语句以后，则仍然继续向下执行其他case结构中的执行语句，直到遇到break关键字或此switch-case结构末尾结束为止。<br>
+② break,可以使用在switch-case结构中，表示一旦执行到此关键字，就跳出switch-case结构<br>
+③ switch结构中的表达式，只能是如下的6种数据类型之一：<br>
+byte 、short、char、int、枚举类型(JDK5.0新增)、String类型(JDK7.0新增)<br>
+④ case 之后只能声明常量。不能声明范围。<br>
+⑤ break关键字是可选的。<br>
+⑥ default:相当于if-else结构中的else.<br>
+default结构是可选的，而且位置是灵活的。<br>
+3.如果switch-case结构中的多个case的执行语句相同，则可以考虑进行合并。<br>
+4.break在switch-case中是可选的</p>
+<p>二、循环结构：<br>
+for<br>
+while<br>
+do-while</p>
+<p>1.循环结构的四要素<br>
+① 初始化条件<br>
+② 循环条件  ---&gt;是boolean类型<br>
+③ 循环体<br>
+④ 迭代条件<br>
+说明：通常情况下，循环结束都是因为②中循环条件返回false了。</p>
+<p>2.三种循环结构：<br>
+2.1 for循环结构<br>
+for(①;②;④){<br>
+③<br>
+}<br>
+执行过程：① - ② - ③ - ④ - ② - ③ - ④ - ... - ②<br>
+2.2 while循环结构<br>
+①<br>
+while(②){<br>
+③;<br>
+④;<br>
+}<br>
+执行过程：① - ② - ③ - ④ - ② - ③ - ④ - ... - ②<br>
+说明：<br>
+写while循环千万小心不要丢了迭代条件。一旦丢了，就可能导致死循环！</p>
+<p>for和while循环总结：</p>
+<ol>
+<li>开发中，基本上我们都会从for、while中进行选择，实现循环结构。</li>
+<li>for循环和while循环是可以相互转换的！<br>
+区别：for循环和while循环的初始化条件部分的作用范围不同。</li>
+<li>我们写程序，要避免出现死循环。<br>
+2.3 do-while循环结构<br>
+①<br>
+do{<br>
+③;<br>
+④;<br>
+}while(②);<br>
+执行过程：① - ③ - ④ - ② - ③ - ④ - ... - ②</li>
+</ol>
+<p>说明：<br>
+1.do-while循环至少会执行一次循环体！<br>
+2.开发中，使用for和while更多一些。较少使用do-while</p>
+<p>3.“无限循环”结构: while(true) 或 for(;😉<br>
+总结：如何结束一个循环结构？<br>
+方式一：当循环条件是false时<br>
+方式二：在循环体中，执行break</p>
+<p>4.嵌套循环<br>
+1.嵌套循环:将一个循环结构A声明在另一个循环结构B的循环体中,就构成了嵌套循环<br>
+内层循环：循环结构A<br>
+外层循环：循环结构B<br>
+2.说明：<br>
+① 内层循环结构遍历一遍，只相当于外层循环循环体执行了一次<br>
+② 假设外层循环需要执行m次，内层循环需要执行n次。此时内层循环的循环体一共执行了m * n次<br>
+③ 外层循环控制行数，内层循环控制列数<br>
+【典型练习】<br>
+//练习一：<br>
+/*<br>
+******<br>
+******<br>
+******<br>
+******<br>
+<em>/<br>
+for(int j = 1;j &lt;= 4;j++ ){<br>
+for(int i = 1;i &lt;= 6;i++){<br>
+System.out.print('</em>');<br>
+}<br>
+System.out.println();<br>
+}<br>
+//练习二：<br>
+/*			i(行号)		j(*的个数)<br>
+*			1			1<br>
+**			2			2<br>
+***			3			3<br>
+****		4			4<br>
+*****		5			5<br>
+*/</p>
+<pre><code>	for(int i = 1;i &lt;= 5;i++){//控制行数
+		for(int j = 1;j &lt;= i;j++){//控制列数
+			System.out.print(&quot;*&quot;);
+		
+		}
+		System.out.println();
+	}
+	//练习三：九九乘法表
+	//练习四：100以内的质数
+</code></pre>
+<p>补充:衡量一个功能代码的优劣：<br>
+1.正确性<br>
+2.可读性<br>
+3.健壮性<br>
+4.高效率与低存储：时间复杂度 、空间复杂度 （衡量算法的好坏）</p>
+<p>如何理解流程控制的练习：<br>
+流程控制结构的使用 + 算法逻辑</p>
+<p>小结：break和continue关键字的使用<br>
+使用范围		循环中使用的作用(不同点)	  相同点</p>
+<p>break:	 switch-case			<br>
+循环结构中		   结束当前循环		关键字后面不能声明执行语句</p>
+<p>continue:	循环结构中	 结束当次循环		关键字后面不能声明执行语句</p>
+<p>补充：带标签的break和continue的使用</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://fantaixi.github.io/tag/UDPQ9NSLF/" class="tag">
+                    Java
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://fantaixi.github.io/post/05-java-yun-suan-fu/">
+                  <h3 class="post-title">
+                    05 Java运算符
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
