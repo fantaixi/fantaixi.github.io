@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>08 面向对象-上 | 饭太稀</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://fantaixi.github.io/favicon.ico?v=1588762060008">
+<link rel="stylesheet" href="https://fantaixi.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、类与对象
+1.面向对象学习的三条主线：
+
+1.Java类及类的成员：属性、方法、构造器；代码块、内部类
+2.面向对象的大特征：封装性、继承性、多态性、(抽象性)
+3.其它关键字：this、super、static、final、abstr..." />
+    <meta name="keywords" content="Java" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://fantaixi.github.io">
+        <img src="https://fantaixi.github.io/images/avatar.png?v=1588762060008" class="site-logo">
+        <h1 class="site-title">饭太稀</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://fantaixi.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">08 面向对象-上</h2>
+            <div class="post-date">2020-05-04</div>
+            
+            <div class="post-content" v-pre>
+              <p>一、类与对象<br>
+1.面向对象学习的三条主线：</p>
+<ul>
+<li>1.Java类及类的成员：属性、方法、构造器；代码块、内部类</li>
+<li>2.面向对象的大特征：封装性、继承性、多态性、(抽象性)</li>
+<li>3.其它关键字：this、super、static、final、abstract、interface、package、import等</li>
+<li>“大处着眼，小处着手”</li>
+</ul>
+<p>2.面向对象与面向过程（理解）<br>
+1.面向过程：强调的是功能行为，以函数为最小单位，考虑怎么做。（c/c++）<br>
+2.面向对象：强调具备了功能的对象，以类/对象为最小单位，考虑谁来做。（Java）</p>
+<p>举例对比：人把大象装进冰箱。</p>
+<p>3.完成一个项目（或功能）的思路：<br>
+<img src="https://fantaixi.github.io/post-images/1588580409160.png" alt="" loading="lazy"></p>
+<p>4.面向对象中两个重要的概念：<br>
+类：对一类事物的描述，是抽象的、概念上的定义<br>
+对象：是实际存在的该类事物的每个个体，因而也称为实例(instance)</p>
+<blockquote>
+<p>面向对象程序设计的重点是类的设计<br>
+设计类，就是设计类的成员。</p>
+</blockquote>
+<p>二者的关系：<br>
+对象，是由类new出来的，派生出来的。<br>
+5.面向对象思想落地实现的规则一</p>
+<ul>
+<li>1.创建类，设计类的成员</li>
+<li>2.创建类的对象</li>
+<li>3.通过“对象.属性”或“对象.方法”调用对象的结构</li>
+</ul>
+<p>补充：几个概念的使用说明</p>
+<ul>
+<li>属性 = 成员变量 = field = 域、字段</li>
+<li>方法 = 成员方法 = 函数 = method</li>
+<li>创建类的对象 = 类的实例化 = 实例化类</li>
+</ul>
+<p>6.对象的创建与对象的内存解析<br>
+典型代码：<br>
+Person p1 = new Person();<br>
+Person p2 = new Person();<br>
+Person p3 = p1;//没有新创建一个对象，共用一个堆空间中的对象实体。<br>
+说明：<br>
+如果创建了一个类的多个对象，则每个对象都独立的拥有一套类的属性。（非static的）<br>
+意味着：如果我们修改一个对象的属性a，则不影响另外一个对象属性a的值。</p>
+<p>7.匿名对象:我们创建的对象，没有显式的赋给一个变量名。即为匿名对象<br>
+特点：匿名对象只能调用一次。<br>
+举例：<br>
+new Phone().sendEmail();<br>
+new Phone().playGame();<br>
+new Phone().price = 1999;<br>
+new Phone().showPrice();//0.0<br>
+应用场景：<br>
+PhoneMall mall = new PhoneMall();<br>
+//匿名对象的使用<br>
+mall.show(new Phone());<br>
+其中，<br>
+class PhoneMall{<br>
+public void show(Phone phone){<br>
+phone.sendEmail();<br>
+phone.playGame();<br>
+}<br>
+}<br>
+8.理解&quot;万事万物皆对象&quot;<br>
+1.在Java语言范畴中，我们都将功能、结构等封装到类中，通过类的实例化，来调用具体的功能结构</p>
+<ul>
+<li>
+<pre><code> &gt;Scanner,String等
+</code></pre>
+</li>
+<li>
+<pre><code> &gt;文件：File
+</code></pre>
+</li>
+<li>
+<pre><code> &gt;网络资源：URL
+</code></pre>
+</li>
+</ul>
+<p>2.涉及到Java语言与前端Html、后端的数据库交互时，前后端的结构在Java层面交互时，都体现为类、对象。</p>
+<p>补充：<br>
+编译完源程序以后，生成一个或多个字节码文件。<br>
+我们使用JVM中的类的加载器和解释器对生成的字节码文件进行解释运行。意味着，需要将字节码文件对应的类加载到内存中，涉及到内存解析。<br>
+<img src="https://fantaixi.github.io/post-images/1588580739867.png" alt="" loading="lazy"><br>
+虚拟机栈，即为平时提到的栈结构。我们将局部变量存储在栈结构中<br>
+堆，我们将new出来的结构（比如：数组、对象）加载在堆空间中。补充：对象的属性（非static的）加载在堆空间中。<br>
+方法区：类的加载信息、常量池、静态域</p>
+<p>二、类的结构之一：属性<br>
+对比：属性  vs  局部变量<br>
+1.相同点：</p>
+<ul>
+<li>
+<pre><code> 1.1  定义变量的格式：数据类型  变量名 = 变量值
+</code></pre>
+</li>
+<li>
+<pre><code> 1.2 先声明，后使用
+</code></pre>
+</li>
+<li>
+<pre><code> 1.3 变量都有其对应的作用域 
+</code></pre>
+</li>
+</ul>
+<p>2.不同点：<br>
+2.1 在类中声明的位置的不同</p>
+<ul>
+<li>
+<pre><code> 属性：直接定义在类的一对{}内
+</code></pre>
+</li>
+<li>
+<pre><code> 局部变量：声明在方法内、方法形参、代码块内、构造器形参、构造器内部的变量
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 2.2 关于权限修饰符的不同
+</code></pre>
+</li>
+<li>
+<pre><code> 属性：可以在声明属性时，指明其权限，使用权限修饰符。
+</code></pre>
+</li>
+<li>
+<pre><code> 常用的权限修饰符：private、public、缺省、protected  ---&gt;封装性
+</code></pre>
+</li>
+<li>
+<pre><code> 目前，大家声明属性时，都使用缺省就可以了。
+</code></pre>
+</li>
+<li>
+<pre><code> 局部变量：不可以使用权限修饰符。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 2.3 默认初始化值的情况：
+</code></pre>
+</li>
+<li>
+<pre><code> 属性：类的属性，根据其类型，都默认初始化值。
+</code></pre>
+</li>
+<li>
+<pre><code> 	整型（byte、short、int、long：0）
+</code></pre>
+</li>
+<li>
+<pre><code> 	浮点型（float、double：0.0）
+</code></pre>
+</li>
+<li>
+<pre><code> 	字符型（char：0  （或'\u0000'））
+</code></pre>
+</li>
+<li>
+<pre><code> 	布尔型（boolean：false）
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 	引用数据类型（类、数组、接口：null）
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 局部变量：没默认初始化值。
+</code></pre>
+</li>
+<li>
+<pre><code> 	意味着，我们在调用局部变量之前，一定要显式赋值。
+</code></pre>
+</li>
+<li>
+<pre><code> 	特别地：形参在调用时，我们赋值即可。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 2.4 在内存中加载的位置：
+</code></pre>
+</li>
+<li>
+<pre><code> 属性：加载到堆空间中   （非static）
+</code></pre>
+</li>
+<li>
+<pre><code> 局部变量：加载到栈空间
+</code></pre>
+</li>
+</ul>
+<p>三、类的结构之二：方法</p>
+<ol>
+<li>方法：描述类应该具有的功能。</li>
+</ol>
+<ul>
+<li>比如：</li>
+<li>Math类：sqrt()\random() ...</li>
+<li>Scanner类：nextXxx() ...</li>
+<li>Arrays类：sort() \ binarySearch() \ toString() \ equals() \ ...</li>
+</ul>
+<ol start="2">
+<li>
+<p>方法的声明：权限修饰符  返回值类型  方法名(形参列表){<br>
+方法体<br>
+}</p>
+</li>
+<li>
+<p>说明：</p>
+</li>
+</ol>
+<ul>
+<li>
+<pre><code> 3.1 关于权限修饰符：默认方法的权限修饰符先都使用public
+</code></pre>
+</li>
+<li>
+<pre><code> Java规定的4种权限修饰符：private、public、缺省、protected  --&gt;封装性再细说
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 3.2 返回值类型： 返回值  vs 没返回值
+</code></pre>
+</li>
+<li>
+<pre><code> 3.2.1  如果方法返回值，则必须在方法声明时，指定返回值的类型。同时，方法中，需要使用
+</code></pre>
+</li>
+<li>
+<pre><code>       return关键字来返回指定类型的变量或常量：“return 数据”。
+</code></pre>
+</li>
+<li>
+<pre><code> 	如果方法没返回值，则方法声明时，使用void来表示。通常，没返回值的方法中，       *          就不需要 使用return.但是，如果使用的话，只能“return;”表示结束此方法的意思。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 	3.2.2 我们定义方法该不该返回值？
+</code></pre>
+</li>
+<li>
+<pre><code> 		① 题目要求
+</code></pre>
+</li>
+<li>
+<pre><code> 		② 凭经验：具体问题具体分析
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 3.3 方法名：属于标识符，遵循标识符的规则和规范，“见名知意”
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 3.4 形参列表： 方法可以声明0个，1个，或多个形参。
+</code></pre>
+</li>
+<li>
+<pre><code>    3.4.1 格式：数据类型1 形参1,数据类型2 形参2,...
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code>    3.4.2 我们定义方法时，该不该定义形参？
+</code></pre>
+</li>
+<li>
+<pre><code>    		① 题目要求
+</code></pre>
+</li>
+<li>
+<pre><code>    		② 凭经验：具体问题具体分析
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 3.5 方法体：方法功能的体现。 	
+</code></pre>
+</li>
+</ul>
+<ol start="3">
+<li>方法的使用中，可以调用当前类的属性或方法</li>
+</ol>
+<ul>
+<li>
+<pre><code> 	特殊的：方法A中又调用了方法A:递归方法。
+</code></pre>
+</li>
+<li>
+<pre><code>方法中，不可以定义方法。
+</code></pre>
+</li>
+</ul>
+<p>补充：return，重载，可变个数的形参，值传递机制，递归<br>
+return关键字：<br>
+1.使用范围：使用在方法体中<br>
+2.作用：① 结束方法<br>
+② 针对于返回值类型的方法，使用&quot;return 数据&quot;方法返回所要的数据。<br>
+3.注意点：return关键字后面不可以声明执行语句。</p>
+<p>方法的重载：<br>
+1.方法的重载的概念<br>
+定义：在同一个类中，允许存在一个以上的同名方法，只要它们的参数个数或者参数类型不同即可。<br>
+总结：&quot;两同一不同&quot;:同一个类、相同方法名<br>
+参数列表不同：参数个数不同，参数类型不同</p>
+<p>2.构成重载的举例：<br>
+举例一：Arrays类中重载的sort() / binarySearch()；PrintStream中的println()<br>
+举例二：<br>
+//如下的4个方法构成了重载<br>
+public void getSum(int i,int j){<br>
+System.out.println(&quot;1&quot;);<br>
+}</p>
+<pre><code>public void getSum(double d1,double d2){
+	System.out.println(&quot;2&quot;);
+}
+
+public void getSum(String s ,int i){
+	System.out.println(&quot;3&quot;);
+}
+
+public void getSum(int i,String s){
+	System.out.println(&quot;4&quot;);
+}
+</code></pre>
+<p>不构成重载的举例：<br>
+//如下的3个方法不能与上述4个方法构成重载<br>
+//	public int getSum(int i,int j){<br>
+//		return 0;<br>
+//	}</p>
+<p>//	public void getSum(int m,int n){<br>
+//		<br>
+//	}</p>
+<p>//	private void getSum(int i,int j){<br>
+//		<br>
+//	}</p>
+<ol>
+<li>如何判断是否构成方法的重载？<br>
+严格按照定义判断：两同一不同。<br>
+跟方法的权限修饰符、返回值类型、形参变量名、方法体都没关系！<br>
+4.如何确定类中某一个方法的调用：<br>
+方法名 ---&gt; 参数列表</li>
+</ol>
+<p>可变个数的形参的方法：<br>
+1.使用说明：</p>
+<ul>
+<li>1.jdk 5.0新增的内容</li>
+<li>2.具体使用：</li>
+<li>2.1 可变个数形参的格式：数据类型 ... 变量名</li>
+<li>2.2 当调用可变个数形参的方法时，传入的参数个数可以是：0个，1个,2个，。。。</li>
+<li>2.3 可变个数形参的方法与本类中方法名相同，形参不同的方法之间构成重载</li>
+<li>2.4 可变个数形参的方法与本类中方法名相同，形参类型也相同的数组之间不构成重载。换句话说，二者不能共存。</li>
+<li>2.5 可变个数形参在方法的形参中，必须声明在末尾</li>
+<li>2.6  可变个数形参在方法的形参中,最多只能声明一个可变形参。<br>
+（之前方法形参有多个的时候，一般使用数组，常见场景：JDBC工具类）<br>
+2.举例说明：<br>
+public void show(int i){<br>
+}<br>
+public void show(String s){<br>
+System.out.println(&quot;show(String)&quot;);<br>
+}<br>
+public void show(String ... strs){<br>
+System.out.println(&quot;show(String ... strs)&quot;);<br>
+for(int i = 0;i &lt; strs.length;i++){<br>
+System.out.println(strs[i]);<br>
+}<br>
+}<br>
+//不能与上一个方法同时存在<br>
+//	public void show(String[] strs){<br>
+//		<br>
+//	}<br>
+调用时：<br>
+test.show(&quot;hello&quot;);<br>
+test.show(&quot;hello&quot;,&quot;world&quot;);<br>
+test.show();<br>
+test.show(new String[]{&quot;AA&quot;,&quot;BB&quot;,&quot;CC&quot;});</li>
+</ul>
+<p>java的值传递机制：<br>
+1.规则：<br>
+如果变量是基本数据类型，此时赋值的是变量所保存的数据值。<br>
+如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</p>
+<p>2.针对于方法的参数概念<br>
+形参：方法定义时，声明的小括号内的参数<br>
+实参：方法调用时，实际传递给形参的数据</p>
+<p>3.java中参数传递机制：值传递<br>
+规则：</p>
+<ul>
+<li>如果参数是基本数据类型，此时实参赋给形参的是实参真实存储的数据值。</li>
+<li>如果参数是引用数据类型，此时实参赋给形参的是实参存储数据的地址值。</li>
+</ul>
+<p>推广：<br>
+如果变量是基本数据类型，此时赋值的是变量所保存的数据值。<br>
+如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</p>
+<p>递归：<br>
+1.定义：<br>
+递归方法：一个方法体内调用它自身。<br>
+2.如何理解递归方法？</p>
+<blockquote>
+<p>方法递归包含了一种隐式的循环，它会重复执行某段代码，但这种重复执行无须循环控制。<br>
+递归一定要向已知方向递归，否则这种递归就变成了无穷递归，类似于死循环。<br>
+3.举例：<br>
+// 例1：计算1-n之间所自然数的和<br>
+public int getSum(int n) {// 3<br>
+if (n == 1) {<br>
+return 1;<br>
+} else {<br>
+return n + getSum(n - 1);<br>
+}<br>
+}</p>
+</blockquote>
+<pre><code>// 例2：计算1-n之间所自然数的乘积:n!
+public int getSum1(int n) {
+	if (n == 1) {
+		return 1;
+	} else {
+		return n * getSum1(n - 1);
+	}
+}
+
+//例3：已知一个数列：f(0) = 1,f(1) = 4,f(n+2)=2*f(n+1) + f(n),
+//其中n是大于0的整数，求f(10)的值。
+public int f(int n){
+	if(n == 0){
+		return 1;
+	}else if(n == 1){
+		return 4;
+	}else{
+</code></pre>
+<p>//			return f(n + 2) - 2 * f(n + 1);<br>
+return 2*f(n - 1) + f(n - 2);<br>
+}<br>
+}</p>
+<p>四、类的结构之三：构造器<br>
+1.构造器（或构造方法）：Constructor<br>
+构造器的作用：</p>
+<ul>
+<li>1.创建对象</li>
+<li>2.初始化对象的信息<br>
+2.使用说明：</li>
+<li>1.如果没显式的定义类的构造器的话，则系统默认提供一个空参的构造器</li>
+<li>2.定义构造器的格式：权限修饰符  类名(形参列表){}</li>
+<li>3.一个类中定义的多个构造器，彼此构成重载</li>
+<li>4.一旦我们显式的定义了类的构造器之后，系统就不再提供默认的空参构造器</li>
+<li>5.一个类中，至少会有一个构造器。</li>
+</ul>
+<p>3.举例：<br>
+//构造器<br>
+public Person(){<br>
+System.out.println(&quot;Person().....&quot;);<br>
+}<br>
+public Person(String n){<br>
+name = n;	<br>
+}<br>
+public Person(String n,int a){<br>
+name = n;<br>
+age = a;<br>
+}</p>
+<p>补充：属性赋值顺序，JavaBean，this，package/import/JDK中常见的包及其使用</p>
+<p>属性赋值顺序：<br>
+① 默认初始化<br>
+② 显式初始化<br>
+③ 构造器中初始化<br>
+④ 通过&quot;对象.方法&quot; 或 &quot;对象.属性&quot;的方式，赋值<br>
+以上操作的先后顺序：① - ② - ③ - ④</p>
+<p>JavaBean：<br>
+所谓JavaBean，是指符合如下标准的Java类：<br>
+&gt;类是公共的<br>
+&gt;一个无参的公共的构造器<br>
+&gt;属性，且对应的get、set方法</p>
+<p>关键字：this<br>
+1.可以调用的结构：属性、方法；构造器<br>
+2.this调用属性、方法：<br>
+this理解为：当前对象  或 当前正在创建的对象</p>
+<p>2.1  在类的方法中，我们可以使用&quot;this.属性&quot;或&quot;this.方法&quot;的方式，调用当前对象属性或方法。但是， 通常情况下，我们都择省略&quot;this.&quot;。特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用&quot;this.变量&quot;的方式，表明此变量是属性，而非形参。<br>
+*</p>
+<ul>
+<li>2.2 在类的构造器中，我们可以使用&quot;this.属性&quot;或&quot;this.方法&quot;的方式，调用当前正在创建的对象属性或方法。但是，通常情况下，我们都选择省略&quot;this.&quot;。特殊情况下，如果构造器的形参和类的属性同名时，我们必须显式的使用&quot;this.变量&quot;的方式，表明此变量是属性，而非形参。</li>
+</ul>
+<p>3.this调用构造器：<br>
+① 我们在类的构造器中，可以显式的使用&quot;this(形参列表)&quot;方式，调用本类中指定的其他构造器<br>
+② 构造器中不能通过&quot;this(形参列表)&quot;方式调用自己（死循环）<br>
+③ 如果一个类中有n个构造器，则最多有 n - 1构造器中使用了&quot;this(形参列表)&quot;<br>
+④ 规定：&quot;this(形参列表)&quot;必须声明在当前构造器的首行<br>
+⑤ 构造器内部，最多只能声明一个&quot;this(形参列表)&quot;，用来调用其他的构造器</p>
+<p>package/import</p>
+<ol>
+<li>package的使用说明：</li>
+</ol>
+<ul>
+<li>1.为了更好的实现项目中类的管理，提供包的概念</li>
+<li>2.使用package声明类或接口所属的包，声明在源文件的首行</li>
+<li>3.包，属于标识符，遵循标识符的命名规则、规范(xxxyyyzzz)、“见名知意”</li>
+<li>4.每&quot;.&quot;一次，就代表一层文件目录。</li>
+</ul>
+<ol start="2">
+<li>import的使用：</li>
+</ol>
+<ul>
+<li>
+<ol>
+<li>在源文件中显式的使用import结构导入指定包下的类、接口</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>声明在包的声明和类的声明之间</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>如果需要导入多个结构，则并列写出即可</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>可以使用&quot;xxx.*&quot;的方式，表示可以导入xxx包下的所结构</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>如果使用的类或接口是java.lang包下定义的，则可以省略import结构</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>如果使用的类或接口是本包下定义的，则可以省略import结构</li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li>如果在源文件中，使用了不同包下的同名的类，则必须至少一个类需要以全类名的方式显示。</li>
+</ol>
+</li>
+<li>
+<ol start="8">
+<li>使用&quot;xxx.*&quot;方式表明可以调用xxx包下的所结构。但是如果使用的是xxx子包下的结构，则仍需要显式导入</li>
+</ol>
+</li>
+<li>
+<ol start="9">
+<li>import static:导入指定类或接口中的静态结构:属性或方法。</li>
+</ol>
+</li>
+</ul>
+<p>3.JDK中常见的包及其使用<br>
+<img src="https://fantaixi.github.io/post-images/1588757322912.png" alt="" loading="lazy"></p>
+<p>五、面向对象的特征一：封装性<br>
+1.为什么要引入封装性？<br>
+我们程序设计追求“高内聚，低耦合”。<br>
+高内聚 ：类的内部数据操作细节自己完成，不允许外部干涉；<br>
+低耦合 ：仅对外暴露少量的方法用于使用。</p>
+<p>隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。</p>
+<p>2.问题引入：<br>
+当我们创建一个类的对象以后，我们可以通过&quot;对象.属性&quot;的方式，对对象的属性进行赋值。这里，赋值操作要受到属性的数据类型和存储范围的制约。除此之外，没其他制约条件。但是，在实际问题中，我们往往需要给属性赋值加入额外的限制条件。这个条件就不能在属性声明时体现，我们只能通过方法进行限制条件的添加。（比如：setLegs()同时，我们需要避免用户再使用&quot;对象.属性&quot;的方式对属性进行赋值。则需要将属性声明为私有的(private).<br>
+--&gt;此时，针对于属性就体现了封装性。<br>
+3.封装性思想具体的代码体现：<br>
+体现一：将类的属性xxx私化(private),同时，提供公共的(public)方法来获取(getXxx)和设置(setXxx)此属性的值<br>
+private double radius;<br>
+public void setRadius(double radius){<br>
+this.radius = radius;<br>
+}<br>
+public double getRadius(){<br>
+return radius;<br>
+}<br>
+体现二：不对外暴露的私有的方法<br>
+体现三：单例模式（将构造器私有化）<br>
+体现四：如果不希望类在包外被调用，可以将类设置为缺省的。</p>
+<p>4.Java规定的四种权限修饰符<br>
+4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public<br>
+4.2 具体的修饰范围：<br>
+<img src="https://fantaixi.github.io/post-images/1588757478304.png" alt="" loading="lazy"><br>
+4.3 权限修饰符可用来修饰的结构说明：<br>
+4种权限都可以用来修饰类的内部结构：属性、方法、构造器、内部类<br>
+修饰类的话，只能使用：缺省、public</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://fantaixi.github.io/tag/UDPQ9NSLF/" class="tag">
+                    Java
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://fantaixi.github.io/post/07-java-shu-zu/">
+                  <h3 class="post-title">
+                    07 Java 数组
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
