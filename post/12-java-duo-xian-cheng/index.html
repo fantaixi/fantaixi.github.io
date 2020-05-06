@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>12 Java多线程 | 饭太稀</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://fantaixi.github.io/favicon.ico?v=1588795446572">
+<link rel="stylesheet" href="https://fantaixi.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、程序、进程、线程的理解
+
+
+程序(programm)
+概念：是为完成特定任务、用某种语言编写的一组指令的集合。即指一段静态的代码。
+
+
+进程(process)
+概念：程序的一次执行过程，或是正在运行的一个程序。
+说明：进程作为资源分配的..." />
+    <meta name="keywords" content="Java" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://fantaixi.github.io">
+        <img src="https://fantaixi.github.io/images/avatar.png?v=1588795446572" class="site-logo">
+        <h1 class="site-title">饭太稀</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://fantaixi.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">12 Java多线程</h2>
+            <div class="post-date">2020-05-06</div>
+            
+            <div class="post-content" v-pre>
+              <p>一、程序、进程、线程的理解</p>
+<ol>
+<li>
+<p>程序(programm)<br>
+概念：是为完成特定任务、用某种语言编写的一组指令的集合。即指一段静态的代码。</p>
+</li>
+<li>
+<p>进程(process)<br>
+概念：程序的一次执行过程，或是正在运行的一个程序。<br>
+说明：进程作为资源分配的单位，系统在运行时会为每个进程分配不同的内存区域</p>
+</li>
+<li>
+<p>线程(thread)<br>
+概念：进程可进一步细化为线程，是一个程序内部的一条执行路径。<br>
+说明：线程作为调度和执行的单位，每个线程拥独立的运行栈和程序计数器(pc)，线程切换的开销小。<br>
+<img src="https://fantaixi.github.io/post-images/1588779139268.png" alt="" loading="lazy"></p>
+</li>
+</ol>
+<p>补充：<br>
+内存结构：<br>
+<img src="https://fantaixi.github.io/post-images/1588779225110.png" alt="" loading="lazy"></p>
+<p>进程可以细化为多个线程。<br>
+每个线程，拥有自己独立的：栈、程序计数器<br>
+多个线程，共享同一个进程中的结构：方法区、堆。</p>
+<p>二、并行与并发</p>
+<ol>
+<li>
+<p>单核CPU与多核CPU的理解<br>
+单核CPU，其实是一种假的多线程，因为在一个时间单元内，也只能执行一个线程的任务。例如：虽然有多车道，但是收费站只有一个工作人员在收费，只有收了费才能通过，那么CPU就好比收费人员。如果某个人不想交钱，那么收费人员可以把他“挂起”（晾着他，等他想通了，准备好了钱，再去收费。）但是因为CPU时间单元特别短，因此感觉不出来。<br>
+如果是多核的话，才能更好的发挥多线程的效率。（现在的服务器都是多核的）<br>
+一个Java应用程序java.exe，其实至少三个线程：main()主线程，gc()垃圾回收线程，异常处理线程。当然如果发生异常，会影响主线程。</p>
+</li>
+<li>
+<p>并行与并发的理解<br>
+并行：多个CPU同时执行多个任务。比如：多个人同时做不同的事。<br>
+并发：一个CPU(采用时间片)同时执行多个任务。比如：秒杀、多个人做同一件事</p>
+</li>
+</ol>
+<p>三、创建多线程的两种方式（JDK5.0之前）<br>
+方式一：继承Thread类的方式：</p>
+<ul>
+<li>
+<ol>
+<li>创建一个继承于Thread类的子类</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>重写Thread类的run() --&gt; 将此线程执行的操作声明在run()中</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>创建Thread类的子类的对象</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>通过此对象调用start()：①启动当前线程 ② 调用当前线程的run()</li>
+</ol>
+</li>
+</ul>
+<p>说明两个问题：<br>
+问题一：我们启动一个线程，必须调用start()，不能调用run()的方式启动线程。<br>
+问题二：如果再启动一个线程，必须重新创建一个Thread子类的对象，调用此对象的start().</p>
+<p>方式二：实现Runnable接口的方式：</p>
+<ul>
+<li>
+<ol>
+<li>创建一个实现了Runnable接口的类</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>实现类去实现Runnable中的抽象方法：run()</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>创建实现类的对象</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>将此对象作为参数传递到Thread类的构造器中，创建Thread类的对象</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>通过Thread类的对象调用start()</li>
+</ol>
+</li>
+</ul>
+<p>两种方式的对比：</p>
+<ul>
+<li>开发中：优先选择：实现Runnable接口的方式</li>
+<li>原因：1. 实现的方式没类的单继承性的局限性</li>
+<li>
+<pre><code> 2. 实现的方式更适合来处理多个线程共享数据的情况。
+</code></pre>
+</li>
+<li></li>
+<li>联系：public class Thread implements Runnable</li>
+<li>相同点：两种方式都需要重写run(),将线程要执行的逻辑声明在run()中。<br>
+目前两种方式，要想启动线程，都是调用的Thread类中的start()。</li>
+</ul>
+<p>四、Thread类中的常用方法<br>
+Thread类中的常用的方法:</p>
+<ul>
+<li>
+<ol>
+<li>start():启动当前线程；调用当前线程的run()</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>run(): 通常需要重写Thread类中的此方法，将创建的线程要执行的操作声明在此方法中</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>currentThread():静态方法，返回执行当前代码的线程</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>getName():获取当前线程的名字</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>setName():设置当前线程的名字</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>yield():释放当前cpu的执行权</li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li>join():在线程a中调用线程b的join(),此时线程a就进入阻塞状态，直到线程b完全执行完以后，线程a才结束阻塞状态。</li>
+</ol>
+</li>
+<li>
+<ol start="8">
+<li>stop():已过时。当执行此方法时，强制结束当前线程。</li>
+</ol>
+</li>
+<li>
+<ol start="9">
+<li>sleep(long millitime):让当前线程“睡眠”指定的millitime毫秒。在指定的millitime毫秒时间内，当前线程是阻塞状态。</li>
+</ol>
+</li>
+<li>
+<ol start="10">
+<li>isAlive():判断当前线程是否存活</li>
+</ol>
+</li>
+<li>
+<p>线程的优先级：</p>
+</li>
+<li>
+<ol>
+<li></li>
+</ol>
+</li>
+<li>
+<p>MAX_PRIORITY：10</p>
+</li>
+<li>
+<p>MIN _PRIORITY：1</p>
+</li>
+<li>
+<p>NORM_PRIORITY：5  --&gt;默认优先级</p>
+</li>
+<li>
+<p>2.如何获取和设置当前线程的优先级：</p>
+</li>
+<li>
+<p>getPriority():获取线程的优先级</p>
+</li>
+<li>
+<p>setPriority(int p):设置线程的优先级</p>
+</li>
+<li></li>
+<li>
+<p>说明：高优先级的线程要抢占低优先级线程cpu的执行权。但是只是从概率上讲，高优先级的线程高概率的情况下被执行。并不意味着只当高优先级的线程执行完以后，低优先级的线程才执行。</p>
+</li>
+</ul>
+<p>线程通信：wait() / notify() / notifyAll() :此三个方法定义在Object类中的。</p>
+<p>补充：线程的分类<br>
+一种是守护线程，一种是用户线程。</p>
+<p>五、Thread的生命周期<br>
+<img src="https://fantaixi.github.io/post-images/1588779515021.png" alt="" loading="lazy"><br>
+说明：<br>
+1.生命周期关注两个概念：状态、相应的方法<br>
+2.关注：状态a--&gt;状态b:哪些方法执行了（回调方法）<br>
+某个方法主动调用：状态a--&gt;状态b<br>
+3.阻塞：临时状态，不可以作为最终状态<br>
+死亡：最终状态。</p>
+<p>六、线程的同步机制<br>
+1.背景<br>
+例子：创建个窗口卖票，总票数为100张.使用实现Runnable接口的方式<br>
+*</p>
+<ul>
+<li>1.问题：卖票过程中，出现了重票、错票 --&gt;出现了线程的安全问题</li>
+<li>2.问题出现的原因：当某个线程操作车票的过程中，尚未操作完成时，其他线程参与进来，也操作车票。</li>
+<li>3.如何解决：当一个线程a在操作ticket的时候，其他线程不能参与进来。直到线程a操作完ticket时，其他线程才可以开始操作ticket。这种情况即使线程a出现了阻塞，也不能被改变。</li>
+</ul>
+<p>2.Java解决方案：同步机制<br>
+在Java中，我们通过同步机制，来解决线程的安全问题。</p>
+<p>方式一：同步代码块<br>
+*</p>
+<ul>
+<li>
+<p>synchronized(同步监视器){</p>
+</li>
+<li>
+<pre><code> //需要被同步的代码
+</code></pre>
+</li>
+<li></li>
+<li>
+<p>}</p>
+</li>
+<li>
+<p>说明：1.操作共享数据的代码，即为需要被同步的代码。  --&gt;不能包含代码多了，也不能包含代码少了。</p>
+</li>
+<li>
+<pre><code>  2.共享数据：多个线程共同操作的变量。比如：ticket就是共享数据。
+</code></pre>
+</li>
+<li>
+<pre><code>  3.同步监视器，俗称：锁。任何一个类的对象，都可以充当锁。
+</code></pre>
+</li>
+<li>
+<pre><code>     要求：多个线程必须要共用同一把锁。
+</code></pre>
+</li>
+<li></li>
+<li>
+<p>补充：在实现Runnable接口创建多线程的方式中，我们可以考虑使用this充当同步监视器。<br>
+在继承Thread类创建多线程的方式中，慎用this充当同步监视器，考虑使用当前类充当同步监视器。</p>
+</li>
+<li>
+<p>方式二：同步方法</p>
+</li>
+<li>
+<pre><code>如果操作共享数据的代码完整的声明在一个方法中，我们不妨将此方法声明同步的。
+</code></pre>
+</li>
+<li>
+<p>关于同步方法的总结：</p>
+</li>
+<li>
+<ol>
+<li>同步方法仍然涉及到同步监视器，只是不需要我们显式的声明。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>非静态的同步方法，同步监视器是：this</li>
+</ol>
+</li>
+<li>
+<pre><code>静态的同步方法，同步监视器是：当前类本身
+</code></pre>
+<p>方式三：Lock锁  --- JDK5.0新增</p>
+</li>
+<li></li>
+<li>
+<ol>
+<li>面试题：synchronized 与 Lock的异同？</li>
+</ol>
+</li>
+<li>
+<p>相同：二者都可以解决线程安全问题</p>
+</li>
+<li>
+<p>不同：synchronized机制在执行完相应的同步代码以后，自动的释放同步监视器</p>
+</li>
+<li>
+<pre><code>   Lock需要手动的启动同步（lock()，同时结束同步也需要手动的实现（unlock()）
+</code></pre>
+</li>
+</ul>
+<p>使用的优先顺序：</p>
+<ul>
+<li>Lock ---&gt; 同步代码块（已经进入了方法体，分配了相应资源 ) ---&gt; 同步方法（在方法体之外)<br>
+3.利弊<br>
+同步的方式，解决了线程的安全问题。---好处<br>
+操作同步代码时，只能一个线程参与，其他线程等待。相当于是一个单线程的过程，效率低。</li>
+</ul>
+<p>补充：线程安全的单例模式（懒汉式）、死锁问题</p>
+<p>使用同步机制将单例模式中的懒汉式改写为线程安全的。<br>
+class Bank{<br>
+private Bank(){<br>
+}<br>
+private static Bank instance = null;<br>
+public static Bank getInstance(){<br>
+//方式一：效率稍差<br>
+//        synchronized (Bank.class) {<br>
+//            if(instance == null){<br>
+//<br>
+//                instance = new Bank();<br>
+//            }<br>
+//            return instance;<br>
+//        }<br>
+//方式二：效率更高<br>
+if(instance == null){<br>
+synchronized (Bank.class) {<br>
+if(instance == null){<br>
+instance = new Bank();<br>
+}<br>
+}<br>
+}<br>
+return instance;<br>
+}<br>
+}</p>
+<p>死锁：<br>
+1.死锁的理解：<br>
+不同的线程分别占用对方需要的同步资源不放弃，都在等待对方放弃自己需要的同步资源，就形成了线程的死锁</p>
+<p>2.说明：</p>
+<ul>
+<li>1出现死锁后，不会出现异常，不会出现提示，只是所的线程都处于阻塞状态，无法继续</li>
+<li>2我们使用同步时，要避免出现死锁。<br>
+3.举例：<br>
+public static void main(String[] args) {<br>
+StringBuffer s1 = new StringBuffer();<br>
+StringBuffer s2 = new StringBuffer();<br>
+new Thread(){<br>
+@Override<br>
+public void run() {<br>
+synchronized (s1){<br>
+s1.append(&quot;a&quot;);<br>
+s2.append(&quot;1&quot;);<br>
+try {<br>
+Thread.sleep(100);<br>
+} catch (InterruptedException e) {<br>
+e.printStackTrace();<br>
+}<br>
+synchronized (s2){<br>
+s1.append(&quot;b&quot;);<br>
+s2.append(&quot;2&quot;);<br>
+System.out.println(s1);<br>
+System.out.println(s2);<br>
+}<br>
+}<br>
+}<br>
+}.start();<br>
+new Thread(new Runnable() {<br>
+@Override<br>
+public void run() {<br>
+synchronized (s2){<br>
+s1.append(&quot;c&quot;);<br>
+s2.append(&quot;3&quot;);<br>
+try {<br>
+Thread.sleep(100);<br>
+} catch (InterruptedException e) {<br>
+e.printStackTrace();<br>
+}<br>
+synchronized (s1){<br>
+s1.append(&quot;d&quot;);<br>
+s2.append(&quot;4&quot;);<br>
+System.out.println(s1);<br>
+System.out.println(s2);<br>
+}<br>
+}<br>
+}<br>
+}).start();<br>
+}</li>
+</ul>
+<p>七、线程通信<br>
+1.线程通信涉及到的三个方法：</p>
+<ul>
+<li>wait():一旦执行此方法，当前线程就进入阻塞状态，并释放同步监视器。</li>
+<li>notify():一旦执行此方法，就会唤醒被wait的一个线程。如果有多个线程被wait，就唤醒优先级高的那个。</li>
+<li>notifyAll():一旦执行此方法，就会唤醒所有被wait的线程。</li>
+</ul>
+<p>2.说明：</p>
+<ul>
+<li>1.wait()，notify()，notifyAll()三个方法必须使用在同步代码块或同步方法中。</li>
+<li>2.wait()，notify()，notifyAll()三个方法的调用者必须是同步代码块或同步方法中的同步监视器。</li>
+<li>否则，会出现IllegalMonitorStateException异常</li>
+<li>3.wait()，notify()，notifyAll()三个方法是定义在java.lang.Object类中。<br>
+3.面试题：<br>
+面试题：sleep() 和 wait()的异同？</li>
+<li>1.相同点：一旦执行方法，都可以使得当前的线程进入阻塞状态。</li>
+<li>2.不同点：1）两个方法声明的位置不同：Thread类中声明sleep() , Object类中声明wait()</li>
+<li>
+<pre><code>     2）调用的要求不同：sleep()可以在任何需要的场景下调用。 wait()必须使用在同步代码块或同步方法中
+</code></pre>
+</li>
+<li>
+<pre><code>     3）关于是否释放同步监视器：如果两个方法都使用在同步代码块或同步方法中，sleep()不会释放锁，wait()会释放锁。
+</code></pre>
+</li>
+</ul>
+<ol start="4">
+<li></li>
+</ol>
+<p>小结释放锁的操作：<br>
+<img src="https://fantaixi.github.io/post-images/1588786120077.png" alt="" loading="lazy"><br>
+小结不会释放锁的操作：<br>
+<img src="https://fantaixi.github.io/post-images/1588786147470.png" alt="" loading="lazy"></p>
+<p>八、JDK5.0新增线程创建的方式<br>
+1.新增方式一：实现Callable接口。 --- JDK 5.0新增<br>
+//1.创建一个实现Callable的实现类<br>
+class NumThread implements Callable{<br>
+//2.实现call方法，将此线程需要执行的操作声明在call()中<br>
+@Override<br>
+public Object call() throws Exception {<br>
+int sum = 0;<br>
+for (int i = 1; i &lt;= 100; i++) {<br>
+if(i % 2 == 0){<br>
+System.out.println(i);<br>
+sum += i;<br>
+}<br>
+}<br>
+return sum;<br>
+}<br>
+}</p>
+<p>public class ThreadNew {<br>
+public static void main(String[] args) {<br>
+//3.创建Callable接口实现类的对象<br>
+NumThread numThread = new NumThread();<br>
+//4.将此Callable接口实现类的对象作为传递到FutureTask构造器中，创建FutureTask的对象<br>
+FutureTask futureTask = new FutureTask(numThread);<br>
+//5.将FutureTask的对象作为参数传递到Thread类的构造器中，创建Thread对象，并调用start()<br>
+new Thread(futureTask).start();</p>
+<pre><code>    try {
+        //6.获取Callable中call方法的返回值
+        //get()返回值即为FutureTask构造器参数Callable实现类重写的call()的返回值。
+        Object sum = futureTask.get();
+        System.out.println(&quot;总和为：&quot; + sum);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    } catch (ExecutionException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>}</p>
+<p>说明：</p>
+<ul>
+<li>如何理解实现Callable接口的方式创建多线程比实现Runnable接口创建多线程方式强大？</li>
+<li>
+<ol>
+<li>call()可以返回值的。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>call()可以抛出异常，被外面的操作捕获，获取异常的信息</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>Callable是支持泛型的</li>
+</ol>
+</li>
+</ul>
+<p>2.新增方式二：使用线程池<br>
+class NumberThread implements Runnable{<br>
+@Override<br>
+public void run() {<br>
+for(int i = 0;i &lt;= 100;i++){<br>
+if(i % 2 == 0){<br>
+System.out.println(Thread.currentThread().getName() + &quot;: &quot; + i);<br>
+}<br>
+}<br>
+}<br>
+}</p>
+<p>class NumberThread1 implements Runnable{<br>
+@Override<br>
+public void run() {<br>
+for(int i = 0;i &lt;= 100;i++){<br>
+if(i % 2 != 0){<br>
+System.out.println(Thread.currentThread().getName() + &quot;: &quot; + i);<br>
+}<br>
+}<br>
+}<br>
+}</p>
+<p>public class ThreadPool {<br>
+public static void main(String[] args) {<br>
+//1. 提供指定线程数量的线程池<br>
+ExecutorService service = Executors.newFixedThreadPool(10);<br>
+ThreadPoolExecutor service1 = (ThreadPoolExecutor) service;<br>
+//设置线程池的属性<br>
+//        System.out.println(service.getClass());<br>
+//        service1.setCorePoolSize(15);<br>
+//        service1.setKeepAliveTime();</p>
+<pre><code>    //2.执行指定的线程的操作。需要提供实现Runnable接口或Callable接口实现类的对象
+    service.execute(new NumberThread());//适合适用于Runnable
+    service.execute(new NumberThread1());//适合适用于Runnable
+</code></pre>
+<p>//        service.submit(Callable callable);//适合使用于Callable<br>
+//3.关闭连接池<br>
+service.shutdown();<br>
+}<br>
+}<br>
+说明：</p>
+<ul>
+<li>好处：</li>
+<li>1.提高响应速度（减少了创建新线程的时间）</li>
+<li>2.降低资源消耗（重复利用线程池中线程，不需要每次都创建）</li>
+<li>3.便于线程管理</li>
+<li>
+<pre><code> corePoolSize：核心池的大小
+</code></pre>
+</li>
+<li>
+<pre><code> maximumPoolSize：最大线程数
+</code></pre>
+</li>
+<li>
+<pre><code> keepAliveTime：线程没任务时最多保持多长时间后会终止
+</code></pre>
+</li>
+</ul>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://fantaixi.github.io/tag/UDPQ9NSLF/" class="tag">
+                    Java
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://fantaixi.github.io/post/11-java-yi-chang-chu-li/">
+                  <h3 class="post-title">
+                    11 Java异常处理
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

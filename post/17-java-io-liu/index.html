@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>17 Java IO流 | 饭太稀</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://fantaixi.github.io/favicon.ico?v=1588795446572">
+<link rel="stylesheet" href="https://fantaixi.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、File类的使用
+1.File类的理解
+
+
+
+File类的一个对象，代表一个文件或一个文件目录(俗称：文件夹)
+
+
+
+
+File类声明在java.io包下
+
+
+
+
+File类中涉及到关于文件或文件目录的创建、删除、重命名、修改时间、文件..." />
+    <meta name="keywords" content="Java" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://fantaixi.github.io">
+        <img src="https://fantaixi.github.io/images/avatar.png?v=1588795446572" class="site-logo">
+        <h1 class="site-title">饭太稀</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://fantaixi.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">17 Java IO流</h2>
+            <div class="post-date">2020-05-07</div>
+            
+            <div class="post-content" v-pre>
+              <p>一、File类的使用<br>
+1.File类的理解</p>
+<ul>
+<li>
+<ol>
+<li>File类的一个对象，代表一个文件或一个文件目录(俗称：文件夹)</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>File类声明在java.io包下</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>File类中涉及到关于文件或文件目录的创建、删除、重命名、修改时间、文件大小等方法，</li>
+</ol>
+</li>
+<li>并未涉及到写入或读取文件内容的操作。如果需要读取或写入文件内容，必须使用IO流来完成。</li>
+<li>
+<ol start="4">
+<li>后续File类的对象常会作为参数传递到流的构造器中，指明读取或写入的&quot;终点&quot;.</li>
+</ol>
+</li>
+</ul>
+<p>2.File的实例化<br>
+2.1 常用构造器<br>
+File(String filePath)<br>
+File(String parentPath,String childPath)<br>
+File(File parentFile,String childPath)</p>
+<p>2.2 路径的分类<br>
+相对路径：相较于某个路径下，指明的路径。<br>
+绝对路径：包含盘符在内的文件或文件目录的路径</p>
+<p>2.3 路径分隔符<br>
+windows和DOS系统默认使用“\”来表示<br>
+UNIX和URL使用“/”来表示</p>
+<p>3.File类的常用方法<br>
+<img src="https://fantaixi.github.io/post-images/1588792509580.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588792535704.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588792564929.png" alt="" loading="lazy"></p>
+<p>二、IO流概述<br>
+1.流的分类</p>
+<ul>
+<li>1.操作数据单位：字节流、字符流</li>
+<li>2.数据的流向：输入流、输出流</li>
+<li>3.流的角色：节点流、处理流<br>
+图示：<br>
+<img src="https://fantaixi.github.io/post-images/1588792701873.png" alt="" loading="lazy"><br>
+2.流的体系结构<br>
+<img src="https://fantaixi.github.io/post-images/1588792732018.png" alt="" loading="lazy"><br>
+说明：红框对应的是IO流中的4个抽象基类。<br>
+蓝框的流需要大家重点关注。</li>
+</ul>
+<p>3.重点说明的几个流结构<br>
+<img src="https://fantaixi.github.io/post-images/1588792762677.png" alt="" loading="lazy"><br>
+4.输入、输出的标准化过程<br>
+4.1 输入过程<br>
+① 创建File类的对象，指明读取的数据的来源。（要求此文件一定要存在）<br>
+② 创建相应的输入流，将File类的对象作为参数，传入流的构造器中<br>
+③ 具体的读入过程：<br>
+创建相应的byte[] 或 char[]。<br>
+④ 关闭流资源<br>
+说明：程序中出现的异常需要使用try-catch-finally处理。<br>
+4.2 输出过程<br>
+① 创建File类的对象，指明写出的数据的位置。（不要求此文件一定要存在）<br>
+② 创建相应的输出流，将File类的对象作为参数，传入流的构造器中<br>
+③ 具体的写出过程：<br>
+write(char[]/byte[] buffer,0,len)<br>
+④ 关闭流资源<br>
+说明：程序中出现的异常需要使用try-catch-finally处理。</p>
+<p>三、节点流（或文件流）<br>
+1.FileReader/FileWriter的使用：<br>
+1.1 FileReader的使用<br>
+/*<br>
+说明点：</p>
+<ol>
+<li>
+<p>read()的理解：返回读入的一个字符。如果达到文件末尾，返回-1</p>
+</li>
+<li>
+<p>异常的处理：为了保证流资源一定可以执行关闭操作。需要使用try-catch-finally处理</p>
+</li>
+<li>
+<p>读入的文件一定要存在，否则就会报FileNotFoundException。<br>
+*/<br>
+@Test<br>
+public void testFileReader1()  {<br>
+FileReader fr = null;<br>
+try {<br>
+//1.File类的实例化<br>
+File file = new File(&quot;hello.txt&quot;);</p>
+<pre><code>     //2.FileReader流的实例化
+     fr = new FileReader(file);
+
+     //3.读入的操作
+     //read(char[] cbuf):返回每次读入cbuf数组中的字符的个数。如果达到文件末尾，返回-1
+     char[] cbuf = new char[5];
+     int len;
+     while((len = fr.read(cbuf)) != -1){
+         //方式一：
+         //错误的写法
+</code></pre>
+</li>
+</ol>
+<p>//                for(int i = 0;i &lt; cbuf.length;i++){<br>
+//                    System.out.print(cbuf[i]);<br>
+//                }<br>
+//正确的写法<br>
+//                for(int i = 0;i &lt; len;i++){<br>
+//                    System.out.print(cbuf[i]);<br>
+//                }<br>
+//方式二：<br>
+//错误的写法,对应着方式一的错误的写法<br>
+//                String str = new String(cbuf);<br>
+//                System.out.print(str);<br>
+//正确的写法<br>
+String str = new String(cbuf,0,len);<br>
+System.out.print(str);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(fr != null){<br>
+//4.资源的关闭<br>
+try {<br>
+fr.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+1.2 FileWriter的使用<br>
+/*<br>
+从内存中写出数据到硬盘的文件里。<br>
+说明：</p>
+<ol>
+<li>输出操作，对应的File可以不存在的。并不会报异常</li>
+<li>File对应的硬盘中的文件如果不存在，在输出的过程中，会自动创建此文件。<br>
+File对应的硬盘中的文件如果存在：<br>
+如果流使用的构造器是：FileWriter(file,false) / FileWriter(file):对原文件的覆盖<br>
+如果流使用的构造器是：FileWriter(file,true):不会对原文件覆盖，而是在原文件基础上追加内容<br>
+*/<br>
+@Test<br>
+public void testFileWriter() {<br>
+FileWriter fw = null;<br>
+try {<br>
+//1.提供File类的对象，指明写出到的文件<br>
+File file = new File(&quot;hello1.txt&quot;);<br>
+//2.提供FileWriter的对象，用于数据的写出<br>
+fw = new FileWriter(file,false);<br>
+//3.写出的操作<br>
+fw.write(&quot;I have a dream!\n&quot;);<br>
+fw.write(&quot;you need to have a dream!&quot;);<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//4.流资源的关闭<br>
+if(fw != null){<br>
+try {<br>
+fw.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+1.3 文本文件的复制：<br>
+@Test<br>
+public void testFileReaderFileWriter() {<br>
+FileReader fr = null;<br>
+FileWriter fw = null;<br>
+try {<br>
+//1.创建File类的对象，指明读入和写出的文件<br>
+File srcFile = new File(&quot;hello.txt&quot;);<br>
+File destFile = new File(&quot;hello2.txt&quot;);<br>
+//不能使用字符流来处理图片等字节数据<br>
+//            File srcFile = new File(&quot;爱情与友情.jpg&quot;);<br>
+//            File destFile = new File(&quot;爱情与友情1.jpg&quot;);<br>
+//2.创建输入流和输出流的对象<br>
+fr = new FileReader(srcFile);<br>
+fw = new FileWriter(destFile);<br>
+//3.数据的读入和写出操作<br>
+char[] cbuf = new char[5];<br>
+int len;//记录每次读入到cbuf数组中的字符的个数<br>
+while((len = fr.read(cbuf)) != -1){<br>
+//每次写出len个字符<br>
+fw.write(cbuf,0,len);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//4.关闭流资源<br>
+//方式一：<br>
+//            try {<br>
+//                if(fw != null)<br>
+//                    fw.close();<br>
+//            } catch (IOException e) {<br>
+//                e.printStackTrace();<br>
+//            }finally{<br>
+//                try {<br>
+//                    if(fr != null)<br>
+//                        fr.close();<br>
+//                } catch (IOException e) {<br>
+//                    e.printStackTrace();<br>
+//                }<br>
+//            }<br>
+//方式二：<br>
+try {<br>
+if(fw != null)<br>
+fw.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+try {<br>
+if(fr != null)<br>
+fr.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+2.FileInputStream / FileOutputStream的使用：</li>
+</ol>
+<ul>
+<li>
+<ol>
+<li>对于文本文件(.txt,.java,.c,.cpp)，使用字符流处理</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>对于非文本文件(.jpg,.mp3,.mp4,.avi,.doc,.ppt,...)，使用字节流处理<br>
+/*<br>
+实现对图片的复制操作<br>
+*/<br>
+@Test<br>
+public void testFileInputOutputStream()  {<br>
+FileInputStream fis = null;<br>
+FileOutputStream fos = null;<br>
+try {<br>
+//1.造文件<br>
+File srcFile = new File(&quot;爱情与友情.jpg&quot;);<br>
+File destFile = new File(&quot;爱情与友情2.jpg&quot;);<br>
+//2.造流<br>
+fis = new FileInputStream(srcFile);<br>
+fos = new FileOutputStream(destFile);<br>
+//3.复制的过程<br>
+byte[] buffer = new byte[5];<br>
+int len;<br>
+while((len = fis.read(buffer)) != -1){<br>
+fos.write(buffer,0,len);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(fos != null){<br>
+//4.关闭流<br>
+try {<br>
+fos.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(fis != null){<br>
+try {<br>
+fis.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}</li>
+</ol>
+</li>
+</ul>
+<p>四、缓冲流的使用<br>
+1.缓冲流涉及到的类：</p>
+<ul>
+<li>BufferedInputStream</li>
+<li>BufferedOutputStream</li>
+<li>BufferedReader</li>
+<li>BufferedWriter</li>
+</ul>
+<p>2.作用：<br>
+作用：提供流的读取、写入的速度<br>
+提高读写速度的原因：内部提供了一个缓冲区。默认情况下是8kb</p>
+<p>3.典型代码<br>
+3.1 使用BufferedInputStream和BufferedOutputStream:处理非文本文件<br>
+//实现文件复制的方法<br>
+public void copyFileWithBuffered(String srcPath,String destPath){<br>
+BufferedInputStream bis = null;<br>
+BufferedOutputStream bos = null;<br>
+try {<br>
+//1.造文件<br>
+File srcFile = new File(srcPath);<br>
+File destFile = new File(destPath);<br>
+//2.造流<br>
+//2.1 造节点流<br>
+FileInputStream fis = new FileInputStream((srcFile));<br>
+FileOutputStream fos = new FileOutputStream(destFile);<br>
+//2.2 造缓冲流<br>
+bis = new BufferedInputStream(fis);<br>
+bos = new BufferedOutputStream(fos);<br>
+//3.复制的细节：读取、写入<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = bis.read(buffer)) != -1){<br>
+bos.write(buffer,0,len);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//4.资源关闭<br>
+//要求：先关闭外层的流，再关闭内层的流<br>
+if(bos != null){<br>
+try {<br>
+bos.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(bis != null){<br>
+try {<br>
+bis.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+//说明：关闭外层流的同时，内层流也会自动的进行关闭。关于内层流的关闭，我们可以省略.<br>
+//        fos.close();<br>
+//        fis.close();<br>
+}<br>
+}</p>
+<p>3.2 使用BufferedReader和BufferedWriter：处理文本文件<br>
+@Test<br>
+public void testBufferedReaderBufferedWriter(){<br>
+BufferedReader br = null;<br>
+BufferedWriter bw = null;<br>
+try {<br>
+//创建文件和相应的流<br>
+br = new BufferedReader(new FileReader(new File(&quot;dbcp.txt&quot;)));<br>
+bw = new BufferedWriter(new FileWriter(new File(&quot;dbcp1.txt&quot;)));<br>
+//读写操作<br>
+//方式一：使用char[]数组<br>
+//            char[] cbuf = new char[1024];<br>
+//            int len;<br>
+//            while((len = br.read(cbuf)) != -1){<br>
+//                bw.write(cbuf,0,len);<br>
+//    //            bw.flush();<br>
+//            }<br>
+//方式二：使用String<br>
+String data;<br>
+while((data = br.readLine()) != null){<br>
+//方法一：<br>
+//                bw.write(data + &quot;\n&quot;);//data中不包含换行符<br>
+//方法二：<br>
+bw.write(data);//data中不包含换行符<br>
+bw.newLine();//提供换行的操作</p>
+<pre><code>        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        //关闭资源
+        if(bw != null){
+            try {
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(br != null){
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre>
+<p>五、转换流的使用<br>
+1.转换流涉及到的类：属于字符流<br>
+InputStreamReader：将一个字节的输入流转换为字符的输入流<br>
+解码：字节、字节数组  ---&gt;字符数组、字符串</p>
+<p>OutputStreamWriter：将一个字符的输出流转换为字节的输出流<br>
+编码：字符数组、字符串 ---&gt; 字节、字节数组</p>
+<p>说明：编码决定了解码的方式</p>
+<p>2.作用：提供字节流与字符流之间的转换</p>
+<p>3.图示：<br>
+<img src="https://fantaixi.github.io/post-images/1588793047441.png" alt="" loading="lazy"></p>
+<p>4.典型实现：<br>
+@Test<br>
+public void test1() throws IOException {</p>
+<pre><code>    FileInputStream fis = new FileInputStream(&quot;dbcp.txt&quot;);
+</code></pre>
+<p>//        InputStreamReader isr = new InputStreamReader(fis);//使用系统默认的字符集<br>
+//参数2指明了字符集，具体使用哪个字符集，取决于文件dbcp.txt保存时使用的字符集<br>
+InputStreamReader isr = new InputStreamReader(fis,&quot;UTF-8&quot;);//使用系统默认的字符集<br>
+char[] cbuf = new char[20];<br>
+int len;<br>
+while((len = isr.read(cbuf)) != -1){<br>
+String str = new String(cbuf,0,len);<br>
+System.out.print(str);<br>
+}<br>
+isr.close();<br>
+}<br>
+/*<br>
+此时处理异常的话，仍然应该使用try-catch-finally<br>
+综合使用InputStreamReader和OutputStreamWriter<br>
+*/<br>
+@Test<br>
+public void test2() throws Exception {<br>
+//1.造文件、造流<br>
+File file1 = new File(&quot;dbcp.txt&quot;);<br>
+File file2 = new File(&quot;dbcp_gbk.txt&quot;);</p>
+<pre><code>FileInputStream fis = new FileInputStream(file1);
+FileOutputStream fos = new FileOutputStream(file2);
+
+InputStreamReader isr = new InputStreamReader(fis,&quot;utf-8&quot;);
+OutputStreamWriter osw = new OutputStreamWriter(fos,&quot;gbk&quot;);
+
+//2.读写过程
+char[] cbuf = new char[20];
+int len;
+while((len = isr.read(cbuf)) != -1){
+    osw.write(cbuf,0,len);
+}
+//3.关闭资源
+isr.close();
+osw.close();
+</code></pre>
+<p>}<br>
+5.说明：<br>
+//文件编码的方式（比如：GBK），决定了解析时使用的字符集（也只能是GBK）。</p>
+<p>补充：编码集<br>
+常见的编码表<br>
+ASCII：美国标准信息交换码。用一个字节的7位可以表示。<br>
+ISO8859-1：拉丁码表。欧洲码表用一个字节的8位表示。<br>
+GB2312：中国的中文编码表。最多两个字节编码所有字符<br>
+GBK：中国的中文编码表升级，融合了更多的中文文字符号。最多两个字节编码<br>
+Unicode：国际标准码，融合了目前人类使用的所字符。为每个字符分配唯一的字符码。所有的文字都用两个字节来表示。<br>
+UTF-8：变长的编码方式，可用1-4个字节来表示一个字符。</p>
+<p>六、其他的流的使用</p>
+<ol>
+<li>标准的输入输出流：<br>
+System.in:标准的输入流，默认从键盘输入<br>
+System.out:标准的输出流，默认从控制台输出</li>
+</ol>
+<p>修改默认的输入和输出行为：<br>
+System类的setIn(InputStream is) / setOut(PrintStream ps)方式重新指定输入和输出的流。</p>
+<ol start="2">
+<li>打印流：<br>
+PrintStream 和PrintWriter<br>
+说明：<br>
+提供了一系列重载的print()和println()方法，用于多种数据类型的输出<br>
+System.out返回的是PrintStream的实例</li>
+<li>数据流：<br>
+DataInputStream 和 DataOutputStream<br>
+作用：<br>
+用于读取或写出基本数据类型的变量或字符串<br>
+示例代码：<br>
+/*<br>
+练习：将内存中的字符串、基本数据类型的变量写出到文件中。<br>
+注意：处理异常的话，仍然应该使用try-catch-finally.<br>
+<em>/<br>
+@Test<br>
+public void test3() throws IOException {<br>
+//1.<br>
+DataOutputStream dos = new DataOutputStream(new FileOutputStream(&quot;data.txt&quot;));<br>
+//2.<br>
+dos.writeUTF(&quot;刘建辰&quot;);<br>
+dos.flush();//刷新操作，将内存中的数据写入文件<br>
+dos.writeInt(23);<br>
+dos.flush();<br>
+dos.writeBoolean(true);<br>
+dos.flush();<br>
+//3.<br>
+dos.close();<br>
+}<br>
+/</em><br>
+将文件中存储的基本数据类型变量和字符串读取到内存中，保存在变量中。<br>
+注意点：读取不同类型的数据的顺序要与当初写入文件时，保存的数据的顺序一致！<br>
+*/<br>
+@Test<br>
+public void test4() throws IOException {<br>
+//1.<br>
+DataInputStream dis = new DataInputStream(new FileInputStream(&quot;data.txt&quot;));<br>
+//2.<br>
+String name = dis.readUTF();<br>
+int age = dis.readInt();<br>
+boolean isMale = dis.readBoolean();<br>
+System.out.println(&quot;name = &quot; + name);<br>
+System.out.println(&quot;age = &quot; + age);<br>
+System.out.println(&quot;isMale = &quot; + isMale);<br>
+//3.<br>
+dis.close();<br>
+}</li>
+</ol>
+<p>七、对象流的使用<br>
+1.对象流：<br>
+ObjectInputStream 和 ObjectOutputStream<br>
+2.作用：<br>
+ObjectOutputStream:内存中的对象---&gt;存储中的文件、通过网络传输出去：序列化过程<br>
+ObjectInputStream:存储中的文件、通过网络接收过来 ---&gt;内存中的对象：反序列化过程<br>
+3.对象的序列化机制：<br>
+对象序列化机制允许把内存中的Java对象转换成平台无关的二进制流，从而允许把这种二进制流持久地保存在磁盘<br>
+上，或通过网络将这种二进制流传输到另一个网络节点。//当其它程序获取了这种二进制流，就可以恢复成原来的<br>
+Java对象<br>
+4.<br>
+序列化代码实现：<br>
+@Test<br>
+public void testObjectOutputStream(){<br>
+ObjectOutputStream oos = null;<br>
+try {<br>
+//1.<br>
+oos = new ObjectOutputStream(new FileOutputStream(&quot;object.dat&quot;));<br>
+//2.<br>
+oos.writeObject(new String(&quot;我爱北京天安门&quot;));<br>
+oos.flush();//刷新操作<br>
+oos.writeObject(new Person(&quot;王铭&quot;,23));<br>
+oos.flush();<br>
+oos.writeObject(new Person(&quot;张学良&quot;,23,1001,new Account(5000)));<br>
+oos.flush();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(oos != null){<br>
+//3.<br>
+try {<br>
+oos.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+5.<br>
+反序列化代码实现：<br>
+@Test<br>
+public void testObjectInputStream(){<br>
+ObjectInputStream ois = null;<br>
+try {<br>
+ois = new ObjectInputStream(new FileInputStream(&quot;object.dat&quot;));<br>
+Object obj = ois.readObject();<br>
+String str = (String) obj;<br>
+Person p = (Person) ois.readObject();<br>
+Person p1 = (Person) ois.readObject();<br>
+System.out.println(str);<br>
+System.out.println(p);<br>
+System.out.println(p1);<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} catch (ClassNotFoundException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(ois != null){<br>
+try {<br>
+ois.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}</p>
+<p>6.实现序列化的对象所属的类需要满足：<br>
+1.需要实现接口：Serializable</p>
+<ul>
+<li>2.当前类提供一个全局常量：serialVersionUID</li>
+<li>3.除了当前Person类需要实现Serializable接口之外，还必须保证其内部所属性</li>
+<li>也必须是可序列化的。（默认情况下，基本数据类型可序列化）</li>
+<li>补充：ObjectOutputStream和ObjectInputStream不能序列化static和transient修饰的成员变量</li>
+<li></li>
+</ul>
+<p>八、RandomAccessFile的使用<br>
+1.随机存取文件流：RandomAccessFile</p>
+<p>2.使用说明：</p>
+<ul>
+<li>1.RandomAccessFile直接继承于java.lang.Object类，实现了DataInput和DataOutput接口</li>
+<li>2.RandomAccessFile既可以作为一个输入流，又可以作为一个输出流</li>
+<li></li>
+<li>3.如果RandomAccessFile作为输出流时，写出到的文件如果不存在，则在执行过程中自动创建。</li>
+<li>如果写出到的文件存在，则会对原文件内容进行覆盖。（默认情况下，从头覆盖）</li>
+<li></li>
+<li>
+<ol start="4">
+<li>可以通过相关的操作，实现RandomAccessFile“插入”数据的效果。seek(int pos)</li>
+</ol>
+</li>
+</ul>
+<ol start="3">
+<li></li>
+</ol>
+<p>典型代码1：<br>
+@Test<br>
+public void test1() {<br>
+RandomAccessFile raf1 = null;<br>
+RandomAccessFile raf2 = null;<br>
+try {<br>
+//1.<br>
+raf1 = new RandomAccessFile(new File(&quot;爱情与友情.jpg&quot;),&quot;r&quot;);<br>
+raf2 = new RandomAccessFile(new File(&quot;爱情与友情1.jpg&quot;),&quot;rw&quot;);<br>
+//2.<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = raf1.read(buffer)) != -1){<br>
+raf2.write(buffer,0,len);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//3.<br>
+if(raf1 != null){<br>
+try {<br>
+raf1.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(raf2 != null){<br>
+try {<br>
+raf2.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+典型代码2：<br>
+/*<br>
+使用RandomAccessFile实现数据的插入效果<br>
+*/<br>
+@Test<br>
+public void test3() throws IOException {<br>
+RandomAccessFile raf1 = new RandomAccessFile(&quot;hello.txt&quot;,&quot;rw&quot;);<br>
+raf1.seek(3);//将指针调到角标为3的位置<br>
+//保存指针3后面的所数据到StringBuilder中<br>
+StringBuilder builder = new StringBuilder((int) new File(&quot;hello.txt&quot;).length());<br>
+byte[] buffer = new byte[20];<br>
+int len;<br>
+while((len = raf1.read(buffer)) != -1){<br>
+builder.append(new String(buffer,0,len)) ;<br>
+}<br>
+//调回指针，写入“xyz”<br>
+raf1.seek(3);<br>
+raf1.write(&quot;xyz&quot;.getBytes());<br>
+//将StringBuilder中的数据写入到文件中<br>
+raf1.write(builder.toString().getBytes());<br>
+raf1.close();<br>
+//思考：将StringBuilder替换为ByteArrayOutputStream<br>
+}</p>
+<p>九、Path、Paths、Files的使用<br>
+1.NIO的使用说明：</p>
+<blockquote>
+<p>Java NIO (New IO，Non-Blocking IO)是从Java 1.4版本开始引入的一套新的IO API，可以替代标准的Java<br>
+IO AP。<br>
+NIO与原来的IO同样的作用和目的，但是使用的方式完全不同，NIO支持面向缓冲区的(IO是面向流的)、基于<br>
+通道的IO操作。<br>
+NIO将以更加高效的方式进行文件的读写操作。<br>
+随着 JDK 7 的发布，Java对NIO进行了极大的扩展，增强了对文件处理和文件系统特性的支持，以至于我们称他们为 NIO.2。</p>
+</blockquote>
+<p>2.Path的使用 ---jdk7提供<br>
+2.1Path的说明：<br>
+Path替换原有的File类。<br>
+2.2如何实例化：<br>
+<img src="https://fantaixi.github.io/post-images/1588793499232.png" alt="" loading="lazy"><br>
+2.3常用方法：<br>
+<img src="https://fantaixi.github.io/post-images/1588793525215.png" alt="" loading="lazy"></p>
+<p>3.Files工具类 ---jdk7提供<br>
+3.1作用：<br>
+操作文件或文件目录的工具类<br>
+3.2常用方法：</p>
+<figure data-type="image" tabindex="1"><img src="https://fantaixi.github.io/post-images/1588793567581.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://fantaixi.github.io/post-images/1588793593306.png" alt="" loading="lazy"></figure>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://fantaixi.github.io/tag/UDPQ9NSLF/" class="tag">
+                    Java
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://fantaixi.github.io/post/16-fan-xing/">
+                  <h3 class="post-title">
+                    16 Java泛型
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

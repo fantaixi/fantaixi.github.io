@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>20 Java8的其他新特性 | 饭太稀</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://fantaixi.github.io/favicon.ico?v=1588795446572">
+<link rel="stylesheet" href="https://fantaixi.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、Java8新特性概述
+
+
+二、Lambda表达式
+1.Lambda表达式使用前后的对比：
+举例一：
+@Test
+public void test1(){
+Runnable r1 = new Runnable() {
+    @Overr..." />
+    <meta name="keywords" content="Java" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://fantaixi.github.io">
+        <img src="https://fantaixi.github.io/images/avatar.png?v=1588795446572" class="site-logo">
+        <h1 class="site-title">饭太稀</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://fantaixi.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">20 Java8的其他新特性</h2>
+            <div class="post-date">2020-05-07</div>
+            
+            <div class="post-content" v-pre>
+              <p>一、Java8新特性概述<br>
+<img src="https://fantaixi.github.io/post-images/1588795006566.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://fantaixi.github.io/post-images/1588795031488.png" alt="" loading="lazy"></figure>
+<p>二、Lambda表达式<br>
+1.Lambda表达式使用前后的对比：<br>
+举例一：<br>
+@Test<br>
+public void test1(){</p>
+<pre><code>Runnable r1 = new Runnable() {
+    @Override
+    public void run() {
+        System.out.println(&quot;我爱北京天安门&quot;);
+    }
+};
+
+r1.run();
+
+System.out.println(&quot;***********************&quot;);
+
+Runnable r2 = () -&gt; System.out.println(&quot;我爱北京故宫&quot;);
+
+r2.run();
+</code></pre>
+<p>}</p>
+<p>举例二：<br>
+@Test<br>
+public void test2(){</p>
+<pre><code>Comparator&lt;Integer&gt; com1 = new Comparator&lt;Integer&gt;() {
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return Integer.compare(o1,o2);
+    }
+};
+
+int compare1 = com1.compare(12,21);
+System.out.println(compare1);
+
+System.out.println(&quot;***********************&quot;);
+//Lambda表达式的写法
+Comparator&lt;Integer&gt; com2 = (o1,o2) -&gt; Integer.compare(o1,o2);
+
+int compare2 = com2.compare(32,21);
+System.out.println(compare2);
+
+
+System.out.println(&quot;***********************&quot;);
+//方法引用
+Comparator&lt;Integer&gt; com3 = Integer :: compare;
+
+int compare3 = com3.compare(32,21);
+System.out.println(compare3);
+</code></pre>
+<p>}<br>
+2.Lambda表达式的基本语法：</p>
+<ul>
+<li>1.举例： (o1,o2) -&gt; Integer.compare(o1,o2);</li>
+<li>2.格式：</li>
+<li>
+<pre><code> -&gt; :lambda操作符 或 箭头操作符
+</code></pre>
+</li>
+<li>
+<pre><code> -&gt;左边：lambda形参列表 （其实就是接口中的抽象方法的形参列表
+</code></pre>
+</li>
+<li>
+<pre><code> -&gt;右边：lambda体 （其实就是重写的抽象方法的方法体
+</code></pre>
+</li>
+</ul>
+<p>3.如何使用：分为六种情况<br>
+<img src="https://fantaixi.github.io/post-images/1588795108630.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588795133842.png" alt="" loading="lazy"></p>
+<p>总结六种情况：<br>
+-&gt;左边：lambda形参列表的参数类型可以省略(类型推断)；如果lambda形参列表只一个参数，其一对()也可以省略<br>
+-&gt;右边：lambda体应该使用一对{}包裹；如果lambda体只一条执行语句（可能是return语句，省略这一对{}和return关键字</p>
+<p>三、函数式接口<br>
+1.函数式接口的使用说明</p>
+<blockquote>
+<p>如果一个接口中，只声明了一个抽象方法，则此接口就称为函数式接口。<br>
+我们可以在一个接口上使用 @FunctionalInterface 注解，这样做可以检查它是否是一个函数式接口。<br>
+Lambda表达式的本质：作为函数式接口的实例</p>
+</blockquote>
+<p>2.Java8中关于Lambda表达式提供的4个基本的函数式接口：<br>
+具体使用：<br>
+<img src="https://fantaixi.github.io/post-images/1588795197948.png" alt="" loading="lazy"></p>
+<p>3.总结<br>
+3.1 何时使用lambda表达式？<br>
+当需要对一个函数式接口实例化的时候，可以使用lambda表达式。<br>
+3.2 何时使用给定的函数式接口？<br>
+如果我们开发中需要定义一个函数式接口，首先看看在已有的jdk提供的函数式接口是否提供了<br>
+能满足需求的函数式接口。如果有，则直接调用即可，不需要自己再自定义了。</p>
+<p>四、方法引用<br>
+方法引用<br>
+1.理解：<br>
+方法引用可以看做是Lambda表达式深层次的表达。换句话说，方法引用就是Lambda表达式，也就是函数式接口的一个实例，通过方法的名字来指向一个方法。</p>
+<p>2.使用情境：<br>
+当要传递给Lambda体的操作，已经实现的方法了，可以使用方法引用！</p>
+<p>3.格式：<br>
+类(或对象) :: 方法名</p>
+<p>4.分为如下的三种情况：</p>
+<ul>
+<li>情况1     对象 :: 非静态方法</li>
+<li>情况2     类 :: 静态方法</li>
+<li></li>
+<li>情况3     类 :: 非静态方法</li>
+</ul>
+<p>5.要求：</p>
+<blockquote>
+<p>要求接口中的抽象方法的形参列表和返回值类型与方法引用的方法的形参列表和返回值类型相同！（针对于情况1和情况2）<br>
+当函数式接口方法的第一个参数是需要引用方法的调用者，并且第二个参数是需要引用方法的参数(或无参数)时：ClassName::methodName（针对于情况3）</p>
+</blockquote>
+<p>6.使用建议：<br>
+如果给函数式接口提供实例，恰好满足方法引用的使用情境，大家就可以考虑使用方法引用给函数式接口提供实例。如果大家不熟悉方法引用，那么还可以使用lambda表达式。</p>
+<p>7.使用举例：<br>
+// 情况一：对象 :: 实例方法<br>
+//Consumer中的void accept(T t)<br>
+//PrintStream中的void println(T t)<br>
+@Test<br>
+public void test1() {<br>
+Consumer<String> con1 = str -&gt; System.out.println(str);<br>
+con1.accept(&quot;北京&quot;);<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+PrintStream ps = System.out;<br>
+Consumer<String> con2 = ps::println;<br>
+con2.accept(&quot;beijing&quot;);<br>
+}<br>
+//Supplier中的T get()<br>
+//Employee中的String getName()<br>
+@Test<br>
+public void test2() {<br>
+Employee emp = new Employee(1001,&quot;Tom&quot;,23,5600);<br>
+Supplier<String> sup1 = () -&gt; emp.getName();<br>
+System.out.println(sup1.get());<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+Supplier<String> sup2 = emp::getName;<br>
+System.out.println(sup2.get());<br>
+}<br>
+// 情况二：类 :: 静态方法<br>
+//Comparator中的int compare(T t1,T t2)<br>
+//Integer中的int compare(T t1,T t2)<br>
+@Test<br>
+public void test3() {<br>
+Comparator<Integer> com1 = (t1,t2) -&gt; Integer.compare(t1,t2);<br>
+System.out.println(com1.compare(12,21));<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+Comparator<Integer> com2 = Integer::compare;<br>
+System.out.println(com2.compare(12,3));<br>
+}<br>
+//Function中的R apply(T t)<br>
+//Math中的Long round(Double d)<br>
+@Test<br>
+public void test4() {<br>
+Function&lt;Double,Long&gt; func = new Function&lt;Double, Long&gt;() {<br>
+@Override<br>
+public Long apply(Double d) {<br>
+return Math.round(d);<br>
+}<br>
+};<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+Function&lt;Double,Long&gt; func1 = d -&gt; Math.round(d);<br>
+System.out.println(func1.apply(12.3));<br>
+System.out.println(&quot;*******************&quot;);<br>
+Function&lt;Double,Long&gt; func2 = Math::round;<br>
+System.out.println(func2.apply(12.6));<br>
+}</p>
+<p>// 情况：类 :: 实例方法  (难度)<br>
+// Comparator中的int comapre(T t1,T t2)<br>
+// String中的int t1.compareTo(t2)<br>
+@Test<br>
+public void test5() {<br>
+Comparator<String> com1 = (s1,s2) -&gt; s1.compareTo(s2);<br>
+System.out.println(com1.compare(&quot;abc&quot;,&quot;abd&quot;));<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+Comparator<String> com2 = String :: compareTo;<br>
+System.out.println(com2.compare(&quot;abd&quot;,&quot;abm&quot;));<br>
+}<br>
+//BiPredicate中的boolean test(T t1, T t2);<br>
+//String中的boolean t1.equals(t2)<br>
+@Test<br>
+public void test6() {<br>
+BiPredicate&lt;String,String&gt; pre1 = (s1,s2) -&gt; s1.equals(s2);<br>
+System.out.println(pre1.test(&quot;abc&quot;,&quot;abc&quot;));<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+BiPredicate&lt;String,String&gt; pre2 = String :: equals;<br>
+System.out.println(pre2.test(&quot;abc&quot;,&quot;abd&quot;));<br>
+}<br>
+// Function中的R apply(T t)<br>
+// Employee中的String getName();<br>
+@Test<br>
+public void test7() {<br>
+Employee employee = new Employee(1001, &quot;Jerry&quot;, 23, 6000);<br>
+Function&lt;Employee,String&gt; func1 = e -&gt; e.getName();<br>
+System.out.println(func1.apply(employee));<br>
+System.out.println(&quot;*******************&quot;);<br>
+Function&lt;Employee,String&gt; func2 = Employee::getName;<br>
+System.out.println(func2.apply(employee));<br>
+}</p>
+<p>五、构造器引用与数组引用<br>
+1.构造器引用格式：<br>
+类名::new</p>
+<p>2.构造器引用使用要求：<br>
+和方法引用类似，函数式接口的抽象方法的形参列表和构造器的形参列表一致。抽象方法的返回值类型即为构造器所属的类的类型</p>
+<p>3.构造器引用举例：<br>
+//Supplier中的T get()<br>
+//Employee的空参构造器：Employee()<br>
+@Test<br>
+public void test1(){<br>
+Supplier<Employee> sup = new Supplier<Employee>() {<br>
+@Override<br>
+public Employee get() {<br>
+return new Employee();<br>
+}<br>
+};<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+Supplier<Employee>  sup1 = () -&gt; new Employee();<br>
+System.out.println(sup1.get());<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+Supplier<Employee>  sup2 = Employee :: new;<br>
+System.out.println(sup2.get());<br>
+}</p>
+<p>//Function中的R apply(T t)<br>
+@Test<br>
+public void test2(){<br>
+Function&lt;Integer,Employee&gt; func1 = id -&gt; new Employee(id);<br>
+Employee employee = func1.apply(1001);<br>
+System.out.println(employee);<br>
+System.out.println(&quot;*******************&quot;);<br>
+Function&lt;Integer,Employee&gt; func2 = Employee :: new;<br>
+Employee employee1 = func2.apply(1002);<br>
+System.out.println(employee1);<br>
+}</p>
+<p>//BiFunction中的R apply(T t,U u)<br>
+@Test<br>
+public void test3(){<br>
+BiFunction&lt;Integer,String,Employee&gt; func1 = (id,name) -&gt; new Employee(id,name);<br>
+System.out.println(func1.apply(1001,&quot;Tom&quot;));<br>
+System.out.println(&quot;*******************&quot;);<br>
+BiFunction&lt;Integer,String,Employee&gt; func2 = Employee :: new;<br>
+System.out.println(func2.apply(1002,&quot;Tom&quot;));<br>
+}</p>
+<p>4.数组引用格式：<br>
+数组类型[] :: new</p>
+<p>5.数组引用举例：<br>
+//Function中的R apply(T t)<br>
+@Test<br>
+public void test4(){<br>
+Function&lt;Integer,String[]&gt; func1 = length -&gt; new String[length];<br>
+String[] arr1 = func1.apply(5);<br>
+System.out.println(Arrays.toString(arr1));<br>
+System.out.println(&quot;*******************&quot;);<br>
+Function&lt;Integer,String[]&gt; func2 = String[] :: new;<br>
+String[] arr2 = func2.apply(10);<br>
+System.out.println(Arrays.toString(arr2));</p>
+<p>}</p>
+<p>六、Optional类的使用<br>
+java.util.Optional类<br>
+1.理解：为了解决java中的空指针问题而生！<br>
+Optional<T> 类(java.util.Optional) 是一个容器类，它可以保存类型T的值，代表这个值存在。或者仅仅保存null，表示这个值不存在。原来用 null 表示一个值不存在，现在 Optional 可以更好的表达这个概念。并且可以避<br>
+免空指针异常。</p>
+<p>2.常用方法：<br>
+@Test<br>
+public void test1(){<br>
+//empty():创建的Optional对象内部的value = null<br>
+Optional<Object> op1 = Optional.empty();<br>
+if(!op1.isPresent()){//Optional封装的数据是否包含数据<br>
+System.out.println(&quot;数据为空&quot;);<br>
+}<br>
+System.out.println(op1);<br>
+System.out.println(op1.isPresent());<br>
+//如果Optional封装的数据value为空，则get()报错。否则，value不为空时，返回value.<br>
+//        System.out.println(op1.get());<br>
+}<br>
+@Test<br>
+public void test2(){<br>
+String str = &quot;hello&quot;;<br>
+//        str = null;<br>
+//of(T t):封装数据t生成Optional对象。要求t非空，否则报错。<br>
+Optional<String> op1 = Optional.of(str);<br>
+//get()通常与of()方法搭配使用。用于获取内部的封装的数据value<br>
+String str1 = op1.get();<br>
+System.out.println(str1);<br>
+}<br>
+@Test<br>
+public void test3(){<br>
+String str = &quot;beijing&quot;;<br>
+str = null;<br>
+//ofNullable(T t) ：封装数据t赋给Optional内部的value。不要求t非空<br>
+Optional<String> op1 = Optional.ofNullable(str);<br>
+//orElse(T t1):如果Optional内部的value非空，则返回此value值。如果<br>
+//value为空，则返回t1.<br>
+String str2 = op1.orElse(&quot;shanghai&quot;);<br>
+System.out.println(str2);//<br>
+}<br>
+3.典型练习：<br>
+能保证如下的方法执行中不会出现空指针的异常。<br>
+//使用Optional类的getGirlName():<br>
+public String getGirlName2(Boy boy){<br>
+Optional<Boy> boyOptional = Optional.ofNullable(boy);<br>
+//此时的boy1一定非空<br>
+Boy boy1 = boyOptional.orElse(new Boy(new Girl(&quot;迪丽热巴&quot;)));<br>
+Girl girl = boy1.getGirl();<br>
+Optional<Girl> girlOptional = Optional.ofNullable(girl);<br>
+//girl1一定非空<br>
+Girl girl1 = girlOptional.orElse(new Girl(&quot;古力娜扎&quot;));<br>
+return girl1.getName();<br>
+}<br>
+@Test<br>
+public void test5(){<br>
+Boy boy = null;<br>
+boy = new Boy();<br>
+boy = new Boy(new Girl(&quot;苍老师&quot;));<br>
+String girlName = getGirlName2(boy);<br>
+System.out.println(girlName);<br>
+}</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://fantaixi.github.io/tag/UDPQ9NSLF/" class="tag">
+                    Java
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://fantaixi.github.io/post/19-java-fan-she-ji-zhi/">
+                  <h3 class="post-title">
+                    19 Java反射机制
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>

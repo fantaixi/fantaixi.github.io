@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fantaixi.github.io</id>
     <title>饭太稀</title>
-    <updated>2020-05-06T10:47:46.180Z</updated>
+    <updated>2020-05-06T20:04:14.645Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fantaixi.github.io"/>
     <link rel="self" href="https://fantaixi.github.io/atom.xml"/>
@@ -11,2342 +11,4380 @@
     <icon>https://fantaixi.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 饭太稀</rights>
     <entry>
-        <title type="html"><![CDATA[10 面向对象-下]]></title>
-        <id>https://fantaixi.github.io/post/10-mian-xiang-dui-xiang-xia/</id>
-        <link href="https://fantaixi.github.io/post/10-mian-xiang-dui-xiang-xia/">
+        <title type="html"><![CDATA[20 Java8的其他新特性]]></title>
+        <id>https://fantaixi.github.io/post/20-java8-de-qi-ta-xin-te-xing/</id>
+        <link href="https://fantaixi.github.io/post/20-java8-de-qi-ta-xin-te-xing/">
         </link>
-        <updated>2020-05-06T10:12:36.000Z</updated>
-        <content type="html"><![CDATA[<p>一、关键字static<br>
-static:静态的<br>
-1.可以用来修饰的结构：主要用来修饰类的内部结构<br>
-属性、方法、代码块、内部类<br>
-2.static修饰属性：静态变量（或类变量）<br>
-2.1 属性，是否使用static修饰，又分为：静态属性  vs 非静态属性(实例变量)</p>
+        <updated>2020-05-06T19:55:28.000Z</updated>
+        <content type="html"><![CDATA[<p>一、Java8新特性概述<br>
+<img src="https://fantaixi.github.io/post-images/1588795006566.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://fantaixi.github.io/post-images/1588795031488.png" alt="" loading="lazy"></figure>
+<p>二、Lambda表达式<br>
+1.Lambda表达式使用前后的对比：<br>
+举例一：<br>
+@Test<br>
+public void test1(){</p>
+<pre><code>Runnable r1 = new Runnable() {
+    @Override
+    public void run() {
+        System.out.println(&quot;我爱北京天安门&quot;);
+    }
+};
+
+r1.run();
+
+System.out.println(&quot;***********************&quot;);
+
+Runnable r2 = () -&gt; System.out.println(&quot;我爱北京故宫&quot;);
+
+r2.run();
+</code></pre>
+<p>}</p>
+<p>举例二：<br>
+@Test<br>
+public void test2(){</p>
+<pre><code>Comparator&lt;Integer&gt; com1 = new Comparator&lt;Integer&gt;() {
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return Integer.compare(o1,o2);
+    }
+};
+
+int compare1 = com1.compare(12,21);
+System.out.println(compare1);
+
+System.out.println(&quot;***********************&quot;);
+//Lambda表达式的写法
+Comparator&lt;Integer&gt; com2 = (o1,o2) -&gt; Integer.compare(o1,o2);
+
+int compare2 = com2.compare(32,21);
+System.out.println(compare2);
+
+
+System.out.println(&quot;***********************&quot;);
+//方法引用
+Comparator&lt;Integer&gt; com3 = Integer :: compare;
+
+int compare3 = com3.compare(32,21);
+System.out.println(compare3);
+</code></pre>
+<p>}<br>
+2.Lambda表达式的基本语法：</p>
 <ul>
+<li>1.举例： (o1,o2) -&gt; Integer.compare(o1,o2);</li>
+<li>2.格式：</li>
 <li>
-<pre><code>    实例变量：我们创建了类的多个对象，每个对象都独立的拥一套类中的非静态属性。当修改其中一个对象中的非静态属性时，不会导致其他对象中同样的属性值的修改。
+<pre><code> -&gt; :lambda操作符 或 箭头操作符
 </code></pre>
 </li>
 <li>
-<pre><code>      静态变量：我们创建了类的多个对象，多个对象共享同一个静态变量。当通过某一个对象修改静态变量时，会导致其他对象调用此静态变量时，是修改过了的。
+<pre><code> -&gt;左边：lambda形参列表 （其实就是接口中的抽象方法的形参列表
 </code></pre>
 </li>
 <li>
-<pre><code> 2.2 static修饰属性的其他说明：
-</code></pre>
-</li>
-<li>
-<pre><code>  ① 静态变量随着类的加载而加载。可以通过&quot;类.静态变量&quot;的方式进行调用
-</code></pre>
-</li>
-<li>
-<pre><code>     ② 静态变量的加载要早于对象的创建。
-</code></pre>
-</li>
-<li>
-<pre><code>     ③ 由于类只会加载一次，则静态变量在内存中也只会存在一份：存在方法区的静态域中。
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code>     ④		类变量	实例变量
-</code></pre>
-</li>
-<li>
-<pre><code>     类		yes		no
-</code></pre>
-</li>
-<li>
-<pre><code>     对象	yes		yes
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code>    2.3 静态属性举例：System.out; Math.PI;
+<pre><code> -&gt;右边：lambda体 （其实就是重写的抽象方法的方法体
 </code></pre>
 </li>
 </ul>
-<p>3.静态变量内存解析：<br>
-<img src="https://fantaixi.github.io/post-images/1588760221392.png" alt="" loading="lazy"><br>
-4.static修饰方法：静态方法、类方法<br>
-① 随着类的加载而加载，可以通过&quot;类.静态方法&quot;的方式进行调用<br>
-②			          静态方法	非静态方法</p>
+<p>3.如何使用：分为六种情况<br>
+<img src="https://fantaixi.github.io/post-images/1588795108630.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588795133842.png" alt="" loading="lazy"></p>
+<p>总结六种情况：<br>
+-&gt;左边：lambda形参列表的参数类型可以省略(类型推断)；如果lambda形参列表只一个参数，其一对()也可以省略<br>
+-&gt;右边：lambda体应该使用一对{}包裹；如果lambda体只一条执行语句（可能是return语句，省略这一对{}和return关键字</p>
+<p>三、函数式接口<br>
+1.函数式接口的使用说明</p>
+<blockquote>
+<p>如果一个接口中，只声明了一个抽象方法，则此接口就称为函数式接口。<br>
+我们可以在一个接口上使用 @FunctionalInterface 注解，这样做可以检查它是否是一个函数式接口。<br>
+Lambda表达式的本质：作为函数式接口的实例</p>
+</blockquote>
+<p>2.Java8中关于Lambda表达式提供的4个基本的函数式接口：<br>
+具体使用：<br>
+<img src="https://fantaixi.github.io/post-images/1588795197948.png" alt="" loading="lazy"></p>
+<p>3.总结<br>
+3.1 何时使用lambda表达式？<br>
+当需要对一个函数式接口实例化的时候，可以使用lambda表达式。<br>
+3.2 何时使用给定的函数式接口？<br>
+如果我们开发中需要定义一个函数式接口，首先看看在已有的jdk提供的函数式接口是否提供了<br>
+能满足需求的函数式接口。如果有，则直接调用即可，不需要自己再自定义了。</p>
+<p>四、方法引用<br>
+方法引用<br>
+1.理解：<br>
+方法引用可以看做是Lambda表达式深层次的表达。换句话说，方法引用就是Lambda表达式，也就是函数式接口的一个实例，通过方法的名字来指向一个方法。</p>
+<p>2.使用情境：<br>
+当要传递给Lambda体的操作，已经实现的方法了，可以使用方法引用！</p>
+<p>3.格式：<br>
+类(或对象) :: 方法名</p>
+<p>4.分为如下的三种情况：</p>
 <ul>
-<li>
-<pre><code>     类		    yes		no
-</code></pre>
-</li>
-<li>
-<pre><code>     对象		yes		yes
-</code></pre>
-</li>
+<li>情况1     对象 :: 非静态方法</li>
+<li>情况2     类 :: 静态方法</li>
+<li></li>
+<li>情况3     类 :: 非静态方法</li>
 </ul>
-<p>③ 静态方法中，只能调用静态的方法或属性<br>
-非静态方法中，既可以调用非静态的方法或属性，也可以调用静态的方法或属性</p>
-<ol start="5">
-<li>static的注意点：<br>
-5.1 在静态的方法内，不能使用this关键字、super关键字<br>
-5.2 关于静态属性和静态方法的使用，大家都从生命周期的角度去理解。</li>
-</ol>
-<p>6.如何判定属性和方法应该使用static关键字：<br>
-6.1 关于属性</p>
+<p>5.要求：</p>
 <blockquote>
-<p>属性是可以被多个对象所共享的，不会随着对象的不同而不同的。<br>
-类中的常量也常常声明为static</p>
+<p>要求接口中的抽象方法的形参列表和返回值类型与方法引用的方法的形参列表和返回值类型相同！（针对于情况1和情况2）<br>
+当函数式接口方法的第一个参数是需要引用方法的调用者，并且第二个参数是需要引用方法的参数(或无参数)时：ClassName::methodName（针对于情况3）</p>
 </blockquote>
-<p>6.2 关于方法</p>
-<blockquote>
-<p>操作静态属性的方法，通常设置为static的<br>
-工具类中的方法，习惯上声明为static的。 比如：Math、Arrays、Collections<br>
-7.使用举例：<br>
-举例一：Arrays、Math、Collections等工具类<br>
-举例二：单例模式<br>
-举例三：<br>
-class Circle{</p>
-</blockquote>
-<pre><code>private double radius;
-private int id;//自动赋值
-
-public Circle(){
-	id = init++;
-	total++;
-}
-
-public Circle(double radius){
-	this();
-</code></pre>
-<p>//		id = init++;<br>
-//		total++;<br>
-this.radius = radius;		<br>
+<p>6.使用建议：<br>
+如果给函数式接口提供实例，恰好满足方法引用的使用情境，大家就可以考虑使用方法引用给函数式接口提供实例。如果大家不熟悉方法引用，那么还可以使用lambda表达式。</p>
+<p>7.使用举例：<br>
+// 情况一：对象 :: 实例方法<br>
+//Consumer中的void accept(T t)<br>
+//PrintStream中的void println(T t)<br>
+@Test<br>
+public void test1() {<br>
+Consumer<String> con1 = str -&gt; System.out.println(str);<br>
+con1.accept(&quot;北京&quot;);<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+PrintStream ps = System.out;<br>
+Consumer<String> con2 = ps::println;<br>
+con2.accept(&quot;beijing&quot;);<br>
+}<br>
+//Supplier中的T get()<br>
+//Employee中的String getName()<br>
+@Test<br>
+public void test2() {<br>
+Employee emp = new Employee(1001,&quot;Tom&quot;,23,5600);<br>
+Supplier<String> sup1 = () -&gt; emp.getName();<br>
+System.out.println(sup1.get());<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+Supplier<String> sup2 = emp::getName;<br>
+System.out.println(sup2.get());<br>
+}<br>
+// 情况二：类 :: 静态方法<br>
+//Comparator中的int compare(T t1,T t2)<br>
+//Integer中的int compare(T t1,T t2)<br>
+@Test<br>
+public void test3() {<br>
+Comparator<Integer> com1 = (t1,t2) -&gt; Integer.compare(t1,t2);<br>
+System.out.println(com1.compare(12,21));<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+Comparator<Integer> com2 = Integer::compare;<br>
+System.out.println(com2.compare(12,3));<br>
+}<br>
+//Function中的R apply(T t)<br>
+//Math中的Long round(Double d)<br>
+@Test<br>
+public void test4() {<br>
+Function&lt;Double,Long&gt; func = new Function&lt;Double, Long&gt;() {<br>
+@Override<br>
+public Long apply(Double d) {<br>
+return Math.round(d);<br>
+}<br>
+};<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+Function&lt;Double,Long&gt; func1 = d -&gt; Math.round(d);<br>
+System.out.println(func1.apply(12.3));<br>
+System.out.println(&quot;*******************&quot;);<br>
+Function&lt;Double,Long&gt; func2 = Math::round;<br>
+System.out.println(func2.apply(12.6));<br>
 }</p>
-<pre><code>private static int total;//记录创建的圆的个数
-private static int init = 1001;//static声明的属性被所对象所共享
+<p>// 情况：类 :: 实例方法  (难度)<br>
+// Comparator中的int comapre(T t1,T t2)<br>
+// String中的int t1.compareTo(t2)<br>
+@Test<br>
+public void test5() {<br>
+Comparator<String> com1 = (s1,s2) -&gt; s1.compareTo(s2);<br>
+System.out.println(com1.compare(&quot;abc&quot;,&quot;abd&quot;));<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+Comparator<String> com2 = String :: compareTo;<br>
+System.out.println(com2.compare(&quot;abd&quot;,&quot;abm&quot;));<br>
+}<br>
+//BiPredicate中的boolean test(T t1, T t2);<br>
+//String中的boolean t1.equals(t2)<br>
+@Test<br>
+public void test6() {<br>
+BiPredicate&lt;String,String&gt; pre1 = (s1,s2) -&gt; s1.equals(s2);<br>
+System.out.println(pre1.test(&quot;abc&quot;,&quot;abc&quot;));<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+BiPredicate&lt;String,String&gt; pre2 = String :: equals;<br>
+System.out.println(pre2.test(&quot;abc&quot;,&quot;abd&quot;));<br>
+}<br>
+// Function中的R apply(T t)<br>
+// Employee中的String getName();<br>
+@Test<br>
+public void test7() {<br>
+Employee employee = new Employee(1001, &quot;Jerry&quot;, 23, 6000);<br>
+Function&lt;Employee,String&gt; func1 = e -&gt; e.getName();<br>
+System.out.println(func1.apply(employee));<br>
+System.out.println(&quot;*******************&quot;);<br>
+Function&lt;Employee,String&gt; func2 = Employee::getName;<br>
+System.out.println(func2.apply(employee));<br>
+}</p>
+<p>五、构造器引用与数组引用<br>
+1.构造器引用格式：<br>
+类名::new</p>
+<p>2.构造器引用使用要求：<br>
+和方法引用类似，函数式接口的抽象方法的形参列表和构造器的形参列表一致。抽象方法的返回值类型即为构造器所属的类的类型</p>
+<p>3.构造器引用举例：<br>
+//Supplier中的T get()<br>
+//Employee的空参构造器：Employee()<br>
+@Test<br>
+public void test1(){<br>
+Supplier<Employee> sup = new Supplier<Employee>() {<br>
+@Override<br>
+public Employee get() {<br>
+return new Employee();<br>
+}<br>
+};<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+Supplier<Employee>  sup1 = () -&gt; new Employee();<br>
+System.out.println(sup1.get());<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+Supplier<Employee>  sup2 = Employee :: new;<br>
+System.out.println(sup2.get());<br>
+}</p>
+<p>//Function中的R apply(T t)<br>
+@Test<br>
+public void test2(){<br>
+Function&lt;Integer,Employee&gt; func1 = id -&gt; new Employee(id);<br>
+Employee employee = func1.apply(1001);<br>
+System.out.println(employee);<br>
+System.out.println(&quot;*******************&quot;);<br>
+Function&lt;Integer,Employee&gt; func2 = Employee :: new;<br>
+Employee employee1 = func2.apply(1002);<br>
+System.out.println(employee1);<br>
+}</p>
+<p>//BiFunction中的R apply(T t,U u)<br>
+@Test<br>
+public void test3(){<br>
+BiFunction&lt;Integer,String,Employee&gt; func1 = (id,name) -&gt; new Employee(id,name);<br>
+System.out.println(func1.apply(1001,&quot;Tom&quot;));<br>
+System.out.println(&quot;*******************&quot;);<br>
+BiFunction&lt;Integer,String,Employee&gt; func2 = Employee :: new;<br>
+System.out.println(func2.apply(1002,&quot;Tom&quot;));<br>
+}</p>
+<p>4.数组引用格式：<br>
+数组类型[] :: new</p>
+<p>5.数组引用举例：<br>
+//Function中的R apply(T t)<br>
+@Test<br>
+public void test4(){<br>
+Function&lt;Integer,String[]&gt; func1 = length -&gt; new String[length];<br>
+String[] arr1 = func1.apply(5);<br>
+System.out.println(Arrays.toString(arr1));<br>
+System.out.println(&quot;*******************&quot;);<br>
+Function&lt;Integer,String[]&gt; func2 = String[] :: new;<br>
+String[] arr2 = func2.apply(10);<br>
+System.out.println(Arrays.toString(arr2));</p>
+<p>}</p>
+<p>六、Optional类的使用<br>
+java.util.Optional类<br>
+1.理解：为了解决java中的空指针问题而生！<br>
+Optional<T> 类(java.util.Optional) 是一个容器类，它可以保存类型T的值，代表这个值存在。或者仅仅保存null，表示这个值不存在。原来用 null 表示一个值不存在，现在 Optional 可以更好的表达这个概念。并且可以避<br>
+免空指针异常。</p>
+<p>2.常用方法：<br>
+@Test<br>
+public void test1(){<br>
+//empty():创建的Optional对象内部的value = null<br>
+Optional<Object> op1 = Optional.empty();<br>
+if(!op1.isPresent()){//Optional封装的数据是否包含数据<br>
+System.out.println(&quot;数据为空&quot;);<br>
+}<br>
+System.out.println(op1);<br>
+System.out.println(op1.isPresent());<br>
+//如果Optional封装的数据value为空，则get()报错。否则，value不为空时，返回value.<br>
+//        System.out.println(op1.get());<br>
+}<br>
+@Test<br>
+public void test2(){<br>
+String str = &quot;hello&quot;;<br>
+//        str = null;<br>
+//of(T t):封装数据t生成Optional对象。要求t非空，否则报错。<br>
+Optional<String> op1 = Optional.of(str);<br>
+//get()通常与of()方法搭配使用。用于获取内部的封装的数据value<br>
+String str1 = op1.get();<br>
+System.out.println(str1);<br>
+}<br>
+@Test<br>
+public void test3(){<br>
+String str = &quot;beijing&quot;;<br>
+str = null;<br>
+//ofNullable(T t) ：封装数据t赋给Optional内部的value。不要求t非空<br>
+Optional<String> op1 = Optional.ofNullable(str);<br>
+//orElse(T t1):如果Optional内部的value非空，则返回此value值。如果<br>
+//value为空，则返回t1.<br>
+String str2 = op1.orElse(&quot;shanghai&quot;);<br>
+System.out.println(str2);//<br>
+}<br>
+3.典型练习：<br>
+能保证如下的方法执行中不会出现空指针的异常。<br>
+//使用Optional类的getGirlName():<br>
+public String getGirlName2(Boy boy){<br>
+Optional<Boy> boyOptional = Optional.ofNullable(boy);<br>
+//此时的boy1一定非空<br>
+Boy boy1 = boyOptional.orElse(new Boy(new Girl(&quot;迪丽热巴&quot;)));<br>
+Girl girl = boy1.getGirl();<br>
+Optional<Girl> girlOptional = Optional.ofNullable(girl);<br>
+//girl1一定非空<br>
+Girl girl1 = girlOptional.orElse(new Girl(&quot;古力娜扎&quot;));<br>
+return girl1.getName();<br>
+}<br>
+@Test<br>
+public void test5(){<br>
+Boy boy = null;<br>
+boy = new Boy();<br>
+boy = new Boy(new Girl(&quot;苍老师&quot;));<br>
+String girlName = getGirlName2(boy);<br>
+System.out.println(girlName);<br>
+}</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[19 Java反射机制]]></title>
+        <id>https://fantaixi.github.io/post/19-java-fan-she-ji-zhi/</id>
+        <link href="https://fantaixi.github.io/post/19-java-fan-she-ji-zhi/">
+        </link>
+        <updated>2020-05-06T19:41:16.000Z</updated>
+        <content type="html"><![CDATA[<p>一、反射的概述<br>
+1.什么叫做反射？<br>
+Java的反射（reflection）机制是指在程序的运行状态中，可以构造任意一个类的对象，可以了解任意一个对象所属的类，可以了解任意一个类的成员变量和方法，可以调用任意一个对象的属性和方法。 这种动态获取程序信息以及动态调用对象的功能称为Java语言的反射机制。 反射被视为动态语言的关键。</p>
+<p>2.关于反射的理解<br>
+Reflection（反射)是被视为动态语言的关键，反射机制允许程序在执行期借助于Reflection API取得任何<br>
+类的内部信息，并能直接操作任意对象的内部属性及方法。</p>
+<p>框架 = 反射 + 注解 + 设计模式。</p>
+<p>3.体会反射机制的“动态性”<br>
+//体会反射的动态性<br>
+@Test<br>
+public void test2(){<br>
+for(int i = 0;i &lt; 100;i++){<br>
+int num = new Random().nextInt(3);//0,1,2<br>
+String classPath = &quot;&quot;;<br>
+switch(num){<br>
+case 0:<br>
+classPath = &quot;java.util.Date&quot;;<br>
+break;<br>
+case 1:<br>
+classPath = &quot;java.lang.Object&quot;;<br>
+break;<br>
+case 2:<br>
+classPath = &quot;com.atguigu.java.Person&quot;;<br>
+break;<br>
+}<br>
+try {<br>
+Object obj = getInstance(classPath);<br>
+System.out.println(obj);<br>
+} catch (Exception e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+/*<br>
+创建一个指定类的对象。<br>
+classPath:指定类的全类名<br>
+*/<br>
+public Object getInstance(String classPath) throws Exception {<br>
+Class clazz =  Class.forName(classPath);<br>
+return clazz.newInstance();<br>
+}</p>
+<p>4.反射机制能提供的功能<br>
+<img src="https://fantaixi.github.io/post-images/1588794217339.png" alt="" loading="lazy"></p>
+<p>5.相关API<br>
+java.lang.Class:反射的源头<br>
+java.lang.reflect.Method<br>
+java.lang.reflect.Field<br>
+java.lang.reflect.Constructor<br>
+....</p>
+<p>二、Class类的理解与获取Class的实例<br>
+1.Class类的理解<br>
+1)类的加载过程：<br>
+程序经过javac.exe命令以后，会生成一个或多个字节码文件(.class结尾)。<br>
+接着我们使用java.exe命令对某个字节码文件进行解释运行。相当于将某个字节码文件<br>
+加载到内存中。此过程就称为类的加载。加载到内存中的类，我们就称为运行时类，此<br>
+运行时类，就作为Class的一个实例。<br>
+2)换句话说，Class的实例就对应着一个运行时类。<br>
+3)加载到内存中的运行时类，会缓存一定的时间。在此时间之内，我们可以通过不同的方式<br>
+来获取此运行时类。</p>
+<p>2.获取Class实例的几种方式：（前三种方式需要掌握）<br>
+//方式一：调用运行时类的属性：.class<br>
+Class clazz1 = Person.class;<br>
+System.out.println(clazz1);<br>
+//方式二：通过运行时类的对象,调用getClass()<br>
+Person p1 = new Person();<br>
+Class clazz2 = p1.getClass();<br>
+System.out.println(clazz2);<br>
+//方式三：调用Class的静态方法：forName(String classPath)<br>
+Class clazz3 = Class.forName(&quot;com.atguigu.java.Person&quot;);<br>
+//        clazz3 = Class.forName(&quot;java.lang.String&quot;);<br>
+System.out.println(clazz3);<br>
+System.out.println(clazz1 == clazz2);<br>
+System.out.println(clazz1 == clazz3);<br>
+//方式四：使用类的加载器：ClassLoader  (了解)<br>
+ClassLoader classLoader = ReflectionTest.class.getClassLoader();<br>
+Class clazz4 = classLoader.loadClass(&quot;com.atguigu.java.Person&quot;);<br>
+System.out.println(clazz4);<br>
+System.out.println(clazz1 == clazz4);</p>
+<p>3.总结：创建类的对象的方式?<br>
+方式一：new + 构造器<br>
+方式二：要创建Xxx类的对象，可以考虑：Xxx、Xxxs、XxxFactory、XxxBuilder类中查看是否有<br>
+静态方法的存在。可以调用其静态方法，创建Xxx对象。<br>
+方式三：通过反射</p>
+<p>4.Class实例可以是哪些结构的说明<br>
+<img src="https://fantaixi.github.io/post-images/1588794537175.png" alt="" loading="lazy"></p>
+<p>三、反射应用一：创建运行时类的对象<br>
+1.代码举例<br>
+Class<Person> clazz = Person.class;<br>
+Person obj = clazz.newInstance();<br>
+System.out.println(obj);</p>
+<p>2.说明<br>
+newInstance():调用此方法，创建对应的运行时类的对象。内部调用了运行时类的空参的构造器。<br>
+要想此方法正常的创建运行时类的对象，要求：<br>
+1.运行时类必须提供空参的构造器<br>
+2.空参的构造器的访问权限得够。通常，设置为public。</p>
+<p>在javabean中要求提供一个public的空参构造器。原因：<br>
+1.便于通过反射，创建运行时类的对象<br>
+2.便于子类继承此运行时类时，默认调用super()时，保证父类此构造器</p>
+<p>四、反射应用二：获取运行时类的完整结构<br>
+我们可以通过反射，获取对应的运行时类中所有的属性、方法、构造器、父类、接口、父类的泛型、包、注解、异常等。。。。<br>
+典型代码：<br>
+@Test<br>
+public void test1(){<br>
+Class clazz = Person.class;<br>
+//获取属性结构<br>
+//getFields():获取当前运行时类及其父类中声明为public访问权限的属性<br>
+Field[] fields = clazz.getFields();<br>
+for(Field f : fields){<br>
+System.out.println(f);<br>
+}<br>
+System.out.println();<br>
+//getDeclaredFields():获取当前运行时类中声明的所有属性。（不包含父类中声明的属性<br>
+Field[] declaredFields = clazz.getDeclaredFields();<br>
+for(Field f : declaredFields){<br>
+System.out.println(f);<br>
+}<br>
+}<br>
+@Test<br>
+public void test1(){<br>
+Class clazz = Person.class;<br>
+//getMethods():获取当前运行时类及其所父类中声明为public权限的方法<br>
+Method[] methods = clazz.getMethods();<br>
+for(Method m : methods){<br>
+System.out.println(m);<br>
+}<br>
+System.out.println();<br>
+//getDeclaredMethods():获取当前运行时类中声明的所方法。（不包含父类中声明的方法<br>
+Method[] declaredMethods = clazz.getDeclaredMethods();<br>
+for(Method m : declaredMethods){<br>
+System.out.println(m);<br>
+}<br>
+}<br>
+/*<br>
+获取构造器结构<br>
+<em>/<br>
+@Test<br>
+public void test1(){<br>
+Class clazz = Person.class;<br>
+//getConstructors():获取当前运行时类中声明为public的构造器<br>
+Constructor[] constructors = clazz.getConstructors();<br>
+for(Constructor c : constructors){<br>
+System.out.println(c);<br>
+}<br>
+System.out.println();<br>
+//getDeclaredConstructors():获取当前运行时类中声明的所的构造器<br>
+Constructor[] declaredConstructors = clazz.getDeclaredConstructors();<br>
+for(Constructor c : declaredConstructors){<br>
+System.out.println(c);<br>
+}<br>
+}<br>
+/</em><br>
+获取运行时类的父类<br>
+<em>/<br>
+@Test<br>
+public void test2(){<br>
+Class clazz = Person.class;<br>
+Class superclass = clazz.getSuperclass();<br>
+System.out.println(superclass);<br>
+}<br>
+/</em><br>
+获取运行时类的带泛型的父类<br>
+*/<br>
+@Test<br>
+public void test3(){<br>
+Class clazz = Person.class;</p>
+<pre><code>    Type genericSuperclass = clazz.getGenericSuperclass();
+    System.out.println(genericSuperclass);
+}
+/*
+获取运行时类的带泛型的父类的泛型
+代码：逻辑性代码  vs 功能性代码
+ */
+@Test
+public void test4(){
+    Class clazz = Person.class;
+    Type genericSuperclass = clazz.getGenericSuperclass();
+    ParameterizedType paramType = (ParameterizedType) genericSuperclass;
+    //获取泛型类型
+    Type[] actualTypeArguments = paramType.getActualTypeArguments();
+</code></pre>
+<p>//        System.out.println(actualTypeArguments[0].getTypeName());<br>
+System.out.println(((Class)actualTypeArguments[0]).getName());<br>
+}<br>
+/*<br>
+获取运行时类实现的接口<br>
+<em>/<br>
+@Test<br>
+public void test5(){<br>
+Class clazz = Person.class;<br>
+Class[] interfaces = clazz.getInterfaces();<br>
+for(Class c : interfaces){<br>
+System.out.println(c);<br>
+}<br>
+System.out.println();<br>
+//获取运行时类的父类实现的接口<br>
+Class[] interfaces1 = clazz.getSuperclass().getInterfaces();<br>
+for(Class c : interfaces1){<br>
+System.out.println(c);<br>
+}<br>
+}<br>
+/</em><br>
+获取运行时类所在的包<br>
+<em>/<br>
+@Test<br>
+public void test6(){<br>
+Class clazz = Person.class;<br>
+Package pack = clazz.getPackage();<br>
+System.out.println(pack);<br>
+}<br>
+/</em><br>
+获取运行时类声明的注解<br>
+*/<br>
+@Test<br>
+public void test7(){<br>
+Class clazz = Person.class;<br>
+Annotation[] annotations = clazz.getAnnotations();<br>
+for(Annotation annos : annotations){<br>
+System.out.println(annos);<br>
+}<br>
+}</p>
+<p>五、反射应用三：获取运行时类的指定结构<br>
+调用指定的属性：<br>
+@Test<br>
+public void testField1() throws Exception {<br>
+Class clazz = Person.class;<br>
+//创建运行时类的对象<br>
+Person p = (Person) clazz.newInstance();<br>
+//1. getDeclaredField(String fieldName):获取运行时类中指定变量名的属性<br>
+Field name = clazz.getDeclaredField(&quot;name&quot;);<br>
+//2.保证当前属性是可访问的<br>
+name.setAccessible(true);<br>
+//3.获取、设置指定对象的此属性值<br>
+name.set(p,&quot;Tom&quot;);<br>
+System.out.println(name.get(p));<br>
+}<br>
+调用指定的方法：<br>
+@Test<br>
+public void testMethod() throws Exception {<br>
+Class clazz = Person.class;<br>
+//创建运行时类的对象<br>
+Person p = (Person) clazz.newInstance();<br>
+/*<br>
+1.获取指定的某个方法<br>
+getDeclaredMethod():参数1 ：指明获取的方法的名称  参数2：指明获取的方法的形参列表<br>
+<em>/<br>
+Method show = clazz.getDeclaredMethod(&quot;show&quot;, String.class);<br>
+//2.保证当前方法是可访问的<br>
+show.setAccessible(true);<br>
+/</em><br>
+3. 调用方法的invoke():参数1：方法的调用者  参数2：给方法形参赋值的实参<br>
+invoke()的返回值即为对应类中调用的方法的返回值。<br>
+<em>/<br>
+Object returnValue = show.invoke(p,&quot;CHN&quot;); //String nation = p.show(&quot;CHN&quot;);<br>
+System.out.println(returnValue);<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong>如何调用静态方法</strong></strong></strong></strong></strong></strong></em></em>***&quot;);<br>
+// private static void showDesc()<br>
+Method showDesc = clazz.getDeclaredMethod(&quot;showDesc&quot;);<br>
+showDesc.setAccessible(true);<br>
+//如果调用的运行时类中的方法没返回值，则此invoke()返回null<br>
+//        Object returnVal = showDesc.invoke(null);<br>
+Object returnVal = showDesc.invoke(Person.class);<br>
+System.out.println(returnVal);//null<br>
+}<br>
+调用指定的构造器：<br>
+@Test<br>
+public void testConstructor() throws Exception {<br>
+Class clazz = Person.class;<br>
+//private Person(String name)<br>
+/*<br>
+1.获取指定的构造器<br>
+getDeclaredConstructor():参数：指明构造器的参数列表<br>
+*/<br>
+Constructor constructor = clazz.getDeclaredConstructor(String.class);<br>
+//2.保证此构造器是可访问的<br>
+constructor.setAccessible(true);<br>
+//3.调用此构造器创建运行时类的对象<br>
+Person per = (Person) constructor.newInstance(&quot;Tom&quot;);<br>
+System.out.println(per);<br>
+}</p>
+<p>六、反射应用四：动态代理<br>
+1.代理模式的原理：<br>
+使用一个代理将对象包装起来, 然后用该代理对象取代原始对象。任何对原始对象的调用都要通过代理。代理对象决定是否以及何时将方法调用转到原始对象上。</p>
+<p>2.静态代理<br>
+2.1 举例：<br>
+实现Runnable接口的方法创建多线程。<br>
+Class MyThread implements Runnable{} //相当于被代理类<br>
+Class Thread implements Runnable{} //相当于代理类<br>
+main(){<br>
+MyThread t = new MyThread();<br>
+Thread thread = new Thread(t);<br>
+thread.start();//启动线程；调用线程的run()<br>
+}<br>
+2.2 静态代理的缺点：<br>
+① 代理类和目标对象的类都是在编译期间确定下来，不利于程序的扩展。<br>
+② 每一个代理类只能为一个接口服务，这样一来程序开发中必然产生过多的代理。</p>
+<p>3.动态代理的特点：<br>
+动态代理是指客户通过代理类来调用其它对象的方法，并且是在程序运行时根据需要动态创建目标类的代理对<br>
+象。</p>
+<p>4.动态代理的实现<br>
+4.1 需要解决的两个主要问题：<br>
+问题一：如何根据加载到内存中的被代理类，动态的创建一个代理类及其对象。<br>
+（通过Proxy.newProxyInstance()实现）<br>
+问题二：当通过代理类的对象调用方法a时，如何动态的去调用被代理类中的同名方法a。<br>
+(通过InvocationHandler接口的实现类及其方法invoke())<br>
+4.2 代码实现：<br>
+/**<br>
+*</p>
+<ul>
+<li>动态代理的举例</li>
+<li></li>
+<li>@author shkstart</li>
+<li>@create 2019 上午 10:18<br>
+*/<br>
+interface Human{<br>
+String getBelief();<br>
+void eat(String food);<br>
+}<br>
+//被代理类<br>
+class SuperMan implements Human{<br>
+@Override<br>
+public String getBelief() {<br>
+return &quot;I believe I can fly!&quot;;<br>
+}<br>
+@Override<br>
+public void eat(String food) {<br>
+System.out.println(&quot;我喜欢吃&quot; + food);<br>
+}<br>
+}<br>
+class HumanUtil{<br>
+public void method1(){<br>
+System.out.println(&quot;<mark><mark><mark><mark><mark><mark><mark><mark><mark><mark>通用方法一</mark></mark></mark></mark></mark></mark></mark></mark></mark></mark>&quot;);<br>
+}<br>
+public void method2(){<br>
+System.out.println(&quot;<mark><mark><mark><mark><mark><mark><mark><mark><mark><mark>通用方法二</mark></mark></mark></mark></mark></mark></mark></mark></mark></mark>&quot;);<br>
+}<br>
+}</li>
+</ul>
+<p>class ProxyFactory{<br>
+//调用此方法，返回一个代理类的对象。解决问题一<br>
+public static Object getProxyInstance(Object obj){//obj:被代理类的对象<br>
+MyInvocationHandler handler = new MyInvocationHandler();<br>
+handler.bind(obj);<br>
+return Proxy.newProxyInstance(obj.getClass().getClassLoader(),obj.getClass().getInterfaces(),handler);<br>
+}<br>
+}<br>
+class MyInvocationHandler implements InvocationHandler{<br>
+private Object obj;//需要使用被代理类的对象进行赋值<br>
+public void bind(Object obj){<br>
+this.obj = obj;<br>
+}<br>
+//当我们通过代理类的对象，调用方法a时，就会自动的调用如下的方法：invoke()<br>
+//将被代理类要执行的方法a的功能就声明在invoke()中<br>
+@Override<br>
+public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {<br>
+HumanUtil util = new HumanUtil();<br>
+util.method1();<br>
+//method:即为代理类对象调用的方法，此方法也就作为了被代理类对象要调用的方法<br>
+//obj:被代理类的对象<br>
+Object returnValue = method.invoke(obj,args);<br>
+util.method2();<br>
+//上述方法的返回值就作为当前类中的invoke()的返回值。<br>
+return returnValue;<br>
+}<br>
+}<br>
+public class ProxyTest {<br>
+public static void main(String[] args) {<br>
+SuperMan superMan = new SuperMan();<br>
+//proxyInstance:代理类的对象<br>
+Human proxyInstance = (Human) ProxyFactory.getProxyInstance(superMan);<br>
+//当通过代理类对象调用方法时，会自动的调用被代理类中同名的方法<br>
+String belief = proxyInstance.getBelief();<br>
+System.out.println(belief);<br>
+proxyInstance.eat(&quot;四川麻辣烫&quot;);<br>
+System.out.println(&quot;*****************************&quot;);<br>
+NikeClothFactory nikeClothFactory = new NikeClothFactory();<br>
+ClothFactory proxyClothFactory = (ClothFactory) ProxyFactory.getProxyInstance(nikeClothFactory);<br>
+proxyClothFactory.produceCloth();<br>
+}<br>
+}<br>
+体会：反射的动态性。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[18 网络编程]]></title>
+        <id>https://fantaixi.github.io/post/18-wang-luo-bian-cheng/</id>
+        <link href="https://fantaixi.github.io/post/18-wang-luo-bian-cheng/">
+        </link>
+        <updated>2020-05-06T19:33:37.000Z</updated>
+        <content type="html"><![CDATA[<p>一、InetAddress类的使用<br>
+1.实现网络通信需要解决的两个问题</p>
+<ul>
+<li>1.如何准确地定位网络上一台或多台主机；定位主机上的特定的应用</li>
+<li>2.找到主机后如何可靠高效地进行数据传输</li>
+</ul>
+<p>2.网络通信的两个要素：</p>
+<ul>
+<li>1.对应问题一：IP和端口号</li>
+<li>2.对应问题二：提供网络通信协议：TCP/IP参考模型（应用层、传输层、网络层、物理+数据链路层）</li>
+</ul>
+<p>3.通信要素一：IP和端口号<br>
+1.IP的理解</p>
+<ul>
+<li>
+<ol>
+<li>IP:唯一的标识 Internet 上的计算机（通信实体）</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>在Java中使用InetAddress类代表IP</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>IP分类：IPv4 和 IPv6 ; 万维网 和 局域网</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>域名:   www.baidu.com   www.mi.com  www.sina.com  www.jd.com</li>
+</ol>
+</li>
+<li>域名解析：域名容易记忆，当在连接网络时输入一个主机的域名后，域名服务器(DNS)负责将域名转化成IP地址，这样才能和主机建立连接。 -------域名解析</li>
+<li>
+<ol start="5">
+<li>本地回路地址：127.0.0.1 对应着：localhost</li>
+</ol>
+</li>
+<li></li>
+</ul>
+<p>2.InetAddress类:此类的一个对象就代表着一个具体的IP地址<br>
+2.1实例化<br>
+getByName(String host) 、 getLocalHost()</p>
+<p>2.2常用方法<br>
+getHostName() / getHostAddress()</p>
+<p>3.端口号：正在计算机上运行的进程。</p>
+<ul>
+<li>要求：不同的进程不同的端口号</li>
+<li>范围：被规定为一个 16 位的整数 0~65535。</li>
+</ul>
+<p>端口号与IP地址的组合得出一个网络套接字：Socket</p>
+<p>4.通信要素二：网络通信协议</p>
+<ol>
+<li>分型模型<br>
+<img src="https://fantaixi.github.io/post-images/1588793717318.png" alt="" loading="lazy"><br>
+2.TCP和UDP的区别<br>
+<img src="https://fantaixi.github.io/post-images/1588793747754.png" alt="" loading="lazy"><br>
+3.TCP三次握手和四次挥手<br>
+<img src="https://fantaixi.github.io/post-images/1588793796025.png" alt="" loading="lazy"></li>
+</ol>
+<figure data-type="image" tabindex="1"><img src="https://fantaixi.github.io/post-images/1588793803982.png" alt="" loading="lazy"></figure>
+<p>二、TCP网络编程<br>
+代码示例1：客户端发送信息给服务端，服务端将数据显示在控制台上<br>
+//客户端<br>
+@Test<br>
+public void client()  {<br>
+Socket socket = null;<br>
+OutputStream os = null;<br>
+try {<br>
+//1.创建Socket对象，指明服务器端的ip和端口号<br>
+InetAddress inet = InetAddress.getByName(&quot;192.168.14.100&quot;);<br>
+socket = new Socket(inet,8899);<br>
+//2.获取一个输出流，用于输出数据<br>
+os = socket.getOutputStream();<br>
+//3.写出数据的操作<br>
+os.write(&quot;你好，我是客户端mm&quot;.getBytes());<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//4.资源的关闭<br>
+if(os != null){<br>
+try {<br>
+os.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(socket != null){<br>
+try {<br>
+socket.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+//服务端<br>
+@Test<br>
+public void server()  {<br>
+ServerSocket ss = null;<br>
+Socket socket = null;<br>
+InputStream is = null;<br>
+ByteArrayOutputStream baos = null;<br>
+try {<br>
+//1.创建服务器端的ServerSocket，指明自己的端口号<br>
+ss = new ServerSocket(8899);<br>
+//2.调用accept()表示接收来自于客户端的socket<br>
+socket = ss.accept();<br>
+//3.获取输入流<br>
+is = socket.getInputStream();<br>
+//不建议这样写，可能会乱码<br>
+//        byte[] buffer = new byte[1024];<br>
+//        int len;<br>
+//        while((len = is.read(buffer)) != -1){<br>
+//            String str = new String(buffer,0,len);<br>
+//            System.out.print(str);<br>
+//        }<br>
+//4.读取输入流中的数据<br>
+baos = new ByteArrayOutputStream();<br>
+byte[] buffer = new byte[5];<br>
+int len;<br>
+while((len = is.read(buffer)) != -1){<br>
+baos.write(buffer,0,len);<br>
+}<br>
+System.out.println(baos.toString());<br>
+System.out.println(&quot;收到了来自于：&quot; + socket.getInetAddress().getHostAddress() + &quot;的数据&quot;);</p>
+<pre><code>    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        if(baos != null){
+            //5.关闭资源
+            try {
+                baos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(is != null){
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(socket != null){
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(ss != null){
+            try {
+                ss.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre>
+<p>代码示例2：客户端发送文件给服务端，服务端将文件保存在本地。<br>
+/*<br>
+这里涉及到的异常，应该使用try-catch-finally处理<br>
+<em>/<br>
+@Test<br>
+public void client() throws IOException {<br>
+//1.<br>
+Socket socket = new Socket(InetAddress.getByName(&quot;127.0.0.1&quot;),9090);<br>
+//2.<br>
+OutputStream os = socket.getOutputStream();<br>
+//3.<br>
+FileInputStream fis = new FileInputStream(new File(&quot;beauty.jpg&quot;));<br>
+//4.<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = fis.read(buffer)) != -1){<br>
+os.write(buffer,0,len);<br>
+}<br>
+//5.<br>
+fis.close();<br>
+os.close();<br>
+socket.close();<br>
+}<br>
+/</em><br>
+这里涉及到的异常，应该使用try-catch-finally处理<br>
+<em>/<br>
+@Test<br>
+public void server() throws IOException {<br>
+//1.<br>
+ServerSocket ss = new ServerSocket(9090);<br>
+//2.<br>
+Socket socket = ss.accept();<br>
+//3.<br>
+InputStream is = socket.getInputStream();<br>
+//4.<br>
+FileOutputStream fos = new FileOutputStream(new File(&quot;beauty1.jpg&quot;));<br>
+//5.<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = is.read(buffer)) != -1){<br>
+fos.write(buffer,0,len);<br>
+}<br>
+//6.<br>
+fos.close();<br>
+is.close();<br>
+socket.close();<br>
+ss.close();<br>
+}<br>
+代码示例3：从客户端发送文件给服务端，服务端保存到本地。并返回“发送成功”给客户端。并关闭相应的连接。<br>
+/</em><br>
+这里涉及到的异常，应该使用try-catch-finally处理<br>
+<em>/<br>
+@Test<br>
+public void client() throws IOException {<br>
+//1.<br>
+Socket socket = new Socket(InetAddress.getByName(&quot;127.0.0.1&quot;),9090);<br>
+//2.<br>
+OutputStream os = socket.getOutputStream();<br>
+//3.<br>
+FileInputStream fis = new FileInputStream(new File(&quot;beauty.jpg&quot;));<br>
+//4.<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = fis.read(buffer)) != -1){<br>
+os.write(buffer,0,len);<br>
+}<br>
+//关闭数据的输出<br>
+socket.shutdownOutput();<br>
+//5.接收来自于服务器端的数据，并显示到控制台上<br>
+InputStream is = socket.getInputStream();<br>
+ByteArrayOutputStream baos = new ByteArrayOutputStream();<br>
+byte[] bufferr = new byte[20];<br>
+int len1;<br>
+while((len1 = is.read(buffer)) != -1){<br>
+baos.write(buffer,0,len1);<br>
+}<br>
+System.out.println(baos.toString());<br>
+//6.<br>
+fis.close();<br>
+os.close();<br>
+socket.close();<br>
+baos.close();<br>
+}<br>
+/</em><br>
+这里涉及到的异常，应该使用try-catch-finally处理<br>
+*/<br>
+@Test<br>
+public void server() throws IOException {<br>
+//1.<br>
+ServerSocket ss = new ServerSocket(9090);<br>
+//2.<br>
+Socket socket = ss.accept();<br>
+//3.<br>
+InputStream is = socket.getInputStream();<br>
+//4.<br>
+FileOutputStream fos = new FileOutputStream(new File(&quot;beauty2.jpg&quot;));<br>
+//5.<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = is.read(buffer)) != -1){<br>
+fos.write(buffer,0,len);<br>
+}<br>
+System.out.println(&quot;图片传输完成&quot;);<br>
+//6.服务器端给予客户端反馈<br>
+OutputStream os = socket.getOutputStream();<br>
+os.write(&quot;你好，美女，照片我已收到，非常漂亮！&quot;.getBytes());<br>
+//7.<br>
+fos.close();<br>
+is.close();<br>
+socket.close();<br>
+ss.close();<br>
+os.close();<br>
+}</p>
+<p>三、UDP网络编程<br>
+代码示例：<br>
+//发送端<br>
+@Test<br>
+public void sender() throws IOException {<br>
+DatagramSocket socket = new DatagramSocket();<br>
+String str = &quot;我是UDP方式发送的导弹&quot;;<br>
+byte[] data = str.getBytes();<br>
+InetAddress inet = InetAddress.getLocalHost();<br>
+DatagramPacket packet = new DatagramPacket(data,0,data.length,inet,9090);<br>
+socket.send(packet);<br>
+socket.close();<br>
+}<br>
+//接收端<br>
+@Test<br>
+public void receiver() throws IOException {<br>
+DatagramSocket socket = new DatagramSocket(9090);<br>
+byte[] buffer = new byte[100];<br>
+DatagramPacket packet = new DatagramPacket(buffer,0,buffer.length);<br>
+socket.receive(packet);<br>
+System.out.println(new String(packet.getData(),0,packet.getLength()));<br>
+socket.close();<br>
+}</p>
+<p>四、URL编程<br>
+1.URL(Uniform Resource Locator)的理解:<br>
+统一资源定位符，对应着互联网的某一资源地址</p>
+<p>2.URL的5个基本结构：</p>
+<ul>
+<li>http://localhost:8080/examples/beauty.jpg?username=Tom</li>
+<li>协议   主机名    端口号  资源地址           参数列表<br>
+3.如何实例化:<br>
+URL url = new URL(&quot;http://localhost:8080/examples/beauty.jpg?username=Tom&quot;);</li>
+</ul>
+<p>4.常用方法：<br>
+<img src="https://fantaixi.github.io/post-images/1588794043895.png" alt="" loading="lazy"></p>
+<p>5.可以读取、下载对应的url资源：<br>
+public static void main(String[] args) {<br>
+HttpURLConnection urlConnection = null;<br>
+InputStream is = null;<br>
+FileOutputStream fos = null;<br>
+try {<br>
+URL url = new URL(&quot;http://localhost:8080/examples/beauty.jpg&quot;);<br>
+urlConnection = (HttpURLConnection) url.openConnection();<br>
+urlConnection.connect();<br>
+is = urlConnection.getInputStream();<br>
+fos = new FileOutputStream(&quot;day10\beauty3.jpg&quot;);<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = is.read(buffer)) != -1){<br>
+fos.write(buffer,0,len);<br>
+}<br>
+System.out.println(&quot;下载完成&quot;);<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//关闭资源<br>
+if(is != null){<br>
+try {<br>
+is.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(fos != null){<br>
+try {<br>
+fos.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(urlConnection != null){<br>
+urlConnection.disconnect();<br>
+}<br>
+}<br>
+}</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[17 Java IO流]]></title>
+        <id>https://fantaixi.github.io/post/17-java-io-liu/</id>
+        <link href="https://fantaixi.github.io/post/17-java-io-liu/">
+        </link>
+        <updated>2020-05-06T19:13:20.000Z</updated>
+        <content type="html"><![CDATA[<p>一、File类的使用<br>
+1.File类的理解</p>
+<ul>
+<li>
+<ol>
+<li>File类的一个对象，代表一个文件或一个文件目录(俗称：文件夹)</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>File类声明在java.io包下</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>File类中涉及到关于文件或文件目录的创建、删除、重命名、修改时间、文件大小等方法，</li>
+</ol>
+</li>
+<li>并未涉及到写入或读取文件内容的操作。如果需要读取或写入文件内容，必须使用IO流来完成。</li>
+<li>
+<ol start="4">
+<li>后续File类的对象常会作为参数传递到流的构造器中，指明读取或写入的&quot;终点&quot;.</li>
+</ol>
+</li>
+</ul>
+<p>2.File的实例化<br>
+2.1 常用构造器<br>
+File(String filePath)<br>
+File(String parentPath,String childPath)<br>
+File(File parentFile,String childPath)</p>
+<p>2.2 路径的分类<br>
+相对路径：相较于某个路径下，指明的路径。<br>
+绝对路径：包含盘符在内的文件或文件目录的路径</p>
+<p>2.3 路径分隔符<br>
+windows和DOS系统默认使用“\”来表示<br>
+UNIX和URL使用“/”来表示</p>
+<p>3.File类的常用方法<br>
+<img src="https://fantaixi.github.io/post-images/1588792509580.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588792535704.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588792564929.png" alt="" loading="lazy"></p>
+<p>二、IO流概述<br>
+1.流的分类</p>
+<ul>
+<li>1.操作数据单位：字节流、字符流</li>
+<li>2.数据的流向：输入流、输出流</li>
+<li>3.流的角色：节点流、处理流<br>
+图示：<br>
+<img src="https://fantaixi.github.io/post-images/1588792701873.png" alt="" loading="lazy"><br>
+2.流的体系结构<br>
+<img src="https://fantaixi.github.io/post-images/1588792732018.png" alt="" loading="lazy"><br>
+说明：红框对应的是IO流中的4个抽象基类。<br>
+蓝框的流需要大家重点关注。</li>
+</ul>
+<p>3.重点说明的几个流结构<br>
+<img src="https://fantaixi.github.io/post-images/1588792762677.png" alt="" loading="lazy"><br>
+4.输入、输出的标准化过程<br>
+4.1 输入过程<br>
+① 创建File类的对象，指明读取的数据的来源。（要求此文件一定要存在）<br>
+② 创建相应的输入流，将File类的对象作为参数，传入流的构造器中<br>
+③ 具体的读入过程：<br>
+创建相应的byte[] 或 char[]。<br>
+④ 关闭流资源<br>
+说明：程序中出现的异常需要使用try-catch-finally处理。<br>
+4.2 输出过程<br>
+① 创建File类的对象，指明写出的数据的位置。（不要求此文件一定要存在）<br>
+② 创建相应的输出流，将File类的对象作为参数，传入流的构造器中<br>
+③ 具体的写出过程：<br>
+write(char[]/byte[] buffer,0,len)<br>
+④ 关闭流资源<br>
+说明：程序中出现的异常需要使用try-catch-finally处理。</p>
+<p>三、节点流（或文件流）<br>
+1.FileReader/FileWriter的使用：<br>
+1.1 FileReader的使用<br>
+/*<br>
+说明点：</p>
+<ol>
+<li>
+<p>read()的理解：返回读入的一个字符。如果达到文件末尾，返回-1</p>
+</li>
+<li>
+<p>异常的处理：为了保证流资源一定可以执行关闭操作。需要使用try-catch-finally处理</p>
+</li>
+<li>
+<p>读入的文件一定要存在，否则就会报FileNotFoundException。<br>
+*/<br>
+@Test<br>
+public void testFileReader1()  {<br>
+FileReader fr = null;<br>
+try {<br>
+//1.File类的实例化<br>
+File file = new File(&quot;hello.txt&quot;);</p>
+<pre><code>     //2.FileReader流的实例化
+     fr = new FileReader(file);
 
-public double findArea(){
-	return 3.14 * radius * radius;
+     //3.读入的操作
+     //read(char[] cbuf):返回每次读入cbuf数组中的字符的个数。如果达到文件末尾，返回-1
+     char[] cbuf = new char[5];
+     int len;
+     while((len = fr.read(cbuf)) != -1){
+         //方式一：
+         //错误的写法
+</code></pre>
+</li>
+</ol>
+<p>//                for(int i = 0;i &lt; cbuf.length;i++){<br>
+//                    System.out.print(cbuf[i]);<br>
+//                }<br>
+//正确的写法<br>
+//                for(int i = 0;i &lt; len;i++){<br>
+//                    System.out.print(cbuf[i]);<br>
+//                }<br>
+//方式二：<br>
+//错误的写法,对应着方式一的错误的写法<br>
+//                String str = new String(cbuf);<br>
+//                System.out.print(str);<br>
+//正确的写法<br>
+String str = new String(cbuf,0,len);<br>
+System.out.print(str);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(fr != null){<br>
+//4.资源的关闭<br>
+try {<br>
+fr.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+1.2 FileWriter的使用<br>
+/*<br>
+从内存中写出数据到硬盘的文件里。<br>
+说明：</p>
+<ol>
+<li>输出操作，对应的File可以不存在的。并不会报异常</li>
+<li>File对应的硬盘中的文件如果不存在，在输出的过程中，会自动创建此文件。<br>
+File对应的硬盘中的文件如果存在：<br>
+如果流使用的构造器是：FileWriter(file,false) / FileWriter(file):对原文件的覆盖<br>
+如果流使用的构造器是：FileWriter(file,true):不会对原文件覆盖，而是在原文件基础上追加内容<br>
+*/<br>
+@Test<br>
+public void testFileWriter() {<br>
+FileWriter fw = null;<br>
+try {<br>
+//1.提供File类的对象，指明写出到的文件<br>
+File file = new File(&quot;hello1.txt&quot;);<br>
+//2.提供FileWriter的对象，用于数据的写出<br>
+fw = new FileWriter(file,false);<br>
+//3.写出的操作<br>
+fw.write(&quot;I have a dream!\n&quot;);<br>
+fw.write(&quot;you need to have a dream!&quot;);<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//4.流资源的关闭<br>
+if(fw != null){<br>
+try {<br>
+fw.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+1.3 文本文件的复制：<br>
+@Test<br>
+public void testFileReaderFileWriter() {<br>
+FileReader fr = null;<br>
+FileWriter fw = null;<br>
+try {<br>
+//1.创建File类的对象，指明读入和写出的文件<br>
+File srcFile = new File(&quot;hello.txt&quot;);<br>
+File destFile = new File(&quot;hello2.txt&quot;);<br>
+//不能使用字符流来处理图片等字节数据<br>
+//            File srcFile = new File(&quot;爱情与友情.jpg&quot;);<br>
+//            File destFile = new File(&quot;爱情与友情1.jpg&quot;);<br>
+//2.创建输入流和输出流的对象<br>
+fr = new FileReader(srcFile);<br>
+fw = new FileWriter(destFile);<br>
+//3.数据的读入和写出操作<br>
+char[] cbuf = new char[5];<br>
+int len;//记录每次读入到cbuf数组中的字符的个数<br>
+while((len = fr.read(cbuf)) != -1){<br>
+//每次写出len个字符<br>
+fw.write(cbuf,0,len);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//4.关闭流资源<br>
+//方式一：<br>
+//            try {<br>
+//                if(fw != null)<br>
+//                    fw.close();<br>
+//            } catch (IOException e) {<br>
+//                e.printStackTrace();<br>
+//            }finally{<br>
+//                try {<br>
+//                    if(fr != null)<br>
+//                        fr.close();<br>
+//                } catch (IOException e) {<br>
+//                    e.printStackTrace();<br>
+//                }<br>
+//            }<br>
+//方式二：<br>
+try {<br>
+if(fw != null)<br>
+fw.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+try {<br>
+if(fr != null)<br>
+fr.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+2.FileInputStream / FileOutputStream的使用：</li>
+</ol>
+<ul>
+<li>
+<ol>
+<li>对于文本文件(.txt,.java,.c,.cpp)，使用字符流处理</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>对于非文本文件(.jpg,.mp3,.mp4,.avi,.doc,.ppt,...)，使用字节流处理<br>
+/*<br>
+实现对图片的复制操作<br>
+*/<br>
+@Test<br>
+public void testFileInputOutputStream()  {<br>
+FileInputStream fis = null;<br>
+FileOutputStream fos = null;<br>
+try {<br>
+//1.造文件<br>
+File srcFile = new File(&quot;爱情与友情.jpg&quot;);<br>
+File destFile = new File(&quot;爱情与友情2.jpg&quot;);<br>
+//2.造流<br>
+fis = new FileInputStream(srcFile);<br>
+fos = new FileOutputStream(destFile);<br>
+//3.复制的过程<br>
+byte[] buffer = new byte[5];<br>
+int len;<br>
+while((len = fis.read(buffer)) != -1){<br>
+fos.write(buffer,0,len);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(fos != null){<br>
+//4.关闭流<br>
+try {<br>
+fos.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(fis != null){<br>
+try {<br>
+fis.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}</li>
+</ol>
+</li>
+</ul>
+<p>四、缓冲流的使用<br>
+1.缓冲流涉及到的类：</p>
+<ul>
+<li>BufferedInputStream</li>
+<li>BufferedOutputStream</li>
+<li>BufferedReader</li>
+<li>BufferedWriter</li>
+</ul>
+<p>2.作用：<br>
+作用：提供流的读取、写入的速度<br>
+提高读写速度的原因：内部提供了一个缓冲区。默认情况下是8kb</p>
+<p>3.典型代码<br>
+3.1 使用BufferedInputStream和BufferedOutputStream:处理非文本文件<br>
+//实现文件复制的方法<br>
+public void copyFileWithBuffered(String srcPath,String destPath){<br>
+BufferedInputStream bis = null;<br>
+BufferedOutputStream bos = null;<br>
+try {<br>
+//1.造文件<br>
+File srcFile = new File(srcPath);<br>
+File destFile = new File(destPath);<br>
+//2.造流<br>
+//2.1 造节点流<br>
+FileInputStream fis = new FileInputStream((srcFile));<br>
+FileOutputStream fos = new FileOutputStream(destFile);<br>
+//2.2 造缓冲流<br>
+bis = new BufferedInputStream(fis);<br>
+bos = new BufferedOutputStream(fos);<br>
+//3.复制的细节：读取、写入<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = bis.read(buffer)) != -1){<br>
+bos.write(buffer,0,len);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//4.资源关闭<br>
+//要求：先关闭外层的流，再关闭内层的流<br>
+if(bos != null){<br>
+try {<br>
+bos.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(bis != null){<br>
+try {<br>
+bis.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+//说明：关闭外层流的同时，内层流也会自动的进行关闭。关于内层流的关闭，我们可以省略.<br>
+//        fos.close();<br>
+//        fis.close();<br>
+}<br>
+}</p>
+<p>3.2 使用BufferedReader和BufferedWriter：处理文本文件<br>
+@Test<br>
+public void testBufferedReaderBufferedWriter(){<br>
+BufferedReader br = null;<br>
+BufferedWriter bw = null;<br>
+try {<br>
+//创建文件和相应的流<br>
+br = new BufferedReader(new FileReader(new File(&quot;dbcp.txt&quot;)));<br>
+bw = new BufferedWriter(new FileWriter(new File(&quot;dbcp1.txt&quot;)));<br>
+//读写操作<br>
+//方式一：使用char[]数组<br>
+//            char[] cbuf = new char[1024];<br>
+//            int len;<br>
+//            while((len = br.read(cbuf)) != -1){<br>
+//                bw.write(cbuf,0,len);<br>
+//    //            bw.flush();<br>
+//            }<br>
+//方式二：使用String<br>
+String data;<br>
+while((data = br.readLine()) != null){<br>
+//方法一：<br>
+//                bw.write(data + &quot;\n&quot;);//data中不包含换行符<br>
+//方法二：<br>
+bw.write(data);//data中不包含换行符<br>
+bw.newLine();//提供换行的操作</p>
+<pre><code>        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    } finally {
+        //关闭资源
+        if(bw != null){
+            try {
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(br != null){
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+</code></pre>
+<p>五、转换流的使用<br>
+1.转换流涉及到的类：属于字符流<br>
+InputStreamReader：将一个字节的输入流转换为字符的输入流<br>
+解码：字节、字节数组  ---&gt;字符数组、字符串</p>
+<p>OutputStreamWriter：将一个字符的输出流转换为字节的输出流<br>
+编码：字符数组、字符串 ---&gt; 字节、字节数组</p>
+<p>说明：编码决定了解码的方式</p>
+<p>2.作用：提供字节流与字符流之间的转换</p>
+<p>3.图示：<br>
+<img src="https://fantaixi.github.io/post-images/1588793047441.png" alt="" loading="lazy"></p>
+<p>4.典型实现：<br>
+@Test<br>
+public void test1() throws IOException {</p>
+<pre><code>    FileInputStream fis = new FileInputStream(&quot;dbcp.txt&quot;);
+</code></pre>
+<p>//        InputStreamReader isr = new InputStreamReader(fis);//使用系统默认的字符集<br>
+//参数2指明了字符集，具体使用哪个字符集，取决于文件dbcp.txt保存时使用的字符集<br>
+InputStreamReader isr = new InputStreamReader(fis,&quot;UTF-8&quot;);//使用系统默认的字符集<br>
+char[] cbuf = new char[20];<br>
+int len;<br>
+while((len = isr.read(cbuf)) != -1){<br>
+String str = new String(cbuf,0,len);<br>
+System.out.print(str);<br>
+}<br>
+isr.close();<br>
+}<br>
+/*<br>
+此时处理异常的话，仍然应该使用try-catch-finally<br>
+综合使用InputStreamReader和OutputStreamWriter<br>
+*/<br>
+@Test<br>
+public void test2() throws Exception {<br>
+//1.造文件、造流<br>
+File file1 = new File(&quot;dbcp.txt&quot;);<br>
+File file2 = new File(&quot;dbcp_gbk.txt&quot;);</p>
+<pre><code>FileInputStream fis = new FileInputStream(file1);
+FileOutputStream fos = new FileOutputStream(file2);
+
+InputStreamReader isr = new InputStreamReader(fis,&quot;utf-8&quot;);
+OutputStreamWriter osw = new OutputStreamWriter(fos,&quot;gbk&quot;);
+
+//2.读写过程
+char[] cbuf = new char[20];
+int len;
+while((len = isr.read(cbuf)) != -1){
+    osw.write(cbuf,0,len);
+}
+//3.关闭资源
+isr.close();
+osw.close();
+</code></pre>
+<p>}<br>
+5.说明：<br>
+//文件编码的方式（比如：GBK），决定了解析时使用的字符集（也只能是GBK）。</p>
+<p>补充：编码集<br>
+常见的编码表<br>
+ASCII：美国标准信息交换码。用一个字节的7位可以表示。<br>
+ISO8859-1：拉丁码表。欧洲码表用一个字节的8位表示。<br>
+GB2312：中国的中文编码表。最多两个字节编码所有字符<br>
+GBK：中国的中文编码表升级，融合了更多的中文文字符号。最多两个字节编码<br>
+Unicode：国际标准码，融合了目前人类使用的所字符。为每个字符分配唯一的字符码。所有的文字都用两个字节来表示。<br>
+UTF-8：变长的编码方式，可用1-4个字节来表示一个字符。</p>
+<p>六、其他的流的使用</p>
+<ol>
+<li>标准的输入输出流：<br>
+System.in:标准的输入流，默认从键盘输入<br>
+System.out:标准的输出流，默认从控制台输出</li>
+</ol>
+<p>修改默认的输入和输出行为：<br>
+System类的setIn(InputStream is) / setOut(PrintStream ps)方式重新指定输入和输出的流。</p>
+<ol start="2">
+<li>打印流：<br>
+PrintStream 和PrintWriter<br>
+说明：<br>
+提供了一系列重载的print()和println()方法，用于多种数据类型的输出<br>
+System.out返回的是PrintStream的实例</li>
+<li>数据流：<br>
+DataInputStream 和 DataOutputStream<br>
+作用：<br>
+用于读取或写出基本数据类型的变量或字符串<br>
+示例代码：<br>
+/*<br>
+练习：将内存中的字符串、基本数据类型的变量写出到文件中。<br>
+注意：处理异常的话，仍然应该使用try-catch-finally.<br>
+<em>/<br>
+@Test<br>
+public void test3() throws IOException {<br>
+//1.<br>
+DataOutputStream dos = new DataOutputStream(new FileOutputStream(&quot;data.txt&quot;));<br>
+//2.<br>
+dos.writeUTF(&quot;刘建辰&quot;);<br>
+dos.flush();//刷新操作，将内存中的数据写入文件<br>
+dos.writeInt(23);<br>
+dos.flush();<br>
+dos.writeBoolean(true);<br>
+dos.flush();<br>
+//3.<br>
+dos.close();<br>
+}<br>
+/</em><br>
+将文件中存储的基本数据类型变量和字符串读取到内存中，保存在变量中。<br>
+注意点：读取不同类型的数据的顺序要与当初写入文件时，保存的数据的顺序一致！<br>
+*/<br>
+@Test<br>
+public void test4() throws IOException {<br>
+//1.<br>
+DataInputStream dis = new DataInputStream(new FileInputStream(&quot;data.txt&quot;));<br>
+//2.<br>
+String name = dis.readUTF();<br>
+int age = dis.readInt();<br>
+boolean isMale = dis.readBoolean();<br>
+System.out.println(&quot;name = &quot; + name);<br>
+System.out.println(&quot;age = &quot; + age);<br>
+System.out.println(&quot;isMale = &quot; + isMale);<br>
+//3.<br>
+dis.close();<br>
+}</li>
+</ol>
+<p>七、对象流的使用<br>
+1.对象流：<br>
+ObjectInputStream 和 ObjectOutputStream<br>
+2.作用：<br>
+ObjectOutputStream:内存中的对象---&gt;存储中的文件、通过网络传输出去：序列化过程<br>
+ObjectInputStream:存储中的文件、通过网络接收过来 ---&gt;内存中的对象：反序列化过程<br>
+3.对象的序列化机制：<br>
+对象序列化机制允许把内存中的Java对象转换成平台无关的二进制流，从而允许把这种二进制流持久地保存在磁盘<br>
+上，或通过网络将这种二进制流传输到另一个网络节点。//当其它程序获取了这种二进制流，就可以恢复成原来的<br>
+Java对象<br>
+4.<br>
+序列化代码实现：<br>
+@Test<br>
+public void testObjectOutputStream(){<br>
+ObjectOutputStream oos = null;<br>
+try {<br>
+//1.<br>
+oos = new ObjectOutputStream(new FileOutputStream(&quot;object.dat&quot;));<br>
+//2.<br>
+oos.writeObject(new String(&quot;我爱北京天安门&quot;));<br>
+oos.flush();//刷新操作<br>
+oos.writeObject(new Person(&quot;王铭&quot;,23));<br>
+oos.flush();<br>
+oos.writeObject(new Person(&quot;张学良&quot;,23,1001,new Account(5000)));<br>
+oos.flush();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(oos != null){<br>
+//3.<br>
+try {<br>
+oos.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+5.<br>
+反序列化代码实现：<br>
+@Test<br>
+public void testObjectInputStream(){<br>
+ObjectInputStream ois = null;<br>
+try {<br>
+ois = new ObjectInputStream(new FileInputStream(&quot;object.dat&quot;));<br>
+Object obj = ois.readObject();<br>
+String str = (String) obj;<br>
+Person p = (Person) ois.readObject();<br>
+Person p1 = (Person) ois.readObject();<br>
+System.out.println(str);<br>
+System.out.println(p);<br>
+System.out.println(p1);<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} catch (ClassNotFoundException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(ois != null){<br>
+try {<br>
+ois.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}</p>
+<p>6.实现序列化的对象所属的类需要满足：<br>
+1.需要实现接口：Serializable</p>
+<ul>
+<li>2.当前类提供一个全局常量：serialVersionUID</li>
+<li>3.除了当前Person类需要实现Serializable接口之外，还必须保证其内部所属性</li>
+<li>也必须是可序列化的。（默认情况下，基本数据类型可序列化）</li>
+<li>补充：ObjectOutputStream和ObjectInputStream不能序列化static和transient修饰的成员变量</li>
+<li></li>
+</ul>
+<p>八、RandomAccessFile的使用<br>
+1.随机存取文件流：RandomAccessFile</p>
+<p>2.使用说明：</p>
+<ul>
+<li>1.RandomAccessFile直接继承于java.lang.Object类，实现了DataInput和DataOutput接口</li>
+<li>2.RandomAccessFile既可以作为一个输入流，又可以作为一个输出流</li>
+<li></li>
+<li>3.如果RandomAccessFile作为输出流时，写出到的文件如果不存在，则在执行过程中自动创建。</li>
+<li>如果写出到的文件存在，则会对原文件内容进行覆盖。（默认情况下，从头覆盖）</li>
+<li></li>
+<li>
+<ol start="4">
+<li>可以通过相关的操作，实现RandomAccessFile“插入”数据的效果。seek(int pos)</li>
+</ol>
+</li>
+</ul>
+<ol start="3">
+<li></li>
+</ol>
+<p>典型代码1：<br>
+@Test<br>
+public void test1() {<br>
+RandomAccessFile raf1 = null;<br>
+RandomAccessFile raf2 = null;<br>
+try {<br>
+//1.<br>
+raf1 = new RandomAccessFile(new File(&quot;爱情与友情.jpg&quot;),&quot;r&quot;);<br>
+raf2 = new RandomAccessFile(new File(&quot;爱情与友情1.jpg&quot;),&quot;rw&quot;);<br>
+//2.<br>
+byte[] buffer = new byte[1024];<br>
+int len;<br>
+while((len = raf1.read(buffer)) != -1){<br>
+raf2.write(buffer,0,len);<br>
+}<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+//3.<br>
+if(raf1 != null){<br>
+try {<br>
+raf1.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+if(raf2 != null){<br>
+try {<br>
+raf2.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}<br>
+}<br>
+典型代码2：<br>
+/*<br>
+使用RandomAccessFile实现数据的插入效果<br>
+*/<br>
+@Test<br>
+public void test3() throws IOException {<br>
+RandomAccessFile raf1 = new RandomAccessFile(&quot;hello.txt&quot;,&quot;rw&quot;);<br>
+raf1.seek(3);//将指针调到角标为3的位置<br>
+//保存指针3后面的所数据到StringBuilder中<br>
+StringBuilder builder = new StringBuilder((int) new File(&quot;hello.txt&quot;).length());<br>
+byte[] buffer = new byte[20];<br>
+int len;<br>
+while((len = raf1.read(buffer)) != -1){<br>
+builder.append(new String(buffer,0,len)) ;<br>
+}<br>
+//调回指针，写入“xyz”<br>
+raf1.seek(3);<br>
+raf1.write(&quot;xyz&quot;.getBytes());<br>
+//将StringBuilder中的数据写入到文件中<br>
+raf1.write(builder.toString().getBytes());<br>
+raf1.close();<br>
+//思考：将StringBuilder替换为ByteArrayOutputStream<br>
+}</p>
+<p>九、Path、Paths、Files的使用<br>
+1.NIO的使用说明：</p>
+<blockquote>
+<p>Java NIO (New IO，Non-Blocking IO)是从Java 1.4版本开始引入的一套新的IO API，可以替代标准的Java<br>
+IO AP。<br>
+NIO与原来的IO同样的作用和目的，但是使用的方式完全不同，NIO支持面向缓冲区的(IO是面向流的)、基于<br>
+通道的IO操作。<br>
+NIO将以更加高效的方式进行文件的读写操作。<br>
+随着 JDK 7 的发布，Java对NIO进行了极大的扩展，增强了对文件处理和文件系统特性的支持，以至于我们称他们为 NIO.2。</p>
+</blockquote>
+<p>2.Path的使用 ---jdk7提供<br>
+2.1Path的说明：<br>
+Path替换原有的File类。<br>
+2.2如何实例化：<br>
+<img src="https://fantaixi.github.io/post-images/1588793499232.png" alt="" loading="lazy"><br>
+2.3常用方法：<br>
+<img src="https://fantaixi.github.io/post-images/1588793525215.png" alt="" loading="lazy"></p>
+<p>3.Files工具类 ---jdk7提供<br>
+3.1作用：<br>
+操作文件或文件目录的工具类<br>
+3.2常用方法：</p>
+<figure data-type="image" tabindex="1"><img src="https://fantaixi.github.io/post-images/1588793567581.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://fantaixi.github.io/post-images/1588793593306.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[16 Java泛型]]></title>
+        <id>https://fantaixi.github.io/post/16-fan-xing/</id>
+        <link href="https://fantaixi.github.io/post/16-fan-xing/">
+        </link>
+        <updated>2020-05-06T18:19:45.000Z</updated>
+        <content type="html"><![CDATA[<p>一、泛型的理解<br>
+1.泛型的概念<br>
+所谓泛型，就是允许在定义类、接口时通过一个标识表示类中某个属性的类型或者是某个方法的返<br>
+回值及参数类型。这个类型参数将在使用时（例如，继承或实现这个接口，用这个类型声明变量、<br>
+创建对象时确定（即传入实际的类型参数，也称为类型实参）。</p>
+<p>2.泛型的引入背景<br>
+集合容器类在设计阶段/声明阶段不能确定这个容器到底实际存的是什么类型的对象，所以在JDK1.5之前只能把元素类型设计为Object，JDK1.5之后使用泛型来解决。因为这个时候除了元素的类型不确定，其他的部分是确定的，例如关于这个元素如何保存，如何管理等是确定的，因此此时把元素的类型设计成一个参数，这个类型参数叫做泛型。Collection<E>，List<E>，ArrayList<E>   这个<E>就是类型参数，即泛型。</p>
+<p>二、泛型在集合中的使用</p>
+<ol>
+<li>
+<p>在集合中使用泛型之前的例子<br>
+@Test<br>
+public void test1(){<br>
+ArrayList list = new ArrayList();<br>
+//需求：存放学生的成绩<br>
+list.add(78);<br>
+list.add(76);<br>
+list.add(89);<br>
+list.add(88);<br>
+//问题一：类型不安全<br>
+//        list.add(&quot;Tom&quot;);<br>
+for(Object score : list){<br>
+//问题二：强转时，可能出现ClassCastException<br>
+int stuScore = (Integer) score;<br>
+System.out.println(stuScore);<br>
+}<br>
+}<br>
+图示：<br>
+<img src="https://fantaixi.github.io/post-images/1588789321700.png" alt="" loading="lazy"></p>
+</li>
+<li>
+<p>在集合中使用泛型例子1<br>
+@Test<br>
+public void test2(){<br>
+ArrayList<Integer> list =  new ArrayList<Integer>();<br>
+list.add(78);<br>
+list.add(87);<br>
+list.add(99);<br>
+list.add(65);<br>
+//编译时，就会进行类型检查，保证数据的安全<br>
+//        list.add(&quot;Tom&quot;);<br>
+//方式一：<br>
+//        for(Integer score : list){<br>
+//            //避免了强转操作<br>
+//            int stuScore = score;<br>
+//            System.out.println(stuScore);<br>
+//        }<br>
+//方式二：<br>
+Iterator<Integer> iterator = list.iterator();<br>
+while(iterator.hasNext()){<br>
+int stuScore = iterator.next();<br>
+System.out.println(stuScore);<br>
+}<br>
+}<br>
+图示：</p>
+</li>
+</ol>
+<p><img src="https://fantaixi.github.io/post-images/1588789371656.png" alt="" loading="lazy"><br>
+3. 在集合中使用泛型例子2<br>
+//在集合中使用泛型的情况：以HashMap为例<br>
+@Test<br>
+public void test3(){<br>
+//        Map&lt;String,Integer&gt; map = new HashMap&lt;String,Integer&gt;();<br>
+//jdk7新特性：类型推断<br>
+Map&lt;String,Integer&gt; map = new HashMap&lt;&gt;();<br>
+map.put(&quot;Tom&quot;,87);<br>
+map.put(&quot;Jerry&quot;,87);<br>
+map.put(&quot;Jack&quot;,67);<br>
+//        map.put(123,&quot;ABC&quot;);<br>
+//泛型的嵌套<br>
+Set&lt;Map.Entry&lt;String,Integer&gt;&gt; entry = map.entrySet();<br>
+Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; iterator = entry.iterator();<br>
+while(iterator.hasNext()){<br>
+Map.Entry&lt;String, Integer&gt; e = iterator.next();<br>
+String key = e.getKey();<br>
+Integer value = e.getValue();<br>
+System.out.println(key + &quot;----&quot; + value);<br>
+}<br>
+}<br>
+4. 集合中使用泛型总结：</p>
+<ul>
+<li>① 集合接口或集合类在jdk5.0时都修改为带泛型的结构。</li>
+<li>② 在实例化集合类时，可以指明具体的泛型类型</li>
+<li>③ 指明完以后，在集合类或接口中凡是定义类或接口时，内部结构（比如：方法、构造器、属性等）使用到类的泛型的位置，都指定为实例化的泛型类型。</li>
+<li>比如：add(E e)  ---&gt;实例化以后：add(Integer e)</li>
+<li>④ 注意点：泛型的类型必须是类，不能是基本数据类型。需要用到基本数据类型的位置，拿包装类替换</li>
+<li>⑤ 如果实例化时，没指明泛型的类型。默认类型为java.lang.Object类型。</li>
+</ul>
+<p>三、自定义泛型类、泛型接口、泛型方法<br>
+1.举例:<br>
+【Order.java】</p>
+<p>public class Order<T> {</p>
+<pre><code>String orderName;
+int orderId;
+
+//类的内部结构就可以使用类的泛型
+
+T orderT;
+
+public Order(){
+    //编译不通过
+</code></pre>
+<p>//        T[] arr = new T[10];<br>
+//编译通过<br>
+T[] arr = (T[]) new Object[10];<br>
+}</p>
+<pre><code>public Order(String orderName,int orderId,T orderT){
+    this.orderName = orderName;
+    this.orderId = orderId;
+    this.orderT = orderT;
 }
 
-public double getRadius() {
-	return radius;
+//如下的个方法都不是泛型方法
+public T getOrderT(){
+    return orderT;
 }
 
-public void setRadius(double radius) {
-	this.radius = radius;
+public void setOrderT(T orderT){
+    this.orderT = orderT;
 }
 
-public int getId() {
-	return id;
+@Override
+public String toString() {
+    return &quot;Order{&quot; +
+            &quot;orderName='&quot; + orderName + '\'' +
+            &quot;, orderId=&quot; + orderId +
+            &quot;, orderT=&quot; + orderT +
+            '}';
 }
+//静态方法中不能使用类的泛型。
+</code></pre>
+<p>//    public static void show(T orderT){<br>
+//        System.out.println(orderT);<br>
+//    }</p>
+<pre><code>public void show(){
+    //编译不通过
+</code></pre>
+<p>//        try{<br>
+//<br>
+//<br>
+//        }catch(T t){<br>
+//<br>
+//        }</p>
+<pre><code>}
 
-public static int getTotal() {
-	return total;
+//泛型方法：在方法中出现了泛型的结构，泛型参数与类的泛型参数没任何关系。
+//换句话说，泛型方法所属的类是不是泛型类都没关系。
+//泛型方法，可以声明为静态的。原因：泛型参数是在调用方法时确定的。并非在实例化类时确定。
+public static &lt;E&gt;  List&lt;E&gt; copyFromArrayToList(E[] arr){
+
+    ArrayList&lt;E&gt; list = new ArrayList&lt;&gt;();
+
+    for(E e : arr){
+        list.add(e);
+    }
+    return list;
+
 }
 </code></pre>
 <p>}</p>
-<p>二、单例模式<br>
-1.设计模式的说明<br>
-1.1 理解<br>
-设计模式是在大量的实践中总结和理论化之后优的代码结构、编程风格、以及解决问题的思考方式。</p>
-<p>1.2 常用设计模式  --- 23种经典的设计模式  GOF<br>
-创建型模式，共5种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。<br>
-结构型模式，共7种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。<br>
-行为型模式，共11种：策略模式、模板方法模式、观察者模式、迭代器模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</p>
-<p>2.单例模式<br>
-2.1 要解决的问题：<br>
-所谓类的单例设计模式，就是采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例。<br>
-2.2 具体代码的实现：<br>
-饿汉式1：<br>
-class Bank{<br>
-//1.私化类的构造器<br>
-private Bank(){	<br>
-}<br>
-//2.内部创建类的对象<br>
-//4.要求此对象也必须声明为静态的<br>
-private static Bank instance = new Bank();<br>
-//3.提供公共的静态的方法，返回类的对象<br>
-public static Bank getInstance(){<br>
-return instance;<br>
-}<br>
-}</p>
-<p>饿汉式2：使用了静态代码块<br>
-class Order{<br>
-//1.私化类的构造器<br>
-private Order(){	<br>
-}<br>
-//2.声明当前类对象，没初始化<br>
-//4.此对象也必须声明为static的<br>
-private static Order instance = null;<br>
-static{<br>
-instance = new Order();<br>
-}	<br>
-//3.声明public、static的返回当前类对象的方法<br>
-public static Order getInstance(){<br>
-return instance;<br>
-}	<br>
-}<br>
-懒汉式：<br>
-class Order{<br>
-//1.私化类的构造器<br>
-private Order(){		<br>
-}<br>
-//2.声明当前类对象，没初始化<br>
-//4.此对象也必须声明为static的<br>
-private static Order instance = null;</p>
-<pre><code>//3.声明public、static的返回当前类对象的方法
-public static Order getInstance(){	
-	if(instance == null){		
-		instance = new Order();		
-	}
-	return instance;
+<p>【SubOrder.java】<br>
+public class SubOrder extends Order<Integer> {//SubOrder:不是泛型类</p>
+<pre><code>public static &lt;E&gt; List&lt;E&gt; copyFromArrayToList(E[] arr){
+
+    ArrayList&lt;E&gt; list = new ArrayList&lt;&gt;();
+
+    for(E e : arr){
+        list.add(e);
+    }
+    return list;
+
 }
 </code></pre>
-<p>}<br>
-2.3 两种方式的对比：</p>
-<ul>
-<li>饿汉式：</li>
-<li>
-<pre><code> 坏处：对象加载时间过长。
+<p>}</p>
+<p>//实例化时，如下的代码是错误的<br>
+SubOrder<Integer> o = new SubOrder&lt;&gt;();</p>
+<p>【SubOrder1.java】<br>
+public class SubOrder1<T> extends Order<T> {//SubOrder1<T>:仍然是泛型类</p>
+<p>}</p>
+<p>【测试】<br>
+@Test<br>
+public void test1(){<br>
+//如果定义了泛型类，实例化没指明类的泛型，则认为此泛型类型为Object类型<br>
+//要求：如果大家定义了类是带泛型的，建议在实例化时要指明类的泛型。<br>
+Order order = new Order();<br>
+order.setOrderT(123);<br>
+order.setOrderT(&quot;ABC&quot;);</p>
+<pre><code>    //建议：实例化时指明类的泛型
+    Order&lt;String&gt; order1 = new Order&lt;String&gt;(&quot;orderAA&quot;,1001,&quot;order:AA&quot;);
+
+    order1.setOrderT(&quot;AA:hello&quot;);
+
+}
+
+@Test
+public void test2(){
+    SubOrder sub1 = new SubOrder();
+    //由于子类在继承带泛型的父类时，指明了泛型类型。则实例化子类对象时，不再需要指明泛型。
+    sub1.setOrderT(1122);
+
+    SubOrder1&lt;String&gt; sub2 = new SubOrder1&lt;&gt;();
+    sub2.setOrderT(&quot;order2...&quot;);
+}
+
+@Test
+public void test3(){
+
+    ArrayList&lt;String&gt; list1 = null;
+    ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;();
+    //泛型不同的引用不能相互赋值。
 </code></pre>
-</li>
-<li>
-<pre><code> 好处：饿汉式是线程安全的
+<p>//        list1 = list2;</p>
+<pre><code>    Person p1 = null;
+    Person p2 = null;
+    p1 = p2;
+
+
+}
+
+//测试泛型方法
+@Test
+public void test4(){
+    Order&lt;String&gt; order = new Order&lt;&gt;();
+    Integer[] arr = new Integer[]{1,2,3,4};
+    //泛型方法在调用时，指明泛型参数的类型。
+    List&lt;Integer&gt; list = order.copyFromArrayToList(arr);
+
+    System.out.println(list);
+}
 </code></pre>
-</li>
-<li></li>
-<li>懒汉式：好处：延迟对象的创建。</li>
-<li>
-<pre><code>   目前的写法坏处：线程不安全。---&gt;到多线程内容时，再修改
-</code></pre>
-</li>
-</ul>
-<p>三、类的成员之四：代码块(初始化块)（重要性较属性、方法、构造器差一些）<br>
-1.代码块的作用：用来初始化类、对象的信息<br>
-2.分类：代码块要是使用修饰符，只能使用static<br>
-分类：静态代码块  vs 非静态代码块<br>
-3.静态代码块：</p>
-<blockquote>
-<p>内部可以输出语句<br>
-随着类的加载而执行,而且只执行一次<br>
-作用：初始化类的信息<br>
-如果一个类中定义了多个静态代码块，则按照声明的先后顺序执行<br>
-静态代码块的执行要优先于非静态代码块的执行<br>
-静态代码块内只能调用静态的属性、静态的方法，不能调用非静态的结构</p>
-</blockquote>
-<p>非静态代码块：</p>
-<blockquote>
-<p>内部可以输出语句<br>
-随着对象的创建而执行<br>
-每创建一个对象，就执行一次非静态代码块<br>
-作用：可以在创建对象时，对对象的属性等进行初始化<br>
-如果一个类中定义了多个非静态代码块，则按照声明的先后顺序执行<br>
-非静态代码块内可以调用静态的属性、静态的方法，或非静态的属性、非静态的方法</p>
-</blockquote>
-<ol start="4">
-<li>实例化子类对象时，涉及到父类、子类中静态代码块、非静态代码块、构造器的加载顺序：<br>
-由父及子，静态先行。</li>
-</ol>
-<p>补充：有了代码块之后的属性赋值顺序</p>
-<ul>
-<li>①默认初始化</li>
-<li>②显式初始化/⑤在代码块中赋值</li>
-<li>③构造器中初始化</li>
-<li>④有了对象以后，可以通过&quot;对象.属性&quot;或&quot;对象.方法&quot;的方式，进行赋值</li>
-<li>执行的先后顺序：① - ② / ⑤ - ③ - ④</li>
-</ul>
-<p>四、关键字：final（最终的）<br>
-1.可以用来修饰：类、方法、变量<br>
-2.具体的：<br>
-2.1 final 用来修饰一个类:此类不能被其他类所继承。</p>
-<ul>
-<li>
-<pre><code>     比如：String类、System类、StringBuffer类
-</code></pre>
-</li>
-</ul>
-<p>2.2 final 用来修饰方法：表明此方法不可以被重写</p>
-<ul>
-<li>
-<pre><code> 	比如：Object类中getClass();
-</code></pre>
-</li>
-</ul>
-<p>2.3 final 用来修饰变量：此时的&quot;变量&quot;就称为是一个常量</p>
-<ul>
-<li>
-<pre><code> 1. final修饰属性：可以考虑赋值的位置：显式初始化、代码块中初始化、构造器中初始化
-</code></pre>
-</li>
-<li>
-<pre><code> 2. final修饰局部变量：
-</code></pre>
-</li>
-<li>
-<pre><code>   尤其是使用final修饰形参时，表明此形参是一个常量。当我们调用此方法时，给常量形参赋一个实参。一旦赋值以后，就只能在方法体内使用此形参，但不能进行重新赋值。
-</code></pre>
-</li>
-</ul>
-<p>static final 用来修饰属性：全局常量</p>
-<p>五、关键字：abstract（抽象的）<br>
-1.可以用来修饰：类、方法<br>
-2.具体的：<br>
-abstract修饰类：抽象类</p>
-<ul>
-<li>
-<pre><code> &gt; 此类不能实例化
-</code></pre>
-</li>
-<li>
-<pre><code> &gt; 抽象类中一定有构造器，便于子类实例化时调用（涉及：子类对象实例化的全过程）
-</code></pre>
-</li>
-<li>
-<pre><code> &gt; 开发中，都会提供抽象类的子类，让子类对象实例化，完成相关的操作 ---&gt;抽象的使用前提：继承性
-</code></pre>
-</li>
-</ul>
-<p>abstract修饰方法：抽象方法</p>
-<ul>
-<li>
-<pre><code> &gt; 抽象方法只有方法的声明，没有方法体
-</code></pre>
-</li>
-<li>
-<pre><code> &gt; 包含抽象方法的类，一定是一个抽象类。反之，抽象类中可以没有抽象方法的。
-</code></pre>
-</li>
-<li>
-<pre><code>   &gt; 若子类重写了父类中的所的抽象方法后，此子类方可实例化
-</code></pre>
-</li>
-<li>
-<pre><code>    若子类没重写父类中的所有的抽象方法，则此子类也是一个抽象类，需要使用abstract修饰
-</code></pre>
-</li>
-</ul>
-<p>3.注意点：</p>
-<ul>
-<li>1.abstract不能用来修饰：属性、构造器等结构</li>
-<li>2.abstract不能用来修饰私方法、静态方法、final的方法、final的类<br>
-4.abstract的应用举例：<br>
-abstract class GeometricObject{<br>
-public abstract double findArea();<br>
+<p>2.注意点：<br>
+<img src="https://fantaixi.github.io/post-images/1588789514671.png" alt="" loading="lazy"><br>
+<img src="https://fantaixi.github.io/post-images/1588789548625.png" alt="" loading="lazy"><br>
+3.应用场景举例：<br>
+【DAO.java】:定义了操作数据库中的表的通用操作。   ORM思想(数据库中的表和Java中的类对应)<br>
+public class DAO<T> {//表的共性操作的DAO<br>
+//添加一条记录<br>
+public void add(T t){<br>
 }<br>
-class Circle extends GeometricObject{<br>
-private double radius;<br>
-public double findArea(){<br>
-return 3.14 * radius * radius;<br>
-};<br>
-}</li>
-</ul>
-<p>补充：模板方法的设计模式</p>
-<ol>
-<li>解决的问题</li>
-</ol>
-<p>在软件开发中实现一个算法时，整体步骤很固定、通用，这些步骤已经在父类中写好了。但是某些部分易变，易变部分可以抽象出来，供不同子类实现。这就是一种模板模式。（比较与AOP）</p>
-<ol start="2">
-<li>举例<br>
-abstract class Template{<br>
-//计算某段代码执行所需要花费的时间<br>
-public void spendTime(){	<br>
-long start = System.currentTimeMillis();	<br>
-this.code();//不确定的部分、易变的部分<br>
-long end = System.currentTimeMillis();<br>
-System.out.println(&quot;花费的时间为：&quot; + (end - start));<br>
-}	<br>
-public abstract void code();<br>
-}<br>
-class SubTemplate extends Template{<br>
-@Override<br>
-public void code() {	<br>
-for(int i = 2;i &lt;= 1000;i++){<br>
-boolean isFlag = true;<br>
-for(int j = 2;j &lt;= Math.sqrt(i);j++){		<br>
-if(i % j == 0){<br>
-isFlag = false;<br>
-break;<br>
-}<br>
-}<br>
-if(isFlag){<br>
-System.out.println(i);<br>
-}<br>
-}<br>
-}	<br>
-}</li>
-<li>应用场景<br>
-<img src="https://fantaixi.github.io/post-images/1588761178746.png" alt="" loading="lazy"></li>
-</ol>
-<p>六、关键字：interface（接口）<br>
-1.使用说明：<br>
-1.接口使用interface来定义</p>
-<ul>
-<li>
-<p>2.Java中，接口和类是并列的两个结构</p>
-</li>
-<li>
-<p>3.如何定义接口：定义接口中的成员</p>
-</li>
-<li>
-<pre><code> 3.1 JDK7及以前：只能定义全局常量和抽象方法
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt;全局常量：public static final的.但是书写时，可以省略不写
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt;抽象方法：public abstra	
-</code></pre>
-</li>
-<li>
-<pre><code> 3.2 JDK8：除了定义全局常量和抽象方法之外，还可以定义静态方法、默认方法（略）
-</code></pre>
-</li>
-<li>
-<ol start="4">
-<li>接口中不能定义构造器的！意味着接口不可以实例化（********）</li>
-</ol>
-</li>
-<li></li>
-<li>
-<ol start="5">
-<li>Java开发中，接口通过让类去实现(implements)的方式来使用.</li>
-</ol>
-</li>
-<li>
-<p>如果实现类覆盖了接口中的所有的抽象方法，则此实现类就可以实例化</p>
-</li>
-<li>
-<p>如果实现类没覆盖接口中所有的抽象方法，则此实现类仍为一个抽象类</p>
-</li>
-<li></li>
-<li>
-<ol start="6">
-<li>Java类可以实现多个接口   ---&gt;弥补了Java单继承性的局限性</li>
-</ol>
-</li>
-<li>
-<p>格式：class AA extends BB implements CC,DD,EE</p>
-</li>
-<li></li>
-<li>
-<ol start="7">
-<li>接口与接口之间可以继承，而且可以多继承</li>
-</ol>
-</li>
-<li></li>
-<li>
-<ol start="8">
-<li>接口的具体使用，体现多态性</li>
-</ol>
-</li>
-<li>
-<ol start="9">
-<li>接口，实际上可以看做是一种规范</li>
-</ol>
-</li>
-</ul>
-<p>2.举例：<br>
-class Computer{<br>
-public void transferData(USB usb){//USB usb = new Flash();<br>
-usb.start();<br>
-System.out.println(&quot;具体传输数据的细节&quot;);	<br>
-usb.stop();<br>
-}	<br>
-}<br>
-interface USB{<br>
-//常量：定义了长、宽、最大最小的传输速度等<br>
-void start();	<br>
-void stop();<br>
-}<br>
-class Flash implements USB{<br>
-@Override<br>
-public void start() {<br>
-System.out.println(&quot;U盘开启工作&quot;);<br>
-}<br>
-@Override<br>
-public void stop() {<br>
-System.out.println(&quot;U盘结束工作&quot;);<br>
-}	<br>
-}<br>
-class Printer implements USB{<br>
-@Override<br>
-public void start() {<br>
-System.out.println(&quot;打印机开启工作&quot;);<br>
-}<br>
-@Override<br>
-public void stop() {<br>
-System.out.println(&quot;打印机结束工作&quot;);<br>
-}<br>
-}<br>
-体会：</p>
-<ul>
-<li>1.接口使用上也满足多态性</li>
-<li>2.接口，实际上就是定义了一种规范</li>
-<li>3.开发中，体会面向接口编程！	<br>
-3.体会面向接口编程的思想<br>
-<img src="https://fantaixi.github.io/post-images/1588761493053.png" alt="" loading="lazy"><br>
-面向接口编程：我们在应用程序中，调用的结构都是JDBC中定义的接口，不会出现具体某一个<br>
-数据库厂商的API。<br>
-4.Java8中关于接口的新规范<br>
-//知识点1：接口中定义的静态方法，只能通过接口来调用。<br>
-//知识点2：通过实现类的对象，可以调用接口中的默认方法。<br>
-//如果实现类重写了接口中的默认方法，调用时，仍然调用的是重写以后的方法<br>
-//知识点3：如果子类(或实现类)继承的父类和实现的接口中声明了同名同参数的默认方法，那么子类在没重写此方法的情况下，默认调用的是父类中的同名同参数的方法。--&gt;类优先原则<br>
-//知识点4：如果实现类实现了多个接口，而这多个接口中定义了同名同参数的默认方法，<br>
-//那么在实现类没重写此方法的情况下，报错。--&gt;接口冲突。<br>
-//这就需要我们必须在实现类中重写此方法<br>
-//知识点5：如何在子类(或实现类)的方法中调用父类、接口中被重写的方法<br>
-public void myMethod(){<br>
-method3();//调用自己定义的重写的方法<br>
-super.method3();//调用的是父类中声明的<br>
-//调用接口中的默认方法<br>
-CompareA.super.method3();<br>
-CompareB.super.method3();<br>
-}<br>
-5.面试题：<br>
-抽象类和接口的异同？<br>
-相同点：不能实例化；都可以包含抽象方法的。<br>
-不同点：<br>
-1）把抽象类和接口(java7,java8,java9)的定义、内部结构解释说明<br>
-2）类：单继承性    接口：多继承<br>
-类与接口：多实现</li>
-</ul>
-<p>补充：代理模式、工厂的设计模式<br>
-代理模式：</p>
-<ol>
-<li>
-<p>解决的问题<br>
-代理模式是Java开发中使用较多的一种设计模式。代理设计就是为其他对象提供一种代理以控制对这个对象的访问。</p>
-</li>
-<li>
-<p>举例<br>
-interface NetWork{	<br>
-public void browse();<br>
-}<br>
-//被代理类<br>
-class Server implements NetWork{<br>
-@Override<br>
-public void browse() {<br>
-System.out.println(&quot;真实的服务器访问网络&quot;);<br>
-}<br>
-}<br>
-//代理类<br>
-class ProxyServer implements NetWork{	<br>
-private NetWork work;<br>
-public ProxyServer(NetWork work){<br>
-this.work = work;<br>
-}	<br>
-public void check(){<br>
-System.out.println(&quot;联网之前的检查工作&quot;);<br>
-}<br>
-@Override<br>
-public void browse() {<br>
-check();	<br>
-work.browse();	<br>
-}	<br>
-}</p>
-</li>
-<li>
-<p>应用场景<br>
-<img src="https://fantaixi.github.io/post-images/1588761791191.png" alt="" loading="lazy"></p>
-</li>
-</ol>
-<p>工厂的设计模式;</p>
-<ol>
-<li>
-<p>解决的问题<br>
-实现了创建者与调用者的分离，即将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的。</p>
-</li>
-<li>
-<p>具体模式</p>
-</li>
-</ol>
-<p>简单工厂模式：用来生产同一等级结构中的任意产品。（对于增加新的产品，需要修改已有代码）<br>
-工厂方法模式：用来生产同一等级结构中的固定产品。（支持增加任意产品)<br>
-抽象工厂模式：用来生产不同产品族的全部产品。（对于增加新的产品，无能为力；支持增加产品族)</p>
-<p>七、类的结构：内部类<br>
-内部类：类的第五个成员<br>
-1.定义：Java中允许将一个类A声明在另一个类B中，则类A就是内部类，类B称为外部类.<br>
-2.内部类的分类：<br>
-成员内部类（静态、非静态 ） vs 局部内部类(方法内、代码块内、构造器内)<br>
-3.成员内部类的理解：<br>
-一方面，作为外部类的成员：</p>
-<ul>
-<li>
-<pre><code> 	&gt;调用外部类的结构
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt;可以被static修饰
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt;可以被4种不同的权限修饰
-</code></pre>
-</li>
-<li></li>
-</ul>
-<p>另一方面，作为一个类：</p>
-<ul>
-<li>
-<pre><code> 	&gt; 类内可以定义属性、方法、构造器等
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt; 可以被final修饰，表示此类不能被继承。言外之意，不使用final，就可以被继承
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt; 可以被abstract修饰
-</code></pre>
-</li>
-</ul>
-<p>4.成员内部类：<br>
-4.1如何创建成员内部类的对象？(静态的，非静态的)<br>
-//创建静态的Dog内部类的实例(静态的成员内部类):<br>
-Person.Dog dog = new Person.Dog();</p>
-<p>//创建非静态的Bird内部类的实例(非静态的成员内部类):<br>
-//Person.Bird bird = new Person.Bird();//错误的<br>
-Person p = new Person();<br>
-Person.Bird bird = p.new Bird();</p>
-<p>4.2如何在成员内部类中调用外部类的结构？<br>
-class Person{<br>
-String name = &quot;小明&quot;;<br>
-public void eat(){<br>
-}<br>
-//非静态成员内部类<br>
-class Bird{<br>
-String name = &quot;杜鹃&quot;;<br>
-public void display(String name){<br>
-System.out.println(name);//方法的形参<br>
-System.out.println(this.name);//内部类的属性<br>
-System.out.println(Person.this.name);//外部类的属性<br>
-//Person.this.eat();<br>
-}<br>
-}<br>
-}<br>
-5.局部内部类的使用：<br>
-//返回一个实现了Comparable接口的类的对象<br>
-public Comparable getComparable(){	<br>
-//创建一个实现了Comparable接口的类:局部内部类<br>
-//方式一：<br>
-//		class MyComparable implements Comparable{<br>
-//<br>
-//			@Override<br>
-//			public int compareTo(Object o) {<br>
-//				return 0;<br>
-//			}<br>
-//			<br>
-//		}<br>
-//		<br>
-//		return new MyComparable();	<br>
-//方式二：<br>
-return new Comparable(){<br>
-@Override<br>
-public int compareTo(Object o) {<br>
-return 0;<br>
-}	<br>
-};	<br>
-}</p>
-<p>注意点：<br>
-在局部内部类的方法中（比如：show如果调用局部内部类所声明的方法(比如：method)中的局部变量(比如：num)的话,要求此局部变量声明为final的。<br>
-jdk 7及之前版本：要求此局部变量显式的声明为final的<br>
-jdk 8及之后的版本：可以省略final的声明<br>
-总结：<br>
-成员内部类和局部内部类，在编译以后，都会生成字节码文件。<br>
-格式：<br>
-成员内部类：外部类$内部类名.class</p>
-<p>局部内部类：外部类$数字 内部类名.class</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[09 面向对象-中]]></title>
-        <id>https://fantaixi.github.io/post/09-mian-xiang-dui-xiang-zhong/</id>
-        <link href="https://fantaixi.github.io/post/09-mian-xiang-dui-xiang-zhong/">
-        </link>
-        <updated>2020-05-05T09:32:58.000Z</updated>
-        <content type="html"><![CDATA[<p>一、面向对象的特征二：继承性<br>
-1.为什么要有类的继承性？(继承性的好处）</p>
-<ul>
-<li>① 减少了代码的冗余，提高了代码的复用性</li>
-<li>② 便于功能的扩展</li>
-<li>③ 为之后多态性的使用，提供了前提<br>
-图示：<br>
-<img src="https://fantaixi.github.io/post-images/1588757719288.png" alt="" loading="lazy"><br>
-2.继承性的格式：<br>
-class A extends B{}</li>
-<li>A:子类、派生类、subclass</li>
-<li>B:父类、超类、基类、superclass</li>
-</ul>
-<p>3.子类继承父类以后有哪些不同？<br>
-3.1体现：一旦子类A继承父类B以后，子类A中就获取了父类B中声明的所有的属性和方法。</p>
-<ul>
-<li>特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私有的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。<br>
-3.2 子类继承父类以后，还可以声明自己特有的属性或方法：实现功能的拓展。</li>
-<li>子类和父类的关系，不同于子集和集合的关系。</li>
-<li>extends：延展、扩展</li>
-</ul>
-<p>4.Java中继承性的说明<br>
-1.一个类可以被多个子类继承。<br>
-2.Java中类的单继承性：一个类只能有一个父类<br>
-3.子父类是相对的概念。<br>
-4.子类直接继承的父类，称为：直接父类。间接继承的父类称为：间接父类<br>
-5.子类继承父类以后，就获取了直接父类以及所有间接父类中声明的属性和方法</p>
-<p>图示：<br>
-<img src="https://fantaixi.github.io/post-images/1588757866009.png" alt="" loading="lazy"></p>
-<p>5.java.lang.Object类的理解</p>
-<ol>
-<li>如果我们没有显式的声明一个类的父类的话，则此类继承于java.lang.Object类</li>
-<li>所有的java类（除java.lang.Object类之外都直接或间接的继承于java.lang.Object类</li>
-<li>意味着，所的java类具有java.lang.Object类声明的功能。</li>
-</ol>
-<p>Object类的使用：<br>
-1.java.lang.Object类的说明：</p>
-<ul>
-<li>1.Object类是所Java类的根父类</li>
-<li>2.如果在类的声明中未使用extends关键字指明其父类，则默认父类为java.lang.Object类</li>
-<li>3.Object类中的功能(属性、方法)就具通用性。</li>
-<li>属性：无</li>
-<li>方法：equals() / toString() / getClass() /hashCode() / clone() / finalize()</li>
-<li>
-<pre><code>wait() 、 notify()、notifyAll()
-</code></pre>
-</li>
-<li>
-<ol start="4">
-<li>Object类只声明了一个空参的构造器<br>
-2.equals()方法<br>
-2.1 equals()的使用：</li>
-<li>是一个方法，而非运算符</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>只能适用于引用数据类型</li>
-</ol>
-</li>
-<li>
-<ol start="3">
-<li>Object类中equals()的定义：</li>
-</ol>
-</li>
-<li>public boolean equals(Object obj) {<br>
-return (this == obj);<br>
-}</li>
-<li>说明：Object类中定义的equals()和==的作用是相同的：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
-<li></li>
-<li>
-<ol start="4">
-<li>像String、Date、File、包装类等都重写了Object类中的equals()方法。重写以后，比较的不是两个引用的地址是否相同，而是比较两个对象的&quot;实体内容&quot;是否相同。</li>
-</ol>
-</li>
-<li></li>
-<li>
-<ol start="5">
-<li>通常情况下，我们自定义的类如果使用equals()的话，也通常是比较两个对象的&quot;实体内容&quot;是否相同。那么，就需要对Object类中的equals()进行重写.</li>
-</ol>
-</li>
-<li>重写的原则：比较两个对象的实体内容是否相同.<br>
-2.2 如何重写equals()<br>
-2.2.1 手动重写举例：<br>
-class User{<br>
-String name;<br>
-int age;<br>
-//重写其equals()方法<br>
-public boolean equals(Object obj){<br>
-if(obj == this){<br>
-return true;<br>
-}<br>
-if(obj instanceof User){<br>
-User u = (User)obj;<br>
-return this.age == u.age &amp;&amp; this.name.equals(u.name);<br>
-}<br>
+//删除一条记录<br>
+public boolean remove(int index){<br>
 return false;<br>
 }<br>
+//修改一条记录<br>
+public void update(int index,T t){<br>
 }<br>
-2.2.2 开发中如何实现：自动生成的<br>
-2.3 回顾 == 运算符的使用：</li>
-<li>== ：运算符</li>
-<li>
-<ol>
-<li>可以使用在基本数据类型变量和引用数据类型变量中</li>
-</ol>
-</li>
-<li>
-<ol start="2">
-<li>如果比较的是基本数据类型变量：比较两个变量保存的数据是否相等。（不一定类型要相同）</li>
-</ol>
-</li>
-<li>如果比较的是引用数据类型变量：比较两个对象的地址值是否相同.即两个引用是否指向同一个对象实体</li>
-<li>补充： == 符号使用时，必须保证符号左右两边的变量类型一致。</li>
-</ul>
-<ol>
-<li>toString()方法<br>
-3.1 toString()的使用：
-<ol>
-<li>当我们输出一个对象的引用时，实际上就是调用当前对象的toString()</li>
-</ol>
-</li>
-</ol>
-<ul>
-<li></li>
-<li>
-<ol start="2">
-<li>Object类中toString()的定义：</li>
-</ol>
-</li>
-<li>public String toString() {<br>
-return getClass().getName() + &quot;@&quot; + Integer.toHexString(hashCode());<br>
-}</li>
-<li></li>
-<li>
-<ol start="3">
-<li>像String、Date、File、包装类等都重写了Object类中的toString()方法。</li>
-</ol>
-</li>
-<li>使得在调用对象的toString()时，返回&quot;实体内容&quot;信息</li>
-<li></li>
-<li>
-<ol start="4">
-<li>自定义类也可以重写toString()方法，当调用此方法时，返回对象的&quot;实体内容&quot;<br>
-3.2 如何重写toString()<br>
-举例：<br>
-//自动实现<br>
-@Override<br>
-public String toString() {<br>
-return &quot;Customer [name=&quot; + name + &quot;, age=&quot; + age + &quot;]&quot;;<br>
-}</li>
-</ol>
-</li>
-</ul>
-<p>二、方法的重写<br>
-1.什么是方法的重写(override 或 overwrite)？<br>
-子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作.</p>
-<ol start="2">
-<li>应用：<br>
-重写以后，当创建子类对象以后，通过子类对象调用子父类中的同名同参数的方法时，实际执行的是子类重写父类的方法。<br>
-3.举例：<br>
-class Circle{<br>
-public double findArea(){}//求面积<br>
+//查询一条记录<br>
+public T getIndex(int index){<br>
+return null;<br>
 }<br>
-class Cylinder extends Circle{<br>
-public double findArea(){}//求表面积<br>
-}</li>
-</ol>
-<hr>
-<p>class Account{<br>
-public boolean withdraw(double amt){}<br>
+//查询多条记录<br>
+public List<T> getForList(int index){<br>
+return null;<br>
 }<br>
-class CheckAccount extends Account{<br>
-public boolean withdraw(double amt){}<br>
-}</p>
-<p>4.重写的规则：<br>
-方法的声明： 权限修饰符  返回值类型  方法名(形参列表) throws 异常的类型{</p>
-<ul>
-<li>
-<pre><code> 				//方法体
-</code></pre>
-</li>
-<li>
-<pre><code> 			}
-</code></pre>
-</li>
-<li>
-<pre><code> 约定俗称：子类中的叫重写的方法，父类中的叫被重写的方法
-</code></pre>
-</li>
-<li>
-<pre><code> ① 子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同
-</code></pre>
-</li>
-<li>
-<pre><code> ② 子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt;特殊情况：子类不能重写父类中声明为private权限的方法
-</code></pre>
-</li>
-<li>
-<pre><code> ③ 返回值类型：
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt;父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt;父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A类的子类
-</code></pre>
-</li>
-<li>
-<pre><code> 	&gt;父类被重写的方法的返回值类型是基本数据类型(比如：double)，则子类重写的方法的返回值类型必须是相同的基本数据类型(必须也是double)
-</code></pre>
-</li>
-<li>
-<pre><code> ④ 子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型（具体放到异常处理时候讲）
-</code></pre>
-</li>
-</ul>
-<hr>
-<ul>
-<li>子类和父类中的同名同参数的方法要么都声明为非static的（考虑重写），要么都声明为static的（不是重写)。</li>
-</ul>
-<p>5.面试题：<br>
-区分方法的重写和重载？<br>
-答：<br>
-① 二者的概念：<br>
-② 重载和重写的具体规则<br>
-③ 重载：不表现为多态性。<br>
-重写：表现为多态性。<br>
-重载，是指允许存在多个同名方法，而这些方法的参数不同。编译器根据方法不同的参数表，对同名方法的名称做修饰。对于编译器而言，这些同名方法就成了不同的方法。它们的调用地址在编译期就绑定了。Java的重载是可以包括父类和子类的，即子类可以重载父类的同名不同参数的方法。<br>
-所以：对于重载而言，在方法调用之前，编译器就已经确定了所要调用的方法，这称为“早绑定”或“静态绑定”；<br>
-而对于多态，只等到方法调用的那一刻，解释运行器才会确定所要调用的具体方法，这称为“晚绑定”或“动态绑定”。</p>
-<p>《Java编程思想》：“不要犯傻，如果它不是晚绑定，它就不是多态。”</p>
-<p>三、super关键字<br>
-1.super 关键字可以理解为：父类的</p>
-<p>2.可以用来调用的结构：<br>
-属性、方法、构造器</p>
-<p>3.super调用属性、方法：<br>
-3.1 我们可以在子类的方法或构造器中。通过使用&quot;super.属性&quot;或&quot;super.方法&quot;的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们习惯省略&quot;super.&quot;<br>
-3.2 特殊情况：当子类和父类中定义了同名的属性时，我们要想在子类中调用父类中声明的属性，则必须显式的使用&quot;super.属性&quot;的方式，表明调用的是父类中声明的属性。<br>
-3.3 特殊情况：当子类重写了父类中的方法以后，我们想在子类的方法中调用父类中被重写的方法时，则必须显式的使用&quot;super.方法&quot;的方式，表明调用的是父类中被重写的方法。</p>
-<p>4.super调用构造器：<br>
-4.1  我们可以在子类的构造器中显式的使用&quot;super(形参列表)&quot;的方式，调用父类中声明的指定的构造器<br>
-4.2 &quot;super(形参列表)&quot;的使用，必须声明在子类构造器的首行！<br>
-4.3 我们在类的构造器中，针对于&quot;this(形参列表)&quot;或&quot;super(形参列表)&quot;只能二一，不能同时出现<br>
-4.4 在构造器的首行，没显式的声明&quot;this(形参列表)&quot;或&quot;super(形参列表)&quot;，则默认调用的是父类中空参的构造器：super()<br>
-4.5 在类的多个构造器中，至少一个类的构造器中使用了&quot;super(形参列表)&quot;，调用父类中的构造器</p>
-<p>四、子类对象实例化全过程<br>
-1.从结果上看：继承性</p>
-<blockquote>
-<p>子类继承父类以后，就获取了父类中声明的属性或方法。<br>
-创建子类的对象，在堆空间中，就会加载所父类中声明的属性。<br>
-2.从过程上看：<br>
-当我们通过子类的构造器创建子类对象时，我们一定会直接或间接的调用其父类的构造器，进而调用父类的父类的构造器，...直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所有的父类的结构，所以才可以看到内存中父类中的结构，子类对象才可以考虑进行调用。<br>
-3.强调说明：<br>
-虽然创建子类对象时，调用了父类的构造器，但是自始至终就创建过一个对象，即为new的子类对象。</p>
-</blockquote>
-<p>五、面向对象的特征三：多态性<br>
-1.多态性的理解：可以理解为一个事物的多种形态。<br>
-2.何为多态性：<br>
-对象的多态性：父类的引用指向子类的对象（或子类的对象赋给父类的引用）<br>
-举例：<br>
-Person p = new Man();<br>
-Object obj = new Date();<br>
-3.多态性的使用：虚拟方法调用</p>
-<blockquote>
-<p>有了对象的多态性以后，我们在编译期，只能调用父类中声明的方法，但在运行期，我们实际执行的是子类重写父类的方法。<br>
-总结：编译，看左边；运行，看右边。<br>
-4.多态性的使用前提：<br>
-① 类的继承关系  ② 方法的重写<br>
-5.多态性的应用举例：<br>
-举例一：<br>
-public void func(Animal animal){//Animal animal = new Dog();<br>
-animal.eat();<br>
-animal.shout();<br>
-}<br>
-举例二：<br>
-public void method(Object obj){	<br>
-}<br>
-举例三：<br>
-class Driver{<br>
-public void doData(Connection conn){//conn = new MySQlConnection(); / conn = new OracleConnection();<br>
-//规范的步骤去操作数据<br>
-//		conn.method1();<br>
-//		conn.method2();<br>
-//		conn.method3();		<br>
+//泛型方法<br>
+//举例：获取表中一共有多少条记录？获取最大的员工入职时间？<br>
+public <E> E getValue(){<br>
+return null;<br>
 }<br>
 }</p>
-</blockquote>
-<p>6.多态性使用的注意点：<br>
-对象的多态性，只适用于方法，不适用于属性（编译和运行都看左边）</p>
-<hr>
-<p>7.关于向上转型与向下转型：<br>
-7.1 向上转型：多态<br>
-7.2 向下转型：<br>
-7.2.1 为什么使用向下转型：<br>
-有了对象的多态性以后，内存中实际上是加载了子类特有的属性和方法的，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。如何才能调用子类特的属性和方法？使用向下转型。<br>
-7.2.2 如何实现向下转型：<br>
-使用强制类型转换符：()<br>
-7.2.3 使用时的注意点：<br>
-① 使用强转时，可能出现ClassCastException的异常。（两个类型转换不兼容）<br>
-② 为了避免在向下转型时出现ClassCastException的异常，我们在向下转型之前，先进行instanceof的判断，一旦返回true，就进行向下转型。如果返回false，不进行向下转型。<br>
-7.2.4 instanceof的使用：<br>
-① a instanceof A:判断对象a是否是类A的实例。如果是，返回true；如果不是，返回false。<br>
-② 如果 a instanceof A返回true,则 a instanceof B也返回true.其中，类B是类A的父类。<br>
-③ 要求a所属的类与类A必须是子类和父类的关系，否则编译错误。<br>
-7.2.5 图示：<br>
-<img src="https://fantaixi.github.io/post-images/1588759288912.png" alt="" loading="lazy"><br>
-8. 面试题：<br>
-8.1 谈谈你对多态性的理解？<br>
-① 实现代码的通用性。<br>
-② Object类中定义的public boolean equals(Object obj){  }<br>
-JDBC:使用java程序操作(获取数据库连接、CRUD)数据库(MySQL、Oracle、DB2、SQL Server)<br>
-③ 抽象类、接口的使用肯定体现了多态性。（抽象类、接口不能实例化）<br>
-8.2 多态是编译时行为还是运行时行为？  运行时行为</p>
-<p>六、单元测试方法<br>
-Java中的JUnit单元测试<br>
-步骤：<br>
-1.中当前工程 - 右键择：build path - add libraries - JUnit 4 - 下一步<br>
-2.创建Java类，进行单元测试。<br>
-此时的Java类要求：① 此类是public的  ②此类提供公共的无参的构造器<br>
-3.此类中声明单元测试方法。<br>
-此时的单元测试方法：方法的权限是public,没返回值，没形参</p>
-<p>4.此单元测试方法上需要声明注解：@Test,并在单元测试类中导入：import org.junit.Test;</p>
-<p>5.声明好单元测试方法以后，就可以在方法体内测试相关的代码。<br>
-6.写完代码以后，左键双击单元测试方法名，右键：run as - JUnit Test</p>
-<p>说明：<br>
-1.如果执行结果没任何异常：绿条<br>
-2.如果执行结果出现异常：红条</p>
-<p>七、包装类的使用<br>
-1.为什么要有包装类(或封装类）<br>
-为了使基本数据类型的变量具有类的特征，引入包装类。</p>
-<p>2.基本数据类型与对应的包装类：<br>
-<img src="https://fantaixi.github.io/post-images/1588759915421.png" alt="" loading="lazy"></p>
-<p>3.需要掌握的类型间的转换：（基本数据类型、包装类、String）<br>
-<img src="https://fantaixi.github.io/post-images/1588759921171.png" alt="" loading="lazy"></p>
-<p>简易版：<br>
-基本数据类型&lt;---&gt;包装类：JDK 5.0 新特性：自动装箱 与自动拆箱<br>
-基本数据类型、包装类---&gt;String:调用String重载的valueOf(Xxx xxx)<br>
-String---&gt;基本数据类型、包装类:调用包装类的parseXxx(String s)<br>
-注意：转换时，可能会报NumberFormatException<br>
-应用场景举例：<br>
-① Vector类中关于添加元素，只定义了形参为Object类型的方法：<br>
-v.addElement(Object obj);   //基本数据类型 ---&gt;包装类 ---&gt;使用多态</p>
+<p>四、泛型在继承上的体现<br>
+泛型在继承上的体现:<br>
+/*<br>
+1. 泛型在继承方面的体现<br>
+虽然类A是类B的父类，但是G<A> 和G<B>二者不具备子父类关系，二者是并列关系。<br>
+补充：类A是类B的父类，A<G> 是 B<G> 的父类<br>
+*/<br>
+@Test<br>
+public void test1(){<br>
+Object obj = null;<br>
+String str = null;<br>
+obj = str;</p>
+<pre><code>    Object[] arr1 = null;
+    String[] arr2 = null;
+    arr1 = arr2;
+    //编译不通过
+</code></pre>
+<p>//        Date date = new Date();<br>
+//        str = date;<br>
+List<Object> list1 = null;<br>
+List<String> list2 = new ArrayList<String>();<br>
+//此时的list1和list2的类型不具子父类关系<br>
+//编译不通过<br>
+//        list1 = list2;<br>
+/*<br>
+反证法：<br>
+假设list1 = list2;<br>
+list1.add(123);导致混入非String的数据。出错。<br>
+*/<br>
+show(list1);<br>
+show1(list2);<br>
+}<br>
+public void show1(List<String> list){</p>
+<pre><code>}
+public void show(List&lt;Object&gt; list){
+
+}
+@Test
+public void test2(){
+    AbstractList&lt;String&gt; list1 = null;
+    List&lt;String&gt; list2 = null;
+    ArrayList&lt;String&gt; list3 = null;
+    list1 = list3;
+    list2 = list3;
+    List&lt;String&gt; list4 = new ArrayList&lt;&gt;();
+}
+</code></pre>
+<p>五、通配符<br>
+1.通配符的使用<br>
+/*<br>
+通配符的使用<br>
+通配符：?<br>
+类A是类B的父类，G<A>和G<B>是没关系的，二者共同的父类是：G&lt;?&gt;<br>
+<em>/<br>
+@Test<br>
+public void test3(){<br>
+List<Object> list1 = null;<br>
+List<String> list2 = null;<br>
+List&lt;?&gt; list = null;<br>
+list = list1;<br>
+list = list2;<br>
+//编译通过<br>
+//        print(list1);<br>
+//        print(list2);<br>
+//<br>
+List<String> list3 = new ArrayList&lt;&gt;();<br>
+list3.add(&quot;AA&quot;);<br>
+list3.add(&quot;BB&quot;);<br>
+list3.add(&quot;CC&quot;);<br>
+list = list3;<br>
+//添加(写入)：对于List&lt;?&gt;就不能向其内部添加数据。<br>
+//除了添加null之外。<br>
+//        list.add(&quot;DD&quot;);<br>
+//        list.add('?');<br>
+list.add(null);<br>
+//获取(读取)：允许读取数据，读取的数据类型为Object。<br>
+Object o = list.get(0);<br>
+System.out.println(o);<br>
+}<br>
+public void print(List&lt;?&gt; list){<br>
+Iterator&lt;?&gt; iterator = list.iterator();<br>
+while(iterator.hasNext()){<br>
+Object obj = iterator.next();<br>
+System.out.println(obj);<br>
+}<br>
+}<br>
+2.涉及通配符的集合的数据的写入和读取:<br>
+见上	<br>
+3.有限制条件的通配符的使用<br>
+/</em><br>
+限制条件的通配符的使用。<br>
+? extends A:<br>
+G&lt;? extends A&gt; 可以作为G<A>和G<B>的父类，其中B是A的子类<br>
+? super A:<br>
+G&lt;? super A&gt; 可以作为G<A>和G<B>的父类，其中B是A的父类<br>
+*/<br>
+@Test<br>
+public void test4(){<br>
+List&lt;? extends Person&gt; list1 = null;<br>
+List&lt;? super Person&gt; list2 = null;<br>
+List<Student> list3 = new ArrayList<Student>();<br>
+List<Person> list4 = new ArrayList<Person>();<br>
+List<Object> list5 = new ArrayList<Object>();<br>
+list1 = list3;<br>
+list1 = list4;<br>
+//        list1 = list5;<br>
+//        list2 = list3;<br>
+list2 = list4;<br>
+list2 = list5;<br>
+//读取数据：<br>
+list1 = list3;<br>
+Person p = list1.get(0);<br>
+//编译不通过<br>
+//Student s = list1.get(0);<br>
+list2 = list4;<br>
+Object obj = list2.get(0);<br>
+////编译不通过<br>
+//        Person obj = list2.get(0);<br>
+//写入数据：<br>
+//编译不通过<br>
+//        list1.add(new Student());<br>
+//编译通过<br>
+list2.add(new Person());<br>
+list2.add(new Student());<br>
+}</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[08 面向对象-上]]></title>
-        <id>https://fantaixi.github.io/post/08-mian-xiang-dui-xiang-shang/</id>
-        <link href="https://fantaixi.github.io/post/08-mian-xiang-dui-xiang-shang/">
+        <title type="html"><![CDATA[15 Java集合]]></title>
+        <id>https://fantaixi.github.io/post/15-java-ji-he/</id>
+        <link href="https://fantaixi.github.io/post/15-java-ji-he/">
         </link>
-        <updated>2020-05-04T07:44:00.000Z</updated>
-        <content type="html"><![CDATA[<p>一、类与对象<br>
-1.面向对象学习的三条主线：</p>
-<ul>
-<li>1.Java类及类的成员：属性、方法、构造器；代码块、内部类</li>
-<li>2.面向对象的大特征：封装性、继承性、多态性、(抽象性)</li>
-<li>3.其它关键字：this、super、static、final、abstract、interface、package、import等</li>
-<li>“大处着眼，小处着手”</li>
-</ul>
-<p>2.面向对象与面向过程（理解）<br>
-1.面向过程：强调的是功能行为，以函数为最小单位，考虑怎么做。（c/c++）<br>
-2.面向对象：强调具备了功能的对象，以类/对象为最小单位，考虑谁来做。（Java）</p>
-<p>举例对比：人把大象装进冰箱。</p>
-<p>3.完成一个项目（或功能）的思路：<br>
-<img src="https://fantaixi.github.io/post-images/1588580409160.png" alt="" loading="lazy"></p>
-<p>4.面向对象中两个重要的概念：<br>
-类：对一类事物的描述，是抽象的、概念上的定义<br>
-对象：是实际存在的该类事物的每个个体，因而也称为实例(instance)</p>
+        <updated>2020-05-06T17:57:10.000Z</updated>
+        <content type="html"><![CDATA[<p>一、数组与集合</p>
+<ol>
+<li>
+<p>集合与数组存储数据概述：<br>
+集合、数组都是对多个数据进行存储操作的结构，简称Java容器。<br>
+说明：此时的存储，主要指的是内存层面的存储，不涉及到持久化的存储（.txt,.jpg,.avi，数据库中)</p>
+</li>
+<li>
+<p>数组存储的特点：</p>
+</li>
+</ol>
 <blockquote>
-<p>面向对象程序设计的重点是类的设计<br>
-设计类，就是设计类的成员。</p>
+<p>一旦初始化以后，其长度就确定了。<br>
+数组一旦定义好，其元素的类型也就确定了。我们也就只能操作指定类型的数据了。</p>
 </blockquote>
-<p>二者的关系：<br>
-对象，是由类new出来的，派生出来的。<br>
-5.面向对象思想落地实现的规则一</p>
 <ul>
-<li>1.创建类，设计类的成员</li>
-<li>2.创建类的对象</li>
-<li>3.通过“对象.属性”或“对象.方法”调用对象的结构</li>
+<li>
+<pre><code> 比如：String[] arr;int[] arr1;Object[] arr2;
+</code></pre>
+</li>
 </ul>
-<p>补充：几个概念的使用说明</p>
+<ol start="3">
+<li>数组存储的弊端：</li>
+</ol>
 <ul>
-<li>属性 = 成员变量 = field = 域、字段</li>
-<li>方法 = 成员方法 = 函数 = method</li>
-<li>创建类的对象 = 类的实例化 = 实例化类</li>
+<li>
+<pre><code> &gt; 一旦初始化以后，其长度就不可修改。
+</code></pre>
+</li>
+<li>
+<pre><code> &gt; 数组中提供的方法非常限，对于添加、删除、插入数据等操作，非常不便，同时效率不高。
+</code></pre>
+</li>
+<li>
+<pre><code> &gt; 获取数组中实际元素的个数的需求，数组没有现成的属性或方法可用
+</code></pre>
+</li>
+<li>
+<pre><code> &gt; 数组存储数据的特点：有序、可重复。对于无序、不可重复的需求，不能满足。
+</code></pre>
+</li>
 </ul>
-<p>6.对象的创建与对象的内存解析<br>
-典型代码：<br>
-Person p1 = new Person();<br>
-Person p2 = new Person();<br>
-Person p3 = p1;//没有新创建一个对象，共用一个堆空间中的对象实体。<br>
+<ol start="4">
+<li>集合存储的优点：<br>
+解决数组存储数据方面的弊端。</li>
+</ol>
+<p>二、Collection接口<br>
+1.单列集合框架结构<br>
+|----Collection接口：单列集合，用来存储一个一个的对象</p>
+<ul>
+<li>
+<pre><code>     |----List接口：存储有序的、可重复的数据。  --&gt;“动态”数组
+</code></pre>
+</li>
+<li>
+<pre><code>         |----ArrayList、LinkedList、Vector
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code>     |----Set接口：存储无序的、不可重复的数据   --&gt;高中讲的“集合”
+</code></pre>
+</li>
+<li>
+<pre><code>         |----HashSet、LinkedHashSet、TreeSet
+</code></pre>
+</li>
+</ul>
+<p>对应图示：<br>
+<img src="https://fantaixi.github.io/post-images/1588788224614.png" alt="" loading="lazy"></p>
+<p>2.Collection接口常用方法：<br>
+add(Object obj),addAll(Collection coll),size(),isEmpty(),clear();<br>
+contains(Object obj),containsAll(Collection coll),remove(Object obj),removeAll(Collection coll),retainsAll(Collection coll),equals(Object obj);<br>
+hasCode(),toArray(),iterator();</p>
+<p>3.Collection集合与数组间的转换<br>
+//集合 ---&gt;数组：toArray()<br>
+Object[] arr = coll.toArray();<br>
+for(int i = 0;i &lt; arr.length;i++){<br>
+System.out.println(arr[i]);<br>
+}</p>
+<p>//拓展：数组 ---&gt;集合:调用Arrays类的静态方法asList(T ... t)<br>
+List<String> list = Arrays.asList(new String[]{&quot;AA&quot;, &quot;BB&quot;, &quot;CC&quot;});<br>
+System.out.println(list);</p>
+<p>List arr1 = Arrays.asList(new int[]{123, 456});<br>
+System.out.println(arr1.size());//1</p>
+<p>List arr2 = Arrays.asList(new Integer[]{123, 456});<br>
+System.out.println(arr2.size());//2</p>
+<p>4.使用Collection集合存储对象，要求对象所属的类满足：<br>
+向Collection接口的实现类的对象中添加数据obj时，要求obj所在类要重写equals().</p>
+<p>三、Iterator接口与foreach循环<br>
+1.遍历Collection的两种方式：<br>
+① 使用迭代器Iterator  ② foreach循环（或增强for循环）<br>
+2.java.utils包下定义的迭代器接口：Iterator<br>
+2.1说明：<br>
+Iterator对象称为迭代器(设计模式的一种)，主要用于遍历 Collection 集合中的元素。<br>
+GOF给迭代器模式的定义为：提供一种方法访问一个容器(container)对象中各个元素，而又不需暴露该对象的内部细节。迭代器模式，就是为容器而生。<br>
+2.2作用：遍历集合Collectiton元素<br>
+2.3如何获取实例：coll.iterator()返回一个迭代器实例<br>
+2.4遍历的代码实现：<br>
+Iterator iterator = coll.iterator();<br>
+//hasNext():判断是否还下一个元素<br>
+while(iterator.hasNext()){<br>
+//next():①指针下移 ②将下移以后集合位置上的元素返回<br>
+System.out.println(iterator.next());<br>
+}<br>
+2.5图示说明：<br>
+<img src="https://fantaixi.github.io/post-images/1588788373686.png" alt="" loading="lazy"></p>
+<p>2.6 remove()的使用：<br>
+//测试Iterator中的remove()<br>
+//如果还未调用next()或在上一次调用 next 方法之后已经调用了 remove 方法，再调用remove都会报IllegalStateException。<br>
+//内部定义了remove(),可以在遍历的时候，删除集合中的元素。此方法不同于集合直接调用remove()<br>
+@Test<br>
+public void test3(){<br>
+Collection coll = new ArrayList();<br>
+coll.add(123);<br>
+coll.add(456);<br>
+coll.add(new Person(&quot;Jerry&quot;,20));<br>
+coll.add(new String(&quot;Tom&quot;));<br>
+coll.add(false);<br>
+//删除集合中&quot;Tom&quot;<br>
+Iterator iterator = coll.iterator();<br>
+while (iterator.hasNext()){<br>
+//            iterator.remove();<br>
+Object obj = iterator.next();<br>
+if(&quot;Tom&quot;.equals(obj)){<br>
+iterator.remove();<br>
+//                iterator.remove();<br>
+}<br>
+}<br>
+//遍历集合<br>
+iterator = coll.iterator();<br>
+while (iterator.hasNext()){<br>
+System.out.println(iterator.next());<br>
+}<br>
+}</p>
+<p>3.jdk5.0新特性--增强for循环：(foreach循环)</p>
+<p>1.遍历集合举例：<br>
+@Test<br>
+public void test1(){<br>
+Collection coll = new ArrayList();<br>
+coll.add(123);<br>
+coll.add(456);<br>
+coll.add(new Person(&quot;Jerry&quot;,20));<br>
+coll.add(new String(&quot;Tom&quot;));<br>
+coll.add(false);<br>
+//for(集合元素的类型 局部变量 : 集合对象)<br>
+for(Object obj : coll){<br>
+System.out.println(obj);<br>
+}<br>
+}<br>
 说明：<br>
-如果创建了一个类的多个对象，则每个对象都独立的拥有一套类的属性。（非static的）<br>
-意味着：如果我们修改一个对象的属性a，则不影响另外一个对象属性a的值。</p>
-<p>7.匿名对象:我们创建的对象，没有显式的赋给一个变量名。即为匿名对象<br>
-特点：匿名对象只能调用一次。<br>
-举例：<br>
-new Phone().sendEmail();<br>
-new Phone().playGame();<br>
-new Phone().price = 1999;<br>
-new Phone().showPrice();//0.0<br>
-应用场景：<br>
-PhoneMall mall = new PhoneMall();<br>
-//匿名对象的使用<br>
-mall.show(new Phone());<br>
-其中，<br>
-class PhoneMall{<br>
-public void show(Phone phone){<br>
-phone.sendEmail();<br>
-phone.playGame();<br>
+内部仍然调用了迭代器。</p>
+<p>2.遍历数组举例：</p>
+<p>@Test<br>
+public void test2(){<br>
+int[] arr = new int[]{1,2,3,4,5,6};<br>
+//for(数组元素的类型 局部变量 : 数组对象)<br>
+for(int i : arr){<br>
+System.out.println(i);<br>
 }<br>
-}<br>
-8.理解&quot;万事万物皆对象&quot;<br>
-1.在Java语言范畴中，我们都将功能、结构等封装到类中，通过类的实例化，来调用具体的功能结构</p>
-<ul>
-<li>
-<pre><code> &gt;Scanner,String等
-</code></pre>
-</li>
-<li>
-<pre><code> &gt;文件：File
-</code></pre>
-</li>
-<li>
-<pre><code> &gt;网络资源：URL
-</code></pre>
-</li>
-</ul>
-<p>2.涉及到Java语言与前端Html、后端的数据库交互时，前后端的结构在Java层面交互时，都体现为类、对象。</p>
-<p>补充：<br>
-编译完源程序以后，生成一个或多个字节码文件。<br>
-我们使用JVM中的类的加载器和解释器对生成的字节码文件进行解释运行。意味着，需要将字节码文件对应的类加载到内存中，涉及到内存解析。<br>
-<img src="https://fantaixi.github.io/post-images/1588580739867.png" alt="" loading="lazy"><br>
-虚拟机栈，即为平时提到的栈结构。我们将局部变量存储在栈结构中<br>
-堆，我们将new出来的结构（比如：数组、对象）加载在堆空间中。补充：对象的属性（非static的）加载在堆空间中。<br>
-方法区：类的加载信息、常量池、静态域</p>
-<p>二、类的结构之一：属性<br>
-对比：属性  vs  局部变量<br>
-1.相同点：</p>
-<ul>
-<li>
-<pre><code> 1.1  定义变量的格式：数据类型  变量名 = 变量值
-</code></pre>
-</li>
-<li>
-<pre><code> 1.2 先声明，后使用
-</code></pre>
-</li>
-<li>
-<pre><code> 1.3 变量都有其对应的作用域 
-</code></pre>
-</li>
-</ul>
-<p>2.不同点：<br>
-2.1 在类中声明的位置的不同</p>
-<ul>
-<li>
-<pre><code> 属性：直接定义在类的一对{}内
-</code></pre>
-</li>
-<li>
-<pre><code> 局部变量：声明在方法内、方法形参、代码块内、构造器形参、构造器内部的变量
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 2.2 关于权限修饰符的不同
-</code></pre>
-</li>
-<li>
-<pre><code> 属性：可以在声明属性时，指明其权限，使用权限修饰符。
-</code></pre>
-</li>
-<li>
-<pre><code> 常用的权限修饰符：private、public、缺省、protected  ---&gt;封装性
-</code></pre>
-</li>
-<li>
-<pre><code> 目前，大家声明属性时，都使用缺省就可以了。
-</code></pre>
-</li>
-<li>
-<pre><code> 局部变量：不可以使用权限修饰符。
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 2.3 默认初始化值的情况：
-</code></pre>
-</li>
-<li>
-<pre><code> 属性：类的属性，根据其类型，都默认初始化值。
-</code></pre>
-</li>
-<li>
-<pre><code> 	整型（byte、short、int、long：0）
-</code></pre>
-</li>
-<li>
-<pre><code> 	浮点型（float、double：0.0）
-</code></pre>
-</li>
-<li>
-<pre><code> 	字符型（char：0  （或'\u0000'））
-</code></pre>
-</li>
-<li>
-<pre><code> 	布尔型（boolean：false）
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 	引用数据类型（类、数组、接口：null）
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 局部变量：没默认初始化值。
-</code></pre>
-</li>
-<li>
-<pre><code> 	意味着，我们在调用局部变量之前，一定要显式赋值。
-</code></pre>
-</li>
-<li>
-<pre><code> 	特别地：形参在调用时，我们赋值即可。
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 2.4 在内存中加载的位置：
-</code></pre>
-</li>
-<li>
-<pre><code> 属性：加载到堆空间中   （非static）
-</code></pre>
-</li>
-<li>
-<pre><code> 局部变量：加载到栈空间
-</code></pre>
-</li>
-</ul>
-<p>三、类的结构之二：方法</p>
-<ol>
-<li>方法：描述类应该具有的功能。</li>
-</ol>
-<ul>
-<li>比如：</li>
-<li>Math类：sqrt()\random() ...</li>
-<li>Scanner类：nextXxx() ...</li>
-<li>Arrays类：sort() \ binarySearch() \ toString() \ equals() \ ...</li>
-</ul>
-<ol start="2">
-<li>
-<p>方法的声明：权限修饰符  返回值类型  方法名(形参列表){<br>
-方法体<br>
 }</p>
+<p>四、Collection子接口：List接口</p>
+<ol>
+<li>
+<p>存储的数据特点：存储有序的、可重复的数据。</p>
 </li>
 <li>
-<p>说明：</p>
+<p>常用方法：(记住)<br>
+增：add(Object obj)<br>
+删：remove(int index) / remove(Object obj)<br>
+改：set(int index, Object ele)<br>
+查：get(int index)<br>
+插：add(int index, Object ele)<br>
+长度：size()<br>
+遍历：① Iterator迭代器方式<br>
+② 增强for循环<br>
+③ 普通的循环</p>
+</li>
+<li>
+<p>常用实现类：<br>
+|----Collection接口：单列集合，用来存储一个一个的对象</p>
 </li>
 </ol>
 <ul>
+<li>|----List接口：存储序的、可重复的数据。  --&gt;“动态”数组,替换原的数组</li>
 <li>
-<pre><code> 3.1 关于权限修饰符：默认方法的权限修饰符先都使用public
+<pre><code> |----ArrayList：作为List接口的主要实现类；线程不安全的，效率高；底层使用Object[] elementData存储
 </code></pre>
 </li>
 <li>
-<pre><code> Java规定的4种权限修饰符：private、public、缺省、protected  --&gt;封装性再细说
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 3.2 返回值类型： 返回值  vs 没返回值
+<pre><code> |----LinkedList：对于频繁的插入、删除操作，使用此类效率比ArrayList高；底层使用双向链表存储
 </code></pre>
 </li>
 <li>
-<pre><code> 3.2.1  如果方法返回值，则必须在方法声明时，指定返回值的类型。同时，方法中，需要使用
-</code></pre>
-</li>
-<li>
-<pre><code>       return关键字来返回指定类型的变量或常量：“return 数据”。
-</code></pre>
-</li>
-<li>
-<pre><code> 	如果方法没返回值，则方法声明时，使用void来表示。通常，没返回值的方法中，       *          就不需要 使用return.但是，如果使用的话，只能“return;”表示结束此方法的意思。
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 	3.2.2 我们定义方法该不该返回值？
-</code></pre>
-</li>
-<li>
-<pre><code> 		① 题目要求
-</code></pre>
-</li>
-<li>
-<pre><code> 		② 凭经验：具体问题具体分析
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 3.3 方法名：属于标识符，遵循标识符的规则和规范，“见名知意”
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 3.4 形参列表： 方法可以声明0个，1个，或多个形参。
-</code></pre>
-</li>
-<li>
-<pre><code>    3.4.1 格式：数据类型1 形参1,数据类型2 形参2,...
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code>    3.4.2 我们定义方法时，该不该定义形参？
-</code></pre>
-</li>
-<li>
-<pre><code>    		① 题目要求
-</code></pre>
-</li>
-<li>
-<pre><code>    		② 凭经验：具体问题具体分析
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 3.5 方法体：方法功能的体现。 	
+<pre><code> |----Vector：作为List接口的古老实现类；线程安全的，效率低；底层使用Object[] elementData存储
 </code></pre>
 </li>
 </ul>
+<ol start="4">
+<li>源码分析(难点)<br>
+4.1 ArrayList的源码分析：</li>
+</ol>
+<ul>
+<li>
+<p>2.1 jdk 7情况下</p>
+</li>
+<li>
+<pre><code> ArrayList list = new ArrayList();//底层创建了长度是10的Object[]数组elementData
+</code></pre>
+</li>
+<li>
+<pre><code> list.add(123);//elementData[0] = new Integer(123);
+</code></pre>
+</li>
+<li>
+<pre><code> ...
+</code></pre>
+</li>
+<li>
+<pre><code> list.add(11);//如果此次的添加导致底层elementData数组容量不够，则扩容。
+</code></pre>
+</li>
+<li>
+<pre><code> 默认情况下，扩容为原来的容量的1.5倍，同时需要将原有数组中的数据复制到新的数组中。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 结论：建议开发中使用带参的构造器：ArrayList list = new ArrayList(int capacity)
+</code></pre>
+</li>
+<li></li>
+<li>
+<p>2.2 jdk 8中ArrayList的变化：</p>
+</li>
+<li>
+<pre><code> ArrayList list = new ArrayList();//底层Object[] elementData初始化为{}.并没创建长度为10的数组
+</code></pre>
+</li>
+<li>
+<pre><code> list.add(123);//第一次调用add()时，底层才创建了长度10的数组，并将数据123添加到elementData[0]
+</code></pre>
+</li>
+<li>
+<pre><code> ...
+</code></pre>
+</li>
+<li>
+<pre><code> 后续的添加和扩容操作与jdk 7 无异。
+</code></pre>
+</li>
+<li>
+<p>2.3 小结：jdk7中的ArrayList的对象的创建类似于单例的饿汉式，而jdk8中的ArrayList的对象</p>
+</li>
+<li>
+<pre><code> 的创建类似于单例的懒汉式，延迟了数组的创建，节省内存。
+</code></pre>
+</li>
+</ul>
+<p>4.2 LinkedList的源码分析：</p>
+<ul>
+<li>
+<pre><code> LinkedList list = new LinkedList(); 内部声明了Node类型的first和last属性，默认值为null
+</code></pre>
+</li>
+<li>
+<pre><code> list.add(123);//将123封装到Node中，创建了Node对象。
+</code></pre>
+</li>
+<li>
+<pre><code> 其中，Node定义为：体现了LinkedList的双向链表的说法
+</code></pre>
+</li>
+<li>
+<pre><code> private static class Node&lt;E&gt; {
+      E item;
+      Node&lt;E&gt; next;
+      Node&lt;E&gt; prev;
+      Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) {
+      this.item = element;
+      this.next = next;
+      this.prev = prev;
+      }
+  }
+</code></pre>
+</li>
+</ul>
+<p>4.3 Vector的源码分析：<br>
+jdk7和jdk8中通过Vector()构造器创建对象时，底层都创建了长度为10的数组。<br>
+在扩容方面，默认扩容为原来的数组长度的2倍。</p>
+<ol start="5">
+<li>存储的元素的要求：<br>
+添加的对象，所在的类要重写equals()方法<br>
+[面试题]</li>
+</ol>
+<ul>
+<li>面试题：ArrayList、LinkedList、Vector者的异同？</li>
+<li>同：三个类都是实现了List接口，存储数据的特点相同：存储有序的、可重复的数据</li>
+<li>不同：见上（第3部分+第4部分）</li>
+</ul>
+<p>五、Collection子接口：Set接口</p>
+<ol>
+<li>
+<p>存储的数据特点：无序的、不可重复的元素<br>
+具体的：<br>
+以HashSet为例说明：</p>
+</li>
+<li>
+<p>无序性：不等于随机性。存储的数据在底层数组中并非照数组索引的顺序添加，而是根据数据的哈希值决定的。</p>
+</li>
+<li>
+<p>不可重复性：保证添加的元素照equals()判断时，不能返回true.即：相同的元素只能添加一个。</p>
+</li>
+<li>
+<p>元素添加过程：(以HashSet为例)<br>
+我们向HashSet中添加元素a,首先调用元素a所在类的hashCode()方法，计算元素a的哈希值，<br>
+此哈希值接着通过某种算法计算出在HashSet底层数组中的存放位置（即为：索引位置，判断<br>
+数组此位置上是否已经元素：<br>
+如果此位置上没其他元素，则元素a添加成功。 ---&gt;情况1<br>
+如果此位置上其他元素b(或以链表形式存在的多个元素，则比较元素a与元素b的hash值：<br>
+如果hash值不相同，则元素a添加成功。---&gt;情况2<br>
+如果hash值相同，进而需要调用元素a所在类的equals()方法：<br>
+equals()返回true,元素a添加失败<br>
+equals()返回false,则元素a添加成功。---&gt;情况2</p>
+</li>
+</ol>
+<p>对于添加成功的情况2和情况3而言：元素a 与已经存在指定索引位置上数据以链表的方式存储。<br>
+jdk 7 :元素a放到数组中，指向原来的元素。<br>
+jdk 8 :原来的元素在数组中，指向元素a<br>
+总结：七上八下</p>
+<p>HashSet底层：数组+链表的结构。（前提：jdk7)</p>
 <ol start="3">
-<li>方法的使用中，可以调用当前类的属性或方法</li>
+<li>
+<p>常用方法<br>
+Set接口中没额外定义新的方法，使用的都是Collection中声明过的方法。</p>
+</li>
+<li>
+<p>常用实现类：<br>
+|----Collection接口：单列集合，用来存储一个一个的对象</p>
+</li>
 </ol>
 <ul>
 <li>
-<pre><code> 	特殊的：方法A中又调用了方法A:递归方法。
+<pre><code>     |----Set接口：存储无序的、不可重复的数据   --&gt;高中讲的“集合”
 </code></pre>
 </li>
 <li>
-<pre><code>方法中，不可以定义方法。
+<pre><code>         |----HashSet：作为Set接口的主要实现类；线程不安全的；可以存储null值
+</code></pre>
+</li>
+<li>
+<pre><code>             |----LinkedHashSet：作为HashSet的子类；遍历其内部数据时，可以按照添加的顺序遍历
+</code></pre>
+</li>
+<li>
+<pre><code>            在添加数据的同时，每个数据还维护了两个引用，记录此数据前一个数据和后一个数据。                   对于频繁的遍历操作，LinkedHashSet效率高于HashSet.
+</code></pre>
+</li>
+<li>
+<pre><code>         |----TreeSet：可以照添加对象的指定属性，进行排序。
 </code></pre>
 </li>
 </ul>
-<p>补充：return，重载，可变个数的形参，值传递机制，递归<br>
-return关键字：<br>
-1.使用范围：使用在方法体中<br>
-2.作用：① 结束方法<br>
-② 针对于返回值类型的方法，使用&quot;return 数据&quot;方法返回所要的数据。<br>
-3.注意点：return关键字后面不可以声明执行语句。</p>
-<p>方法的重载：<br>
-1.方法的重载的概念<br>
-定义：在同一个类中，允许存在一个以上的同名方法，只要它们的参数个数或者参数类型不同即可。<br>
-总结：&quot;两同一不同&quot;:同一个类、相同方法名<br>
-参数列表不同：参数个数不同，参数类型不同</p>
-<p>2.构成重载的举例：<br>
-举例一：Arrays类中重载的sort() / binarySearch()；PrintStream中的println()<br>
-举例二：<br>
-//如下的4个方法构成了重载<br>
-public void getSum(int i,int j){<br>
-System.out.println(&quot;1&quot;);<br>
+<ol start="5">
+<li>存储对象所在类的要求：<br>
+HashSet/LinkedHashSet:</li>
+</ol>
+<p>要求：向Set(主要指：HashSet、LinkedHashSet)中添加的数据，其所在的类一定要重写hashCode()和equals()<br>
+要求：重写的hashCode()和equals()尽可能保持一致性：相等的对象必须具有相等的散列码</p>
+<ul>
+<li>重写两个方法的小技巧：对象中用作 equals() 方法比较的 Field，都应该用来计算 hashCode 值。</li>
+</ul>
+<p>TreeSet:<br>
+1.自然排序中，比较两个对象是否相同的标准为：compareTo()返回0.不再是equals().<br>
+2.定制排序中，比较两个对象是否相同的标准为：compare()返回0.不再是equals().</p>
+<ol start="6">
+<li>TreeSet的使用<br>
+6.1 使用说明:<br>
+1.向TreeSet中添加的数据，要求是相同类的对象。<br>
+2.两种排序方式：自然排序（实现Comparable接口 和 定制排序（Comparator）</li>
+</ol>
+<p>6.2 常用的排序方式:<br>
+//方式一：自然排序<br>
+@Test<br>
+public void test1(){<br>
+TreeSet set = new TreeSet();<br>
+//失败：不能添加不同类的对象<br>
+//        set.add(123);<br>
+//        set.add(456);<br>
+//        set.add(&quot;AA&quot;);<br>
+//        set.add(new User(&quot;Tom&quot;,12));<br>
+//举例一：<br>
+//        set.add(34);<br>
+//        set.add(-34);<br>
+//        set.add(43);<br>
+//        set.add(11);<br>
+//        set.add(8);<br>
+//举例二：<br>
+set.add(new User(&quot;Tom&quot;,12));<br>
+set.add(new User(&quot;Jerry&quot;,32));<br>
+set.add(new User(&quot;Jim&quot;,2));<br>
+set.add(new User(&quot;Mike&quot;,65));<br>
+set.add(new User(&quot;Jack&quot;,33));<br>
+set.add(new User(&quot;Jack&quot;,56));</p>
+<pre><code>    Iterator iterator = set.iterator();
+    while(iterator.hasNext()){
+        System.out.println(iterator.next());
+    }
+}
+</code></pre>
+<p>//方式二：定制排序<br>
+@Test<br>
+public void test2(){<br>
+Comparator com = new Comparator() {<br>
+//照年龄从小到大排列<br>
+@Override<br>
+public int compare(Object o1, Object o2) {<br>
+if(o1 instanceof User &amp;&amp; o2 instanceof User){<br>
+User u1 = (User)o1;<br>
+User u2 = (User)o2;<br>
+return Integer.compare(u1.getAge(),u2.getAge());<br>
+}else{<br>
+throw new RuntimeException(&quot;输入的数据类型不匹配&quot;);<br>
+}<br>
+}<br>
+};<br>
+TreeSet set = new TreeSet(com);<br>
+set.add(new User(&quot;Tom&quot;,12));<br>
+set.add(new User(&quot;Jerry&quot;,32));<br>
+set.add(new User(&quot;Jim&quot;,2));<br>
+set.add(new User(&quot;Mike&quot;,65));<br>
+set.add(new User(&quot;Mary&quot;,33));<br>
+set.add(new User(&quot;Jack&quot;,33));<br>
+set.add(new User(&quot;Jack&quot;,56));<br>
+Iterator iterator = set.iterator();<br>
+while(iterator.hasNext()){<br>
+System.out.println(iterator.next());<br>
+}<br>
 }</p>
-<pre><code>public void getSum(double d1,double d2){
-	System.out.println(&quot;2&quot;);
-}
-
-public void getSum(String s ,int i){
-	System.out.println(&quot;3&quot;);
-}
-
-public void getSum(int i,String s){
-	System.out.println(&quot;4&quot;);
-}
+<p>六、Map接口<br>
+双列集合框架：Map<br>
+1.常用实现类结构<br>
+|----Map:双列数据，存储key-value对的数据   ---类似于高中的函数：y = f(x)</p>
+<ul>
+<li>
+<pre><code>  |----HashMap:作为Map的主要实现类；线程不安全的，效率高；存储null的key和value
 </code></pre>
-<p>不构成重载的举例：<br>
-//如下的3个方法不能与上述4个方法构成重载<br>
-//	public int getSum(int i,int j){<br>
-//		return 0;<br>
-//	}</p>
-<p>//	public void getSum(int m,int n){<br>
-//		<br>
-//	}</p>
-<p>//	private void getSum(int i,int j){<br>
-//		<br>
-//	}</p>
-<ol>
-<li>如何判断是否构成方法的重载？<br>
-严格按照定义判断：两同一不同。<br>
-跟方法的权限修饰符、返回值类型、形参变量名、方法体都没关系！<br>
-4.如何确定类中某一个方法的调用：<br>
-方法名 ---&gt; 参数列表</li>
-</ol>
-<p>可变个数的形参的方法：<br>
-1.使用说明：</p>
-<ul>
-<li>1.jdk 5.0新增的内容</li>
-<li>2.具体使用：</li>
-<li>2.1 可变个数形参的格式：数据类型 ... 变量名</li>
-<li>2.2 当调用可变个数形参的方法时，传入的参数个数可以是：0个，1个,2个，。。。</li>
-<li>2.3 可变个数形参的方法与本类中方法名相同，形参不同的方法之间构成重载</li>
-<li>2.4 可变个数形参的方法与本类中方法名相同，形参类型也相同的数组之间不构成重载。换句话说，二者不能共存。</li>
-<li>2.5 可变个数形参在方法的形参中，必须声明在末尾</li>
-<li>2.6  可变个数形参在方法的形参中,最多只能声明一个可变形参。<br>
-（之前方法形参有多个的时候，一般使用数组，常见场景：JDBC工具类）<br>
-2.举例说明：<br>
-public void show(int i){<br>
-}<br>
-public void show(String s){<br>
-System.out.println(&quot;show(String)&quot;);<br>
-}<br>
-public void show(String ... strs){<br>
-System.out.println(&quot;show(String ... strs)&quot;);<br>
-for(int i = 0;i &lt; strs.length;i++){<br>
-System.out.println(strs[i]);<br>
-}<br>
-}<br>
-//不能与上一个方法同时存在<br>
-//	public void show(String[] strs){<br>
-//		<br>
-//	}<br>
-调用时：<br>
-test.show(&quot;hello&quot;);<br>
-test.show(&quot;hello&quot;,&quot;world&quot;);<br>
-test.show();<br>
-test.show(new String[]{&quot;AA&quot;,&quot;BB&quot;,&quot;CC&quot;});</li>
+</li>
+<li>
+<pre><code>         |----LinkedHashMap:保证在遍历map元素时，可以照添加的顺序实现遍历。
+</code></pre>
+</li>
+<li>
+<pre><code>               原因：在原有的HashMap底层结构基础上，添加了一对指针，指向前一个和后一个元素。
+</code></pre>
+</li>
+<li>
+<pre><code>               对于频繁的遍历操作，此类执行效率高于HashMap。
+</code></pre>
+</li>
+<li>
+<pre><code>  |----TreeMap:保证照添加的key-value对进行排序，实现排序遍历。此时考虑key的自然排序或定制排序
+</code></pre>
+</li>
+<li>
+<pre><code>                 底层使用红黑树
+</code></pre>
+</li>
+<li>
+<pre><code>  |----Hashtable:作为古老的实现类；线程安全的，效率低；不能存储null的key和value
+</code></pre>
+</li>
+<li>
+<pre><code>         |----Properties:常用来处理配置文件。key和value都是String类型
+</code></pre>
+</li>
+<li></li>
+<li></li>
+<li>
+<pre><code> HashMap的底层：数组+链表  （jdk7及之前)
+</code></pre>
+</li>
+<li>
+<pre><code>               数组+链表+红黑树 （jdk 8)
+</code></pre>
+</li>
 </ul>
-<p>java的值传递机制：<br>
-1.规则：<br>
-如果变量是基本数据类型，此时赋值的是变量所保存的数据值。<br>
-如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</p>
-<p>2.针对于方法的参数概念<br>
-形参：方法定义时，声明的小括号内的参数<br>
-实参：方法调用时，实际传递给形参的数据</p>
-<p>3.java中参数传递机制：值传递<br>
-规则：</p>
-<ul>
-<li>如果参数是基本数据类型，此时实参赋给形参的是实参真实存储的数据值。</li>
-<li>如果参数是引用数据类型，此时实参赋给形参的是实参存储数据的地址值。</li>
-</ul>
-<p>推广：<br>
-如果变量是基本数据类型，此时赋值的是变量所保存的数据值。<br>
-如果变量是引用数据类型，此时赋值的是变量所保存的数据的地址值。</p>
-<p>递归：<br>
-1.定义：<br>
-递归方法：一个方法体内调用它自身。<br>
-2.如何理解递归方法？</p>
+<p>2.存储结构的理解：</p>
 <blockquote>
-<p>方法递归包含了一种隐式的循环，它会重复执行某段代码，但这种重复执行无须循环控制。<br>
-递归一定要向已知方向递归，否则这种递归就变成了无穷递归，类似于死循环。<br>
-3.举例：<br>
-// 例1：计算1-n之间所自然数的和<br>
-public int getSum(int n) {// 3<br>
-if (n == 1) {<br>
-return 1;<br>
-} else {<br>
-return n + getSum(n - 1);<br>
-}<br>
-}</p>
+<p>Map中的key:无序的、不可重复的，使用Set存储所有的key  ---&gt; key所在的类要重写equals()和hashCode() （以HashMap为例)<br>
+Map中的value:无序的、可重复的，使用Collection存储所的value ---&gt;value所在的类要重写equals()<br>
+一个键值对：key-value构成了一个Entry对象。<br>
+Map中的entry:无序的、不可重复的，使用Set存储所的entry</p>
 </blockquote>
-<pre><code>// 例2：计算1-n之间所自然数的乘积:n!
-public int getSum1(int n) {
-	if (n == 1) {
-		return 1;
-	} else {
-		return n * getSum1(n - 1);
-	}
-}
-
-//例3：已知一个数列：f(0) = 1,f(1) = 4,f(n+2)=2*f(n+1) + f(n),
-//其中n是大于0的整数，求f(10)的值。
-public int f(int n){
-	if(n == 0){
-		return 1;
-	}else if(n == 1){
-		return 4;
-	}else{
-</code></pre>
-<p>//			return f(n + 2) - 2 * f(n + 1);<br>
-return 2*f(n - 1) + f(n - 2);<br>
-}<br>
-}</p>
-<p>四、类的结构之三：构造器<br>
-1.构造器（或构造方法）：Constructor<br>
-构造器的作用：</p>
+<p>图示：<br>
+<img src="https://fantaixi.github.io/post-images/1588788678652.png" alt="" loading="lazy"></p>
+<p>3.常用方法</p>
 <ul>
-<li>1.创建对象</li>
-<li>2.初始化对象的信息<br>
-2.使用说明：</li>
-<li>1.如果没显式的定义类的构造器的话，则系统默认提供一个空参的构造器</li>
-<li>2.定义构造器的格式：权限修饰符  类名(形参列表){}</li>
-<li>3.一个类中定义的多个构造器，彼此构成重载</li>
-<li>4.一旦我们显式的定义了类的构造器之后，系统就不再提供默认的空参构造器</li>
-<li>5.一个类中，至少会有一个构造器。</li>
+<li>添加：put(Object key,Object value)</li>
+<li>删除：remove(Object key)</li>
+<li>修改：put(Object key,Object value)</li>
+<li>查询：get(Object key)</li>
+<li>长度：size()</li>
+<li>遍历：keySet() / values() / entrySet()</li>
 </ul>
-<p>3.举例：<br>
-//构造器<br>
-public Person(){<br>
-System.out.println(&quot;Person().....&quot;);<br>
-}<br>
-public Person(String n){<br>
-name = n;	<br>
-}<br>
-public Person(String n,int a){<br>
-name = n;<br>
-age = a;<br>
-}</p>
-<p>补充：属性赋值顺序，JavaBean，this，package/import/JDK中常见的包及其使用</p>
-<p>属性赋值顺序：<br>
-① 默认初始化<br>
-② 显式初始化<br>
-③ 构造器中初始化<br>
-④ 通过&quot;对象.方法&quot; 或 &quot;对象.属性&quot;的方式，赋值<br>
-以上操作的先后顺序：① - ② - ③ - ④</p>
-<p>JavaBean：<br>
-所谓JavaBean，是指符合如下标准的Java类：<br>
-&gt;类是公共的<br>
-&gt;一个无参的公共的构造器<br>
-&gt;属性，且对应的get、set方法</p>
-<p>关键字：this<br>
-1.可以调用的结构：属性、方法；构造器<br>
-2.this调用属性、方法：<br>
-this理解为：当前对象  或 当前正在创建的对象</p>
-<p>2.1  在类的方法中，我们可以使用&quot;this.属性&quot;或&quot;this.方法&quot;的方式，调用当前对象属性或方法。但是， 通常情况下，我们都择省略&quot;this.&quot;。特殊情况下，如果方法的形参和类的属性同名时，我们必须显式的使用&quot;this.变量&quot;的方式，表明此变量是属性，而非形参。<br>
-*</p>
-<ul>
-<li>2.2 在类的构造器中，我们可以使用&quot;this.属性&quot;或&quot;this.方法&quot;的方式，调用当前正在创建的对象属性或方法。但是，通常情况下，我们都选择省略&quot;this.&quot;。特殊情况下，如果构造器的形参和类的属性同名时，我们必须显式的使用&quot;this.变量&quot;的方式，表明此变量是属性，而非形参。</li>
-</ul>
-<p>3.this调用构造器：<br>
-① 我们在类的构造器中，可以显式的使用&quot;this(形参列表)&quot;方式，调用本类中指定的其他构造器<br>
-② 构造器中不能通过&quot;this(形参列表)&quot;方式调用自己（死循环）<br>
-③ 如果一个类中有n个构造器，则最多有 n - 1构造器中使用了&quot;this(形参列表)&quot;<br>
-④ 规定：&quot;this(形参列表)&quot;必须声明在当前构造器的首行<br>
-⑤ 构造器内部，最多只能声明一个&quot;this(形参列表)&quot;，用来调用其他的构造器</p>
-<p>package/import</p>
 <ol>
-<li>package的使用说明：</li>
-</ol>
-<ul>
-<li>1.为了更好的实现项目中类的管理，提供包的概念</li>
-<li>2.使用package声明类或接口所属的包，声明在源文件的首行</li>
-<li>3.包，属于标识符，遵循标识符的命名规则、规范(xxxyyyzzz)、“见名知意”</li>
-<li>4.每&quot;.&quot;一次，就代表一层文件目录。</li>
-</ul>
-<ol start="2">
-<li>import的使用：</li>
+<li>内存结构说明：（难点）<br>
+4.1 HashMap在jdk7中实现原理：<br>
+HashMap map = new HashMap():</li>
 </ol>
 <ul>
 <li>
+<pre><code> 在实例化以后，底层创建了长度是16的一维数组Entry[] table。
+</code></pre>
+</li>
+<li>
+<pre><code> ...可能已经执行过多次put...
+</code></pre>
+</li>
+<li>
+<pre><code> map.put(key1,value1):
+</code></pre>
+</li>
+<li>
+<pre><code> 首先，调用key1所在类的hashCode()计算key1哈希值，此哈希值经过某种算法计算以后，得到在Entry数组中的存放位置。
+</code></pre>
+</li>
+<li>
+<pre><code> 如果此位置上的数据为空，此时的key1-value1添加成功。 ----情况1
+</code></pre>
+</li>
+<li>
+<pre><code> 如果此位置上的数据不为空，(意味着此位置上存在一个或多个数据(以链表形式存在)),比较key1和已经存在的一个或多个数据的哈希值：
+</code></pre>
+</li>
+<li>
+<pre><code>         如果key1的哈希值与已经存在的数据的哈希值都不相同，此时key1-value1添加成功。----情况2
+</code></pre>
+</li>
+<li>
+<pre><code>         如果key1的哈希值和已经存在的某一个数据(key2-value2)的哈希值相同，继续比较：调用key1所在类的equals(key2)方法，比较：
+</code></pre>
+</li>
+<li>
+<pre><code>                 如果equals()返回false:此时key1-value1添加成功。----情况3
+</code></pre>
+</li>
+<li>
+<pre><code>                 如果equals()返回true:使用value1替换value2。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 补充：关于情况2和情况3：此时key1-value1和原来的数据以链表的方式存储。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code>在不断的添加过程中，会涉及到扩容问题，当超出临界值(且要存放的位置非空)时，扩容。默认的扩容方式：扩容为原来容量的2倍，并将原的数据复制过来。
+</code></pre>
+</li>
+</ul>
+<p>4.2 HashMap在jdk8中相较于jdk7在底层实现方面的不同：</p>
 <ol>
-<li>在源文件中显式的使用import结构导入指定包下的类、接口</li>
+<li>new HashMap():底层没创建一个长度为16的数组</li>
+<li>jdk 8底层的数组是：Node[],而非Entry[]</li>
+<li>首次调用put()方法时，底层创建长度为16的数组</li>
+<li>jdk7底层结构只：数组+链表。jdk8中底层结构：数组+链表+红黑树。<br>
+4.1 形成链表时，七上八下（jdk7:新的元素指向旧的元素。jdk8：旧的元素指向新的元素）<br>
+4.2 当数组的某一个索引位置上的元素以链表形式存在的数据个数 &gt; 8 且当前数组的长度 &gt; 64时，此时此索引位置上的所数据改为使用红黑树存储。</li>
+</ol>
+<p>4.3 HashMap底层典型属性的属性的说明：<br>
+DEFAULT_INITIAL_CAPACITY : HashMap的默认容量，16<br>
+DEFAULT_LOAD_FACTOR：HashMap的默认加载因子：0.75<br>
+threshold：扩容的临界值，=容量*填充因子：16 * 0.75 =&gt; 12<br>
+TREEIFY_THRESHOLD：Bucket中链表长度大于该默认值，转化为红黑树:8<br>
+MIN_TREEIFY_CAPACITY：桶中的Node被树化时最小的hash表容量:64</p>
+<p>4.4 LinkedHashMap的底层实现原理(了解)<br>
+LinkedHashMap底层使用的结构与HashMap相同，因为LinkedHashMap继承于HashMap.<br>
+区别就在于：LinkedHashMap内部提供了Entry，替换HashMap中的Node.<br>
+<img src="https://fantaixi.github.io/post-images/1588788723692.png" alt="" loading="lazy"></p>
+<ol start="5">
+<li>TreeMap的使用<br>
+//向TreeMap中添加key-value，要求key必须是由同一个类创建的对象<br>
+//因为要照key进行排序：自然排序 、定制排序</li>
+</ol>
+<p>6.使用Properties读取配置文件<br>
+//Properties:常用来处理配置文件。key和value都是String类型<br>
+public static void main(String[] args)  {<br>
+FileInputStream fis = null;<br>
+try {<br>
+Properties pros = new Properties();<br>
+fis = new FileInputStream(&quot;jdbc.properties&quot;);<br>
+pros.load(fis);//加载流对应的文件<br>
+String name = pros.getProperty(&quot;name&quot;);<br>
+String password = pros.getProperty(&quot;password&quot;);<br>
+System.out.println(&quot;name = &quot; + name + &quot;, password = &quot; + password);<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+} finally {<br>
+if(fis != null){<br>
+try {<br>
+fis.close();<br>
+} catch (IOException e) {<br>
+e.printStackTrace();<br>
+}<br>
+}<br>
+}</p>
+<p>七、Collections工具类的使用<br>
+Collections工具类<br>
+1.作用：操作Collection和Map的工具类</p>
+<p>2.常用方法：<br>
+reverse(List)：反转 List 中元素的顺序<br>
+shuffle(List)：对 List 集合元素进行随机排序<br>
+sort(List)：根据元素的自然顺序对指定 List 集合元素升序排序<br>
+sort(List，Comparator)：根据指定的 Comparator 产生的顺序对 List 集合元素进行排序<br>
+swap(List，int， int)：将指定 list 集合中的 i 处元素和 j 处元素进行交换<br>
+Object max(Collection)：根据元素的自然顺序，返回给定集合中的最大元素<br>
+Object max(Collection，Comparator)：根据 Comparator 指定的顺序，返回给定集合中的最大元素<br>
+Object min(Collection)<br>
+Object min(Collection，Comparator)<br>
+int frequency(Collection，Object)：返回指定集合中指定元素的出现次数<br>
+void copy(List dest,List src)：将src中的内容复制到dest中<br>
+boolean replaceAll(List list，Object oldVal，Object newVal)：使用新值替换 List 对象的所旧值<br>
+<img src="https://fantaixi.github.io/post-images/1588788821537.png" alt="" loading="lazy"></p>
+<p>说明：ArrayList和HashMap都是线程不安全的，如果程序要求线程安全，我们可以将ArrayList、HashMap转换为线程的。<br>
+使用synchronizedList(List list） 和 synchronizedMap(Map map）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[14 枚举类和注解]]></title>
+        <id>https://fantaixi.github.io/post/14-mei-ju-lei-he-zhu-jie/</id>
+        <link href="https://fantaixi.github.io/post/14-mei-ju-lei-he-zhu-jie/">
+        </link>
+        <updated>2020-05-06T17:53:49.000Z</updated>
+        <content type="html"><![CDATA[<p>一、枚举类的使用</p>
+<ol>
+<li>枚举类的说明：</li>
+</ol>
+<ul>
+<li>1.枚举类的理解：类的对象只有有限个，确定的。我们称此类为枚举类</li>
+<li>2.当需要定义一组常量时，强烈建议使用枚举类</li>
+<li>3.如果枚举类中只一个对象，则可以作为单例模式的实现方式。</li>
+</ul>
+<ol start="2">
+<li>
+<p>如何自定义枚举类？步骤：<br>
+//自定义枚举类<br>
+class Season{<br>
+//1.声明Season对象的属性:private final修饰<br>
+private final String seasonName;<br>
+private final String seasonDesc;<br>
+//2.私化类的构造器,并给对象属性赋值<br>
+private Season(String seasonName,String seasonDesc){<br>
+this.seasonName = seasonName;<br>
+this.seasonDesc = seasonDesc;<br>
+}<br>
+//3.提供当前枚举类的多个对象：public static final的<br>
+public static final Season SPRING = new Season(&quot;春天&quot;,&quot;春暖花开&quot;);<br>
+public static final Season SUMMER = new Season(&quot;夏天&quot;,&quot;夏日炎炎&quot;);<br>
+public static final Season AUTUMN = new Season(&quot;秋天&quot;,&quot;秋高气爽&quot;);<br>
+public static final Season WINTER = new Season(&quot;冬天&quot;,&quot;冰天雪地&quot;);<br>
+//4.其他诉求1：获取枚举类对象的属性<br>
+public String getSeasonName() {<br>
+return seasonName;<br>
+}<br>
+public String getSeasonDesc() {<br>
+return seasonDesc;<br>
+}<br>
+//4.其他诉求1：提供toString()<br>
+@Override<br>
+public String toString() {<br>
+return &quot;Season{&quot; +<br>
+&quot;seasonName='&quot; + seasonName + ''' +<br>
+&quot;, seasonDesc='&quot; + seasonDesc + ''' +<br>
+'}';<br>
+}<br>
+}</p>
+</li>
+<li>
+<p>jdk 5.0 新增使用enum定义枚举类。步骤：<br>
+//使用enum关键字枚举类<br>
+enum Season1 {<br>
+//1.提供当前枚举类的对象，多个对象之间用&quot;,&quot;隔开，末尾对象&quot;;&quot;结束<br>
+SPRING(&quot;春天&quot;,&quot;春暖花开&quot;),<br>
+SUMMER(&quot;夏天&quot;,&quot;夏日炎炎&quot;),<br>
+AUTUMN(&quot;秋天&quot;,&quot;秋高气爽&quot;),<br>
+WINTER(&quot;冬天&quot;,&quot;冰天雪地&quot;);<br>
+//2.声明Season对象的属性:private final修饰<br>
+private final String seasonName;<br>
+private final String seasonDesc;<br>
+//2.私有化类的构造器,并给对象属性赋值<br>
+private Season1(String seasonName,String seasonDesc){<br>
+this.seasonName = seasonName;<br>
+this.seasonDesc = seasonDesc;<br>
+}</p>
+<p>//4.其他诉求1：获取枚举类对象的属性<br>
+public String getSeasonName() {<br>
+return seasonName;<br>
+}<br>
+public String getSeasonDesc() {<br>
+return seasonDesc;<br>
+}<br>
+}</p>
+</li>
+<li>
+<p>使用enum定义枚举类之后，枚举类常用方法：（继承于java.lang.Enum类）<br>
+Season1 summer = Season1.SUMMER;<br>
+//toString():返回枚举类对象的名称<br>
+System.out.println(summer.toString());<br>
+//        System.out.println(Season1.class.getSuperclass());<br>
+System.out.println(&quot;<strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+//values():返回所有的枚举类对象构成的数组<br>
+Season1[] values = Season1.values();<br>
+for(int i = 0;i &lt; values.length;i++){<br>
+System.out.println(values[i]);<br>
+}<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong>&quot;);<br>
+Thread.State[] values1 = Thread.State.values();<br>
+for (int i = 0; i &lt; values1.length; i++) {<br>
+System.out.println(values1[i]);<br>
+}<br>
+//valueOf(String objName):返回枚举类中对象名是objName的对象。<br>
+Season1 winter = Season1.valueOf(&quot;WINTER&quot;);<br>
+//如果没objName的枚举类对象，则抛异常：IllegalArgumentException<br>
+//        Season1 winter = Season1.valueOf(&quot;WINTER1&quot;);<br>
+System.out.println(winter);</p>
+</li>
+<li>
+<p>使用enum定义枚举类之后，如何让枚举类对象分别实现接口：<br>
+interface Info{<br>
+void show();<br>
+}</p>
+</li>
+</ol>
+<p>//使用enum关键字枚举类<br>
+enum Season1 implements Info{<br>
+//1.提供当前枚举类的对象，多个对象之间用&quot;,&quot;隔开，末尾对象&quot;;&quot;结束<br>
+SPRING(&quot;春天&quot;,&quot;春暖花开&quot;){<br>
+@Override<br>
+public void show() {<br>
+System.out.println(&quot;春天在哪里？&quot;);<br>
+}<br>
+},<br>
+SUMMER(&quot;夏天&quot;,&quot;夏日炎炎&quot;){<br>
+@Override<br>
+public void show() {<br>
+System.out.println(&quot;宁夏&quot;);<br>
+}<br>
+},<br>
+AUTUMN(&quot;秋天&quot;,&quot;秋高气爽&quot;){<br>
+@Override<br>
+public void show() {<br>
+System.out.println(&quot;秋天不回来&quot;);<br>
+}<br>
+},<br>
+WINTER(&quot;冬天&quot;,&quot;冰天雪地&quot;){<br>
+@Override<br>
+public void show() {<br>
+System.out.println(&quot;大约在冬季&quot;);<br>
+}<br>
+};<br>
+}</p>
+<p>二、注解的使用</p>
+<ol>
+<li>注解的理解<br>
+① jdk 5.0 新增的功能<br>
+② Annotation 其实就是代码里的特殊标记, 这些标记可以在编译, 类加载, 运行时被读取, 并执行相应的处理。通过使用 Annotation, 程序员可以在不改变原逻辑的情况下, 在源文件中嵌入一些补充信息。<br>
+③在JavaSE中，注解的使用目的比较简单，例如标记过时的功能，忽略警告等。在JavaEE/Android<br>
+中注解占据了更重要的角色，例如用来配置应用程序的任何切面，代替JavaEE旧版中所遗留的繁冗<br>
+代码和XML配置等。</li>
+</ol>
+<p>框架 = 注解 + 反射机制 + 设计模式</p>
+<ol>
+<li>注解的使用示例</li>
+</ol>
+<ul>
+<li>示例一：生成文档相关的注解</li>
+<li>示例二：在编译时进行格式检查(JDK内置的个基本注解)<br>
+@Override: 限定重写父类方法, 该注解只能用于方法<br>
+@Deprecated: 用于表示所修饰的元素(类, 方法等)已过时。通常是因为所修饰的结构危险或存在更好的择<br>
+@SuppressWarnings: 抑制编译器警告</li>
+<li>示例：跟踪代码依赖性，实现替代配置文件功能</li>
+</ul>
+<ol start="3">
+<li>如何自定义注解：参照@SuppressWarnings定义</li>
+</ol>
+<ul>
+<li>① 注解声明为：@interface</li>
+<li>② 内部定义成员，通常使用value表示</li>
+<li>③ 可以指定成员的默认值，使用default定义</li>
+<li>④ 如果自定义注解没成员，表明是一个标识作用。</li>
+</ul>
+<p>说明：<br>
+如果注解有成员，在使用注解时，需要指明成员的值。<br>
+自定义注解必须配上注解的信息处理流程(使用反射)才有意义。<br>
+自定义注解通过都会指明两个元注解：Retention、Target</p>
+<p>代码举例：<br>
+@Inherited<br>
+@Repeatable(MyAnnotations.class)<br>
+@Retention(RetentionPolicy.RUNTIME)<br>
+@Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE,TYPE_PARAMETER,TYPE_USE})<br>
+public @interface MyAnnotation {</p>
+<pre><code>String value() default &quot;hello&quot;;
+</code></pre>
+<p>}<br>
+4. 元注解 ：对现有的注解进行解释说明的注解。<br>
+jdk 提供的4种元注解：<br>
+Retention：指定所修饰的 Annotation 的生命周期：SOURCE\CLASS（默认行为\RUNTIME<br>
+只声明为RUNTIME生命周期的注解，才能通过反射获取。<br>
+Target:用于指定被修饰的 Annotation 能用于修饰哪些程序元素<br>
+<em><strong><strong><strong>出现的频率较低</strong></strong></strong></em><br>
+Documented:表示所修饰的注解在被javadoc解析时，保留下来。<br>
+Inherited:被它修饰的 Annotation 将具继承性。</p>
+<p>---&gt;类比：元数据的概念：String name = &quot;Tom&quot;;<br>
+5. 如何获取注解信息:通过发射来进行获取、调用。<br>
+前提：要求此注解的元注解Retention中声明的生命周期状态为：RUNTIME.<br>
+6.JDK8中注解的新特性：可重复注解、类型注解<br>
+6.1 可重复注解：① 在MyAnnotation上声明@Repeatable，成员值为MyAnnotations.class<br>
+② MyAnnotation的Target和Retention等元注解与MyAnnotations相同。<br>
+6.2 类型注解：<br>
+ElementType.TYPE_PARAMETER 表示该注解能写在类型变量的声明语句中（如：泛型声明。<br>
+ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[13 Java常用类]]></title>
+        <id>https://fantaixi.github.io/post/13-java-chang-yong-lei/</id>
+        <link href="https://fantaixi.github.io/post/13-java-chang-yong-lei/">
+        </link>
+        <updated>2020-05-06T17:31:54.000Z</updated>
+        <content type="html"><![CDATA[<p>一、String类<br>
+java.lang.String类的使用<br>
+1.概述<br>
+String:字符串，使用一对&quot;&quot;引起来表示。<br>
+1.String声明为final的，不可被继承<br>
+2.String实现了Serializable接口：表示字符串是支持序列化的。<br>
+实现了Comparable接口：表示String可以比较大小<br>
+3.String内部定义了final char[] value用于存储字符串数据<br>
+4.通过字面量的方式（区别于new给一个字符串赋值，此时的字符串值声明在字符串常量池中)。<br>
+5.字符串常量池中是不会存储相同内容(使用String类的equals()比较，返回true)的字符串的。</p>
+<p>2.String的不可变性<br>
+2.1 说明<br>
+1.当对字符串重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值。<br>
+2.当对现的字符串进行连接操作时，也需要重新指定内存区域赋值，不能使用原有的value进行赋值。<br>
+3.当调用String的replace()方法修改指定字符或字符串时，也需要重新指定内存区域赋值，不能使用原有的value进行赋值。<br>
+2.2 代码举例<br>
+String s1 = &quot;abc&quot;;//字面量的定义方式<br>
+String s2 = &quot;abc&quot;;<br>
+s1 = &quot;hello&quot;;<br>
+System.out.println(s1 == s2);//比较s1和s2的地址值<br>
+System.out.println(s1);//hello<br>
+System.out.println(s2);//abc<br>
+System.out.println(&quot;<em><strong><strong><strong><strong><strong><strong><strong><strong>&quot;);<br>
+String s3 = &quot;abc&quot;;<br>
+s3 += &quot;def&quot;;<br>
+System.out.println(s3);//abcdef<br>
+System.out.println(s2);<br>
+System.out.println(&quot;</strong></strong></strong></strong></strong></strong></strong></strong></em>&quot;);<br>
+String s4 = &quot;abc&quot;;<br>
+String s5 = s4.replace('a', 'm');<br>
+System.out.println(s4);//abc<br>
+System.out.println(s5);//mbc<br>
+2.3 图示<br>
+<img src="https://fantaixi.github.io/post-images/1588786564765.png" alt="" loading="lazy"><br>
+3.String实例化的不同方式<br>
+3.1 方式说明<br>
+方式一：通过字面量定义的方式<br>
+方式二：通过new + 构造器的方式<br>
+3.2 代码举例<br>
+//通过字面量定义的方式：此时的s1和s2的数据javaEE声明在方法区中的字符串常量池中。<br>
+String s1 = &quot;javaEE&quot;;<br>
+String s2 = &quot;javaEE&quot;;<br>
+//通过new + 构造器的方式:此时的s3和s4保存的地址值，是数据在堆空间中开辟空间以后对应的地址值。<br>
+String s3 = new String(&quot;javaEE&quot;);<br>
+String s4 = new String(&quot;javaEE&quot;);<br>
+System.out.println(s1 == s2);//true<br>
+System.out.println(s1 == s3);//false<br>
+System.out.println(s1 == s4);//false<br>
+System.out.println(s3 == s4);//false<br>
+3.3 面试题<br>
+String s = new String(&quot;abc&quot;);方式创建对象，在内存中创建了几个对象？<br>
+两个:一个是堆空间中new结构，另一个是char[]对应的常量池中的数据：&quot;abc&quot;<br>
+3.4 图示<br>
+<img src="https://fantaixi.github.io/post-images/1588786519711.png" alt="" loading="lazy"><br>
+4. 字符串拼接方式赋值的对比<br>
+4.1 说明<br>
+1.常量与常量的拼接结果在常量池。且常量池中不会存在相同内容的常量。<br>
+2.只要其中一个是变量，结果就在堆中。<br>
+3.如果拼接的结果调用intern()方法，返回值就在常量池中<br>
+4.2 代码举例<br>
+String s1 = &quot;javaEE&quot;;<br>
+String s2 = &quot;hadoop&quot;;<br>
+String s3 = &quot;javaEEhadoop&quot;;<br>
+String s4 = &quot;javaEE&quot; + &quot;hadoop&quot;;<br>
+String s5 = s1 + &quot;hadoop&quot;;<br>
+String s6 = &quot;javaEE&quot; + s2;<br>
+String s7 = s1 + s2;<br>
+System.out.println(s3 == s4);//true<br>
+System.out.println(s3 == s5);//false<br>
+System.out.println(s3 == s6);//false<br>
+System.out.println(s3 == s7);//false<br>
+System.out.println(s5 == s6);//false<br>
+System.out.println(s5 == s7);//false<br>
+System.out.println(s6 == s7);//false<br>
+String s8 = s6.intern();//返回值得到的s8使用的常量值中已经存在的“javaEEhadoop”<br>
+System.out.println(s3 == s8);//true</p>
+<hr>
+<p>String s1 = &quot;javaEEhadoop&quot;;<br>
+String s2 = &quot;javaEE&quot;;<br>
+String s3 = s2 + &quot;hadoop&quot;;<br>
+System.out.println(s1 == s3);//false<br>
+final String s4 = &quot;javaEE&quot;;//s4:常量<br>
+String s5 = s4 + &quot;hadoop&quot;;<br>
+System.out.println(s1 == s5);//true</p>
+<p>5.常用方法：<br>
+int length()：返回字符串的长度： return value.length<br>
+char charAt(int index)： 返回某索引处的字符return value[index]<br>
+boolean isEmpty()：判断是否是空字符串：return value.length == 0<br>
+String toLowerCase()：使用默认语言环境，将 String 中的所字符转换为小写<br>
+String toUpperCase()：使用默认语言环境，将 String 中的所字符转换为大写<br>
+String trim()：返回字符串的副本，忽略前导空白和尾部空白<br>
+boolean equals(Object obj)：比较字符串的内容是否相同<br>
+boolean equalsIgnoreCase(String anotherString)：与equals方法类似，忽略大小写<br>
+String concat(String str)：将指定字符串连接到此字符串的结尾。 等价于用“+”<br>
+int compareTo(String anotherString)：比较两个字符串的大小<br>
+String substring(int beginIndex)：返回一个新的字符串，它是此字符串的从beginIndex开始截取到最后的一个子字符串。<br>
+String substring(int beginIndex, int endIndex) ：返回一个新字符串，它是此字符串从beginIndex开始截取到endIndex(不包含)的一个子字符串。<br>
+boolean endsWith(String suffix)：测试此字符串是否以指定的后缀结束<br>
+boolean startsWith(String prefix)：测试此字符串是否以指定的前缀开始<br>
+boolean startsWith(String prefix, int toffset)：测试此字符串从指定索引开始的子字符串是否以指定前缀开始<br>
+boolean contains(CharSequence s)：当且仅当此字符串包含指定的 char 值序列时，返回 true<br>
+int indexOf(String str)：返回指定子字符串在此字符串中第一次出现处的索引<br>
+int indexOf(String str, int fromIndex)：返回指定子字符串在此字符串中第一次出现处的索引，从指定的索引开始<br>
+int lastIndexOf(String str)：返回指定子字符串在此字符串中最右边出现处的索引<br>
+int lastIndexOf(String str, int fromIndex)：返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始反向搜索</p>
+<p>注：indexOf和lastIndexOf方法如果未找到都是返回-1</p>
+<p>替换：<br>
+String replace(char oldChar, char newChar)：返回一个新的字符串，它是通过用 newChar 替换此字符串中出现的所 oldChar 得到的。<br>
+String replace(CharSequence target, CharSequence replacement)：使用指定的字面值替换序列替换此字符串所匹配字面值目标序列的子字符串。<br>
+String replaceAll(String regex, String replacement)：使用给定的 replacement 替换此字符串所匹配给定的正则表达式的子字符串。<br>
+String replaceFirst(String regex, String replacement)：使用给定的 replacement 替换此字符串匹配给定的正则表达式的第一个子字符串。<br>
+匹配:<br>
+boolean matches(String regex)：告知此字符串是否匹配给定的正则表达式。<br>
+切片：<br>
+String[] split(String regex)：根据给定正则表达式的匹配拆分此字符串。<br>
+String[] split(String regex, int limit)：根据匹配给定的正则表达式来拆分此字符串，最多不超过limit个，如果超过了，剩下的全部都放到最后一个元素中。</p>
+<ol start="6">
+<li>String与其它结构的转换	<br>
+6.1 与基本数据类型、包装类之间的转换<br>
+String --&gt; 基本数据类型、包装类：调用包装类的静态方法：parseXxx(str)<br>
+基本数据类型、包装类 --&gt; String:调用String重载的valueOf(xxx)<br>
+@Test<br>
+public void test1(){<br>
+String str1 = &quot;123&quot;;<br>
+//        int num = (int)str1;//错误的<br>
+int num = Integer.parseInt(str1);<br>
+String str2 = String.valueOf(num);//&quot;123&quot;<br>
+String str3 = num + &quot;&quot;;<br>
+System.out.println(str1 == str3);<br>
+}<br>
+6.2 与字符数组之间的转换<br>
+String --&gt; char[]:调用String的toCharArray()<br>
+char[] --&gt; String:调用String的构造器<br>
+@Test<br>
+public void test2(){<br>
+String str1 = &quot;abc123&quot;;  //题目： a21cb3<br>
+char[] charArray = str1.toCharArray();<br>
+for (int i = 0; i &lt; charArray.length; i++) {<br>
+System.out.println(charArray[i]);<br>
+}<br>
+char[] arr = new char[]{'h','e','l','l','o'};<br>
+String str2 = new String(arr);<br>
+System.out.println(str2);<br>
+}<br>
+6.3 与字节数组之间的转换<br>
+编码：String --&gt; byte[]:调用String的getBytes()<br>
+解码：byte[] --&gt; String:调用String的构造器</li>
+</ol>
+<p>编码：字符串 --&gt;字节  (看得懂 ---&gt;看不懂的二进制数据)<br>
+解码：编码的逆过程，字节 --&gt; 字符串 （看不懂的二进制数据 ---&gt; 看得懂</p>
+<p>说明：解码时，要求解码使用的字符集必须与编码时使用的字符集一致，否则会出现乱码。</p>
+<p>@Test<br>
+public void test3() throws UnsupportedEncodingException {<br>
+String str1 = &quot;abc123中国&quot;;<br>
+byte[] bytes = str1.getBytes();//使用默认的字符集，进行编码。<br>
+System.out.println(Arrays.toString(bytes));<br>
+byte[] gbks = str1.getBytes(&quot;gbk&quot;);//使用gbk字符集进行编码。<br>
+System.out.println(Arrays.toString(gbks));<br>
+System.out.println(&quot;******************&quot;);<br>
+String str2 = new String(bytes);//使用默认的字符集，进行解码。<br>
+System.out.println(str2);<br>
+String str3 = new String(gbks);<br>
+System.out.println(str3);//出现乱码。原因：编码集和解码集不一致！<br>
+String str4 = new String(gbks, &quot;gbk&quot;);<br>
+System.out.println(str4);//没出现乱码。原因：编码集和解码集一致！<br>
+}</p>
+<p>6.4 与StringBuffer、StringBuilder之间的转换<br>
+String --&gt;StringBuffer、StringBuilder:调用StringBuffer、StringBuilder构造器<br>
+StringBuffer、StringBuilder --&gt;String:①调用String构造器；②StringBuffer、StringBuilder的toString()</p>
+<ol start="7">
+<li>JVM中字符串常量池存放位置说明：<br>
+jdk 1.6 (jdk 6.0 ,java 6.0):字符串常量池存储在方法区（永久区）<br>
+jdk 1.7:字符串常量池存储在堆空间<br>
+jdk 1.8:字符串常量池存储在方法区（元空间）</li>
+</ol>
+<p>二、StringBuffer、StringBuilder<br>
+1.String、StringBuffer、StringBuilder三者的对比<br>
+String:不可变的字符序列；底层使用char[]存储<br>
+StringBuffer:可变的字符序列；线程安全的，效率低；底层使用char[]存储<br>
+StringBuilder:可变的字符序列；jdk5.0新增的，线程不安全的，效率高；底层使用char[]存储</p>
+<p>2.StringBuffer与StringBuilder的内存解析<br>
+以StringBuffer为例：<br>
+String str = new String();//char[] value = new char[0];<br>
+String str1 = new String(&quot;abc&quot;);//char[] value = new char[]{'a','b','c'};<br>
+StringBuffer sb1 = new StringBuffer();//char[] value = new char[16];底层创建了一个长度是16的数组。<br>
+System.out.println(sb1.length());//<br>
+sb1.append('a');//value[0] = 'a';<br>
+sb1.append('b');//value[1] = 'b';<br>
+StringBuffer sb2 = new StringBuffer(&quot;abc&quot;);<br>
+//char[] value = new char[&quot;abc&quot;.length() + 16];</p>
+<p>//问题1. System.out.println(sb2.length());//3<br>
+//问题2. 扩容问题:如果要添加的数据底层数组盛不下了，那就需要扩容底层的数组。<br>
+默认情况下，扩容为原来容量的2倍 + 2，同时将原数组中的元素复制到新的数组中。</p>
+<p>开发中建议大家使用：StringBuffer(int capacity) 或 StringBuilder(int capacity)</p>
+<p>3.对比String、StringBuffer、StringBuilder三者的执行效率<br>
+从高到低排列：StringBuilder &gt; StringBuffer &gt; String</p>
+<p>4.StringBuffer、StringBuilder中的常用方法<br>
+增：append(xxx)<br>
+删：delete(int start,int end)<br>
+改：setCharAt(int n ,char ch) / replace(int start, int end, String str)<br>
+查：charAt(int n )<br>
+插：insert(int offset, xxx)<br>
+长度：length();<br>
+*遍历：for() + charAt() / toString()</p>
+<p>三、JDK8之前的日期时间API<br>
+1.获取系统当前时间：System类中的currentTimeMillis()<br>
+long time = System.currentTimeMillis();<br>
+//返回当前时间与1970年1月1日0时0分0秒之间以毫秒为单位的时间差。<br>
+//称为时间戳<br>
+System.out.println(time);</p>
+<ol start="2">
+<li>
+<p>java.util.Date类与java.sql.Date类<br>
+/*<br>
+java.util.Date类<br>
+|---java.sql.Date类</p>
+<p>1.两个构造器的使用<br>
+&gt;构造器一：Date()：创建一个对应当前时间的Date对象<br>
+&gt;构造器二：创建指定毫秒数的Date对象<br>
+2.两个方法的使用<br>
+&gt;toString():显示当前的年、月、日、时、分、秒<br>
+&gt;getTime():获取当前Date对象对应的毫秒数。（时间戳）</p>
+<ol start="3">
+<li>
+<p>java.sql.Date对应着数据库中的日期类型的变量</p>
+<blockquote>
+<p>如何实例化<br>
+如何将java.util.Date对象转换为java.sql.Date对象<br>
+*/<br>
+@Test<br>
+public void test2(){<br>
+//构造器一：Date()：创建一个对应当前时间的Date对象<br>
+Date date1 = new Date();<br>
+System.out.println(date1.toString());//Sat Feb 16 16:35:31 GMT+08:00 2019<br>
+System.out.println(date1.getTime());//1550306204104<br>
+//构造器二：创建指定毫秒数的Date对象<br>
+Date date2 = new Date(155030620410L);<br>
+System.out.println(date2.toString());</p>
+</blockquote>
+<p>//创建java.sql.Date对象<br>
+java.sql.Date date3 = new java.sql.Date(35235325345L);<br>
+System.out.println(date3);//1971-02-13<br>
+//如何将java.util.Date对象转换为java.sql.Date对象<br>
+//情况一：<br>
+//        Date date4 = new java.sql.Date(2343243242323L);<br>
+//        java.sql.Date date5 = (java.sql.Date) date4;<br>
+//情况二：<br>
+Date date6 = new Date();<br>
+java.sql.Date date7 = new java.sql.Date(date6.getTime());<br>
+}</p>
+</li>
+</ol>
+</li>
+<li>
+<p>java.text.SimpleDataFormat类<br>
+SimpleDateFormat对日期Date类的格式化和解析<br>
+1.两个操作：<br>
+1.1 格式化：日期 ---&gt;字符串<br>
+1.2 解析：格式化的逆过程，字符串 ---&gt; 日期</p>
+</li>
+</ol>
+<p>2.SimpleDateFormat的实例化:new + 构造器</p>
+<p>//<em><strong><strong><strong><strong><strong><strong>照指定的方式格式化和解析：调用带参的构造器</strong></strong></strong></strong></strong></strong></em>****<br>
+//        SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyyy.MMMMM.dd GGG hh:mm aaa&quot;);<br>
+SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd hh:mm:ss&quot;);<br>
+//格式化<br>
+String format1 = sdf1.format(date);<br>
+System.out.println(format1);//2019-02-18 11:48:27<br>
+//解析:要求字符串必须是符合SimpleDateFormat识别的格式(通过构造器参数体现),<br>
+//否则，抛异常<br>
+Date date2 = sdf1.parse(&quot;2020-02-18 11:48:27&quot;);<br>
+System.out.println(date2);</p>
+<pre><code>@Test
+public void testExer() throws ParseException {
+    String birth = &quot;2020-09-08&quot;;
+
+    SimpleDateFormat sdf1 = new SimpleDateFormat(&quot;yyyy-MM-dd&quot;);
+    Date date = sdf1.parse(birth);
+</code></pre>
+<p>//        System.out.println(date);</p>
+<pre><code>    java.sql.Date birthDate = new java.sql.Date(date.getTime());
+    System.out.println(birthDate);
+}
+</code></pre>
+<p>4.Calendar类：日历类、抽象类<br>
+//1.实例化<br>
+//方式一：创建其子类（GregorianCalendar的对象<br>
+//方式二：调用其静态方法getInstance()<br>
+Calendar calendar = Calendar.getInstance();<br>
+//        System.out.println(calendar.getClass());</p>
+<pre><code>    //2.常用方法
+    //get()
+    int days = calendar.get(Calendar.DAY_OF_MONTH);
+    System.out.println(days);
+    System.out.println(calendar.get(Calendar.DAY_OF_YEAR));
+
+    //set()
+    //calendar可变性
+     calendar.set(Calendar.DAY_OF_MONTH,22);
+    days = calendar.get(Calendar.DAY_OF_MONTH);
+    System.out.println(days);
+
+    //add()
+    calendar.add(Calendar.DAY_OF_MONTH,-3);
+    days = calendar.get(Calendar.DAY_OF_MONTH);
+    System.out.println(days);
+
+    //getTime():日历类---&gt; Date
+    Date date = calendar.getTime();
+    System.out.println(date);
+
+    //setTime():Date ---&gt; 日历类
+    Date date1 = new Date();
+    calendar.setTime(date1);
+    days = calendar.get(Calendar.DAY_OF_MONTH);
+    System.out.println(days);
+</code></pre>
+<p>四、JDK8中新日期时间API<br>
+1.日期时间API的迭代：<br>
+第一代：jdk 1.0 Date类<br>
+第二代：jdk 1.1 Calendar类，一定程度上替换Date类<br>
+第三代：jdk 1.8 提出了新的一套API</p>
+<p>2.前两代存在的问题举例：<br>
+可变性：像日期和时间这样的类应该是不可变的。<br>
+偏移性：Date中的年份是从1900开始的，而月份都从0开始。<br>
+格式化：格式化只对Date用，Calendar则不行。<br>
+此外，它们也不是线程安全的；不能处理闰秒等。</p>
+<p>3.java 8 中新的日期时间API涉及到的包<br>
+<img src="https://fantaixi.github.io/post-images/1588787191055.png" alt="" loading="lazy"><br>
+4.本地日期、本地时间、本地日期时间的使用：LocalDate / LocalTime / LocalDateTime<br>
+4.1 说明：<br>
+① 分别表示使用 ISO-8601日历系统的日期、时间、日期和时间。它们提供了简单的本地日期或时间，并不包含当前的时间信息，也不包含与时区相关的信息。<br>
+② LocalDateTime相较于LocalDate、LocalTime，使用频率要高<br>
+③ 类似于Calendar</p>
+<p>4.2 常用方法：<br>
+<img src="https://fantaixi.github.io/post-images/1588787234063.png" alt="" loading="lazy"><br>
+5.时间点：Instant<br>
+5.1 说明：<br>
+① 时间线上的一个瞬时点。 概念上讲，它只是简单的表示自1970年1月1日0时0分0秒（UTC开始的秒数。）<br>
+② 类似于 java.util.Date类</p>
+<p>5.2 常用方法：<br>
+<img src="https://fantaixi.github.io/post-images/1588787270536.png" alt="" loading="lazy"></p>
+<p>6.日期时间格式化类：DateTimeFormatter<br>
+6.1 说明：<br>
+① 格式化或解析日期、时间<br>
+② 类似于SimpleDateFormat<br>
+6.2 常用方法：<br>
+① 实例化方式：<br>
+预定义的标准格式。如：ISO_LOCAL_DATE_TIME;ISO_LOCAL_DATE;ISO_LOCAL_TIME<br>
+本地化相关的格式。如：ofLocalizedDateTime(FormatStyle.LONG)<br>
+自定义的格式。如：ofPattern(“yyyy-MM-dd hh:mm:ss”)</p>
+<p>② 常用方法：<br>
+<img src="https://fantaixi.github.io/post-images/1588787306830.png" alt="" loading="lazy"></p>
+<p>特别的：自定义的格式。如：ofPattern(“yyyy-MM-dd hh:mm:ss”)<br>
+//  重点：自定义的格式。如：ofPattern(“yyyy-MM-dd hh:mm:ss”)<br>
+DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd hh:mm:ss&quot;);<br>
+//格式化<br>
+String str4 = formatter3.format(LocalDateTime.now());<br>
+System.out.println(str4);//2019-02-18 03:52:09</p>
+<p>//解析<br>
+TemporalAccessor accessor = formatter3.parse(&quot;2019-02-18 03:52:09&quot;);<br>
+System.out.println(accessor);</p>
+<p>7.其它API的使用（了解）<br>
+7.1 带时区的日期时间：ZonedDateTime / ZoneId<br>
+举例：<br>
+// ZoneId:类中包含了所的时区信息<br>
+@Test<br>
+public void test1(){<br>
+//getAvailableZoneIds():获取所的ZoneId<br>
+Set<String> zoneIds = ZoneId.getAvailableZoneIds();<br>
+for(String s : zoneIds){<br>
+System.out.println(s);<br>
+}<br>
+System.out.println();<br>
+//获取“Asia/Tokyo”时区对应的时间<br>
+LocalDateTime localDateTime = LocalDateTime.now(ZoneId.of(&quot;Asia/Tokyo&quot;));<br>
+System.out.println(localDateTime)	<br>
+}<br>
+//ZonedDateTime:带时区的日期时间<br>
+@Test<br>
+public void test2(){<br>
+//now():获取本时区的ZonedDateTime对象<br>
+ZonedDateTime zonedDateTime = ZonedDateTime.now();<br>
+System.out.println(zonedDateTime);<br>
+//now(ZoneId id):获取指定时区的ZonedDateTime对象<br>
+ZonedDateTime zonedDateTime1 = ZonedDateTime.now(ZoneId.of(&quot;Asia/Tokyo&quot;));<br>
+System.out.println(zonedDateTime1);<br>
+}<br>
+7.2 时间间隔：Duration--用于计算两个“时间”间隔，以秒和纳秒为基准<br>
+举例：<br>
+@Test<br>
+public void test3(){<br>
+LocalTime localTime = LocalTime.now();<br>
+LocalTime localTime1 = LocalTime.of(15, 23, 32);<br>
+//between():静态方法，返回Duration对象，表示两个时间的间隔<br>
+Duration duration = Duration.between(localTime1, localTime);<br>
+System.out.println(duration);<br>
+System.out.println(duration.getSeconds());<br>
+System.out.println(duration.getNano());<br>
+LocalDateTime localDateTime = LocalDateTime.of(2016, 6, 12, 15, 23, 32);<br>
+LocalDateTime localDateTime1 = LocalDateTime.of(2017, 6, 12, 15, 23, 32);<br>
+Duration duration1 = Duration.between(localDateTime1, localDateTime);<br>
+System.out.println(duration1.toDays());<br>
+}<br>
+7.3 日期间隔：Period --用于计算两个“日期”间隔，以年、月、日衡量<br>
+举例：<br>
+@Test<br>
+public void test4(){<br>
+LocalDate localDate = LocalDate.now();<br>
+LocalDate localDate1 = LocalDate.of(2028, 3, 18);<br>
+Period period = Period.between(localDate, localDate1);<br>
+System.out.println(period);<br>
+System.out.println(period.getYears());<br>
+System.out.println(period.getMonths());<br>
+System.out.println(period.getDays());<br>
+Period period1 = period.withYears(2);<br>
+System.out.println(period1);	<br>
+}<br>
+7.4 日期时间校正器：TemporalAdjuster<br>
+举例：<br>
+@Test<br>
+public void test5(){<br>
+//获取当前日期的下一个周日是哪天？<br>
+TemporalAdjuster temporalAdjuster = TemporalAdjusters.next(DayOfWeek.SUNDAY);<br>
+LocalDateTime localDateTime = LocalDateTime.now().with(temporalAdjuster);<br>
+System.out.println(localDateTime);<br>
+//获取下一个工作日是哪天？<br>
+LocalDate localDate = LocalDate.now().with(new TemporalAdjuster(){<br>
+@Override<br>
+public Temporal adjustInto(Temporal temporal) {<br>
+LocalDate date = (LocalDate)temporal;<br>
+if(date.getDayOfWeek().equals(DayOfWeek.FRIDAY)){<br>
+return date.plusDays(3);<br>
+}else if(date.getDayOfWeek().equals(DayOfWeek.SATURDAY)){<br>
+return date.plusDays(2);<br>
+}else{<br>
+return date.plusDays(1);<br>
+}		<br>
+}	<br>
+});<br>
+System.out.println(&quot;下一个工作日是：&quot; + localDate);<br>
+}</p>
+<p>五、Java比较器<br>
+1.Java比较器的使用背景：<br>
+Java中的对象，正常情况下，只能进行比较：==  或  != 。不能使用 &gt; 或 &lt; 的<br>
+但是在开发场景中，我们需要对多个对象进行排序，言外之意，就需要比较对象的大小。<br>
+如何实现？使用两个接口中的任何一个：Comparable 或 Comparator</p>
+<p>2.自然排序：使用Comparable接口<br>
+2.1 说明<br>
+1.像String、包装类等实现了Comparable接口，重写了compareTo(obj)方法，给出了比较两个对象大小的方式。<br>
+2.像String、包装类重写compareTo()方法以后，进行了从小到大的排列<br>
+3. 重写compareTo(obj)的规则：<br>
+如果当前对象this大于形参对象obj，则返回正整数，<br>
+如果当前对象this小于形参对象obj，则返回负整数，<br>
+如果当前对象this等于形参对象obj，则返回零。<br>
+4. 对于自定义类来说，如果需要排序，我们可以让自定义类实现Comparable接口，重写compareTo(obj)方法。在compareTo(obj)方法中指明如何排序</p>
+<p>2.2 自定义类代码举例：<br>
+public class Goods implements  Comparable{<br>
+private String name;<br>
+private double price;<br>
+//指明商品比较大小的方式:照价格从低到高排序,再照产品名称从高到低排序<br>
+@Override<br>
+public int compareTo(Object o) {<br>
+//        System.out.println(&quot;**************&quot;);<br>
+if(o instanceof Goods){<br>
+Goods goods = (Goods)o;<br>
+//方式一：<br>
+if(this.price &gt; goods.price){<br>
+return 1;<br>
+}else if(this.price &lt; goods.price){<br>
+return -1;<br>
+}else{<br>
+//                return 0;<br>
+return -this.name.compareTo(goods.name);<br>
+}<br>
+//方式二：<br>
+//           return Double.compare(this.price,goods.price);<br>
+}<br>
+//        return 0;<br>
+throw new RuntimeException(&quot;传入的数据类型不一致！&quot;);<br>
+}<br>
+// getter、setter、toString()、构造器：省略<br>
+}</p>
+<p>3.定制排序：使用Comparator接口<br>
+3.1 说明<br>
+1.背景：<br>
+当元素的类型没实现java.lang.Comparable接口而又不方便修改代码，或者实现了java.lang.Comparable接口的排序规则不适合当前的操作，那么可以考虑使用 Comparator 的对象来排序<br>
+2.重写compare(Object o1,Object o2)方法，比较o1和o2的大小：<br>
+如果方法返回正整数，则表示o1大于o2；<br>
+如果返回0，表示相等；<br>
+返回负整数，表示o1小于o2。</p>
+<p>3.2 代码举例：<br>
+Comparator com = new Comparator() {<br>
+//指明商品比较大小的方式:照产品名称从低到高排序,再照价格从高到低排序<br>
+@Override<br>
+public int compare(Object o1, Object o2) {<br>
+if(o1 instanceof Goods &amp;&amp; o2 instanceof Goods){<br>
+Goods g1 = (Goods)o1;<br>
+Goods g2 = (Goods)o2;<br>
+if(g1.getName().equals(g2.getName())){<br>
+return -Double.compare(g1.getPrice(),g2.getPrice());<br>
+}else{<br>
+return g1.getName().compareTo(g2.getName());<br>
+}<br>
+}<br>
+throw new RuntimeException(&quot;输入的数据类型不一致&quot;);<br>
+}<br>
+}<br>
+使用：<br>
+Arrays.sort(goods,com);<br>
+Collections.sort(coll,com);<br>
+new TreeSet(com);</p>
+<ol start="4">
+<li>两种排序方式对比</li>
+</ol>
+<ul>
+<li>Comparable接口的方式一旦一定，保证Comparable接口实现类的对象在任何位置都可以比较大小。</li>
+<li>Comparator接口属于临时性的比较。</li>
+</ul>
+<p>六、其他类<br>
+1.System类<br>
+System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。该类位于java.lang包。<br>
+由于该类的构造器是private的，所以无法创建该类的对象，也就是无法实例化该类。其内部的成员变量和成员方法都是static的，所以也可以很方便的进行调用。<br>
+方法：<br>
+native long currentTimeMillis()<br>
+void exit(int status)<br>
+void gc()<br>
+String getProperty(String key)</p>
+<p>2.Math类<br>
+java.lang.Math提供了一系列静态方法用于科学计算。其方法的参数和返回值类型一般为double型。</p>
+<p>3.BigInteger类、BigDecimal类<br>
+说明：<br>
+① java.math包的BigInteger可以表示不可变的任意精度的整数。<br>
+② 要求数字精度比较高，用到java.math.BigDecimal类</p>
+<p>代码举例：<br>
+<img src="https://fantaixi.github.io/post-images/1588787555086.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[12 Java多线程]]></title>
+        <id>https://fantaixi.github.io/post/12-java-duo-xian-cheng/</id>
+        <link href="https://fantaixi.github.io/post/12-java-duo-xian-cheng/">
+        </link>
+        <updated>2020-05-06T15:29:19.000Z</updated>
+        <content type="html"><![CDATA[<p>一、程序、进程、线程的理解</p>
+<ol>
+<li>
+<p>程序(programm)<br>
+概念：是为完成特定任务、用某种语言编写的一组指令的集合。即指一段静态的代码。</p>
+</li>
+<li>
+<p>进程(process)<br>
+概念：程序的一次执行过程，或是正在运行的一个程序。<br>
+说明：进程作为资源分配的单位，系统在运行时会为每个进程分配不同的内存区域</p>
+</li>
+<li>
+<p>线程(thread)<br>
+概念：进程可进一步细化为线程，是一个程序内部的一条执行路径。<br>
+说明：线程作为调度和执行的单位，每个线程拥独立的运行栈和程序计数器(pc)，线程切换的开销小。<br>
+<img src="https://fantaixi.github.io/post-images/1588779139268.png" alt="" loading="lazy"></p>
+</li>
+</ol>
+<p>补充：<br>
+内存结构：<br>
+<img src="https://fantaixi.github.io/post-images/1588779225110.png" alt="" loading="lazy"></p>
+<p>进程可以细化为多个线程。<br>
+每个线程，拥有自己独立的：栈、程序计数器<br>
+多个线程，共享同一个进程中的结构：方法区、堆。</p>
+<p>二、并行与并发</p>
+<ol>
+<li>
+<p>单核CPU与多核CPU的理解<br>
+单核CPU，其实是一种假的多线程，因为在一个时间单元内，也只能执行一个线程的任务。例如：虽然有多车道，但是收费站只有一个工作人员在收费，只有收了费才能通过，那么CPU就好比收费人员。如果某个人不想交钱，那么收费人员可以把他“挂起”（晾着他，等他想通了，准备好了钱，再去收费。）但是因为CPU时间单元特别短，因此感觉不出来。<br>
+如果是多核的话，才能更好的发挥多线程的效率。（现在的服务器都是多核的）<br>
+一个Java应用程序java.exe，其实至少三个线程：main()主线程，gc()垃圾回收线程，异常处理线程。当然如果发生异常，会影响主线程。</p>
+</li>
+<li>
+<p>并行与并发的理解<br>
+并行：多个CPU同时执行多个任务。比如：多个人同时做不同的事。<br>
+并发：一个CPU(采用时间片)同时执行多个任务。比如：秒杀、多个人做同一件事</p>
+</li>
+</ol>
+<p>三、创建多线程的两种方式（JDK5.0之前）<br>
+方式一：继承Thread类的方式：</p>
+<ul>
+<li>
+<ol>
+<li>创建一个继承于Thread类的子类</li>
 </ol>
 </li>
 <li>
 <ol start="2">
-<li>声明在包的声明和类的声明之间</li>
+<li>重写Thread类的run() --&gt; 将此线程执行的操作声明在run()中</li>
 </ol>
 </li>
 <li>
 <ol start="3">
-<li>如果需要导入多个结构，则并列写出即可</li>
+<li>创建Thread类的子类的对象</li>
 </ol>
 </li>
 <li>
 <ol start="4">
-<li>可以使用&quot;xxx.*&quot;的方式，表示可以导入xxx包下的所结构</li>
+<li>通过此对象调用start()：①启动当前线程 ② 调用当前线程的run()</li>
+</ol>
+</li>
+</ul>
+<p>说明两个问题：<br>
+问题一：我们启动一个线程，必须调用start()，不能调用run()的方式启动线程。<br>
+问题二：如果再启动一个线程，必须重新创建一个Thread子类的对象，调用此对象的start().</p>
+<p>方式二：实现Runnable接口的方式：</p>
+<ul>
+<li>
+<ol>
+<li>创建一个实现了Runnable接口的类</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>实现类去实现Runnable中的抽象方法：run()</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>创建实现类的对象</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>将此对象作为参数传递到Thread类的构造器中，创建Thread类的对象</li>
 </ol>
 </li>
 <li>
 <ol start="5">
-<li>如果使用的类或接口是java.lang包下定义的，则可以省略import结构</li>
+<li>通过Thread类的对象调用start()</li>
+</ol>
+</li>
+</ul>
+<p>两种方式的对比：</p>
+<ul>
+<li>开发中：优先选择：实现Runnable接口的方式</li>
+<li>原因：1. 实现的方式没类的单继承性的局限性</li>
+<li>
+<pre><code> 2. 实现的方式更适合来处理多个线程共享数据的情况。
+</code></pre>
+</li>
+<li></li>
+<li>联系：public class Thread implements Runnable</li>
+<li>相同点：两种方式都需要重写run(),将线程要执行的逻辑声明在run()中。<br>
+目前两种方式，要想启动线程，都是调用的Thread类中的start()。</li>
+</ul>
+<p>四、Thread类中的常用方法<br>
+Thread类中的常用的方法:</p>
+<ul>
+<li>
+<ol>
+<li>start():启动当前线程；调用当前线程的run()</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>run(): 通常需要重写Thread类中的此方法，将创建的线程要执行的操作声明在此方法中</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>currentThread():静态方法，返回执行当前代码的线程</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>getName():获取当前线程的名字</li>
+</ol>
+</li>
+<li>
+<ol start="5">
+<li>setName():设置当前线程的名字</li>
 </ol>
 </li>
 <li>
 <ol start="6">
-<li>如果使用的类或接口是本包下定义的，则可以省略import结构</li>
+<li>yield():释放当前cpu的执行权</li>
 </ol>
 </li>
 <li>
 <ol start="7">
-<li>如果在源文件中，使用了不同包下的同名的类，则必须至少一个类需要以全类名的方式显示。</li>
+<li>join():在线程a中调用线程b的join(),此时线程a就进入阻塞状态，直到线程b完全执行完以后，线程a才结束阻塞状态。</li>
 </ol>
 </li>
 <li>
 <ol start="8">
-<li>使用&quot;xxx.*&quot;方式表明可以调用xxx包下的所结构。但是如果使用的是xxx子包下的结构，则仍需要显式导入</li>
+<li>stop():已过时。当执行此方法时，强制结束当前线程。</li>
 </ol>
 </li>
 <li>
 <ol start="9">
-<li>import static:导入指定类或接口中的静态结构:属性或方法。</li>
+<li>sleep(long millitime):让当前线程“睡眠”指定的millitime毫秒。在指定的millitime毫秒时间内，当前线程是阻塞状态。</li>
 </ol>
 </li>
-</ul>
-<p>3.JDK中常见的包及其使用<br>
-<img src="https://fantaixi.github.io/post-images/1588757322912.png" alt="" loading="lazy"></p>
-<p>五、面向对象的特征一：封装性<br>
-1.为什么要引入封装性？<br>
-我们程序设计追求“高内聚，低耦合”。<br>
-高内聚 ：类的内部数据操作细节自己完成，不允许外部干涉；<br>
-低耦合 ：仅对外暴露少量的方法用于使用。</p>
-<p>隐藏对象内部的复杂性，只对外公开简单的接口。便于外界调用，从而提高系统的可扩展性、可维护性。通俗的说，把该隐藏的隐藏起来，该暴露的暴露出来。这就是封装性的设计思想。</p>
-<p>2.问题引入：<br>
-当我们创建一个类的对象以后，我们可以通过&quot;对象.属性&quot;的方式，对对象的属性进行赋值。这里，赋值操作要受到属性的数据类型和存储范围的制约。除此之外，没其他制约条件。但是，在实际问题中，我们往往需要给属性赋值加入额外的限制条件。这个条件就不能在属性声明时体现，我们只能通过方法进行限制条件的添加。（比如：setLegs()同时，我们需要避免用户再使用&quot;对象.属性&quot;的方式对属性进行赋值。则需要将属性声明为私有的(private).<br>
---&gt;此时，针对于属性就体现了封装性。<br>
-3.封装性思想具体的代码体现：<br>
-体现一：将类的属性xxx私化(private),同时，提供公共的(public)方法来获取(getXxx)和设置(setXxx)此属性的值<br>
-private double radius;<br>
-public void setRadius(double radius){<br>
-this.radius = radius;<br>
-}<br>
-public double getRadius(){<br>
-return radius;<br>
-}<br>
-体现二：不对外暴露的私有的方法<br>
-体现三：单例模式（将构造器私有化）<br>
-体现四：如果不希望类在包外被调用，可以将类设置为缺省的。</p>
-<p>4.Java规定的四种权限修饰符<br>
-4.1 权限从小到大顺序为：private &lt;  缺省 &lt; protected &lt; public<br>
-4.2 具体的修饰范围：<br>
-<img src="https://fantaixi.github.io/post-images/1588757478304.png" alt="" loading="lazy"><br>
-4.3 权限修饰符可用来修饰的结构说明：<br>
-4种权限都可以用来修饰类的内部结构：属性、方法、构造器、内部类<br>
-修饰类的话，只能使用：缺省、public</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[07 Java 数组]]></title>
-        <id>https://fantaixi.github.io/post/07-java-shu-zu/</id>
-        <link href="https://fantaixi.github.io/post/07-java-shu-zu/">
-        </link>
-        <updated>2020-05-03T06:11:20.000Z</updated>
-        <content type="html"><![CDATA[<p>一、数组的理解：数组(Array)，是多个相同类型数据一定顺序排列的集合，并使用一个名字命名，<br>
-并通过编号的方式对这些数据进行统一管理。</p>
-<p>二、数组相关的概念：</p>
-<blockquote>
-<p>数组名<br>
-元素<br>
-角标、下标、索引<br>
-数组的长度：元素的个数</p>
-</blockquote>
-<p>三、数组的特点：<br>
-1数组是序排列的<br>
-2数组属于引用数据类型的变量。数组的元素，既可以是基本数据类型，也可以是引用数据类型<br>
-3创建数组对象会在内存中开辟一整块连续的空间<br>
-4数组的长度一旦确定，就不能修改。</p>
-<p>四、数组的分类：<br>
-① 照维数：一维数组、二维数组、。。。<br>
-② 照数组元素的类型：基本数据类型元素的数组、引用数据类型元素的数组</p>
-<p>五、一维数组<br>
-1、声明与初始化<br>
-正确的方式：<br>
-int num;//声明<br>
-num = 10;//初始化<br>
-int id = 1001;//声明 + 初始化</p>
-<pre><code>	int[] ids;//声明
-	//1.1 静态初始化:数组的初始化和数组元素的赋值操作同时进行
-	ids = new int[]{1001,1002,1003,1004};
-	//1.2动态初始化:数组的初始化和数组元素的赋值操作分开进行
-	String[] names = new String[5];
-
-int[] arr4 = {1,2,3,4,5};//类型推断
-</code></pre>
-<p>错误的方式：<br>
-//		int[] arr1 = new int[];<br>
-//		int[5] arr2 = new int[5];<br>
-//		int[] arr3 = new int[3]{1,2,3};</p>
-<p>2、一维数组元素的引用：通过角标的方式调用。<br>
-//数组的角标（或索引从0开始的，到数组的长度-1结束。<br>
-names[0] = &quot;王铭&quot;;<br>
-names[1] = &quot;王赫&quot;;<br>
-names[2] = &quot;张学良&quot;;//charAt(2)</p>
-<p>3、数组的属性：length<br>
-System.out.println(names.length);//5<br>
-System.out.println(ids.length);</p>
-<p>说明：<br>
-数组一旦初始化，其长度就是确定的。arr.length<br>
-数组长度一旦确定，就不可修改。</p>
-<p>4、一维数组的遍历<br>
-for(int i = 0;i &lt; names.length;i++){<br>
-System.out.println(names[i]);<br>
-}</p>
-<p>5.一维数组元素的默认初始化值</p>
-<blockquote>
-<p>数组元素是整型：0<br>
-数组元素是浮点型：0.0<br>
-数组元素是char型：0或'\u0000'，而非'0'<br>
-数组元素是boolean型：false<br>
-数组元素是引用数据类型：null</p>
-</blockquote>
-<p>六、二维数组<br>
-1、如何理解二维数组？<br>
-数组属于引用数据类型<br>
-数组的元素也可以是引用数据类型<br>
-一个一维数组A的元素如果还是一个一维数组类型的，则，此数组A称为二维数组。</p>
-<p>2、二维数组的声明与初始化<br>
-正确的方式：<br>
-int[] arr = new int[]{1,2,3};//一维数组<br>
-//静态初始化<br>
-int[][] arr1 = new int[][]{{1,2,3},{4,5},{6,7,8}};<br>
-//动态初始化1<br>
-String[][] arr2 = new String[3][2];<br>
-//动态初始化2<br>
-String[][] arr3 = new String[3][];<br>
-//也是正确的写法：<br>
-int[] arr4[] = new int[][]{{1,2,3},{4,5,9,10},{6,7,8}};<br>
-int[] arr5[] = {{1,2,3},{4,5},{6,7,8}};//类型推断<br>
-错误的方式：<br>
-//		String[][] arr4 = new String[][4];<br>
-//		String[4][3] arr5 = new String[][];<br>
-//		int[][] arr6 = new int[4][3]{{1,2,3},{4,5},{6,7,8}};<br>
-3、如何调用二维数组元素:<br>
-System.out.println(arr1[0][1]);//2<br>
-System.out.println(arr2[1][1]);//null<br>
-arr3[1] = new String[4];<br>
-System.out.println(arr3[1][0]);<br>
-System.out.println(arr3[0]);//<br>
-4、二维数组的属性：<br>
-System.out.println(arr4.length);//3<br>
-System.out.println(arr4[0].length);//3<br>
-System.out.println(arr4[1].length);//4<br>
-5、遍历二维数组元素<br>
-for(int i = 0;i &lt; arr4.length;i++){	<br>
-for(int j = 0;j &lt; arr4[i].length;j++){<br>
-System.out.print(arr4[i][j] + &quot;  &quot;);<br>
-}<br>
-System.out.println();<br>
-}</p>
-<p>6、二维数组元素的默认初始化值</p>
-<ul>
-<li>规定：二维数组分为外层数组的元素，内层数组的元素</li>
 <li>
-<pre><code> int[][] arr = new int[4][3];
-</code></pre>
+<ol start="10">
+<li>isAlive():判断当前线程是否存活</li>
+</ol>
 </li>
 <li>
-<pre><code> 外层元素：arr[0],arr[1]等
-</code></pre>
+<p>线程的优先级：</p>
 </li>
 <li>
-<pre><code> 内层元素：arr[0][0],arr[1][2]等
-</code></pre>
-</li>
-<li></li>
-<li>数组元素的默认初始化值</li>
-<li>针对于初始化方式一：比如：int[][] arr = new int[4][3];</li>
-<li>
-<pre><code> 外层元素的初始化值为：地址值
-</code></pre>
-</li>
-<li>
-<pre><code> 内层元素的初始化值为：与一维数组初始化情况相同
-</code></pre>
-</li>
-<li></li>
-<li>针对于初始化方式二：比如：int[][] arr = new int[4][];</li>
-<li>
-<pre><code> 外层元素的初始化值为：null
-</code></pre>
-</li>
-<li>
-<pre><code> 内层元素的初始化值为：不能调用，否则报错。
-</code></pre>
-</li>
-</ul>
-<p>七、Arrays工具类的使用<br>
-1.理解：<br>
-① 定义在java.util包下。<br>
-② Arrays:提供了很多操作数组的方法。</p>
-<p>2.使用（常用）：<br>
-//1.boolean equals(int[] a,int[] b):判断两个数组是否相等。<br>
-int[] arr1 = new int[]{1,2,3,4};<br>
-int[] arr2 = new int[]{1,3,2,4};<br>
-boolean isEquals = Arrays.equals(arr1, arr2);<br>
-System.out.println(isEquals);</p>
-<pre><code>	//2.String toString(int[] a):输出数组信息。
-	System.out.println(Arrays.toString(arr1));
-			
-	//3.void fill(int[] a,int val):将指定值填充到数组之中。
-	Arrays.fill(arr1,10);
-	System.out.println(Arrays.toString(arr1));
-	
-	//4.void sort(int[] a):对数组进行排序。
-	Arrays.sort(arr2);
-	System.out.println(Arrays.toString(arr2));
-	
-	//5.int binarySearch(int[] a,int key)
-	int[] arr3 = new int[]{-98,-34,2,34,54,66,79,105,210,333};
-	int index = Arrays.binarySearch(arr3, 210);
-	if(index &gt;= 0){
-		System.out.println(index);
-	}else{
-		System.out.println(&quot;未找到&quot;);
-	}
-</code></pre>
-<p>八、数组常见异常<br>
-1.数组角标越界异常：ArrayIndexOutOfBoundsException<br>
-int[] arr = new int[]{1,2,3,4,5};		<br>
-//		for(int i = 0;i &lt;= arr.length;i++){<br>
-//			System.out.println(arr[i]);<br>
-//		}		<br>
-//		System.out.println(arr[-2]);</p>
-<p>2.空指针异常：NullPointerException<br>
-//情况一：<br>
-//		int[] arr1 = new int[]{1,2,3};<br>
-//		arr1 = null;<br>
-//		System.out.println(arr1[0]);</p>
-<p>//情况二：<br>
-//		int[][] arr2 = new int[4][];<br>
-//		System.out.println(arr2[0][0]);</p>
-<p>//情况三：<br>
-String[] arr3 = new String[]{&quot;AA&quot;,&quot;BB&quot;,&quot;CC&quot;};<br>
-arr3[0] = null;<br>
-System.out.println(arr3[0].toString());</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[06 Java流程控制]]></title>
-        <id>https://fantaixi.github.io/post/06-java-liu-cheng-kong-zhi/</id>
-        <link href="https://fantaixi.github.io/post/06-java-liu-cheng-kong-zhi/">
-        </link>
-        <updated>2020-05-02T08:16:37.000Z</updated>
-        <content type="html"><![CDATA[<p>一、顺序结构：程序从上到下执行。<br>
-分支结构：<br>
-if-else if - else<br>
-switch-case</p>
-<p>1.if-else条件判断结构<br>
-1.1.<br>
-结构一：<br>
-if(条件表达式){<br>
-执行表达式<br>
-}</p>
-<p>结构二：二选一<br>
-if(条件表达式){<br>
-执行表达式1<br>
-}else{<br>
-执行表达式2<br>
-}</p>
-<p>结构三：n选一<br>
-if(条件表达式){<br>
-执行表达式1<br>
-}else if(条件表达式){<br>
-执行表达式2<br>
-}else if(条件表达式){<br>
-执行表达式3<br>
-}<br>
-...<br>
-else{<br>
-执行表达式n<br>
-}</p>
-<p>1.2.说明：</p>
 <ol>
-<li>else 结构是可选的。</li>
-<li>针对于条件表达式：
-<blockquote>
-<p>如果多个条件表达式之间是“互斥”关系(或没有交集的关系),哪个判断和执行语句声明在上面还是下面，无所谓。<br>
-如果多个条件表达式之间有交集的关系，需要根据实际情况，考虑清楚应该将哪个结构声明在上面。<br>
-如果多个条件表达式之间有包含的关系，通常情况下，需要将范围小的声明在范围大的上面。否则，范围小的就没机会执行了。（比如异常处理）</p>
-</blockquote>
-</li>
-<li>if-else结构是可以相互嵌套的。</li>
-<li>如果if-else结构中的执行语句只有一行时，对应的一对{}可以省略的。但是，不建议大家省略。</li>
+<li></li>
 </ol>
-<p>2.switch-case选择结构<br>
-switch(表达式){<br>
-case 常量1:<br>
-执行语句1;<br>
-//break;<br>
-case 常量2:<br>
-执行语句2;<br>
-//break;<br>
-...<br>
-default:<br>
-执行语句n;<br>
-//break;<br>
-}<br>
-2.说明：<br>
-① 根据switch表达式中的值，依次匹配各个case中的常量。一旦匹配成功，则进入相应case结构中，调用其执行语句。<br>
-当调用完执行语句以后，则仍然继续向下执行其他case结构中的执行语句，直到遇到break关键字或此switch-case结构末尾结束为止。<br>
-② break,可以使用在switch-case结构中，表示一旦执行到此关键字，就跳出switch-case结构<br>
-③ switch结构中的表达式，只能是如下的6种数据类型之一：<br>
-byte 、short、char、int、枚举类型(JDK5.0新增)、String类型(JDK7.0新增)<br>
-④ case 之后只能声明常量。不能声明范围。<br>
-⑤ break关键字是可选的。<br>
-⑥ default:相当于if-else结构中的else.<br>
-default结构是可选的，而且位置是灵活的。<br>
-3.如果switch-case结构中的多个case的执行语句相同，则可以考虑进行合并。<br>
-4.break在switch-case中是可选的</p>
-<p>二、循环结构：<br>
-for<br>
-while<br>
-do-while</p>
-<p>1.循环结构的四要素<br>
-① 初始化条件<br>
-② 循环条件  ---&gt;是boolean类型<br>
-③ 循环体<br>
-④ 迭代条件<br>
-说明：通常情况下，循环结束都是因为②中循环条件返回false了。</p>
-<p>2.三种循环结构：<br>
-2.1 for循环结构<br>
-for(①;②;④){<br>
-③<br>
-}<br>
-执行过程：① - ② - ③ - ④ - ② - ③ - ④ - ... - ②<br>
-2.2 while循环结构<br>
-①<br>
-while(②){<br>
-③;<br>
-④;<br>
-}<br>
-执行过程：① - ② - ③ - ④ - ② - ③ - ④ - ... - ②<br>
+</li>
+<li>
+<p>MAX_PRIORITY：10</p>
+</li>
+<li>
+<p>MIN _PRIORITY：1</p>
+</li>
+<li>
+<p>NORM_PRIORITY：5  --&gt;默认优先级</p>
+</li>
+<li>
+<p>2.如何获取和设置当前线程的优先级：</p>
+</li>
+<li>
+<p>getPriority():获取线程的优先级</p>
+</li>
+<li>
+<p>setPriority(int p):设置线程的优先级</p>
+</li>
+<li></li>
+<li>
+<p>说明：高优先级的线程要抢占低优先级线程cpu的执行权。但是只是从概率上讲，高优先级的线程高概率的情况下被执行。并不意味着只当高优先级的线程执行完以后，低优先级的线程才执行。</p>
+</li>
+</ul>
+<p>线程通信：wait() / notify() / notifyAll() :此三个方法定义在Object类中的。</p>
+<p>补充：线程的分类<br>
+一种是守护线程，一种是用户线程。</p>
+<p>五、Thread的生命周期<br>
+<img src="https://fantaixi.github.io/post-images/1588779515021.png" alt="" loading="lazy"><br>
 说明：<br>
-写while循环千万小心不要丢了迭代条件。一旦丢了，就可能导致死循环！</p>
-<p>for和while循环总结：</p>
-<ol>
-<li>开发中，基本上我们都会从for、while中进行选择，实现循环结构。</li>
-<li>for循环和while循环是可以相互转换的！<br>
-区别：for循环和while循环的初始化条件部分的作用范围不同。</li>
-<li>我们写程序，要避免出现死循环。<br>
-2.3 do-while循环结构<br>
-①<br>
-do{<br>
-③;<br>
-④;<br>
-}while(②);<br>
-执行过程：① - ③ - ④ - ② - ③ - ④ - ... - ②</li>
-</ol>
-<p>说明：<br>
-1.do-while循环至少会执行一次循环体！<br>
-2.开发中，使用for和while更多一些。较少使用do-while</p>
-<p>3.“无限循环”结构: while(true) 或 for(;😉<br>
-总结：如何结束一个循环结构？<br>
-方式一：当循环条件是false时<br>
-方式二：在循环体中，执行break</p>
-<p>4.嵌套循环<br>
-1.嵌套循环:将一个循环结构A声明在另一个循环结构B的循环体中,就构成了嵌套循环<br>
-内层循环：循环结构A<br>
-外层循环：循环结构B<br>
-2.说明：<br>
-① 内层循环结构遍历一遍，只相当于外层循环循环体执行了一次<br>
-② 假设外层循环需要执行m次，内层循环需要执行n次。此时内层循环的循环体一共执行了m * n次<br>
-③ 外层循环控制行数，内层循环控制列数<br>
-【典型练习】<br>
-//练习一：<br>
-/*<br>
-******<br>
-******<br>
-******<br>
-******<br>
-<em>/<br>
-for(int j = 1;j &lt;= 4;j++ ){<br>
-for(int i = 1;i &lt;= 6;i++){<br>
-System.out.print('</em>');<br>
-}<br>
-System.out.println();<br>
-}<br>
-//练习二：<br>
-/*			i(行号)		j(*的个数)<br>
-*			1			1<br>
-**			2			2<br>
-***			3			3<br>
-****		4			4<br>
-*****		5			5<br>
-*/</p>
-<pre><code>	for(int i = 1;i &lt;= 5;i++){//控制行数
-		for(int j = 1;j &lt;= i;j++){//控制列数
-			System.out.print(&quot;*&quot;);
-		
-		}
-		System.out.println();
-	}
-	//练习三：九九乘法表
-	//练习四：100以内的质数
-</code></pre>
-<p>补充:衡量一个功能代码的优劣：<br>
-1.正确性<br>
-2.可读性<br>
-3.健壮性<br>
-4.高效率与低存储：时间复杂度 、空间复杂度 （衡量算法的好坏）</p>
-<p>如何理解流程控制的练习：<br>
-流程控制结构的使用 + 算法逻辑</p>
-<p>小结：break和continue关键字的使用<br>
-使用范围		循环中使用的作用(不同点)	  相同点</p>
-<p>break:	 switch-case			<br>
-循环结构中		   结束当前循环		关键字后面不能声明执行语句</p>
-<p>continue:	循环结构中	 结束当次循环		关键字后面不能声明执行语句</p>
-<p>补充：带标签的break和continue的使用</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[05 Java运算符]]></title>
-        <id>https://fantaixi.github.io/post/05-java-yun-suan-fu/</id>
-        <link href="https://fantaixi.github.io/post/05-java-yun-suan-fu/">
-        </link>
-        <updated>2020-05-01T08:26:47.000Z</updated>
-        <content type="html"><![CDATA[<p>一、算术运算符： + -  * / % (前)++ (后)++ (前)-- (后)--<br>
-【典型代码】<br>
-//除号：/<br>
-int num1 = 12;<br>
-int num2 = 5;<br>
-int result1 = num1 / num2;<br>
-System.out.println(result1);//2<br>
-// %:取余运算<br>
-//结果的符号与被模数的符号相同<br>
-//开发中，经常使用%来判断能否被除尽的情况。<br>
-int m1 = 12;<br>
-int n1 = 5;<br>
-System.out.println(&quot;m1 % n1 = &quot; + m1 % n1);</p>
-<pre><code>	int m2 = -12;
-	int n2 = 5;
-	System.out.println(&quot;m2 % n2 = &quot; + m2 % n2);
-
-	int m3 = 12;
-	int n3 = -5;
-	System.out.println(&quot;m3 % n3 = &quot; + m3 % n3);
-
-	int m4 = -12;
-	int n4 = -5;
-	System.out.println(&quot;m4 % n4 = &quot; + m4 % n4);
-	//(前)++ :先自增1，后运算
-	//(后)++ :先运算，后自增1
-	int a1 = 10;
-	int b1 = ++a1;
-	System.out.println(&quot;a1 = &quot; + a1 + &quot;,b1 = &quot; + b1);
-	
-	int a2 = 10;
-	int b2 = a2++;
-	System.out.println(&quot;a2 = &quot; + a2 + &quot;,b2 = &quot; + b2);
-	
-	int a3 = 10;
-	++a3;//a3++;
-	int b3 = a3;
-	//(前)-- :先自减1，后运算
-	//(后)-- :先运算，后自减1
-	
-	int a4 = 10;
-	int b4 = a4--;//int b4 = --a4;
-	System.out.println(&quot;a4 = &quot; + a4 + &quot;,b4 = &quot; + b4);
-</code></pre>
-<p>【特别说明的】<br>
-1.//(前)++ :先自增1，后运算<br>
-//(后)++ :先运算，后自增1<br>
-2.//(前)-- :先自减1，后运算<br>
-//(后)-- :先运算，后自减1<br>
-3.连接符：+：只能使用在String与其他数据类型变量之间使用。</p>
-<p>二、赋值运算符：=  +=  -=  <em>=  /=  %=<br>
-【典型代码】<br>
-int i2,j2;<br>
-//连续赋值<br>
-i2 = j2 = 10;<br>
-//</em>**************<br>
-int i3 = 10,j3 = 20;<br>
-int num1 = 10;<br>
-num1 += 2;//num1 = num1 + 2;<br>
-System.out.println(num1);//12</p>
-<pre><code>	int num2 = 12;
-	num2 %= 5;//num2 = num2 % 5;
-	System.out.println(num2);
-
-	short s1 = 10;
-	//s1 = s1 + 2;//编译失败
-	s1 += 2;//结论：不会改变变量本身的数据类型
-	System.out.println(s1);
-</code></pre>
-<p>【特别说明】<br>
-1.运算的结果不会改变变量本身的数据类型<br>
-2.<br>
-//开发中，如果希望变量实现+2的操作，有几种方法？(前提：int num = 10;)<br>
-//方式一：num = num + 2;<br>
-//方式二：num += 2; (推荐)</p>
-<pre><code>	//开发中，如果希望变量实现+1的操作，有几种方法？(前提：int num = 10;)
-	//方式一：num = num + 1;
-	//方式二：num += 1; 
-	//方式三：num++; (推荐)
-</code></pre>
-<p>三、比较运算符（关系运算符）: == != &gt;  &lt;  &gt;=  &lt;=  instanceof<br>
-【典型代码】<br>
-int i = 10;<br>
-int j = 20;</p>
-<pre><code>	System.out.println(i == j);//false
-	System.out.println(i = j);//20
-
-	boolean b1 = true;
-	boolean b2 = false;
-	System.out.println(b2 == b1);//false
-	System.out.println(b2 = b1);//true
-</code></pre>
-<p>【特别说明】<br>
-1.比较运算符的结果是boolean类型<br>
-2.&gt;  &lt;  &gt;=  &lt;= :只能使用在数值类型的数据之间。<br>
-3. == 和 !=: 不仅可以使用在数值类型数据之间，还可以使用在其他引用类型变量之间。<br>
-Account acct1 = new Account(1000);<br>
-Account acct2 = new Account(1000);<br>
-boolean b1 = (acct1 == acct2);//比较两个Account是否是同一个账户。<br>
-boolean b2 = (acct1 != acct2);//</p>
-<p>四、逻辑运算符：&amp; &amp;&amp;  |  || !  ^<br>
-【典型代码】<br>
-//区分&amp; 与 &amp;&amp;<br>
-//相同点1：&amp; 与  &amp;&amp; 的运算结果相同<br>
-//相同点2：当符号左边是true时，二者都会执行符号右边的运算<br>
-//不同点：当符号左边是false时，&amp;继续执行符号右边的运算。&amp;&amp;不再执行符号右边的运算。<br>
-//开发中，推荐使用&amp;&amp;<br>
-boolean b1 = true;<br>
-b1 = false;<br>
-int num1 = 10;<br>
-if(b1 &amp; (num1++ &gt; 0)){<br>
-System.out.println(&quot;我现在在北京&quot;);<br>
-}else{<br>
-System.out.println(&quot;我现在在南京&quot;);<br>
-}</p>
-<pre><code>	System.out.println(&quot;num1 = &quot; + num1);
-	
-	boolean b2 = true;
-	b2 = false;
-	int num2 = 10;
-	if(b2 &amp;&amp; (num2++ &gt; 0)){
-		System.out.println(&quot;我现在在北京&quot;);
-	}else{
-		System.out.println(&quot;我现在在南京&quot;);
-	}
-
-	System.out.println(&quot;num2 = &quot; + num2);
-
-	// 区分：| 与 || 
-	//相同点1：| 与  || 的运算结果相同
-	//相同点2：当符号左边是false时，二者都会执行符号右边的运算
-	//不同点3：当符号左边是true时，|继续执行符号右边的运算，而||不再执行符号右边的运算
-	//开发中，推荐使用||
-	boolean b3 = false;
-	b3 = true;
-	int num3 = 10;
-	if(b3 | (num3++ &gt; 0)){
-		System.out.println(&quot;我现在在北京&quot;);
-	}else{
-		System.out.println(&quot;我现在在南京&quot;);
-	}
-	System.out.println(&quot;num3 = &quot; + num3);
-
-
-	boolean b4 = false;
-	b4 = true;
-	int num4 = 10;
-	if(b4 || (num4++ &gt; 0)){
-		System.out.println(&quot;我现在在北京&quot;);
-	}else{
-		System.out.println(&quot;我现在在南京&quot;);
-	}
-	System.out.println(&quot;num4 = &quot; + num4);
-</code></pre>
-<p>【特别说明】<br>
-逻辑运算符操作的都是boolean类型的变量。而且结果也是boolean类型</p>
-<p>五、位运算符：&lt;&lt;  &gt;&gt; &gt;&gt;&gt; &amp;  |  ^  ~<br>
-【典型代码】<br>
-int i = 21;<br>
-i = -21;<br>
-System.out.println(&quot;i &lt;&lt; 2 :&quot; + (i &lt;&lt; 2));   // i &lt;&lt; 2 :-84<br>
-System.out.println(&quot;i &lt;&lt; 3 :&quot; + (i &lt;&lt; 3));   // i &lt;&lt; 3 :-168<br>
-System.out.println(&quot;i &lt;&lt; 27 :&quot; + (i &lt;&lt; 27));   //  i &lt;&lt; 27 :1476395008</p>
-<pre><code>	int m = 12;
-	int n = 5;
-	System.out.println(&quot;m &amp; n :&quot; + (m &amp; n));   //  m &amp; n :4
-	System.out.println(&quot;m | n :&quot; + (m | n));    //  m | n :13
-	System.out.println(&quot;m ^ n :&quot; + (m ^ n));   //  m ^ n :9
-</code></pre>
-<p>【面试题】 你能否写出最高效的2 * 8的实现方式？<br>
-答案：2 &lt;&lt; 3  或  8 &lt;&lt; 1<br>
-【特别说明的】</p>
-<ol>
-<li>位运算符操作的都是整型的数据</li>
-<li>&lt;&lt; ：在一定范围内，每向左移1位，相当于 * 2
-<blockquote>
-<blockquote>
-<p>:在一定范围内，每向右移1位，相当于 / 2</p>
-</blockquote>
-</blockquote>
+1.生命周期关注两个概念：状态、相应的方法<br>
+2.关注：状态a--&gt;状态b:哪些方法执行了（回调方法）<br>
+某个方法主动调用：状态a--&gt;状态b<br>
+3.阻塞：临时状态，不可以作为最终状态<br>
+死亡：最终状态。</p>
+<p>六、线程的同步机制<br>
+1.背景<br>
+例子：创建个窗口卖票，总票数为100张.使用实现Runnable接口的方式<br>
+*</p>
+<ul>
+<li>1.问题：卖票过程中，出现了重票、错票 --&gt;出现了线程的安全问题</li>
+<li>2.问题出现的原因：当某个线程操作车票的过程中，尚未操作完成时，其他线程参与进来，也操作车票。</li>
+<li>3.如何解决：当一个线程a在操作ticket的时候，其他线程不能参与进来。直到线程a操作完ticket时，其他线程才可以开始操作ticket。这种情况即使线程a出现了阻塞，也不能被改变。</li>
+</ul>
+<p>2.Java解决方案：同步机制<br>
+在Java中，我们通过同步机制，来解决线程的安全问题。</p>
+<p>方式一：同步代码块<br>
+*</p>
+<ul>
+<li>
+<p>synchronized(同步监视器){</p>
 </li>
-</ol>
-<p>典型题目：<br>
-1.交换两个变量的值。（int a=1,b=2）<br>
-a =  a ^ b;<br>
-b =  a ^ b;//此时的a已经不是原来的a了，此时右边的表达式就等价于：( a ^ b ) ^ b ，结果是a，并把它赋予变量b；<br>
-a =  a ^ b;//此时的a与b都不是原来的a与b了，此时右边的表达式就等价于：a ^ ( a ^ b ) ，结果是b，并把它赋予变量a；</p>
-<p>2.实现60的二进制到十六进制的转换<br>
-public static void BitCalc() {<br>
-//获取60的二进制<br>
-System.out.println(Integer.toBinaryString(60));<br>
-int num =60;<br>
-int n1 = num &amp; 15;<br>
-int temp = 60 &gt;&gt; 4;<br>
-int n2 = temp &amp; 15;<br>
-System.out.print(n2);	<br>
-System.out.println((char)(n1-10+'A'));<br>
-//三元运算<br>
-int x =1,y;<br>
-y =(x&gt;1)?'a':200;<br>
-System.out.println(&quot;y=&quot;+y);		<br>
-}</p>
-<p>结果：<br>
-111100<br>
-3C<br>
-y=200</p>
-<p>六、三元运算符：(条件表达式)? 表达式1 : 表达式2<br>
-【典型代码】<br>
-1.获取两个整数的较大值<br>
-2.获取三个数的最大值<br>
-【特别说明的】</p>
+<li>
+<pre><code> //需要被同步的代码
+</code></pre>
+</li>
+<li></li>
+<li>
+<p>}</p>
+</li>
+<li>
+<p>说明：1.操作共享数据的代码，即为需要被同步的代码。  --&gt;不能包含代码多了，也不能包含代码少了。</p>
+</li>
+<li>
+<pre><code>  2.共享数据：多个线程共同操作的变量。比如：ticket就是共享数据。
+</code></pre>
+</li>
+<li>
+<pre><code>  3.同步监视器，俗称：锁。任何一个类的对象，都可以充当锁。
+</code></pre>
+</li>
+<li>
+<pre><code>     要求：多个线程必须要共用同一把锁。
+</code></pre>
+</li>
+<li></li>
+<li>
+<p>补充：在实现Runnable接口创建多线程的方式中，我们可以考虑使用this充当同步监视器。<br>
+在继承Thread类创建多线程的方式中，慎用this充当同步监视器，考虑使用当前类充当同步监视器。</p>
+</li>
+<li>
+<p>方式二：同步方法</p>
+</li>
+<li>
+<pre><code>如果操作共享数据的代码完整的声明在一个方法中，我们不妨将此方法声明同步的。
+</code></pre>
+</li>
+<li>
+<p>关于同步方法的总结：</p>
+</li>
+<li>
 <ol>
-<li>说明<br>
-① 条件表达式的结果为boolean类型<br>
-② 根据条件表达式真或假，决定执行表达式1，还是表达式2.<br>
-如果表达式为true，则执行表达式1。<br>
-如果表达式为false，则执行表达式2。<br>
-③ 表达式1 和表达式2要求是一致的。<br>
-④ 三元运算符可以嵌套使用</li>
+<li>同步方法仍然涉及到同步监视器，只是不需要我们显式的声明。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>非静态的同步方法，同步监视器是：this</li>
+</ol>
+</li>
+<li>
+<pre><code>静态的同步方法，同步监视器是：当前类本身
+</code></pre>
+<p>方式三：Lock锁  --- JDK5.0新增</p>
+</li>
+<li></li>
+<li>
+<ol>
+<li>面试题：synchronized 与 Lock的异同？</li>
+</ol>
+</li>
+<li>
+<p>相同：二者都可以解决线程安全问题</p>
+</li>
+<li>
+<p>不同：synchronized机制在执行完相应的同步代码以后，自动的释放同步监视器</p>
+</li>
+<li>
+<pre><code>   Lock需要手动的启动同步（lock()，同时结束同步也需要手动的实现（unlock()）
+</code></pre>
+</li>
+</ul>
+<p>使用的优先顺序：</p>
+<ul>
+<li>Lock ---&gt; 同步代码块（已经进入了方法体，分配了相应资源 ) ---&gt; 同步方法（在方法体之外)<br>
+3.利弊<br>
+同步的方式，解决了线程的安全问题。---好处<br>
+操作同步代码时，只能一个线程参与，其他线程等待。相当于是一个单线程的过程，效率低。</li>
+</ul>
+<p>补充：线程安全的单例模式（懒汉式）、死锁问题</p>
+<p>使用同步机制将单例模式中的懒汉式改写为线程安全的。<br>
+class Bank{<br>
+private Bank(){<br>
+}<br>
+private static Bank instance = null;<br>
+public static Bank getInstance(){<br>
+//方式一：效率稍差<br>
+//        synchronized (Bank.class) {<br>
+//            if(instance == null){<br>
+//<br>
+//                instance = new Bank();<br>
+//            }<br>
+//            return instance;<br>
+//        }<br>
+//方式二：效率更高<br>
+if(instance == null){<br>
+synchronized (Bank.class) {<br>
+if(instance == null){<br>
+instance = new Bank();<br>
+}<br>
+}<br>
+}<br>
+return instance;<br>
+}<br>
+}</p>
+<p>死锁：<br>
+1.死锁的理解：<br>
+不同的线程分别占用对方需要的同步资源不放弃，都在等待对方放弃自己需要的同步资源，就形成了线程的死锁</p>
+<p>2.说明：</p>
+<ul>
+<li>1出现死锁后，不会出现异常，不会出现提示，只是所的线程都处于阻塞状态，无法继续</li>
+<li>2我们使用同步时，要避免出现死锁。<br>
+3.举例：<br>
+public static void main(String[] args) {<br>
+StringBuffer s1 = new StringBuffer();<br>
+StringBuffer s2 = new StringBuffer();<br>
+new Thread(){<br>
+@Override<br>
+public void run() {<br>
+synchronized (s1){<br>
+s1.append(&quot;a&quot;);<br>
+s2.append(&quot;1&quot;);<br>
+try {<br>
+Thread.sleep(100);<br>
+} catch (InterruptedException e) {<br>
+e.printStackTrace();<br>
+}<br>
+synchronized (s2){<br>
+s1.append(&quot;b&quot;);<br>
+s2.append(&quot;2&quot;);<br>
+System.out.println(s1);<br>
+System.out.println(s2);<br>
+}<br>
+}<br>
+}<br>
+}.start();<br>
+new Thread(new Runnable() {<br>
+@Override<br>
+public void run() {<br>
+synchronized (s2){<br>
+s1.append(&quot;c&quot;);<br>
+s2.append(&quot;3&quot;);<br>
+try {<br>
+Thread.sleep(100);<br>
+} catch (InterruptedException e) {<br>
+e.printStackTrace();<br>
+}<br>
+synchronized (s1){<br>
+s1.append(&quot;d&quot;);<br>
+s2.append(&quot;4&quot;);<br>
+System.out.println(s1);<br>
+System.out.println(s2);<br>
+}<br>
+}<br>
+}<br>
+}).start();<br>
+}</li>
+</ul>
+<p>七、线程通信<br>
+1.线程通信涉及到的三个方法：</p>
+<ul>
+<li>wait():一旦执行此方法，当前线程就进入阻塞状态，并释放同步监视器。</li>
+<li>notify():一旦执行此方法，就会唤醒被wait的一个线程。如果有多个线程被wait，就唤醒优先级高的那个。</li>
+<li>notifyAll():一旦执行此方法，就会唤醒所有被wait的线程。</li>
+</ul>
+<p>2.说明：</p>
+<ul>
+<li>1.wait()，notify()，notifyAll()三个方法必须使用在同步代码块或同步方法中。</li>
+<li>2.wait()，notify()，notifyAll()三个方法的调用者必须是同步代码块或同步方法中的同步监视器。</li>
+<li>否则，会出现IllegalMonitorStateException异常</li>
+<li>3.wait()，notify()，notifyAll()三个方法是定义在java.lang.Object类中。<br>
+3.面试题：<br>
+面试题：sleep() 和 wait()的异同？</li>
+<li>1.相同点：一旦执行方法，都可以使得当前的线程进入阻塞状态。</li>
+<li>2.不同点：1）两个方法声明的位置不同：Thread类中声明sleep() , Object类中声明wait()</li>
+<li>
+<pre><code>     2）调用的要求不同：sleep()可以在任何需要的场景下调用。 wait()必须使用在同步代码块或同步方法中
+</code></pre>
+</li>
+<li>
+<pre><code>     3）关于是否释放同步监视器：如果两个方法都使用在同步代码块或同步方法中，sleep()不会释放锁，wait()会释放锁。
+</code></pre>
+</li>
+</ul>
+<ol start="4">
 <li></li>
 </ol>
-<p>凡是可以使用三元运算符的地方，都可以改写为if-else<br>
-反之，不成立。<br>
-3. 如果程序既可以使用三元运算符，又可以使用if-else结构，那么优先选择三元运算符。原因：简洁、执行效率高。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[04 Java基本语法]]></title>
-        <id>https://fantaixi.github.io/post/04-java-ji-ben-yu-fa/</id>
-        <link href="https://fantaixi.github.io/post/04-java-ji-ben-yu-fa/">
-        </link>
-        <updated>2020-04-30T06:52:38.000Z</updated>
-        <content type="html"><![CDATA[<p>一、Java关键字与标识符</p>
-<p>1.1 Java关键字的使用<br>
-定义：被Java语言赋予了特殊含义，用做专门用途的字符串（单词）<br>
-特点：关键字中所有字母都为小写<br>
-具体有哪些关键字：<br>
-<img src="https://fantaixi.github.io/post-images/1588229972083.png" alt="" loading="lazy"><br>
-<img src="https://fantaixi.github.io/post-images/1588229980768.png" alt="" loading="lazy"></p>
-<p>1.2 保留字<br>
-现Java版本尚未使用，但以后版本可能会作为关键字使用。<br>
-具体哪些保留字：goto 、const</p>
-<p>二、标识符<br>
-定义：凡是自己可以起名字的地方都叫标识符。<br>
-涉及到的结构：<br>
-包名、类名、接口名、变量名、方法名、常量名<br>
-规则：(必须要遵守。否则，编译不通过)<br>
-<img src="https://fantaixi.github.io/post-images/1588230188167.png" alt="" loading="lazy"></p>
-<p>小结：在起名字时，为了提高阅读性，要尽量意义，“见名知意”。</p>
-<p>三、变量的使用 ***<br>
-3.1 变量的分类<br>
-1）按数据类型分类<br>
-<img src="https://fantaixi.github.io/post-images/1588231616061.png" alt="" loading="lazy"><br>
-详细说明：</p>
-<ol>
-<li>整型：byte(1字节=8bit) \ short(2字节) \ int(4字节) \ long(8字节)<br>
-① byte范围：-128 ~ 127<br>
-② 声明long型变量，必须以&quot;l&quot;或&quot;L&quot;结尾<br>
-③ 通常，定义整型变量时，使用int型。<br>
-④整型的常量，默认类型是：int型</li>
-<li>浮点型：float(4字节) \ double(8字节)<br>
-① 浮点型，表示带小数点的数值<br>
-② float表示数值的范围比long还大<br>
-③ 定义float类型变量时，变量要以&quot;f&quot;或&quot;F&quot;结尾<br>
-④ 通常，定义浮点型变量时，使用double型。<br>
-⑤ 浮点型的常量，默认类型为：double</li>
-<li>字符型：char (1字符=2字节)<br>
-① 定义char型变量，通常使用一对'',内部只能写一个字符<br>
-② 表示方式：1.声明一个字符 2.转义字符 3.直接使用 Unicode 值来表示字符型常量</li>
-<li>布尔型：boolean<br>
-① 只能取两个值之一：true 、 false<br>
-② 常常在条件判断、循环结构中使用</li>
-</ol>
-<p>2）按声明的位置分类<br>
-<img src="https://fantaixi.github.io/post-images/1588231919694.png" alt="" loading="lazy"></p>
-<p>3.2 变量的定义格式<br>
-数据类型  变量名 = 变量值;<br>
-或<br>
-数据类型  变量名;<br>
-变量名 = 变量值;</p>
-<p>变量使用的注意点：<br>
-① 变量必须先声明，后使用<br>
-② 变量都定义在其作用域内。在作用域内，它是有效的。换句话说，出了作用域，就失效了<br>
-③ 同一个作用域内，不可以声明两个同名的变量</p>
-<p>四、基本数据类型变量间运算规则<br>
-4.1 涉及到的基本数据类型：除了boolean之外的其他7种</p>
-<p>4.2 自动类型转换(只涉及7种基本数据类型）</p>
-<p>小结：当容量小的数据类型的变量与容量大的数据类型的变量做运算时，结果自动提升为容量大的数据类型。（自动类型转换）<br>
-byte 、char 、short --&gt; int --&gt; long --&gt; float --&gt; double<br>
-特别的：当byte、char、short三种类型的变量做运算时，结果为int型（此时的容量大小指的是，表示数的范围的大和小。比如：float容量要大于long的容量）</p>
-<p>4.3 强制类型转换(只涉及7种基本数据类型）：自动类型提升运算的逆运算。<br>
-1.需要使用强转符：( )<br>
-2.注意点：强制类型转换，可能导致精度损失。</p>
-<p>4.4 String与8种基本数据类型间的运算</p>
-<ol>
-<li>String属于引用数据类型,翻译为：字符串</li>
-<li>声明String类型变量时，使用一对&quot;&quot;</li>
-<li>String可以和8种基本数据类型变量做运算，且运算只能是连接运算：+</li>
-<li>运算的结果仍然是String类型<br>
-避免：<br>
-String s = 123;//编译错误<br>
-String s1 = &quot;123&quot;;<br>
-int i = (int)s1;//编译错误</li>
-</ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[03 第一个Java程序，Hello World ]]></title>
-        <id>https://fantaixi.github.io/post/di-yi-ge-java-cheng-xu-hello-world/</id>
-        <link href="https://fantaixi.github.io/post/di-yi-ge-java-cheng-xu-hello-world/">
-        </link>
-        <updated>2020-04-29T18:09:46.000Z</updated>
-        <content type="html"><![CDATA[<p>public class Test {<br>
+<p>小结释放锁的操作：<br>
+<img src="https://fantaixi.github.io/post-images/1588786120077.png" alt="" loading="lazy"><br>
+小结不会释放锁的操作：<br>
+<img src="https://fantaixi.github.io/post-images/1588786147470.png" alt="" loading="lazy"></p>
+<p>八、JDK5.0新增线程创建的方式<br>
+1.新增方式一：实现Callable接口。 --- JDK 5.0新增<br>
+//1.创建一个实现Callable的实现类<br>
+class NumThread implements Callable{<br>
+//2.实现call方法，将此线程需要执行的操作声明在call()中<br>
+@Override<br>
+public Object call() throws Exception {<br>
+int sum = 0;<br>
+for (int i = 1; i &lt;= 100; i++) {<br>
+if(i % 2 == 0){<br>
+System.out.println(i);<br>
+sum += i;<br>
+}<br>
+}<br>
+return sum;<br>
+}<br>
+}</p>
+<p>public class ThreadNew {<br>
 public static void main(String[] args) {<br>
-System.out.println(&quot;Hello World&quot;);<br>
+//3.创建Callable接口实现类的对象<br>
+NumThread numThread = new NumThread();<br>
+//4.将此Callable接口实现类的对象作为传递到FutureTask构造器中，创建FutureTask的对象<br>
+FutureTask futureTask = new FutureTask(numThread);<br>
+//5.将FutureTask的对象作为参数传递到Thread类的构造器中，创建Thread对象，并调用start()<br>
+new Thread(futureTask).start();</p>
+<pre><code>    try {
+        //6.获取Callable中call方法的返回值
+        //get()返回值即为FutureTask构造器参数Callable实现类重写的call()的返回值。
+        Object sum = futureTask.get();
+        System.out.println(&quot;总和为：&quot; + sum);
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    } catch (ExecutionException e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>}</p>
+<p>说明：</p>
+<ul>
+<li>如何理解实现Callable接口的方式创建多线程比实现Runnable接口创建多线程方式强大？</li>
+<li>
+<ol>
+<li>call()可以返回值的。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>call()可以抛出异常，被外面的操作捕获，获取异常的信息</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>Callable是支持泛型的</li>
+</ol>
+</li>
+</ul>
+<p>2.新增方式二：使用线程池<br>
+class NumberThread implements Runnable{<br>
+@Override<br>
+public void run() {<br>
+for(int i = 0;i &lt;= 100;i++){<br>
+if(i % 2 == 0){<br>
+System.out.println(Thread.currentThread().getName() + &quot;: &quot; + i);<br>
 }<br>
 }<br>
-运行结果如下：<br>
-<img src="https://fantaixi.github.io/post-images/1588184119057.png" alt="" loading="lazy"></p>
-<p>适当分析：<br>
-1）第一个public  类Test的修饰符，作用范围：同一工程下，同类，同包，子类，不同包可见<br>
-2）class 声明Test为一个类<br>
-3）第二个public 同 1），区别在于是方法的修饰符，对于当前方法对其他类是否可见取决于所在类的修饰符<br>
-4）static，表示当前方法为静态方法<br>
-5）void，表示当前方法没有返回值<br>
-6）String[] args，参数，为String类型的数组，名字args<br>
-7）System.out.println，表示在控制台换行输出</p>
-<p>小结：一个Java程序必有一个主程序入口，默认的入口如上。</p>
+}<br>
+}</p>
+<p>class NumberThread1 implements Runnable{<br>
+@Override<br>
+public void run() {<br>
+for(int i = 0;i &lt;= 100;i++){<br>
+if(i % 2 != 0){<br>
+System.out.println(Thread.currentThread().getName() + &quot;: &quot; + i);<br>
+}<br>
+}<br>
+}<br>
+}</p>
+<p>public class ThreadPool {<br>
+public static void main(String[] args) {<br>
+//1. 提供指定线程数量的线程池<br>
+ExecutorService service = Executors.newFixedThreadPool(10);<br>
+ThreadPoolExecutor service1 = (ThreadPoolExecutor) service;<br>
+//设置线程池的属性<br>
+//        System.out.println(service.getClass());<br>
+//        service1.setCorePoolSize(15);<br>
+//        service1.setKeepAliveTime();</p>
+<pre><code>    //2.执行指定的线程的操作。需要提供实现Runnable接口或Callable接口实现类的对象
+    service.execute(new NumberThread());//适合适用于Runnable
+    service.execute(new NumberThread1());//适合适用于Runnable
+</code></pre>
+<p>//        service.submit(Callable callable);//适合使用于Callable<br>
+//3.关闭连接池<br>
+service.shutdown();<br>
+}<br>
+}<br>
+说明：</p>
+<ul>
+<li>好处：</li>
+<li>1.提高响应速度（减少了创建新线程的时间）</li>
+<li>2.降低资源消耗（重复利用线程池中线程，不需要每次都创建）</li>
+<li>3.便于线程管理</li>
+<li>
+<pre><code> corePoolSize：核心池的大小
+</code></pre>
+</li>
+<li>
+<pre><code> maximumPoolSize：最大线程数
+</code></pre>
+</li>
+<li>
+<pre><code> keepAliveTime：线程没任务时最多保持多长时间后会终止
+</code></pre>
+</li>
+</ul>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[02 Java初识]]></title>
-        <id>https://fantaixi.github.io/post/java-chu-shi/</id>
-        <link href="https://fantaixi.github.io/post/java-chu-shi/">
+        <title type="html"><![CDATA[11 Java异常处理]]></title>
+        <id>https://fantaixi.github.io/post/11-java-yi-chang-chu-li/</id>
+        <link href="https://fantaixi.github.io/post/11-java-yi-chang-chu-li/">
         </link>
-        <updated>2020-04-29T17:50:08.000Z</updated>
-        <content type="html"><![CDATA[<p>1.Java凭什么这么强大？<br>
-主要由JVM实现平台无关性，真正实现一处编译，随处运行。</p>
-<p>2.JVM、JRE及JDK的区别？<br>
-JVM：Java虚拟机<br>
-JRE：JVM + Java SE标准类库<br>
-JDK：JRE + 开发工具（例如Javac编译工具等）<br>
-<img src="https://fantaixi.github.io/post-images/1588182860675.png" alt="" loading="lazy"></p>
-<p>3.Java分类<br>
-Java SE（标准版）<br>
-Java EE（企业版）<br>
-Java ME（手机版）</p>
-<p>4.一个Java程序的开发流程（粗略）<br>
-1）编写源代码  .java<br>
-2） javac.exe编译源代码 ，生成字节码文件<br>
-3） java.exe运行字节码<br>
-<img src="https://fantaixi.github.io/post-images/1588183729386.png" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[01 Java安装]]></title>
-        <id>https://fantaixi.github.io/post/java-an-zhuang/</id>
-        <link href="https://fantaixi.github.io/post/java-an-zhuang/">
-        </link>
-        <updated>2020-04-29T09:15:30.000Z</updated>
-        <content type="html"><![CDATA[<p>1.简介<br>
-Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。Java语言作为静态面向对象编程语言的代表，极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程 。<br>
-Java具有简单性、面向对象、分布式、健壮性、安全性、平台独立与可移植性、多线程、动态性等特点   。Java可以编写桌面应用程序、Web应用程序、分布式系统和嵌入式系统应用程序等 。<br>
----&lt;百度百科&gt;<br>
-2.安装<br>
-2.1 下载jdk<br>
-https://www.java.com/zh_CN/download/help/download_options.xml</p>
-<p>2.2系统环境变量配置<br>
-win7：<br>
-<img src="https://fantaixi.github.io/post-images/1588154373181.png" alt="" loading="lazy"><br>
-win10：<br>
-<img src="https://fantaixi.github.io/post-images/1588154530632.png" alt="" loading="lazy"><br>
-2.3 为什么配置path环境变量？<br>
-path环境变量：windows操作系统执行命令时所要搜寻的路径<br>
-为什么要配置path:希望java的开发工具（javac.exe,java.exe)在任何的文件路径下都可以执行成功。</p>
-<p>2.4检查jdk是否安装成功<br>
-cmd：java -version<br>
-<img src="https://fantaixi.github.io/post-images/1588154715970.png" alt="" loading="lazy"></p>
-<p>小结：很大，很持久（通过jvm实现平台无关性）</p>
+        <updated>2020-05-06T15:04:08.000Z</updated>
+        <content type="html"><![CDATA[<p>一、异常</p>
+<ol>
+<li>异常的体系结构</li>
+</ol>
+<ul>
+<li>java.lang.Throwable</li>
+<li>
+<pre><code> |-----java.lang.Error:一般不编写针对性的代码进行处理。
+</code></pre>
+</li>
+<li>
+<pre><code> |-----java.lang.Exception:可以进行异常的处理
+</code></pre>
+</li>
+<li>
+<pre><code> 	|------编译时异常(checked)
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----IOException
+</code></pre>
+</li>
+<li>
+<pre><code> 				|-----FileNotFoundException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----ClassNotFoundException
+</code></pre>
+</li>
+<li>
+<pre><code> 	|------运行时异常(unchecked,RuntimeException)
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----NullPointerException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----ArrayIndexOutOfBoundsException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----ClassCastException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----NumberFormatException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----InputMismatchException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----ArithmeticException
+</code></pre>
+</li>
+</ul>
+<p>2.从程序执行过程，看编译时异常和运行时异常<br>
+<img src="https://fantaixi.github.io/post-images/1588777569253.png" alt="" loading="lazy"><br>
+编译时异常：执行javac.exe命名时，可能出现的异常<br>
+运行时异常：执行java.exe命名时，出现的异常</p>
+<p>3.常见的异常类型，请举例说明：<br>
+//<strong><strong><strong><strong><strong><strong><strong><strong><strong>以下是运行时异常</strong></strong></strong></strong></strong></strong></strong></strong></strong>*********<br>
+//ArithmeticException<br>
+@Test<br>
+public void test6(){<br>
+int a = 10;<br>
+int b = 0;<br>
+System.out.println(a / b);<br>
+}<br>
+//InputMismatchException<br>
+@Test<br>
+public void test5(){<br>
+Scanner scanner = new Scanner(System.in);<br>
+int score = scanner.nextInt();<br>
+System.out.println(score);	<br>
+scanner.close();<br>
+}<br>
+//NumberFormatException<br>
+@Test<br>
+public void test4(){<br>
+String str = &quot;123&quot;;<br>
+str = &quot;abc&quot;;<br>
+int num = Integer.parseInt(str);	<br>
+}<br>
+//ClassCastException<br>
+@Test<br>
+public void test3(){<br>
+Object obj = new Date();<br>
+String str = (String)obj;<br>
+}<br>
+//IndexOutOfBoundsException<br>
+@Test<br>
+public void test2(){<br>
+//ArrayIndexOutOfBoundsException<br>
+//		int[] arr = new int[10];<br>
+//		System.out.println(arr[10]);<br>
+//StringIndexOutOfBoundsException<br>
+String str = &quot;abc&quot;;<br>
+System.out.println(str.charAt(3));<br>
+}<br>
+//NullPointerException<br>
+@Test<br>
+public void test1(){	<br>
+//		int[] arr = null;<br>
+//		System.out.println(arr[3]);	<br>
+String str = &quot;abc&quot;;<br>
+str = null;<br>
+System.out.println(str.charAt(0));	<br>
+}<br>
+//<strong><strong><strong><strong><strong><strong><strong><strong><strong>以下是编译时异常</strong></strong></strong></strong></strong></strong></strong></strong></strong>*********<br>
+@Test<br>
+public void test7(){<br>
+//		File file = new File(&quot;hello.txt&quot;);<br>
+//		FileInputStream fis = new FileInputStream(file);<br>
+//		<br>
+//		int data = fis.read();<br>
+//		while(data != -1){<br>
+//			System.out.print((char)data);<br>
+//			data = fis.read();<br>
+//		}<br>
+//		<br>
+//		fis.close();	<br>
+}</p>
+<p>二、异常的处理<br>
+1.java异常处理的抓抛模型<br>
+过程一：&quot;抛&quot;：程序在正常执行的过程中，一旦出现异常，就会在异常代码处生成一个对应异常类的对象。</p>
+<ul>
+<li>
+<pre><code>      并将此对象抛出。
+</code></pre>
+</li>
+<li>
+<pre><code>      一旦抛出对象以后，其后的代码就不再执行。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 关于异常对象的产生：① 系统自动生成的异常对象
+</code></pre>
+</li>
+<li>
+<pre><code> 			     ② 手动的生成一个异常对象，并抛出（throw）
+</code></pre>
+</li>
+<li></li>
+</ul>
+<p>过程二：&quot;抓&quot;：可以理解为异常的处理方式：① try-catch-finally  ② throws</p>
+<p>2.异常处理方式一：try-catch-finally<br>
+2.1 使用说明：<br>
+try{</p>
+<ul>
+<li>
+<pre><code> //可能出现异常的代码
+</code></pre>
+</li>
+<li></li>
+<li>}catch(异常类型1 变量名1){</li>
+<li>
+<pre><code> //处理异常的方式1
+</code></pre>
+</li>
+<li>}catch(异常类型2 变量名2){</li>
+<li>
+<pre><code> //处理异常的方式2
+</code></pre>
+</li>
+<li>}catch(异常类型3 变量名3){</li>
+<li>
+<pre><code> //处理异常的方式3
+</code></pre>
+</li>
+<li>}</li>
+<li>....</li>
+<li>finally{</li>
+<li>
+<pre><code> //一定会执行的代码
+</code></pre>
+</li>
+<li>}</li>
+<li></li>
+<li>说明：</li>
+<li>
+<ol>
+<li>finally是可的。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>使用try将可能出现异常代码包装起来，在执行过程中，一旦出现异常，就会生成一个对应异常类的对象，根据此对象的类型，去catch中进行匹配</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>一旦try中的异常对象匹配到某一个catch时，就进入catch中进行异常的处理。一旦处理完成，就跳出当前的try-catch结构（在没写finally的情况。继续执行其后的代码</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>catch中的异常类型如果没子父类关系，则谁声明在上，谁声明在下无所谓。</li>
+</ol>
+</li>
+<li>catch中的异常类型如果满足子父类关系，则要求子类一定声明在父类的上面。否则，报错</li>
+<li>
+<ol start="5">
+<li>常用的异常对象处理的方式： ① String  getMessage()    ② printStackTrace()</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>在try结构中声明的变量，再出了try结构以后，就不能再被调用</li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li>try-catch-finally结构可以嵌套</li>
+</ol>
+</li>
+</ul>
+<p>总结：如何看待代码中的编译时异常和运行时异常？</p>
+<ul>
+<li>体会1：使用try-catch-finally处理编译时异常，是得程序在编译时就不再报错，但是运行时仍可能报错。相当于我们使用try-catch-finally将一个编译时可能出现的异常，延迟到运行时出现。</li>
+<li></li>
+<li>体会2：开发中，由于运行时异常比较常见，所以我们通常就不针对运行时异常编写try-catch-finally了。针对于编译时异常，我们说一定要考虑异常的处理。<br>
+2.2：finally的再说明：</li>
+<li>1.finally是可省略的</li>
+<li></li>
+<li>2.finally中声明的是一定会被执行的代码。即使catch中又出现异常了，try中return语句，catch中return语句等情况。</li>
+<li></li>
+<li>3.像数据库连接、输入输出流、网络编程Socket等资源，JVM是不能自动的回收的，我们需要自己手动的进行资源的释放。此时的资源释放，就需要声明在finally中。</li>
+</ul>
+<p>2.3：[面试题]<br>
+final、finally、finalize三者的区别？<br>
+类似：<br>
+throw 和 throws<br>
+Collection 和 Collections<br>
+String 、StringBuffer、StringBuilder<br>
+ArrayList 、 LinkedList<br>
+HashMap 、LinkedHashMap<br>
+重写、重载</p>
+<p>结构不相似的：<br>
+抽象类、接口<br>
+== 、 equals()<br>
+sleep()、wait()</p>
+<p>3.异常处理方式二：<br>
+&quot;throws + 异常类型&quot;写在方法的声明处。指明此方法执行时，可能会抛出的异常类型。<br>
+一旦当方法体执行时，出现异常，仍会在异常代码处生成一个异常类的对象，此对象满足throws后异常类型时，就会被抛出。异常代码后续的代码，就不再执行！</p>
+<ol start="4">
+<li>
+<p>对比两种处理方式<br>
+try-catch-finally:真正的将异常给处理掉了。<br>
+throws的方式只是将异常抛给了方法的调用者。并没真正将异常处理掉。</p>
+</li>
+<li>
+<p>体会开发中应该如何选择两种处理方式？</p>
+</li>
+</ol>
+<ul>
+<li>5.1 如果父类中被重写的方法没throws方式处理异常，则子类重写的方法也不能使用throws，意味着如果子类重写的方法中有异常，必须使用try-catch-finally方式处理。</li>
+<li>5.2 执行的方法a中，先后又调用了另外的几个方法，这几个方法是递进关系执行的。我们建议这几个方法使用throws的方式进行处理。而执行的方法a可以考虑使用try-catch-finally方式进行处理。</li>
+</ul>
+<p>补充：<br>
+方法重写的规则之一：<br>
+子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</p>
+<p>三、手动抛出异常对象<br>
+1.使用说明<br>
+在程序执行中，除了自动抛出异常对象的情况之外，我们还可以手动的throw一个异常类的对象。</p>
+<p>2.[面试题]<br>
+throw 和  throws区别：<br>
+throw 表示抛出一个异常类的对象，生成异常对象的过程。声明在方法体内。<br>
+throws 属于异常处理的一种方式，声明在方法的声明处。</p>
+<p>3.典型例题<br>
+class Student{	<br>
+private int id;<br>
+public void regist(int id) throws Exception {<br>
+if(id &gt; 0){<br>
+this.id = id;<br>
+}else{<br>
+//手动抛出异常对象<br>
+//			throw new RuntimeException(&quot;您输入的数据非法！&quot;);<br>
+//			throw new Exception(&quot;您输入的数据非法！&quot;);<br>
+throw new MyException(&quot;不能输入负数&quot;);<br>
+}		<br>
+}<br>
+@Override<br>
+public String toString() {<br>
+return &quot;Student [id=&quot; + id + &quot;]&quot;;<br>
+}<br>
+}</p>
+<p>四、自定义异常类<br>
+如何自定义一个异常类？</p>
+<ul>
+<li>如何自定义异常类？</li>
+<li>
+<ol>
+<li>继承于现的异常结构：RuntimeException 、Exception</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>提供全局常量：serialVersionUID</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>提供重载的构造器</li>
+</ol>
+</li>
+</ul>
+<p>public class MyException extends Exception{<br>
+static final long serialVersionUID = -7034897193246939L;<br>
+public MyException(){	<br>
+}<br>
+public MyException(String msg){<br>
+super(msg);<br>
+}<br>
+}</p>
 ]]></content>
     </entry>
 </feed>

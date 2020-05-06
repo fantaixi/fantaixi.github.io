@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>11 Java异常处理 | 饭太稀</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://fantaixi.github.io/favicon.ico?v=1588795446572">
+<link rel="stylesheet" href="https://fantaixi.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、异常
+
+异常的体系结构
+
+
+java.lang.Throwable
+
+ |-----java.lang.Error:一般不编写针对性的代码进行处理。
+
+
+
+ |-----java.lang.Exception:可以进行异常的处理
+
+
+
+..." />
+    <meta name="keywords" content="Java" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://fantaixi.github.io">
+        <img src="https://fantaixi.github.io/images/avatar.png?v=1588795446572" class="site-logo">
+        <h1 class="site-title">饭太稀</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://fantaixi.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">11 Java异常处理</h2>
+            <div class="post-date">2020-05-06</div>
+            
+            <div class="post-content" v-pre>
+              <p>一、异常</p>
+<ol>
+<li>异常的体系结构</li>
+</ol>
+<ul>
+<li>java.lang.Throwable</li>
+<li>
+<pre><code> |-----java.lang.Error:一般不编写针对性的代码进行处理。
+</code></pre>
+</li>
+<li>
+<pre><code> |-----java.lang.Exception:可以进行异常的处理
+</code></pre>
+</li>
+<li>
+<pre><code> 	|------编译时异常(checked)
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----IOException
+</code></pre>
+</li>
+<li>
+<pre><code> 				|-----FileNotFoundException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----ClassNotFoundException
+</code></pre>
+</li>
+<li>
+<pre><code> 	|------运行时异常(unchecked,RuntimeException)
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----NullPointerException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----ArrayIndexOutOfBoundsException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----ClassCastException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----NumberFormatException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----InputMismatchException
+</code></pre>
+</li>
+<li>
+<pre><code> 			|-----ArithmeticException
+</code></pre>
+</li>
+</ul>
+<p>2.从程序执行过程，看编译时异常和运行时异常<br>
+<img src="https://fantaixi.github.io/post-images/1588777569253.png" alt="" loading="lazy"><br>
+编译时异常：执行javac.exe命名时，可能出现的异常<br>
+运行时异常：执行java.exe命名时，出现的异常</p>
+<p>3.常见的异常类型，请举例说明：<br>
+//<strong><strong><strong><strong><strong><strong><strong><strong><strong>以下是运行时异常</strong></strong></strong></strong></strong></strong></strong></strong></strong>*********<br>
+//ArithmeticException<br>
+@Test<br>
+public void test6(){<br>
+int a = 10;<br>
+int b = 0;<br>
+System.out.println(a / b);<br>
+}<br>
+//InputMismatchException<br>
+@Test<br>
+public void test5(){<br>
+Scanner scanner = new Scanner(System.in);<br>
+int score = scanner.nextInt();<br>
+System.out.println(score);	<br>
+scanner.close();<br>
+}<br>
+//NumberFormatException<br>
+@Test<br>
+public void test4(){<br>
+String str = &quot;123&quot;;<br>
+str = &quot;abc&quot;;<br>
+int num = Integer.parseInt(str);	<br>
+}<br>
+//ClassCastException<br>
+@Test<br>
+public void test3(){<br>
+Object obj = new Date();<br>
+String str = (String)obj;<br>
+}<br>
+//IndexOutOfBoundsException<br>
+@Test<br>
+public void test2(){<br>
+//ArrayIndexOutOfBoundsException<br>
+//		int[] arr = new int[10];<br>
+//		System.out.println(arr[10]);<br>
+//StringIndexOutOfBoundsException<br>
+String str = &quot;abc&quot;;<br>
+System.out.println(str.charAt(3));<br>
+}<br>
+//NullPointerException<br>
+@Test<br>
+public void test1(){	<br>
+//		int[] arr = null;<br>
+//		System.out.println(arr[3]);	<br>
+String str = &quot;abc&quot;;<br>
+str = null;<br>
+System.out.println(str.charAt(0));	<br>
+}<br>
+//<strong><strong><strong><strong><strong><strong><strong><strong><strong>以下是编译时异常</strong></strong></strong></strong></strong></strong></strong></strong></strong>*********<br>
+@Test<br>
+public void test7(){<br>
+//		File file = new File(&quot;hello.txt&quot;);<br>
+//		FileInputStream fis = new FileInputStream(file);<br>
+//		<br>
+//		int data = fis.read();<br>
+//		while(data != -1){<br>
+//			System.out.print((char)data);<br>
+//			data = fis.read();<br>
+//		}<br>
+//		<br>
+//		fis.close();	<br>
+}</p>
+<p>二、异常的处理<br>
+1.java异常处理的抓抛模型<br>
+过程一：&quot;抛&quot;：程序在正常执行的过程中，一旦出现异常，就会在异常代码处生成一个对应异常类的对象。</p>
+<ul>
+<li>
+<pre><code>      并将此对象抛出。
+</code></pre>
+</li>
+<li>
+<pre><code>      一旦抛出对象以后，其后的代码就不再执行。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code> 关于异常对象的产生：① 系统自动生成的异常对象
+</code></pre>
+</li>
+<li>
+<pre><code> 			     ② 手动的生成一个异常对象，并抛出（throw）
+</code></pre>
+</li>
+<li></li>
+</ul>
+<p>过程二：&quot;抓&quot;：可以理解为异常的处理方式：① try-catch-finally  ② throws</p>
+<p>2.异常处理方式一：try-catch-finally<br>
+2.1 使用说明：<br>
+try{</p>
+<ul>
+<li>
+<pre><code> //可能出现异常的代码
+</code></pre>
+</li>
+<li></li>
+<li>}catch(异常类型1 变量名1){</li>
+<li>
+<pre><code> //处理异常的方式1
+</code></pre>
+</li>
+<li>}catch(异常类型2 变量名2){</li>
+<li>
+<pre><code> //处理异常的方式2
+</code></pre>
+</li>
+<li>}catch(异常类型3 变量名3){</li>
+<li>
+<pre><code> //处理异常的方式3
+</code></pre>
+</li>
+<li>}</li>
+<li>....</li>
+<li>finally{</li>
+<li>
+<pre><code> //一定会执行的代码
+</code></pre>
+</li>
+<li>}</li>
+<li></li>
+<li>说明：</li>
+<li>
+<ol>
+<li>finally是可的。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>使用try将可能出现异常代码包装起来，在执行过程中，一旦出现异常，就会生成一个对应异常类的对象，根据此对象的类型，去catch中进行匹配</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>一旦try中的异常对象匹配到某一个catch时，就进入catch中进行异常的处理。一旦处理完成，就跳出当前的try-catch结构（在没写finally的情况。继续执行其后的代码</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>catch中的异常类型如果没子父类关系，则谁声明在上，谁声明在下无所谓。</li>
+</ol>
+</li>
+<li>catch中的异常类型如果满足子父类关系，则要求子类一定声明在父类的上面。否则，报错</li>
+<li>
+<ol start="5">
+<li>常用的异常对象处理的方式： ① String  getMessage()    ② printStackTrace()</li>
+</ol>
+</li>
+<li>
+<ol start="6">
+<li>在try结构中声明的变量，再出了try结构以后，就不能再被调用</li>
+</ol>
+</li>
+<li>
+<ol start="7">
+<li>try-catch-finally结构可以嵌套</li>
+</ol>
+</li>
+</ul>
+<p>总结：如何看待代码中的编译时异常和运行时异常？</p>
+<ul>
+<li>体会1：使用try-catch-finally处理编译时异常，是得程序在编译时就不再报错，但是运行时仍可能报错。相当于我们使用try-catch-finally将一个编译时可能出现的异常，延迟到运行时出现。</li>
+<li></li>
+<li>体会2：开发中，由于运行时异常比较常见，所以我们通常就不针对运行时异常编写try-catch-finally了。针对于编译时异常，我们说一定要考虑异常的处理。<br>
+2.2：finally的再说明：</li>
+<li>1.finally是可省略的</li>
+<li></li>
+<li>2.finally中声明的是一定会被执行的代码。即使catch中又出现异常了，try中return语句，catch中return语句等情况。</li>
+<li></li>
+<li>3.像数据库连接、输入输出流、网络编程Socket等资源，JVM是不能自动的回收的，我们需要自己手动的进行资源的释放。此时的资源释放，就需要声明在finally中。</li>
+</ul>
+<p>2.3：[面试题]<br>
+final、finally、finalize三者的区别？<br>
+类似：<br>
+throw 和 throws<br>
+Collection 和 Collections<br>
+String 、StringBuffer、StringBuilder<br>
+ArrayList 、 LinkedList<br>
+HashMap 、LinkedHashMap<br>
+重写、重载</p>
+<p>结构不相似的：<br>
+抽象类、接口<br>
+== 、 equals()<br>
+sleep()、wait()</p>
+<p>3.异常处理方式二：<br>
+&quot;throws + 异常类型&quot;写在方法的声明处。指明此方法执行时，可能会抛出的异常类型。<br>
+一旦当方法体执行时，出现异常，仍会在异常代码处生成一个异常类的对象，此对象满足throws后异常类型时，就会被抛出。异常代码后续的代码，就不再执行！</p>
+<ol start="4">
+<li>
+<p>对比两种处理方式<br>
+try-catch-finally:真正的将异常给处理掉了。<br>
+throws的方式只是将异常抛给了方法的调用者。并没真正将异常处理掉。</p>
+</li>
+<li>
+<p>体会开发中应该如何选择两种处理方式？</p>
+</li>
+</ol>
+<ul>
+<li>5.1 如果父类中被重写的方法没throws方式处理异常，则子类重写的方法也不能使用throws，意味着如果子类重写的方法中有异常，必须使用try-catch-finally方式处理。</li>
+<li>5.2 执行的方法a中，先后又调用了另外的几个方法，这几个方法是递进关系执行的。我们建议这几个方法使用throws的方式进行处理。而执行的方法a可以考虑使用try-catch-finally方式进行处理。</li>
+</ul>
+<p>补充：<br>
+方法重写的规则之一：<br>
+子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</p>
+<p>三、手动抛出异常对象<br>
+1.使用说明<br>
+在程序执行中，除了自动抛出异常对象的情况之外，我们还可以手动的throw一个异常类的对象。</p>
+<p>2.[面试题]<br>
+throw 和  throws区别：<br>
+throw 表示抛出一个异常类的对象，生成异常对象的过程。声明在方法体内。<br>
+throws 属于异常处理的一种方式，声明在方法的声明处。</p>
+<p>3.典型例题<br>
+class Student{	<br>
+private int id;<br>
+public void regist(int id) throws Exception {<br>
+if(id &gt; 0){<br>
+this.id = id;<br>
+}else{<br>
+//手动抛出异常对象<br>
+//			throw new RuntimeException(&quot;您输入的数据非法！&quot;);<br>
+//			throw new Exception(&quot;您输入的数据非法！&quot;);<br>
+throw new MyException(&quot;不能输入负数&quot;);<br>
+}		<br>
+}<br>
+@Override<br>
+public String toString() {<br>
+return &quot;Student [id=&quot; + id + &quot;]&quot;;<br>
+}<br>
+}</p>
+<p>四、自定义异常类<br>
+如何自定义一个异常类？</p>
+<ul>
+<li>如何自定义异常类？</li>
+<li>
+<ol>
+<li>继承于现的异常结构：RuntimeException 、Exception</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>提供全局常量：serialVersionUID</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>提供重载的构造器</li>
+</ol>
+</li>
+</ul>
+<p>public class MyException extends Exception{<br>
+static final long serialVersionUID = -7034897193246939L;<br>
+public MyException(){	<br>
+}<br>
+public MyException(String msg){<br>
+super(msg);<br>
+}<br>
+}</p>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://fantaixi.github.io/tag/UDPQ9NSLF/" class="tag">
+                    Java
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://fantaixi.github.io/post/10-mian-xiang-dui-xiang-xia/">
+                  <h3 class="post-title">
+                    10 面向对象-下
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
