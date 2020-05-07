@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://fantaixi.github.io</id>
     <title>饭太稀</title>
-    <updated>2020-05-06T20:04:14.645Z</updated>
+    <updated>2020-05-07T19:40:47.406Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://fantaixi.github.io"/>
     <link rel="self" href="https://fantaixi.github.io/atom.xml"/>
@@ -15,7 +15,7 @@
         <id>https://fantaixi.github.io/post/20-java8-de-qi-ta-xin-te-xing/</id>
         <link href="https://fantaixi.github.io/post/20-java8-de-qi-ta-xin-te-xing/">
         </link>
-        <updated>2020-05-06T19:55:28.000Z</updated>
+        <updated>2019-05-19T19:55:28.000Z</updated>
         <content type="html"><![CDATA[<p>一、Java8新特性概述<br>
 <img src="https://fantaixi.github.io/post-images/1588795006566.png" alt="" loading="lazy"></p>
 <figure data-type="image" tabindex="1"><img src="https://fantaixi.github.io/post-images/1588795031488.png" alt="" loading="lazy"></figure>
@@ -338,7 +338,7 @@ System.out.println(girlName);<br>
         <id>https://fantaixi.github.io/post/19-java-fan-she-ji-zhi/</id>
         <link href="https://fantaixi.github.io/post/19-java-fan-she-ji-zhi/">
         </link>
-        <updated>2020-05-06T19:41:16.000Z</updated>
+        <updated>2019-05-18T19:41:16.000Z</updated>
         <content type="html"><![CDATA[<p>一、反射的概述<br>
 1.什么叫做反射？<br>
 Java的反射（reflection）机制是指在程序的运行状态中，可以构造任意一个类的对象，可以了解任意一个对象所属的类，可以了解任意一个类的成员变量和方法，可以调用任意一个对象的属性和方法。 这种动态获取程序信息以及动态调用对象的功能称为Java语言的反射机制。 反射被视为动态语言的关键。</p>
@@ -722,11 +722,11 @@ proxyClothFactory.produceCloth();<br>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[18 网络编程]]></title>
+        <title type="html"><![CDATA[18 Java网络编程]]></title>
         <id>https://fantaixi.github.io/post/18-wang-luo-bian-cheng/</id>
         <link href="https://fantaixi.github.io/post/18-wang-luo-bian-cheng/">
         </link>
-        <updated>2020-05-06T19:33:37.000Z</updated>
+        <updated>2019-05-17T19:33:37.000Z</updated>
         <content type="html"><![CDATA[<p>一、InetAddress类的使用<br>
 1.实现网络通信需要解决的两个问题</p>
 <ul>
@@ -1085,7 +1085,7 @@ urlConnection.disconnect();<br>
         <id>https://fantaixi.github.io/post/17-java-io-liu/</id>
         <link href="https://fantaixi.github.io/post/17-java-io-liu/">
         </link>
-        <updated>2020-05-06T19:13:20.000Z</updated>
+        <updated>2019-05-16T19:13:20.000Z</updated>
         <content type="html"><![CDATA[<p>一、File类的使用<br>
 1.File类的理解</p>
 <ul>
@@ -1767,7 +1767,7 @@ Path替换原有的File类。<br>
         <id>https://fantaixi.github.io/post/16-fan-xing/</id>
         <link href="https://fantaixi.github.io/post/16-fan-xing/">
         </link>
-        <updated>2020-05-06T18:19:45.000Z</updated>
+        <updated>2019-05-15T18:19:45.000Z</updated>
         <content type="html"><![CDATA[<p>一、泛型的理解<br>
 1.泛型的概念<br>
 所谓泛型，就是允许在定义类、接口时通过一个标识表示类中某个属性的类型或者是某个方法的返<br>
@@ -2160,7 +2160,7 @@ list2.add(new Student());<br>
         <id>https://fantaixi.github.io/post/15-java-ji-he/</id>
         <link href="https://fantaixi.github.io/post/15-java-ji-he/">
         </link>
-        <updated>2020-05-06T17:57:10.000Z</updated>
+        <updated>2019-05-14T17:57:10.000Z</updated>
         <content type="html"><![CDATA[<p>一、数组与集合</p>
 <ol>
 <li>
@@ -2795,7 +2795,7 @@ boolean replaceAll(List list，Object oldVal，Object newVal)：使用新值替�
         <id>https://fantaixi.github.io/post/14-mei-ju-lei-he-zhu-jie/</id>
         <link href="https://fantaixi.github.io/post/14-mei-ju-lei-he-zhu-jie/">
         </link>
-        <updated>2020-05-06T17:53:49.000Z</updated>
+        <updated>2019-05-13T17:53:49.000Z</updated>
         <content type="html"><![CDATA[<p>一、枚举类的使用</p>
 <ol>
 <li>枚举类的说明：</li>
@@ -2991,7 +2991,7 @@ ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中。</
         <id>https://fantaixi.github.io/post/13-java-chang-yong-lei/</id>
         <link href="https://fantaixi.github.io/post/13-java-chang-yong-lei/">
         </link>
-        <updated>2020-05-06T17:31:54.000Z</updated>
+        <updated>2019-05-12T17:31:54.000Z</updated>
         <content type="html"><![CDATA[<p>一、String类<br>
 java.lang.String类的使用<br>
 1.概述<br>
@@ -3535,7 +3535,7 @@ java.lang.Math提供了一系列静态方法用于科学计算。其方法的参
         <id>https://fantaixi.github.io/post/12-java-duo-xian-cheng/</id>
         <link href="https://fantaixi.github.io/post/12-java-duo-xian-cheng/">
         </link>
-        <updated>2020-05-06T15:29:19.000Z</updated>
+        <updated>2019-05-12T15:29:19.000Z</updated>
         <content type="html"><![CDATA[<p>一、程序、进程、线程的理解</p>
 <ol>
 <li>
@@ -4061,330 +4061,652 @@ service.shutdown();<br>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[11 Java异常处理]]></title>
-        <id>https://fantaixi.github.io/post/11-java-yi-chang-chu-li/</id>
-        <link href="https://fantaixi.github.io/post/11-java-yi-chang-chu-li/">
+        <title type="html"><![CDATA[10 面向对象-下]]></title>
+        <id>https://fantaixi.github.io/post/10-mian-xiang-dui-xiang-xia/</id>
+        <link href="https://fantaixi.github.io/post/10-mian-xiang-dui-xiang-xia/">
         </link>
-        <updated>2020-05-06T15:04:08.000Z</updated>
-        <content type="html"><![CDATA[<p>一、异常</p>
-<ol>
-<li>异常的体系结构</li>
-</ol>
+        <updated>2019-05-10T10:12:36.000Z</updated>
+        <content type="html"><![CDATA[<p>一、关键字static<br>
+static:静态的<br>
+1.可以用来修饰的结构：主要用来修饰类的内部结构<br>
+属性、方法、代码块、内部类<br>
+2.static修饰属性：静态变量（或类变量）<br>
+2.1 属性，是否使用static修饰，又分为：静态属性  vs 非静态属性(实例变量)</p>
 <ul>
-<li>java.lang.Throwable</li>
 <li>
-<pre><code> |-----java.lang.Error:一般不编写针对性的代码进行处理。
+<pre><code>    实例变量：我们创建了类的多个对象，每个对象都独立的拥一套类中的非静态属性。当修改其中一个对象中的非静态属性时，不会导致其他对象中同样的属性值的修改。
 </code></pre>
 </li>
 <li>
-<pre><code> |-----java.lang.Exception:可以进行异常的处理
+<pre><code>      静态变量：我们创建了类的多个对象，多个对象共享同一个静态变量。当通过某一个对象修改静态变量时，会导致其他对象调用此静态变量时，是修改过了的。
 </code></pre>
 </li>
 <li>
-<pre><code> 	|------编译时异常(checked)
+<pre><code> 2.2 static修饰属性的其他说明：
 </code></pre>
 </li>
 <li>
-<pre><code> 			|-----IOException
+<pre><code>  ① 静态变量随着类的加载而加载。可以通过&quot;类.静态变量&quot;的方式进行调用
 </code></pre>
 </li>
 <li>
-<pre><code> 				|-----FileNotFoundException
+<pre><code>     ② 静态变量的加载要早于对象的创建。
 </code></pre>
 </li>
 <li>
-<pre><code> 			|-----ClassNotFoundException
+<pre><code>     ③ 由于类只会加载一次，则静态变量在内存中也只会存在一份：存在方法区的静态域中。
+</code></pre>
+</li>
+<li></li>
+<li>
+<pre><code>     ④		类变量	实例变量
 </code></pre>
 </li>
 <li>
-<pre><code> 	|------运行时异常(unchecked,RuntimeException)
+<pre><code>     类		yes		no
 </code></pre>
 </li>
 <li>
-<pre><code> 			|-----NullPointerException
+<pre><code>     对象	yes		yes
 </code></pre>
 </li>
+<li></li>
 <li>
-<pre><code> 			|-----ArrayIndexOutOfBoundsException
-</code></pre>
-</li>
-<li>
-<pre><code> 			|-----ClassCastException
-</code></pre>
-</li>
-<li>
-<pre><code> 			|-----NumberFormatException
-</code></pre>
-</li>
-<li>
-<pre><code> 			|-----InputMismatchException
-</code></pre>
-</li>
-<li>
-<pre><code> 			|-----ArithmeticException
+<pre><code>    2.3 静态属性举例：System.out; Math.PI;
 </code></pre>
 </li>
 </ul>
-<p>2.从程序执行过程，看编译时异常和运行时异常<br>
-<img src="https://fantaixi.github.io/post-images/1588777569253.png" alt="" loading="lazy"><br>
-编译时异常：执行javac.exe命名时，可能出现的异常<br>
-运行时异常：执行java.exe命名时，出现的异常</p>
-<p>3.常见的异常类型，请举例说明：<br>
-//<strong><strong><strong><strong><strong><strong><strong><strong><strong>以下是运行时异常</strong></strong></strong></strong></strong></strong></strong></strong></strong>*********<br>
-//ArithmeticException<br>
-@Test<br>
-public void test6(){<br>
-int a = 10;<br>
-int b = 0;<br>
-System.out.println(a / b);<br>
-}<br>
-//InputMismatchException<br>
-@Test<br>
-public void test5(){<br>
-Scanner scanner = new Scanner(System.in);<br>
-int score = scanner.nextInt();<br>
-System.out.println(score);	<br>
-scanner.close();<br>
-}<br>
-//NumberFormatException<br>
-@Test<br>
-public void test4(){<br>
-String str = &quot;123&quot;;<br>
-str = &quot;abc&quot;;<br>
-int num = Integer.parseInt(str);	<br>
-}<br>
-//ClassCastException<br>
-@Test<br>
-public void test3(){<br>
-Object obj = new Date();<br>
-String str = (String)obj;<br>
-}<br>
-//IndexOutOfBoundsException<br>
-@Test<br>
-public void test2(){<br>
-//ArrayIndexOutOfBoundsException<br>
-//		int[] arr = new int[10];<br>
-//		System.out.println(arr[10]);<br>
-//StringIndexOutOfBoundsException<br>
-String str = &quot;abc&quot;;<br>
-System.out.println(str.charAt(3));<br>
-}<br>
-//NullPointerException<br>
-@Test<br>
-public void test1(){	<br>
-//		int[] arr = null;<br>
-//		System.out.println(arr[3]);	<br>
-String str = &quot;abc&quot;;<br>
-str = null;<br>
-System.out.println(str.charAt(0));	<br>
-}<br>
-//<strong><strong><strong><strong><strong><strong><strong><strong><strong>以下是编译时异常</strong></strong></strong></strong></strong></strong></strong></strong></strong>*********<br>
-@Test<br>
-public void test7(){<br>
-//		File file = new File(&quot;hello.txt&quot;);<br>
-//		FileInputStream fis = new FileInputStream(file);<br>
-//		<br>
-//		int data = fis.read();<br>
-//		while(data != -1){<br>
-//			System.out.print((char)data);<br>
-//			data = fis.read();<br>
-//		}<br>
-//		<br>
-//		fis.close();	<br>
+<p>3.静态变量内存解析：<br>
+<img src="https://fantaixi.github.io/post-images/1588760221392.png" alt="" loading="lazy"><br>
+4.static修饰方法：静态方法、类方法<br>
+① 随着类的加载而加载，可以通过&quot;类.静态方法&quot;的方式进行调用<br>
+②			          静态方法	非静态方法</p>
+<ul>
+<li>
+<pre><code>     类		    yes		no
+</code></pre>
+</li>
+<li>
+<pre><code>     对象		yes		yes
+</code></pre>
+</li>
+</ul>
+<p>③ 静态方法中，只能调用静态的方法或属性<br>
+非静态方法中，既可以调用非静态的方法或属性，也可以调用静态的方法或属性</p>
+<ol start="5">
+<li>static的注意点：<br>
+5.1 在静态的方法内，不能使用this关键字、super关键字<br>
+5.2 关于静态属性和静态方法的使用，大家都从生命周期的角度去理解。</li>
+</ol>
+<p>6.如何判定属性和方法应该使用static关键字：<br>
+6.1 关于属性</p>
+<blockquote>
+<p>属性是可以被多个对象所共享的，不会随着对象的不同而不同的。<br>
+类中的常量也常常声明为static</p>
+</blockquote>
+<p>6.2 关于方法</p>
+<blockquote>
+<p>操作静态属性的方法，通常设置为static的<br>
+工具类中的方法，习惯上声明为static的。 比如：Math、Arrays、Collections<br>
+7.使用举例：<br>
+举例一：Arrays、Math、Collections等工具类<br>
+举例二：单例模式<br>
+举例三：<br>
+class Circle{</p>
+</blockquote>
+<pre><code>private double radius;
+private int id;//自动赋值
+
+public Circle(){
+	id = init++;
+	total++;
+}
+
+public Circle(double radius){
+	this();
+</code></pre>
+<p>//		id = init++;<br>
+//		total++;<br>
+this.radius = radius;		<br>
 }</p>
-<p>二、异常的处理<br>
-1.java异常处理的抓抛模型<br>
-过程一：&quot;抛&quot;：程序在正常执行的过程中，一旦出现异常，就会在异常代码处生成一个对应异常类的对象。</p>
+<pre><code>private static int total;//记录创建的圆的个数
+private static int init = 1001;//static声明的属性被所对象所共享
+
+public double findArea(){
+	return 3.14 * radius * radius;
+}
+
+public double getRadius() {
+	return radius;
+}
+
+public void setRadius(double radius) {
+	this.radius = radius;
+}
+
+public int getId() {
+	return id;
+}
+
+public static int getTotal() {
+	return total;
+}
+</code></pre>
+<p>}</p>
+<p>二、单例模式<br>
+1.设计模式的说明<br>
+1.1 理解<br>
+设计模式是在大量的实践中总结和理论化之后优的代码结构、编程风格、以及解决问题的思考方式。</p>
+<p>1.2 常用设计模式  --- 23种经典的设计模式  GOF<br>
+创建型模式，共5种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。<br>
+结构型模式，共7种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。<br>
+行为型模式，共11种：策略模式、模板方法模式、观察者模式、迭代器模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</p>
+<p>2.单例模式<br>
+2.1 要解决的问题：<br>
+所谓类的单例设计模式，就是采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例。<br>
+2.2 具体代码的实现：<br>
+饿汉式1：<br>
+class Bank{<br>
+//1.私化类的构造器<br>
+private Bank(){	<br>
+}<br>
+//2.内部创建类的对象<br>
+//4.要求此对象也必须声明为静态的<br>
+private static Bank instance = new Bank();<br>
+//3.提供公共的静态的方法，返回类的对象<br>
+public static Bank getInstance(){<br>
+return instance;<br>
+}<br>
+}</p>
+<p>饿汉式2：使用了静态代码块<br>
+class Order{<br>
+//1.私化类的构造器<br>
+private Order(){	<br>
+}<br>
+//2.声明当前类对象，没初始化<br>
+//4.此对象也必须声明为static的<br>
+private static Order instance = null;<br>
+static{<br>
+instance = new Order();<br>
+}	<br>
+//3.声明public、static的返回当前类对象的方法<br>
+public static Order getInstance(){<br>
+return instance;<br>
+}	<br>
+}<br>
+懒汉式：<br>
+class Order{<br>
+//1.私化类的构造器<br>
+private Order(){		<br>
+}<br>
+//2.声明当前类对象，没初始化<br>
+//4.此对象也必须声明为static的<br>
+private static Order instance = null;</p>
+<pre><code>//3.声明public、static的返回当前类对象的方法
+public static Order getInstance(){	
+	if(instance == null){		
+		instance = new Order();		
+	}
+	return instance;
+}
+</code></pre>
+<p>}<br>
+2.3 两种方式的对比：</p>
 <ul>
+<li>饿汉式：</li>
 <li>
-<pre><code>      并将此对象抛出。
+<pre><code> 坏处：对象加载时间过长。
 </code></pre>
 </li>
 <li>
-<pre><code>      一旦抛出对象以后，其后的代码就不再执行。
-</code></pre>
-</li>
-<li></li>
-<li>
-<pre><code> 关于异常对象的产生：① 系统自动生成的异常对象
-</code></pre>
-</li>
-<li>
-<pre><code> 			     ② 手动的生成一个异常对象，并抛出（throw）
+<pre><code> 好处：饿汉式是线程安全的
 </code></pre>
 </li>
 <li></li>
+<li>懒汉式：好处：延迟对象的创建。</li>
+<li>
+<pre><code>   目前的写法坏处：线程不安全。---&gt;到多线程内容时，再修改
+</code></pre>
+</li>
 </ul>
-<p>过程二：&quot;抓&quot;：可以理解为异常的处理方式：① try-catch-finally  ② throws</p>
-<p>2.异常处理方式一：try-catch-finally<br>
-2.1 使用说明：<br>
-try{</p>
+<p>三、类的成员之四：代码块(初始化块)（重要性较属性、方法、构造器差一些）<br>
+1.代码块的作用：用来初始化类、对象的信息<br>
+2.分类：代码块要是使用修饰符，只能使用static<br>
+分类：静态代码块  vs 非静态代码块<br>
+3.静态代码块：</p>
+<blockquote>
+<p>内部可以输出语句<br>
+随着类的加载而执行,而且只执行一次<br>
+作用：初始化类的信息<br>
+如果一个类中定义了多个静态代码块，则按照声明的先后顺序执行<br>
+静态代码块的执行要优先于非静态代码块的执行<br>
+静态代码块内只能调用静态的属性、静态的方法，不能调用非静态的结构</p>
+</blockquote>
+<p>非静态代码块：</p>
+<blockquote>
+<p>内部可以输出语句<br>
+随着对象的创建而执行<br>
+每创建一个对象，就执行一次非静态代码块<br>
+作用：可以在创建对象时，对对象的属性等进行初始化<br>
+如果一个类中定义了多个非静态代码块，则按照声明的先后顺序执行<br>
+非静态代码块内可以调用静态的属性、静态的方法，或非静态的属性、非静态的方法</p>
+</blockquote>
+<ol start="4">
+<li>实例化子类对象时，涉及到父类、子类中静态代码块、非静态代码块、构造器的加载顺序：<br>
+由父及子，静态先行。</li>
+</ol>
+<p>补充：有了代码块之后的属性赋值顺序</p>
+<ul>
+<li>①默认初始化</li>
+<li>②显式初始化/⑤在代码块中赋值</li>
+<li>③构造器中初始化</li>
+<li>④有了对象以后，可以通过&quot;对象.属性&quot;或&quot;对象.方法&quot;的方式，进行赋值</li>
+<li>执行的先后顺序：① - ② / ⑤ - ③ - ④</li>
+</ul>
+<p>四、关键字：final（最终的）<br>
+1.可以用来修饰：类、方法、变量<br>
+2.具体的：<br>
+2.1 final 用来修饰一个类:此类不能被其他类所继承。</p>
 <ul>
 <li>
-<pre><code> //可能出现异常的代码
+<pre><code>     比如：String类、System类、StringBuffer类
 </code></pre>
 </li>
-<li></li>
-<li>}catch(异常类型1 变量名1){</li>
+</ul>
+<p>2.2 final 用来修饰方法：表明此方法不可以被重写</p>
+<ul>
 <li>
-<pre><code> //处理异常的方式1
+<pre><code> 	比如：Object类中getClass();
 </code></pre>
 </li>
-<li>}catch(异常类型2 变量名2){</li>
+</ul>
+<p>2.3 final 用来修饰变量：此时的&quot;变量&quot;就称为是一个常量</p>
+<ul>
 <li>
-<pre><code> //处理异常的方式2
+<pre><code> 1. final修饰属性：可以考虑赋值的位置：显式初始化、代码块中初始化、构造器中初始化
 </code></pre>
 </li>
-<li>}catch(异常类型3 变量名3){</li>
 <li>
-<pre><code> //处理异常的方式3
+<pre><code> 2. final修饰局部变量：
 </code></pre>
 </li>
-<li>}</li>
-<li>....</li>
-<li>finally{</li>
 <li>
-<pre><code> //一定会执行的代码
+<pre><code>   尤其是使用final修饰形参时，表明此形参是一个常量。当我们调用此方法时，给常量形参赋一个实参。一旦赋值以后，就只能在方法体内使用此形参，但不能进行重新赋值。
 </code></pre>
 </li>
-<li>}</li>
-<li></li>
-<li>说明：</li>
+</ul>
+<p>static final 用来修饰属性：全局常量</p>
+<p>五、关键字：abstract（抽象的）<br>
+1.可以用来修饰：类、方法<br>
+2.具体的：<br>
+abstract修饰类：抽象类</p>
+<ul>
 <li>
+<pre><code> &gt; 此类不能实例化
+</code></pre>
+</li>
+<li>
+<pre><code> &gt; 抽象类中一定有构造器，便于子类实例化时调用（涉及：子类对象实例化的全过程）
+</code></pre>
+</li>
+<li>
+<pre><code> &gt; 开发中，都会提供抽象类的子类，让子类对象实例化，完成相关的操作 ---&gt;抽象的使用前提：继承性
+</code></pre>
+</li>
+</ul>
+<p>abstract修饰方法：抽象方法</p>
+<ul>
+<li>
+<pre><code> &gt; 抽象方法只有方法的声明，没有方法体
+</code></pre>
+</li>
+<li>
+<pre><code> &gt; 包含抽象方法的类，一定是一个抽象类。反之，抽象类中可以没有抽象方法的。
+</code></pre>
+</li>
+<li>
+<pre><code>   &gt; 若子类重写了父类中的所的抽象方法后，此子类方可实例化
+</code></pre>
+</li>
+<li>
+<pre><code>    若子类没重写父类中的所有的抽象方法，则此子类也是一个抽象类，需要使用abstract修饰
+</code></pre>
+</li>
+</ul>
+<p>3.注意点：</p>
+<ul>
+<li>1.abstract不能用来修饰：属性、构造器等结构</li>
+<li>2.abstract不能用来修饰私方法、静态方法、final的方法、final的类<br>
+4.abstract的应用举例：<br>
+abstract class GeometricObject{<br>
+public abstract double findArea();<br>
+}<br>
+class Circle extends GeometricObject{<br>
+private double radius;<br>
+public double findArea(){<br>
+return 3.14 * radius * radius;<br>
+};<br>
+}</li>
+</ul>
+<p>补充：模板方法的设计模式</p>
 <ol>
-<li>finally是可的。</li>
+<li>解决的问题</li>
 </ol>
-</li>
-<li>
+<p>在软件开发中实现一个算法时，整体步骤很固定、通用，这些步骤已经在父类中写好了。但是某些部分易变，易变部分可以抽象出来，供不同子类实现。这就是一种模板模式。（比较与AOP）</p>
 <ol start="2">
-<li>使用try将可能出现异常代码包装起来，在执行过程中，一旦出现异常，就会生成一个对应异常类的对象，根据此对象的类型，去catch中进行匹配</li>
+<li>举例<br>
+abstract class Template{<br>
+//计算某段代码执行所需要花费的时间<br>
+public void spendTime(){	<br>
+long start = System.currentTimeMillis();	<br>
+this.code();//不确定的部分、易变的部分<br>
+long end = System.currentTimeMillis();<br>
+System.out.println(&quot;花费的时间为：&quot; + (end - start));<br>
+}	<br>
+public abstract void code();<br>
+}<br>
+class SubTemplate extends Template{<br>
+@Override<br>
+public void code() {	<br>
+for(int i = 2;i &lt;= 1000;i++){<br>
+boolean isFlag = true;<br>
+for(int j = 2;j &lt;= Math.sqrt(i);j++){		<br>
+if(i % j == 0){<br>
+isFlag = false;<br>
+break;<br>
+}<br>
+}<br>
+if(isFlag){<br>
+System.out.println(i);<br>
+}<br>
+}<br>
+}	<br>
+}</li>
+<li>应用场景<br>
+<img src="https://fantaixi.github.io/post-images/1588761178746.png" alt="" loading="lazy"></li>
 </ol>
+<p>六、关键字：interface（接口）<br>
+1.使用说明：<br>
+1.接口使用interface来定义</p>
+<ul>
+<li>
+<p>2.Java中，接口和类是并列的两个结构</p>
 </li>
 <li>
-<ol start="3">
-<li>一旦try中的异常对象匹配到某一个catch时，就进入catch中进行异常的处理。一旦处理完成，就跳出当前的try-catch结构（在没写finally的情况。继续执行其后的代码</li>
-</ol>
+<p>3.如何定义接口：定义接口中的成员</p>
+</li>
+<li>
+<pre><code> 3.1 JDK7及以前：只能定义全局常量和抽象方法
+</code></pre>
+</li>
+<li>
+<pre><code> 	&gt;全局常量：public static final的.但是书写时，可以省略不写
+</code></pre>
+</li>
+<li>
+<pre><code> 	&gt;抽象方法：public abstra	
+</code></pre>
+</li>
+<li>
+<pre><code> 3.2 JDK8：除了定义全局常量和抽象方法之外，还可以定义静态方法、默认方法（略）
+</code></pre>
 </li>
 <li>
 <ol start="4">
-<li>catch中的异常类型如果没子父类关系，则谁声明在上，谁声明在下无所谓。</li>
+<li>接口中不能定义构造器的！意味着接口不可以实例化（********）</li>
 </ol>
 </li>
-<li>catch中的异常类型如果满足子父类关系，则要求子类一定声明在父类的上面。否则，报错</li>
+<li></li>
 <li>
 <ol start="5">
-<li>常用的异常对象处理的方式： ① String  getMessage()    ② printStackTrace()</li>
+<li>Java开发中，接口通过让类去实现(implements)的方式来使用.</li>
 </ol>
 </li>
+<li>
+<p>如果实现类覆盖了接口中的所有的抽象方法，则此实现类就可以实例化</p>
+</li>
+<li>
+<p>如果实现类没覆盖接口中所有的抽象方法，则此实现类仍为一个抽象类</p>
+</li>
+<li></li>
 <li>
 <ol start="6">
-<li>在try结构中声明的变量，再出了try结构以后，就不能再被调用</li>
+<li>Java类可以实现多个接口   ---&gt;弥补了Java单继承性的局限性</li>
 </ol>
 </li>
+<li>
+<p>格式：class AA extends BB implements CC,DD,EE</p>
+</li>
+<li></li>
 <li>
 <ol start="7">
-<li>try-catch-finally结构可以嵌套</li>
+<li>接口与接口之间可以继承，而且可以多继承</li>
+</ol>
+</li>
+<li></li>
+<li>
+<ol start="8">
+<li>接口的具体使用，体现多态性</li>
+</ol>
+</li>
+<li>
+<ol start="9">
+<li>接口，实际上可以看做是一种规范</li>
 </ol>
 </li>
 </ul>
-<p>总结：如何看待代码中的编译时异常和运行时异常？</p>
-<ul>
-<li>体会1：使用try-catch-finally处理编译时异常，是得程序在编译时就不再报错，但是运行时仍可能报错。相当于我们使用try-catch-finally将一个编译时可能出现的异常，延迟到运行时出现。</li>
-<li></li>
-<li>体会2：开发中，由于运行时异常比较常见，所以我们通常就不针对运行时异常编写try-catch-finally了。针对于编译时异常，我们说一定要考虑异常的处理。<br>
-2.2：finally的再说明：</li>
-<li>1.finally是可省略的</li>
-<li></li>
-<li>2.finally中声明的是一定会被执行的代码。即使catch中又出现异常了，try中return语句，catch中return语句等情况。</li>
-<li></li>
-<li>3.像数据库连接、输入输出流、网络编程Socket等资源，JVM是不能自动的回收的，我们需要自己手动的进行资源的释放。此时的资源释放，就需要声明在finally中。</li>
-</ul>
-<p>2.3：[面试题]<br>
-final、finally、finalize三者的区别？<br>
-类似：<br>
-throw 和 throws<br>
-Collection 和 Collections<br>
-String 、StringBuffer、StringBuilder<br>
-ArrayList 、 LinkedList<br>
-HashMap 、LinkedHashMap<br>
-重写、重载</p>
-<p>结构不相似的：<br>
-抽象类、接口<br>
-== 、 equals()<br>
-sleep()、wait()</p>
-<p>3.异常处理方式二：<br>
-&quot;throws + 异常类型&quot;写在方法的声明处。指明此方法执行时，可能会抛出的异常类型。<br>
-一旦当方法体执行时，出现异常，仍会在异常代码处生成一个异常类的对象，此对象满足throws后异常类型时，就会被抛出。异常代码后续的代码，就不再执行！</p>
-<ol start="4">
-<li>
-<p>对比两种处理方式<br>
-try-catch-finally:真正的将异常给处理掉了。<br>
-throws的方式只是将异常抛给了方法的调用者。并没真正将异常处理掉。</p>
-</li>
-<li>
-<p>体会开发中应该如何选择两种处理方式？</p>
-</li>
-</ol>
-<ul>
-<li>5.1 如果父类中被重写的方法没throws方式处理异常，则子类重写的方法也不能使用throws，意味着如果子类重写的方法中有异常，必须使用try-catch-finally方式处理。</li>
-<li>5.2 执行的方法a中，先后又调用了另外的几个方法，这几个方法是递进关系执行的。我们建议这几个方法使用throws的方式进行处理。而执行的方法a可以考虑使用try-catch-finally方式进行处理。</li>
-</ul>
-<p>补充：<br>
-方法重写的规则之一：<br>
-子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</p>
-<p>三、手动抛出异常对象<br>
-1.使用说明<br>
-在程序执行中，除了自动抛出异常对象的情况之外，我们还可以手动的throw一个异常类的对象。</p>
-<p>2.[面试题]<br>
-throw 和  throws区别：<br>
-throw 表示抛出一个异常类的对象，生成异常对象的过程。声明在方法体内。<br>
-throws 属于异常处理的一种方式，声明在方法的声明处。</p>
-<p>3.典型例题<br>
-class Student{	<br>
-private int id;<br>
-public void regist(int id) throws Exception {<br>
-if(id &gt; 0){<br>
-this.id = id;<br>
-}else{<br>
-//手动抛出异常对象<br>
-//			throw new RuntimeException(&quot;您输入的数据非法！&quot;);<br>
-//			throw new Exception(&quot;您输入的数据非法！&quot;);<br>
-throw new MyException(&quot;不能输入负数&quot;);<br>
-}		<br>
+<p>2.举例：<br>
+class Computer{<br>
+public void transferData(USB usb){//USB usb = new Flash();<br>
+usb.start();<br>
+System.out.println(&quot;具体传输数据的细节&quot;);	<br>
+usb.stop();<br>
+}	<br>
+}<br>
+interface USB{<br>
+//常量：定义了长、宽、最大最小的传输速度等<br>
+void start();	<br>
+void stop();<br>
+}<br>
+class Flash implements USB{<br>
+@Override<br>
+public void start() {<br>
+System.out.println(&quot;U盘开启工作&quot;);<br>
 }<br>
 @Override<br>
-public String toString() {<br>
-return &quot;Student [id=&quot; + id + &quot;]&quot;;<br>
+public void stop() {<br>
+System.out.println(&quot;U盘结束工作&quot;);<br>
+}	<br>
 }<br>
-}</p>
-<p>四、自定义异常类<br>
-如何自定义一个异常类？</p>
+class Printer implements USB{<br>
+@Override<br>
+public void start() {<br>
+System.out.println(&quot;打印机开启工作&quot;);<br>
+}<br>
+@Override<br>
+public void stop() {<br>
+System.out.println(&quot;打印机结束工作&quot;);<br>
+}<br>
+}<br>
+体会：</p>
 <ul>
-<li>如何自定义异常类？</li>
-<li>
+<li>1.接口使用上也满足多态性</li>
+<li>2.接口，实际上就是定义了一种规范</li>
+<li>3.开发中，体会面向接口编程！	<br>
+3.体会面向接口编程的思想<br>
+<img src="https://fantaixi.github.io/post-images/1588761493053.png" alt="" loading="lazy"><br>
+面向接口编程：我们在应用程序中，调用的结构都是JDBC中定义的接口，不会出现具体某一个<br>
+数据库厂商的API。<br>
+4.Java8中关于接口的新规范<br>
+//知识点1：接口中定义的静态方法，只能通过接口来调用。<br>
+//知识点2：通过实现类的对象，可以调用接口中的默认方法。<br>
+//如果实现类重写了接口中的默认方法，调用时，仍然调用的是重写以后的方法<br>
+//知识点3：如果子类(或实现类)继承的父类和实现的接口中声明了同名同参数的默认方法，那么子类在没重写此方法的情况下，默认调用的是父类中的同名同参数的方法。--&gt;类优先原则<br>
+//知识点4：如果实现类实现了多个接口，而这多个接口中定义了同名同参数的默认方法，<br>
+//那么在实现类没重写此方法的情况下，报错。--&gt;接口冲突。<br>
+//这就需要我们必须在实现类中重写此方法<br>
+//知识点5：如何在子类(或实现类)的方法中调用父类、接口中被重写的方法<br>
+public void myMethod(){<br>
+method3();//调用自己定义的重写的方法<br>
+super.method3();//调用的是父类中声明的<br>
+//调用接口中的默认方法<br>
+CompareA.super.method3();<br>
+CompareB.super.method3();<br>
+}<br>
+5.面试题：<br>
+抽象类和接口的异同？<br>
+相同点：不能实例化；都可以包含抽象方法的。<br>
+不同点：<br>
+1）把抽象类和接口(java7,java8,java9)的定义、内部结构解释说明<br>
+2）类：单继承性    接口：多继承<br>
+类与接口：多实现</li>
+</ul>
+<p>补充：代理模式、工厂的设计模式<br>
+代理模式：</p>
 <ol>
-<li>继承于现的异常结构：RuntimeException 、Exception</li>
-</ol>
+<li>
+<p>解决的问题<br>
+代理模式是Java开发中使用较多的一种设计模式。代理设计就是为其他对象提供一种代理以控制对这个对象的访问。</p>
 </li>
 <li>
-<ol start="2">
-<li>提供全局常量：serialVersionUID</li>
-</ol>
+<p>举例<br>
+interface NetWork{	<br>
+public void browse();<br>
+}<br>
+//被代理类<br>
+class Server implements NetWork{<br>
+@Override<br>
+public void browse() {<br>
+System.out.println(&quot;真实的服务器访问网络&quot;);<br>
+}<br>
+}<br>
+//代理类<br>
+class ProxyServer implements NetWork{	<br>
+private NetWork work;<br>
+public ProxyServer(NetWork work){<br>
+this.work = work;<br>
+}	<br>
+public void check(){<br>
+System.out.println(&quot;联网之前的检查工作&quot;);<br>
+}<br>
+@Override<br>
+public void browse() {<br>
+check();	<br>
+work.browse();	<br>
+}	<br>
+}</p>
 </li>
 <li>
-<ol start="3">
-<li>提供重载的构造器</li>
+<p>应用场景<br>
+<img src="https://fantaixi.github.io/post-images/1588761791191.png" alt="" loading="lazy"></p>
+</li>
 </ol>
+<p>工厂的设计模式;</p>
+<ol>
+<li>
+<p>解决的问题<br>
+实现了创建者与调用者的分离，即将创建对象的具体过程屏蔽隔离起来，达到提高灵活性的目的。</p>
+</li>
+<li>
+<p>具体模式</p>
+</li>
+</ol>
+<p>简单工厂模式：用来生产同一等级结构中的任意产品。（对于增加新的产品，需要修改已有代码）<br>
+工厂方法模式：用来生产同一等级结构中的固定产品。（支持增加任意产品)<br>
+抽象工厂模式：用来生产不同产品族的全部产品。（对于增加新的产品，无能为力；支持增加产品族)</p>
+<p>七、类的结构：内部类<br>
+内部类：类的第五个成员<br>
+1.定义：Java中允许将一个类A声明在另一个类B中，则类A就是内部类，类B称为外部类.<br>
+2.内部类的分类：<br>
+成员内部类（静态、非静态 ） vs 局部内部类(方法内、代码块内、构造器内)<br>
+3.成员内部类的理解：<br>
+一方面，作为外部类的成员：</p>
+<ul>
+<li>
+<pre><code> 	&gt;调用外部类的结构
+</code></pre>
+</li>
+<li>
+<pre><code> 	&gt;可以被static修饰
+</code></pre>
+</li>
+<li>
+<pre><code> 	&gt;可以被4种不同的权限修饰
+</code></pre>
+</li>
+<li></li>
+</ul>
+<p>另一方面，作为一个类：</p>
+<ul>
+<li>
+<pre><code> 	&gt; 类内可以定义属性、方法、构造器等
+</code></pre>
+</li>
+<li>
+<pre><code> 	&gt; 可以被final修饰，表示此类不能被继承。言外之意，不使用final，就可以被继承
+</code></pre>
+</li>
+<li>
+<pre><code> 	&gt; 可以被abstract修饰
+</code></pre>
 </li>
 </ul>
-<p>public class MyException extends Exception{<br>
-static final long serialVersionUID = -7034897193246939L;<br>
-public MyException(){	<br>
+<p>4.成员内部类：<br>
+4.1如何创建成员内部类的对象？(静态的，非静态的)<br>
+//创建静态的Dog内部类的实例(静态的成员内部类):<br>
+Person.Dog dog = new Person.Dog();</p>
+<p>//创建非静态的Bird内部类的实例(非静态的成员内部类):<br>
+//Person.Bird bird = new Person.Bird();//错误的<br>
+Person p = new Person();<br>
+Person.Bird bird = p.new Bird();</p>
+<p>4.2如何在成员内部类中调用外部类的结构？<br>
+class Person{<br>
+String name = &quot;小明&quot;;<br>
+public void eat(){<br>
 }<br>
-public MyException(String msg){<br>
-super(msg);<br>
+//非静态成员内部类<br>
+class Bird{<br>
+String name = &quot;杜鹃&quot;;<br>
+public void display(String name){<br>
+System.out.println(name);//方法的形参<br>
+System.out.println(this.name);//内部类的属性<br>
+System.out.println(Person.this.name);//外部类的属性<br>
+//Person.this.eat();<br>
 }<br>
+}<br>
+}<br>
+5.局部内部类的使用：<br>
+//返回一个实现了Comparable接口的类的对象<br>
+public Comparable getComparable(){	<br>
+//创建一个实现了Comparable接口的类:局部内部类<br>
+//方式一：<br>
+//		class MyComparable implements Comparable{<br>
+//<br>
+//			@Override<br>
+//			public int compareTo(Object o) {<br>
+//				return 0;<br>
+//			}<br>
+//			<br>
+//		}<br>
+//		<br>
+//		return new MyComparable();	<br>
+//方式二：<br>
+return new Comparable(){<br>
+@Override<br>
+public int compareTo(Object o) {<br>
+return 0;<br>
+}	<br>
+};	<br>
 }</p>
+<p>注意点：<br>
+在局部内部类的方法中（比如：show如果调用局部内部类所声明的方法(比如：method)中的局部变量(比如：num)的话,要求此局部变量声明为final的。<br>
+jdk 7及之前版本：要求此局部变量显式的声明为final的<br>
+jdk 8及之后的版本：可以省略final的声明<br>
+总结：<br>
+成员内部类和局部内部类，在编译以后，都会生成字节码文件。<br>
+格式：<br>
+成员内部类：外部类$内部类名.class</p>
+<p>局部内部类：外部类$数字 内部类名.class</p>
 ]]></content>
     </entry>
 </feed>
